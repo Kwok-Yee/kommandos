@@ -17,7 +17,7 @@ int main()
 {
 
 	IrrlichtDevice *device =
-		createDevice(video::EDT_SOFTWARE, dimension2d<u32>(640, 480), 16,
+		createDevice(video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
 			false, false, false, 0);
 
 	if (!device)

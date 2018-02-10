@@ -15,7 +15,7 @@ using namespace gui;
 
 int main()
 {
-	// TEST PUSH
+
 	IrrlichtDevice *device =
 		createDevice(video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
 			false, false, false, 0);

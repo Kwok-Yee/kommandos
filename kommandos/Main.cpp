@@ -15,6 +15,9 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+vector3df cameraPosition = vector3df(0, 150, 0);
+vector3df cameraTarget = vector3df(0, 0, 0);
+
 int main()
 {
 	// Instance of inputReceiver

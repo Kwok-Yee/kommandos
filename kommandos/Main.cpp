@@ -55,7 +55,16 @@ int main()
 		}
 	}
 
-	smgr->addCameraSceneNodeFPS();
+	const vector3df cameraPosition = vector3df(0, 150, 0);
+	const vector3df cameraTarget = vector3df(0, 0, 0);
+
+	ICameraSceneNode* camera = smgr->addCameraSceneNode();
+
+	if (camera) {
+		camera->setPosition(cameraPosition);
+		camera->setTarget(cameraTarget);
+	}
+
 	device->getCursorControl()->setVisible(false);
 
 	gui::IGUIStaticText* diagnostics = device->getGUIEnvironment()->addStaticText(
@@ -69,7 +78,7 @@ int main()
 	u32 then = device->getTimer()->getTime();
 
 	// This is the movemen speed in units per second.
-	const f32 MOVEMENT_SPEED = 5.f;
+	const f32 MOVEMENT_SPEED = 30.f;
 
 	while (device->run())
 	{
@@ -81,14 +90,14 @@ int main()
 		core::vector3df nodePosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-			nodePosition.Y += MOVEMENT_SPEED * frameDeltaTime;
+			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
 		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-			nodePosition.Y -= MOVEMENT_SPEED * frameDeltaTime;
+			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
 		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 
 		sphere->setPosition(nodePosition);
 

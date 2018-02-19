@@ -13,6 +13,9 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+vector3df cameraPosition = vector3df(0, 150, 0);
+vector3df cameraTarget = vector3df(0, 0, 1);
+
 int main()
 {
 
@@ -31,21 +34,27 @@ int main()
 	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
 		rect<s32>(10, 10, 260, 22), true);
 
-	IAnimatedMesh* mesh = smgr->getMesh("../media/sydney.md2");
-	if (!mesh)
+	IMesh* playerMesh = smgr->getMesh("../media/ArenaPlane.3ds");
+	if (!playerMesh)
 	{
 		device->drop();
 		return 1;
 	}
-	IAnimatedMeshSceneNode* node = smgr->addAnimatedMeshSceneNode(mesh);
-
-	if (node)
+	IMeshSceneNode* playerNode = smgr->addMeshSceneNode(playerMesh);
+	if (playerNode)
 	{
-		node->setMaterialFlag(EMF_LIGHTING, false);
-		node->setMD2Animation(scene::EMAT_STAND);
-		node->setMaterialTexture(0, driver->getTexture("../media/sydney.bmp"));
+		//playerNode->setMaterialFlag(EMF_LIGHTING, false);
+		//playerNode->setMD2Animation(scene::EMAT_STAND);
+		//playerNode->setMaterialTexture(0, driver->getTexture("../media/Color_Player.3ds"));
 	}
-	smgr->addCameraSceneNode(0, vector3df(0, 30, -40), vector3df(0, 5, 0));
+
+	ICameraSceneNode* camera = smgr->addCameraSceneNode();
+
+	if (camera)
+	{
+		camera->setPosition(cameraPosition);
+		camera->setTarget(cameraTarget);
+	}
 
 	while (device->run())
 	{

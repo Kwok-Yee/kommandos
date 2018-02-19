@@ -1,7 +1,6 @@
 #include <irrlicht.h>
 
 using namespace irr;
-
 using namespace core;
 using namespace scene;
 using namespace video;
@@ -31,7 +30,7 @@ int main()
 	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
 		rect<s32>(10, 10, 260, 22), true);
 
-	IAnimatedMesh* mesh = smgr->getMesh("../media/sydney.md2");
+	IAnimatedMesh* mesh = smgr->getMesh("../media/ninja.b3d");
 	if (!mesh)
 	{
 		device->drop();
@@ -43,7 +42,7 @@ int main()
 	{
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMD2Animation(scene::EMAT_STAND);
-		node->setMaterialTexture(0, driver->getTexture("../media/sydney.bmp"));
+		node->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
 	}
 	smgr->addCameraSceneNode(0, vector3df(0, 30, -40), vector3df(0, 5, 0));
 

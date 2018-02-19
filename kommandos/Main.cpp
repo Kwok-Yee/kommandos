@@ -45,7 +45,7 @@ int main()
 	{
 		//playerNode->setMaterialFlag(EMF_LIGHTING, false);
 		//playerNode->setMD2Animation(scene::EMAT_STAND);
-		playerNode->setMaterialTexture(0, driver->getTexture("../media/Color_Player.3ds"));
+		//playerNode->setMaterialTexture(0, driver->getTexture("../media/Color_Player.3ds"));
 	}
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();

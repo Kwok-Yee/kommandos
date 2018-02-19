@@ -8,7 +8,7 @@ public:
 	struct TAABB
 	{
 		core::vector3df m_pos;
-		float m_size;
+		core::vector3df m_size;
 	};
 
 	Collision();

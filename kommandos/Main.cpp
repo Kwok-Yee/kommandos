@@ -17,12 +17,8 @@ using namespace gui;
 int main()
 {
 	Collision col;
-	core::vector3df pos1 = { 0, 0, 0 };
-	float size1 = 1;
-	Collision::TAABB box1 = { pos1, size1 };
-	core::vector3df pos2 = { 10, 10, 10 };
-	float size2 = 1;
-	Collision::TAABB box2 = { pos2, size2 };
+	Collision::TAABB box1;
+	Collision::TAABB box2;
 	
 
 	IrrlichtDevice *device =
@@ -36,18 +32,15 @@ int main()
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
+	IMeshSceneNode* Cube1 = smgr->addCubeSceneNode();
+	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
+	Cube2->setPosition(vector3df{ -15,-15,-15 });
+	box1.m_size = vector3df{10,10,10};
+	box2.m_size = vector3df{ 10,10,10 };
 
 	//guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
 		//rect<s32>(10, 10, 260, 22), true);
-
-	if (col.AABBtoAABB(box1, box2)) {
-		guienv->addStaticText(L"FOUND COLLISION!",
-			rect<s32>(10, 10, 260, 22), true);
-	}
-	else {
-		guienv->addStaticText(L"NOTHING!",
-			rect<s32>(10, 10, 260, 22), true);
-	}
+	
 
 	IAnimatedMesh* mesh = smgr->getMesh("../media/sydney.md2");
 	if (!mesh)
@@ -68,9 +61,18 @@ int main()
 	while (device->run())
 	{
 		driver->beginScene(true, true, SColor(255, 100, 101, 140));
-
+		if (col.AABBtoAABB(box1, box2)) {
+			guienv->addStaticText(L"FOUND COLLISION!",
+				rect<s32>(10, 10, 260, 22), true);
+		}
+		else {
+			guienv->addStaticText(L"NOTHING!",
+				rect<s32>(10, 10, 260, 22), true);
+		}
 		smgr->drawAll();
 		guienv->drawAll();
+
+		
 
 		driver->endScene();
 	}

@@ -1,4 +1,5 @@
 #include <irrlicht.h>
+#include "Collision.h"
 
 using namespace irr;
 
@@ -15,6 +16,14 @@ using namespace gui;
 
 int main()
 {
+	Collision col;
+	core::vector3df pos1 = { 0, 0, 0 };
+	float size1 = 1;
+	Collision::TAABB box1 = { pos1, size1 };
+	core::vector3df pos2 = { 10, 10, 10 };
+	float size2 = 1;
+	Collision::TAABB box2 = { pos2, size2 };
+	
 
 	IrrlichtDevice *device =
 		createDevice(video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
@@ -28,8 +37,17 @@ int main()
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
-		rect<s32>(10, 10, 260, 22), true);
+	//guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
+		//rect<s32>(10, 10, 260, 22), true);
+
+	if (col.AABBtoAABB(box1, box2)) {
+		guienv->addStaticText(L"FOUND COLLISION!",
+			rect<s32>(10, 10, 260, 22), true);
+	}
+	else {
+		guienv->addStaticText(L"NOTHING!",
+			rect<s32>(10, 10, 260, 22), true);
+	}
 
 	IAnimatedMesh* mesh = smgr->getMesh("../media/sydney.md2");
 	if (!mesh)

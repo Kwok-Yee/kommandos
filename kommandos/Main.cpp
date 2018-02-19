@@ -13,6 +13,9 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+vector3df cameraPosition = vector3df(0, 150, 0);
+vector3df cameraTarget = vector3df(0, 0, 0);
+
 int main()
 {
 
@@ -45,7 +48,13 @@ int main()
 		node->setMD2Animation(scene::EMAT_STAND);
 		node->setMaterialTexture(0, driver->getTexture("../media/sydney.bmp"));
 	}
-	smgr->addCameraSceneNode(0, vector3df(0, 30, -40), vector3df(0, 5, 0));
+	
+	ICameraSceneNode* camera = smgr->addCameraSceneNode();
+
+	if (camera) {
+		camera->setPosition(cameraPosition);
+		camera->setTarget(cameraTarget);
+	}
 
 	while (device->run())
 	{

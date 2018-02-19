@@ -13,6 +13,9 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+vector3df cameraPosition = vector3df(0, 150, 0);
+vector3df cameraTarget = vector3df(0, 0, 0);
+
 int main()
 {
 
@@ -49,8 +52,8 @@ int main()
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
 	if (camera) {
-		camera->setPosition(vector3df(0, 150, 0));
-		camera->setTarget(vector3df(0, 0, 0));
+		camera->setPosition(cameraPosition);
+		camera->setTarget(cameraTarget);
 	}
 
 	while (device->run())

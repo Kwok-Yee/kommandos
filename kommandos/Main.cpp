@@ -42,20 +42,6 @@ int main()
 		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
 		sphere->setMaterialFlag(video::EMF_LIGHTING, false);
 	}
-	scene::ISceneNode* cube = smgr->addCubeSceneNode();
-
-	if (cube)
-	{
-		cube->setMaterialTexture(0, driver->getTexture("../media/t351sml.jpg"));
-		cube->setMaterialFlag(video::EMF_LIGHTING, false);
-		scene::ISceneNodeAnimator* anim =
-			smgr->createFlyCircleAnimator(core::vector3df(0, 0, 30), 20.0f);
-		if (anim)
-		{
-			cube->addAnimator(anim);
-			anim->drop();
-		}
-	}
 
 	const vector3df cameraPosition = vector3df(0, 150, 0);
 	const vector3df cameraTarget = vector3df(0, 0, 0);
@@ -67,11 +53,7 @@ int main()
 		camera->setTarget(cameraTarget);
 	}
 
-	device->getCursorControl()->setVisible(false);
-
-	gui::IGUIStaticText* diagnostics = device->getGUIEnvironment()->addStaticText(
-		L"", core::rect<s32>(10, 10, 400, 20));
-	diagnostics->setOverrideColor(video::SColor(255, 255, 255, 0));
+	device->getCursorControl()->setVisible(true);
 
 	int lastFPS = -1;
 
@@ -106,7 +88,6 @@ int main()
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
 		smgr->drawAll(); // draw the 3d scene
-		device->getGUIEnvironment()->drawAll(); // draw the gui environment (the logo)
 
 		driver->endScene();
 

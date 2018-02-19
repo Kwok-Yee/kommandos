@@ -17,7 +17,6 @@ using namespace gui;
 
 int main()
 {
-
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
 

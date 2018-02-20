@@ -17,9 +17,7 @@ using namespace gui;
 int main()
 {
 	Collision col;
-	Collision::TAABB box1;
-	Collision::TAABB box2;
-	
+	stringw text = "Hello World! This is the Irrlicht Software renderer!";
 
 	IrrlichtDevice *device =
 		createDevice(video::EDT_SOFTWARE, dimension2d<u32>(800, 600), 16,
@@ -34,12 +32,11 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 	IMeshSceneNode* Cube1 = smgr->addCubeSceneNode();
 	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
-	Cube2->setPosition(vector3df{ -15,-15,-15 });
-	box1.m_size = vector3df{10,10,10};
-	box2.m_size = vector3df{ 10,10,10 };
+	Cube2->setPosition(vector3df{ -11,-11,-11 });
 
-	//guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
-		//rect<s32>(10, 10, 260, 22), true);
+	
+	IGUIStaticText* infoTex = guienv->addStaticText(stringw(text.c_str()).c_str() ,
+		rect<s32>(10, 10, 260, 22), true);
 	
 
 	IAnimatedMesh* mesh = smgr->getMesh("../media/sydney.md2");
@@ -61,14 +58,14 @@ int main()
 	while (device->run())
 	{
 		driver->beginScene(true, true, SColor(255, 100, 101, 140));
-		if (col.AABBtoAABB(box1, box2)) {
-			guienv->addStaticText(L"FOUND COLLISION!",
-				rect<s32>(10, 10, 260, 22), true);
+
+		if (col.AABBtoAABB(Cube1, Cube2)) {
+			text = "Found Collision";
 		}
 		else {
-			guienv->addStaticText(L"NOTHING!",
-				rect<s32>(10, 10, 260, 22), true);
+			text = "Nothing";
 		}
+		infoTex->setText(stringw(text.c_str()).c_str());
 		smgr->drawAll();
 		guienv->drawAll();
 

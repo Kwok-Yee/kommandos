@@ -2,17 +2,13 @@
 #include <irrlicht.h>
 using namespace irr;
 using namespace core;
+using namespace scene;
 class Collision
 {
 public:
-	struct TAABB
-	{
-		core::vector3df m_pos;
-		core::vector3df m_size;
-	};
 
 	Collision();
 	~Collision();
-	bool AABBtoAABB(const TAABB& tBox1, const TAABB& tBox2);
+	bool AABBtoAABB(const scene::IMeshSceneNode* tBox1, const scene::IMeshSceneNode* tBox2);
 };
 

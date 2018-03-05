@@ -9,15 +9,31 @@
 
 using namespace irr;
 
-InputReceiver::InputReceiver()
-{
-	for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)
-		KeyIsDown[i] = false;
-}
+struct InputReceiver::SMouseState {
+	bool LeftButtonDown;
+	SMouseState() : LeftButtonDown(false) { }
+} MouseState;
 
 // This is the one method that we have to implement
 bool InputReceiver::OnEvent(const SEvent& event)
 {
+	// Remember the mouse state
+	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
+	{
+		switch (event.MouseInput.Event)
+		{
+		case EMIE_LMOUSE_PRESSED_DOWN:
+			MouseState.LeftButtonDown = true;
+			break;
+		case EMIE_LMOUSE_LEFT_UP:
+			MouseState.LeftButtonDown = false;
+			break;
+		default:
+			// We won't use the wheel
+			break;
+		}
+	}
+
 	// Remember whether each key is down or up
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
@@ -31,5 +47,17 @@ bool InputReceiver::IsKeyDown(EKEY_CODE keyCode) const
 	return KeyIsDown[keyCode];
 }
 
+const InputReceiver::SMouseState &InputReceiver::GetMouseState(void) const
+{
+	return MouseState;
+}
+
 // We use this array to store the current state of each key
 bool KeyIsDown[KEY_KEY_CODES_COUNT];
+
+
+InputReceiver::InputReceiver()
+{
+	for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)
+		KeyIsDown[i] = false;
+}

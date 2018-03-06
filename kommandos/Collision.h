@@ -9,6 +9,6 @@ public:
 
 	Collision();
 	~Collision();
-	bool AABBtoAABB(const scene::IMeshSceneNode* tBox1, const scene::IMeshSceneNode* tBox2);
+	bool MeshNodeWithMeshNode(const scene::IMeshSceneNode* tBox1, const scene::IMeshSceneNode* tBox2);
 };
 

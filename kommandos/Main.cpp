@@ -59,7 +59,7 @@ int main()
 	{
 		driver->beginScene(true, true, SColor(255, 100, 101, 140));
 
-		if (col.AABBtoAABB(Cube1, Cube2)) {
+		if (col.MeshNodeWithMeshNode(Cube1, Cube2)) {
 			text = "Found Collision";
 		}
 		else {

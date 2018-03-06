@@ -24,7 +24,7 @@ Collision::~Collision()
 }
 
 
-bool Collision::AABBtoAABB(const IMeshSceneNode* tBox1, const IMeshSceneNode* tBox2)
+bool Collision::MeshNodeWithMeshNode(const IMeshSceneNode* tBox1, const IMeshSceneNode* tBox2)
 {
 	
 	vector3df minPos1 = tBox1->getTransformedBoundingBox().MinEdge;

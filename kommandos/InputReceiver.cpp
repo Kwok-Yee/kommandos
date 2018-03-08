@@ -9,24 +9,25 @@
 
 using namespace irr;
 
-struct InputReceiver::SMouseState {
-	bool LeftButtonDown;
-	SMouseState() : LeftButtonDown(false) { }
-} MouseState;
+bool InputReceiver::isLeftMouseButtonDown = false;
+core::vector3df InputReceiver::position = core::vector3df(0,0,0);
 
-// This is the one method that we have to implement
 bool InputReceiver::OnEvent(const SEvent& event)
 {
-	// Remember the mouse state
 	if (event.EventType == EET_MOUSE_INPUT_EVENT)
 	{
 		switch (event.MouseInput.Event)
 		{
 		case EMIE_LMOUSE_PRESSED_DOWN:
-			MouseState.LeftButtonDown = true;
+			InputReceiver::isLeftMouseButtonDown = true;
 			break;
 		case EMIE_LMOUSE_LEFT_UP:
-			MouseState.LeftButtonDown = false;
+			InputReceiver::isLeftMouseButtonDown = false;
+			break;
+		case EMIE_MOUSE_MOVED:
+			InputReceiver::position.X = event.MouseInput.X;
+			// Stores the event its y mouse position to z position for 2d mouse position
+			InputReceiver::position.Z = event.MouseInput.Y;
 			break;
 		default:
 			break;
@@ -34,7 +35,7 @@ bool InputReceiver::OnEvent(const SEvent& event)
 	}
 
 	// Remember whether each key is down or up
-	if (event.EventType == EET_KEY_INPUT_EVENT)
+	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
 	return false;
@@ -44,11 +45,6 @@ bool InputReceiver::OnEvent(const SEvent& event)
 bool InputReceiver::IsKeyDown(EKEY_CODE keyCode) const
 {
 	return KeyIsDown[keyCode];
-}
-
-const InputReceiver::SMouseState &InputReceiver::GetMouseState(void) const
-{
-	return MouseState;
 }
 
 // We use this array to store the current state of each key

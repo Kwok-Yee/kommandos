@@ -12,7 +12,7 @@ using namespace gui;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
 int main()
@@ -82,7 +82,7 @@ int main()
 
 		sphere->setPosition(nodePosition);
 
-		//sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.GetMouseState().LeftButtonDown);
+		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 

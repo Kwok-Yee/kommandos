@@ -4,6 +4,7 @@ class InputReceiver : public irr::IEventReceiver
 {
 public:
 	
+	// Mouse left button 
 	static bool isLeftMouseButtonDown;
 
 	// Mouse position

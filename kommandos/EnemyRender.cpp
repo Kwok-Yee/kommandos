@@ -13,8 +13,15 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+// This is the movement speed in units per second.
+const f32 ENEMY_MOVEMENT_SPEED = 15.f;
+const f32 PLAYER_MOVEMENT_SPEED = 50.f;
+u32 now;
+f32 frameDeltaTime;
+
 class MyEventReceiver : public IEventReceiver
 {
+
 public:
 	// This is the one method that we have to implement
 	virtual bool OnEvent(const SEvent& event)
@@ -34,13 +41,58 @@ public:
 
 	MyEventReceiver()
 	{
-		for (u32 i = 0; i<KEY_KEY_CODES_COUNT; ++i)
+		for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)
 			KeyIsDown[i] = false;
 	}
 
 private:
 	// We use this array to store the current state of each key
 	bool KeyIsDown[KEY_KEY_CODES_COUNT];
+};
+
+class Movement
+{
+public:
+	virtual void MoveObjects(scene::ISceneNode* playerNode, scene::IAnimatedMeshSceneNode* enemyNode, MyEventReceiver receiver) {
+		EnemyMoveToPlayer(playerNode, enemyNode);
+		MovePlayer(playerNode, receiver);
+	}
+
+private:
+	void EnemyMoveToPlayer(scene::ISceneNode* playerNode, scene::IAnimatedMeshSceneNode* enemyNode)
+	{
+		vector3df enemyPosition = enemyNode->getPosition();
+		vector3df playerPosition = playerNode->getPosition();
+
+		vector3df deltaNormalized = (playerPosition - enemyPosition).normalize();
+		enemyPosition += deltaNormalized * ENEMY_MOVEMENT_SPEED * frameDeltaTime;
+
+		enemyNode->setRotation(core::vector3df(0,atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI,0));
+		enemyNode->setPosition(enemyPosition);
+	}
+
+	void MovePlayer(scene::ISceneNode* playerNode, MyEventReceiver &receiver) {
+		vector3df playerPosition = playerNode->getPosition();
+
+		if (receiver.IsKeyDown(irr::KEY_KEY_W)) { // up
+			playerPosition.Z += PLAYER_MOVEMENT_SPEED * frameDeltaTime;
+			playerNode->setRotation(core::vector3df(0, 0, 0));
+		}
+		else if (receiver.IsKeyDown(irr::KEY_KEY_S)) { // down
+			playerNode->setRotation(core::vector3df(0, 180, 0));
+			playerPosition.Z -= PLAYER_MOVEMENT_SPEED * frameDeltaTime;
+		}
+		if (receiver.IsKeyDown(irr::KEY_KEY_A)) { // left
+			playerPosition.X -= PLAYER_MOVEMENT_SPEED * frameDeltaTime;
+			playerNode->setRotation(core::vector3df(0, -90, 0));
+		}
+		else if (receiver.IsKeyDown(irr::KEY_KEY_D)) { // right
+			playerPosition.X += PLAYER_MOVEMENT_SPEED * frameDeltaTime;
+			playerNode->setRotation(core::vector3df(0, 90, 0));
+		}
+
+		playerNode->setPosition(playerPosition);
+	}
 };
 
 int main()
@@ -52,6 +104,7 @@ int main()
 
 	// create device
 	MyEventReceiver receiver;
+	Movement movement;
 
 	IrrlichtDevice* device = createDevice(driverType,
 		core::dimension2d<u32>(640, 480), 16, false, false, false, &receiver);
@@ -62,30 +115,20 @@ int main()
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
 
-	scene::ISceneNode * node = smgr->addSphereSceneNode();
+	// add sphere (PLAYER) 
+#pragma region SpawnPlayer
+	scene::ISceneNode* node = smgr->addSphereSceneNode();
 	if (node)
 	{
 		node->setPosition(core::vector3df(0, 0, 30));
 		node->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
 		node->setMaterialFlag(video::EMF_LIGHTING, false);
 	}
-	scene::ISceneNode* n = smgr->addCubeSceneNode();
-
-	if (n)
-	{
-		n->setMaterialTexture(0, driver->getTexture("../media/t351sml.jpg"));
-		n->setMaterialFlag(video::EMF_LIGHTING, false);
-		scene::ISceneNodeAnimator* anim =
-			smgr->createFlyCircleAnimator(core::vector3df(0, 0, 30), 20.0f);
-		if (anim)
-		{
-			n->addAnimator(anim);
-			anim->drop();
-		}
-	}
+#pragma endregion SpawnPlayer
+	// spawn enemy
+#pragma region SpawnEnemy
 	scene::IAnimatedMeshSceneNode* anms =
 		smgr->addAnimatedMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
-
 	if (anms)
 	{
 		anms->setMaterialFlag(video::EMF_LIGHTING, false);
@@ -98,6 +141,9 @@ int main()
 		anms->setRotation(core::vector3df(0, -90, 0));
 		anms->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
 	}
+
+#pragma endregion SpawnEnemy
+
 	smgr->addCameraSceneNodeFPS();
 	device->getCursorControl()->setVisible(false);
 
@@ -107,34 +153,15 @@ int main()
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
 
-	// This is the movemen speed in units per second.
-	const f32 MOVEMENT_SPEED = 20.f;
 
 	while (device->run())
 	{
 		// Work out a frame delta time.
-		const u32 now = device->getTimer()->getTime();
-		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
+		now = device->getTimer()->getTime();
+		frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		core::vector3df nodePosition = anms->getPosition();
-
-		if (receiver.IsKeyDown(irr::KEY_KEY_W)) { // up
-			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-			anms->setRotation(core::vector3df(0, 0, 0));
-		} else if (receiver.IsKeyDown(irr::KEY_KEY_S)) { // down
-			anms->setRotation(core::vector3df(0, 180, 0));
-			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-		}
-		if (receiver.IsKeyDown(irr::KEY_KEY_A)) { // left
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-			anms->setRotation(core::vector3df(0, -90, 0));
-		} else if (receiver.IsKeyDown(irr::KEY_KEY_D)) { // right
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-			anms->setRotation(core::vector3df(0, 90, 0));
-		}
-
-		anms->setPosition(nodePosition);
+		movement.MoveObjects(node, anms, receiver);
 
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 

@@ -18,7 +18,7 @@ struct InputReceiver::SMouseState {
 bool InputReceiver::OnEvent(const SEvent& event)
 {
 	// Remember the mouse state
-	if (event.EventType == irr::EET_MOUSE_INPUT_EVENT)
+	if (event.EventType == EET_MOUSE_INPUT_EVENT)
 	{
 		switch (event.MouseInput.Event)
 		{
@@ -29,13 +29,12 @@ bool InputReceiver::OnEvent(const SEvent& event)
 			MouseState.LeftButtonDown = false;
 			break;
 		default:
-			// We won't use the wheel
 			break;
 		}
 	}
 
 	// Remember whether each key is down or up
-	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+	if (event.EventType == EET_KEY_INPUT_EVENT)
 		KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
 	return false;

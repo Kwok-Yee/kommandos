@@ -12,11 +12,8 @@ using namespace gui;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
-
-vector3df cameraPosition = vector3df(0, 150, 0);
-vector3df cameraTarget = vector3df(0, 0, 0);
 
 int main()
 {
@@ -35,7 +32,7 @@ int main()
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
 
-	scene::ISceneNode * sphere = smgr->addSphereSceneNode();
+	scene::ISceneNode* sphere = smgr->addSphereSceneNode();
 	if (sphere)
 	{
 		sphere->setPosition(core::vector3df(0, 0, 30));
@@ -61,7 +58,7 @@ int main()
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
 
-	// This is the movemen speed in units per second.
+	// This is the movement speed in units per second.
 	const f32 MOVEMENT_SPEED = 30.f;
 
 	while (device->run())
@@ -85,6 +82,8 @@ int main()
 
 		sphere->setPosition(nodePosition);
 
+		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
 		smgr->drawAll(); // draw the 3d scene
@@ -95,7 +94,7 @@ int main()
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"Movement Example - Irrlicht Engine [");
+			core::stringw tmp(L"Movement - Irrlicht Engine [");
 			tmp += driver->getName();
 			tmp += L"] fps: ";
 			tmp += fps;

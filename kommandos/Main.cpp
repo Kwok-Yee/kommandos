@@ -23,7 +23,7 @@ vector3df cameraTarget = vector3df(0, 0, 0);
 
 int main()
 {
-	Collision col;
+	Collision collision;
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
 
@@ -41,6 +41,7 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 	IMeshSceneNode* Cube1 = smgr->addCubeSceneNode();
 	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
+	Cube2->setPosition(vector3df(10, 0, -30));
 	ISceneNode * sphere = smgr->addSphereSceneNode();
 	if (sphere)
 	{
@@ -79,7 +80,7 @@ int main()
 		then = now;
 
 		core::vector3df nodePosition = sphere->getPosition();
-		if (!col.SceneNodeWithSceneNode(sphere, Cube1) || !col.SceneNodeWithSceneNode(sphere, Cube2))
+		if (!collision.SceneNodeWithSceneNode(sphere, Cube1) && !collision.SceneNodeWithSceneNode(sphere, Cube2))
 			oldPosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
@@ -94,7 +95,7 @@ int main()
 
 		sphere->setPosition(nodePosition);
 
-		if (col.SceneNodeWithSceneNode(sphere, Cube1) || col.SceneNodeWithSceneNode(sphere, Cube2)) {
+		if (collision.SceneNodeWithSceneNode(sphere, Cube1) || collision.SceneNodeWithSceneNode(sphere, Cube2)) {
 			sphere->setPosition(oldPosition);
 		}
 

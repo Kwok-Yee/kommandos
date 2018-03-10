@@ -1,6 +1,8 @@
 #include <irrlicht.h>
+#include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include <ILogger.h>
 
 using namespace irr;
 
@@ -9,14 +11,23 @@ using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
+using namespace std;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
 //#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
+const vector3df cameraPosition = vector3df(0, 50, 0);
+const vector3df cameraTarget = vector3df(0, 0, 0);
+
+// Initialize the paths for the object its textures
+const path crateDiffuse = "../media/crate/crate_diffuse.png";
+const path crateNormal = "../media/crate/crate_normal.png";
+
 int main()
 {
+	Collision collision;
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
 
@@ -29,19 +40,35 @@ int main()
 		return 1;
 	}
 
-	video::IVideoDriver* driver = device->getVideoDriver();
-	scene::ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
+	ISceneManager* smgr = device->getSceneManager();
+	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	scene::ISceneNode* sphere = smgr->addSphereSceneNode();
+	ISceneNode* cube = smgr->addCubeSceneNode();
+	if (cube) {
+		cube->setPosition(core::vector3df(0, 0, 0));
+		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
+	}
+
+	ISceneNode* cube2 = smgr->addCubeSceneNode();
+	if (cube2) {
+		cube2->setPosition(vector3df(10, 0, -30));
+		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube2->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
+	}
+
+	ISceneNode * sphere = smgr->addSphereSceneNode();
+
 	if (sphere)
 	{
 		sphere->setPosition(core::vector3df(0, 0, 30));
 		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
-		sphere->setMaterialFlag(video::EMF_LIGHTING, false);
+		sphere->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
 	}
-
-	const vector3df cameraPosition = vector3df(0, 150, 0);
-	const vector3df cameraTarget = vector3df(0, 0, 0);
+	core::vector3df oldPosition = sphere->getPosition();
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
@@ -69,6 +96,8 @@ int main()
 		then = now;
 
 		core::vector3df nodePosition = sphere->getPosition();
+		if (!collision.SceneNodeWithSceneNode(sphere, cube) && !collision.SceneNodeWithSceneNode(sphere, cube2))
+			oldPosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
 			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
@@ -84,9 +113,14 @@ int main()
 
 		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
+		if (collision.SceneNodeWithSceneNode(sphere, cube) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
+			sphere->setPosition(oldPosition);
+		}
+
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
 		smgr->drawAll(); // draw the 3d scene
+		guienv->drawAll();
 
 		driver->endScene();
 
@@ -94,7 +128,8 @@ int main()
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"Movement - Irrlicht Engine [");
+			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+
 			tmp += driver->getName();
 			tmp += L"] fps: ";
 			tmp += fps;

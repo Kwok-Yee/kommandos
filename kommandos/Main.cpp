@@ -15,8 +15,11 @@ using namespace std;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
-#endif	
+#pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
+#endif
+
+// This is the movement speed in units per second.
+const f32 MOVEMENT_SPEED = 50.f;
 
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
@@ -64,10 +67,10 @@ int main()
 	shortWallNodeUp->setMaterialFlag(video::EMF_LIGHTING, true);
 	shortWallNodeUp->setPosition(core::vector3df(78.5, 0, 0));
 
-	IMesh* ShortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
-	IMeshSceneNode* ShortWallNodeDown = smgr->addMeshSceneNode(ShortWallMeshDown);
-	ShortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
-	ShortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
+	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
+	shortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
+	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
 	if (cube) {
@@ -114,9 +117,6 @@ int main()
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
 
-	// This is the movement speed in units per second.
-	const f32 MOVEMENT_SPEED = 30.f;
-
 	while (device->run())
 	{
 		// Work out a frame delta time.
@@ -125,7 +125,9 @@ int main()
 		then = now;
 
 		core::vector3df nodePosition = sphere->getPosition();
-		if (!collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft) && !collision.SceneNodeWithSceneNode(sphere, cube2))
+		if (!collision.SceneNodeWithSceneNode(sphere, cube) && !collision.SceneNodeWithSceneNode(sphere, cube2)
+			&& !collision.SceneNodeWithSceneNode(sphere, longWallNodeRight) && !collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft)
+			&& !collision.SceneNodeWithSceneNode(sphere, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(sphere, shortWallNodeDown))
 			oldPosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
@@ -142,7 +144,9 @@ int main()
 
 		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
-		if (collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
+		if (collision.SceneNodeWithSceneNode(sphere, cube) || collision.SceneNodeWithSceneNode(sphere, cube2)
+			|| collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft) || collision.SceneNodeWithSceneNode(sphere, longWallNodeRight)
+			|| collision.SceneNodeWithSceneNode(sphere, shortWallNodeUp) || collision.SceneNodeWithSceneNode(sphere, shortWallNodeDown)) {
 			sphere->setPosition(oldPosition);
 		}
 

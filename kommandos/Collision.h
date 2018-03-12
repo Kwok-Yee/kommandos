@@ -1,4 +1,5 @@
 #pragma once
+#include <irrlicht.h>
 
 class Collision
 {

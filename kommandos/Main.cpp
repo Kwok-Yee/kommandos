@@ -75,7 +75,7 @@ int main()
 	ISceneNode* cube = smgr->addCubeSceneNode();
 
 	if (cube) {
-		cube->setPosition(core::vector3df(-30, 0, 10));
+		cube->setPosition(core::vector3df(-30, 10, 10));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
@@ -92,7 +92,7 @@ int main()
 	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
-		cube2->setPosition(vector3df(10, 0, -30));
+		cube2->setPosition(vector3df(10, 10, -30));
 		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube2->setMaterialFlag(video::EMF_LIGHTING, true);

@@ -1,4 +1,8 @@
 #include <irrlicht.h>
+#include "Collision.h"
+#include "driverChoice.h"
+#include "InputReceiver.h"
+#include <ILogger.h>
 
 using namespace irr;
 
@@ -7,62 +11,34 @@ using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
+using namespace std;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
+//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
-vector3df cameraPosition = vector3df(0, 50, 0);
-vector3df cameraTarget = vector3df(0, 0, 0);
-vector3df previousNodePosition;
+const vector3df cameraPosition = vector3df(0, 120, 0);
+const vector3df cameraTarget = vector3df(0, 0, 0);
 
-class MyEventReceiver : public IEventReceiver
-{
-public:
-	// This is the one method that we have to implement
-	virtual bool OnEvent(const SEvent& event)
-	{
-		// Remember whether each key is down or up
-		if (event.EventType == irr::EET_KEY_INPUT_EVENT)
-			KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
-
-		return false;
-	}
-
-	// This is used to check whether a key is being held down
-	virtual bool IsKeyDown(EKEY_CODE keyCode) const
-	{
-		return KeyIsDown[keyCode];
-	}
-
-	MyEventReceiver()
-	{
-		for (u32 i = 0; i<KEY_KEY_CODES_COUNT; ++i)
-			KeyIsDown[i] = false;
-	}
-
-private:
-	// We use this array to store the current state of each key
-	bool KeyIsDown[KEY_KEY_CODES_COUNT];
-};
+// Initialize the paths for the object its textures
+const path crateDiffuse = "../media/crate/crate_diffuse.png";
+const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
+	Collision collision;
+	// Instance of inputReceiver
+	InputReceiver inputReceiver;
 
-	// ask user for driver
-	video::E_DRIVER_TYPE driverType = video::EDT_DIRECT3D9;
-	if (driverType == video::EDT_COUNT)
+	// Create device
+	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
+		core::dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+
+	// No device found
+	if (!device) {
 		return 1;
-
-	// create device
-	MyEventReceiver receiver;
-
-	IrrlichtDevice* device = createDevice(driverType,
-		core::dimension2d<u32>(800, 600), 16, false, false, false, &receiver);
-
-	if (device == 0)
-		return 1; // could not create selected driver.
+	}
 
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
@@ -71,46 +47,73 @@ int main()
 
 	IMesh* planeMesh = smgr->getMesh("../media/Arena.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
-	planeNode->setMaterialFlag(video::EMF_LIGHTING, false);
+	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* LongWallMesh = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* LongWallNode = smgr->addMeshSceneNode(LongWallMesh);
-	LongWallNode->setMaterialFlag(video::EMF_LIGHTING, false);
+	LongWallNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* LongWallMesh2 = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* LongWallNode2 = smgr->addMeshSceneNode(LongWallMesh2);
-	LongWallNode2->setMaterialFlag(video::EMF_LIGHTING, false);
+	LongWallNode2->setMaterialFlag(video::EMF_LIGHTING, true);
 	LongWallNode2->setPosition(core::vector3df(0, 0, 15));
 	
 	IMesh* ShortWallMesh = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* ShortWallNode = smgr->addMeshSceneNode(ShortWallMesh);
-	ShortWallNode->setMaterialFlag(video::EMF_LIGHTING, false);
+	ShortWallNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* ShortWallMesh2 = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* ShortWallNode2 = smgr->addMeshSceneNode(ShortWallMesh2);
-	ShortWallNode2->setMaterialFlag(video::EMF_LIGHTING, false);
+	ShortWallNode2->setMaterialFlag(video::EMF_LIGHTING, true);
 	ShortWallNode2->setPosition(core::vector3df(-15, 0, 0));
 
-
-	scene::ISceneNode * node = smgr->addSphereSceneNode();
-	if (node)
-	{
-		node->setPosition(core::vector3df(0, 0, 2));
-		node->setMaterialTexture(0, driver->getTexture("../../media/wall.bmp"));
-		node->setMaterialFlag(video::EMF_LIGHTING, false);
+	ISceneNode* cube = smgr->addCubeSceneNode();
+	if (cube) {
+		cube->setPosition(core::vector3df(-30, 0, 10));
+		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
+	ISceneNode* cube2 = smgr->addCubeSceneNode();
+	if (cube2) {
+		cube2->setPosition(vector3df(10, 0, -30));
+		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
 
-	u32 then = device->getTimer()->getTime();
-	const f32 MOVEMENT_SPEED = 5.f;
+	ISceneNode * sphere = smgr->addSphereSceneNode();
+
+	if (sphere)
+	{
+		sphere->setPosition(core::vector3df(0, 0, 0));
+		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
+		sphere->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
+	core::vector3df oldPosition = sphere->getPosition();
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
-	if (camera)
-	{
+	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
 	}
+
+	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
+	SLight & lightData = directionalLight->getLightData();
+	lightData.Type = ELT_DIRECTIONAL;
+	directionalLight->setRotation(vector3df(90, 0, 0));
+	device->getCursorControl()->setVisible(true);
+
+	int lastFPS = -1;
+
+	// In order to do framerate independent movement, we have to know
+	// how long it was since the last frame
+	u32 then = device->getTimer()->getTime();
+
+	// This is the movement speed in units per second.
+	const f32 MOVEMENT_SPEED = 30.f;
 
 	while (device->run())
 	{
@@ -119,29 +122,48 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		core::vector3df nodePosition = node->getPosition();
-		core::vector3df planePosition = planeNode->getPosition();
+		core::vector3df nodePosition = sphere->getPosition();
+		if (!collision.SceneNodeWithSceneNode(sphere, LongWallNode2) && !collision.SceneNodeWithSceneNode(sphere, cube2))
+			oldPosition = sphere->getPosition();
 
-		if (receiver.IsKeyDown(irr::KEY_KEY_W))//up
+		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
+			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+
+		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
 			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-		else if (receiver.IsKeyDown(irr::KEY_KEY_S))//down
+		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
 			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 
-			if (receiver.IsKeyDown(irr::KEY_KEY_A))//left
-				nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-			else if (receiver.IsKeyDown(irr::KEY_KEY_D))//right
-				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		sphere->setPosition(nodePosition);
 
-		node->setPosition(nodePosition);
+		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
-		previousNodePosition = nodePosition;
+		if (collision.SceneNodeWithSceneNode(sphere, LongWallNode2) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
+			sphere->setPosition(oldPosition);
+		}
 
-		driver->beginScene(true, true, SColor(255, 100, 101, 140));
+		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
-		smgr->drawAll();
+		smgr->drawAll(); // draw the 3d scene
 		guienv->drawAll();
 
 		driver->endScene();
+
+		int fps = driver->getFPS();
+
+		if (lastFPS != fps)
+		{
+			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+
+			tmp += driver->getName();
+			tmp += L"] fps: ";
+			tmp += fps;
+
+			device->setWindowCaption(tmp.c_str());
+			lastFPS = fps;
+		}
 	}
 	device->drop();
 

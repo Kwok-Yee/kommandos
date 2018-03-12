@@ -45,13 +45,23 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
+
 	if (cube) {
-		cube->setPosition(core::vector3df(0, 0, 0));
+		cube->setPosition(core::vector3df(50, 0, 0));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
 	}
 
+	IMesh* playerMesh = smgr->getMesh("../media/Colored_Player_Sized.3ds");
+	if (playerMesh) {
+		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
+	}
+	IMeshSceneNode* playerNode = smgr->addMeshSceneNode(playerMesh);
+	if (playerNode)
+	{
+		playerNode->setPosition(core::vector3df(0, 0, 30));
+	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
 		cube2->setPosition(vector3df(10, 0, -30));
@@ -60,15 +70,7 @@ int main()
 		cube2->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
 	}
 
-	ISceneNode * sphere = smgr->addSphereSceneNode();
-
-	if (sphere)
-	{
-		sphere->setPosition(core::vector3df(0, 0, 30));
-		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
-		sphere->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
-	}
-	core::vector3df oldPosition = sphere->getPosition();
+	core::vector3df oldPosition = playerNode->getPosition();
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
@@ -95,9 +97,9 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		core::vector3df nodePosition = sphere->getPosition();
-		if (!collision.SceneNodeWithSceneNode(sphere, cube) && !collision.SceneNodeWithSceneNode(sphere, cube2))
-			oldPosition = sphere->getPosition();
+		core::vector3df nodePosition = playerNode->getPosition();
+		if (!collision.SceneNodeWithSceneNode(playerNode, cube) && !collision.SceneNodeWithSceneNode(playerNode, cube2))
+			oldPosition = playerNode->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
 			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
@@ -109,12 +111,12 @@ int main()
 		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
 			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 
-		sphere->setPosition(nodePosition);
+		playerNode->setPosition(nodePosition);
 
-		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		playerNode->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
-		if (collision.SceneNodeWithSceneNode(sphere, cube) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
-			sphere->setPosition(oldPosition);
+		if (collision.SceneNodeWithSceneNode(playerNode, cube) || collision.SceneNodeWithSceneNode(playerNode, cube2)) {
+			playerNode->setPosition(oldPosition);
 		}
 
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));

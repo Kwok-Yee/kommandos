@@ -49,7 +49,7 @@ int main()
 		cube->setPosition(core::vector3df(0, 0, 0));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
-		cube->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
+		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
@@ -57,7 +57,7 @@ int main()
 		cube2->setPosition(vector3df(10, 0, -30));
 		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
-		cube2->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
+		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
 	ISceneNode * sphere = smgr->addSphereSceneNode();
@@ -66,7 +66,7 @@ int main()
 	{
 		sphere->setPosition(core::vector3df(0, 0, 30));
 		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
-		sphere->setMaterialFlag(video::EMF_LIGHTING, false); // Set to false because of no lighting
+		sphere->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 	core::vector3df oldPosition = sphere->getPosition();
 
@@ -77,6 +77,10 @@ int main()
 		camera->setTarget(cameraTarget);
 	}
 
+	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
+	SLight & lightData = directionalLight->getLightData();
+	lightData.Type = ELT_DIRECTIONAL;
+	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
 	int lastFPS = -1;

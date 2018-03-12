@@ -2,6 +2,7 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "LevelGeneration.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -33,6 +34,8 @@ int main()
 	Collision collision;
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
+
+	LevelGeneration levelGeneration;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -112,6 +115,17 @@ int main()
 	lightData.Type = ELT_DIRECTIONAL;
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
+
+	core::array<ISceneNode*> arenas;
+	const int maxArenas = 5;
+
+	for (int i = 0; i < maxArenas; i++)
+	{
+		arenas.push_back(smgr->addMeshSceneNode(planeMesh));
+		arenas[i]->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
+
+	levelGeneration.PlaceArenas(arenas);
 
 	int lastFPS = -1;
 

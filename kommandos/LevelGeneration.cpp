@@ -22,8 +22,8 @@ void LevelGeneration::PlaceArenas(array<ISceneNode*> nodes)
 	for (size_t i = 0; i < nodes.size(); i++)
 	{
 		printf("test\n");
+		lastPostion += vector3df(0,0,200);
 		nodes[i]->setPosition(lastPostion);
-		lastPostion = vector3df(nodes[i]->getPosition() + vector3df(20,0,0));
 	}
 }
 

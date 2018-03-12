@@ -45,27 +45,29 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 
-	IMesh* planeMesh = smgr->getMesh("../media/Arena.3ds");
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
-	IMesh* LongWallMesh = smgr->getMesh("../media/LongWall.3ds");
-	IMeshSceneNode* LongWallNode = smgr->addMeshSceneNode(LongWallMesh);
-	LongWallNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
+	longWallNodeRight->setMaterialFlag(video::EMF_LIGHTING, true);
+	longWallNodeRight->setPosition(core::vector3df(0, 0, -75));
 
-	IMesh* LongWallMesh2 = smgr->getMesh("../media/LongWall.3ds");
-	IMeshSceneNode* LongWallNode2 = smgr->addMeshSceneNode(LongWallMesh2);
-	LongWallNode2->setMaterialFlag(video::EMF_LIGHTING, true);
-	LongWallNode2->setPosition(core::vector3df(0, 0, 15));
-	
-	IMesh* ShortWallMesh = smgr->getMesh("../media/ShortWall.3ds");
-	IMeshSceneNode* ShortWallNode = smgr->addMeshSceneNode(ShortWallMesh);
-	ShortWallNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
+	longWallNodeLeft->setMaterialFlag(video::EMF_LIGHTING, true);
+	longWallNodeLeft->setPosition(core::vector3df(0, 0, 90));
 
-	IMesh* ShortWallMesh2 = smgr->getMesh("../media/ShortWall.3ds");
-	IMeshSceneNode* ShortWallNode2 = smgr->addMeshSceneNode(ShortWallMesh2);
-	ShortWallNode2->setMaterialFlag(video::EMF_LIGHTING, true);
-	ShortWallNode2->setPosition(core::vector3df(-15, 0, 0));
+	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
+	shortWallNodeUp->setMaterialFlag(video::EMF_LIGHTING, true);
+	shortWallNodeUp->setPosition(core::vector3df(78.5, 0, 0));
+
+	IMesh* ShortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* ShortWallNodeDown = smgr->addMeshSceneNode(ShortWallMeshDown);
+	ShortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
+	ShortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
 	if (cube) {
@@ -123,7 +125,7 @@ int main()
 		then = now;
 
 		core::vector3df nodePosition = sphere->getPosition();
-		if (!collision.SceneNodeWithSceneNode(sphere, LongWallNode2) && !collision.SceneNodeWithSceneNode(sphere, cube2))
+		if (!collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft) && !collision.SceneNodeWithSceneNode(sphere, cube2))
 			oldPosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
@@ -140,7 +142,7 @@ int main()
 
 		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
-		if (collision.SceneNodeWithSceneNode(sphere, LongWallNode2) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
+		if (collision.SceneNodeWithSceneNode(sphere, longWallNodeLeft) || collision.SceneNodeWithSceneNode(sphere, cube2)) {
 			sphere->setPosition(oldPosition);
 		}
 

@@ -53,21 +53,27 @@ private:
 class Movement
 {
 public:
-	virtual void MoveObjects(scene::ISceneNode* playerNode, scene::IAnimatedMeshSceneNode* enemyNode, MyEventReceiver receiver) {
+	virtual void MoveObjects(scene::ISceneNode* playerNode, scene::IMeshSceneNode* enemyNode, MyEventReceiver receiver) {
 		EnemyMoveToPlayer(playerNode, enemyNode);
 		MovePlayer(playerNode, receiver);
 	}
 
 private:
-	void EnemyMoveToPlayer(scene::ISceneNode* playerNode, scene::IAnimatedMeshSceneNode* enemyNode)
+	void EnemyMoveToPlayer(scene::ISceneNode* playerNode, scene::IMeshSceneNode* enemyNode)
 	{
 		vector3df enemyPosition = enemyNode->getPosition();
 		vector3df playerPosition = playerNode->getPosition();
+		
+		vector3df delta = playerPosition - enemyPosition; //save delta
+		vector3df deltaNormalized = delta;
+		deltaNormalized.normalize(); //delta gets normalized otherwise
 
-		vector3df deltaNormalized = (playerPosition - enemyPosition).normalize();
-		enemyPosition += deltaNormalized * ENEMY_MOVEMENT_SPEED * frameDeltaTime;
+		if (delta.getLength() > vector3df(1, 1, 1).getLength())
+		{
+			enemyPosition += deltaNormalized * ENEMY_MOVEMENT_SPEED * frameDeltaTime;
+		}
 
-		enemyNode->setRotation(core::vector3df(0,atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI,0));
+		enemyNode->setRotation(core::vector3df(0, atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI, 0));
 		enemyNode->setPosition(enemyPosition);
 	}
 
@@ -98,9 +104,7 @@ private:
 int main()
 {
 	// ask user for driver
-	video::E_DRIVER_TYPE driverType = video::EDT_OPENGL;
-	if (driverType == video::EDT_COUNT)
-		return 1;
+	video::E_DRIVER_TYPE driverType = video::EDT_DIRECT3D9;
 
 	// create device
 	MyEventReceiver receiver;
@@ -127,14 +131,14 @@ int main()
 #pragma endregion SpawnPlayer
 	// spawn enemy
 #pragma region SpawnEnemy
-	scene::IAnimatedMeshSceneNode* anms =
-		smgr->addAnimatedMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
+	scene::IMeshSceneNode* anms =
+		smgr->addMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
 	if (anms)
 	{
 		anms->setMaterialFlag(video::EMF_LIGHTING, false);
-
-		anms->setFrameLoop(0, 13);
-		anms->setAnimationSpeed(15);
+		anms->setScale(vector3df(10,10,10));
+		/*anms->setFrameLoop(0, 13);
+		anms->setAnimationSpeed(15);*/
 		//anms->setMD2Animation(scene::EMAT_RUN);
 
 		anms->setScale(core::vector3df(2.f, 2.f, 2.f));
@@ -173,7 +177,7 @@ int main()
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"Movement Example - Irrlicht Engine [");
+			core::stringw tmp(L"Movement - Irrlicht Engine [");
 			tmp += driver->getName();
 			tmp += L"] fps: ";
 			tmp += fps;

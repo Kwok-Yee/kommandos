@@ -13,7 +13,7 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
-vector3df cameraPosition = vector3df(0, 100, 0);
+vector3df cameraPosition = vector3df(0, 50, 0);
 vector3df cameraTarget = vector3df(0, 0, 1);
 
 int main()
@@ -34,7 +34,7 @@ int main()
 	guienv->addStaticText(L"Hello World! This is the Irrlicht Software renderer!",
 		rect<s32>(10, 10, 260, 22), true);
 
-	IMesh* playerMesh = smgr->getMesh("../media/Color_Player.3ds");
+	IMesh* playerMesh = smgr->getMesh("../media/Colored_Player_Sized.3ds");
 	if (!playerMesh)
 	{
 		device->drop();

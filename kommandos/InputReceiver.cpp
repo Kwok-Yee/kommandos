@@ -9,8 +9,10 @@
 
 using namespace irr;
 
+// InputReceiver's static variables
 bool InputReceiver::isLeftMouseButtonDown = false;
 core::vector3df InputReceiver::position = core::vector3df(0,0,0);
+SEvent::SJoystickEvent InputReceiver::joystickState;
 
 bool InputReceiver::OnEvent(const SEvent& event)
 {
@@ -38,6 +40,12 @@ bool InputReceiver::OnEvent(const SEvent& event)
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
+	// Store the state of the first connected joystick
+	if (event.EventType == irr::EET_JOYSTICK_INPUT_EVENT
+		&& event.JoystickEvent.Joystick == 0)
+	{
+		InputReceiver::joystickState = event.JoystickEvent;
+	}
 	return false;
 }
 

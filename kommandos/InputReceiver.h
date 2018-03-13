@@ -10,6 +10,9 @@ public:
 	// Mouse position
 	static irr::core::vector3df position;
 
+	// Joystick state
+	static irr::SEvent::SJoystickEvent joystickState;
+
 	// Check for input events 
 	bool OnEvent(const irr::SEvent& event);
 

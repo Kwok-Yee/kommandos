@@ -130,11 +130,11 @@ int main()
 			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
 			playerObject->setPosition(oldPosition);
 		}
-
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 
 		smgr->drawAll(); // draw the 3d scene
 		guienv->drawAll();
+		player->DrawHealthBar();
 
 		driver->endScene();
 

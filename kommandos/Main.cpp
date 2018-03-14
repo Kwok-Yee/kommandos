@@ -3,6 +3,7 @@
 #include "driverChoice.h"
 #include "InputReceiver.h"
 #include "EnemyBehaviour.h"
+#include "Player.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -15,8 +16,15 @@ using namespace std;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
-//#pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
-#endif	
+#pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
+#endif
+
+const vector3df cameraPosition = vector3df(0, 120, 0);
+const vector3df cameraTarget = vector3df(0, 0, 0);
+
+// Initialize the paths for the object its textures
+const path crateDiffuse = "../media/crate/crate_diffuse.png";
+const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
@@ -27,41 +35,80 @@ int main()
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
-		core::dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 
 	// No device found
 	if (!device) {
 		return 1;
 	}
+	Player* player = new Player(device);
 
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	IMeshSceneNode* Cube1 = smgr->addCubeSceneNode();
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	collision.AddStaticToList(Cube1);
+	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+
 	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
 	Cube2->setPosition(vector3df(10, 0, -30));
 	collision.AddStaticToList(Cube2);
 
-	ISceneNode * sphere = smgr->addSphereSceneNode();
-	if (sphere)
-	{
-		sphere->setPosition(core::vector3df(0, 0, 30));
-		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
-		sphere->setMaterialFlag(video::EMF_LIGHTING, false);
-	}
-	core::vector3df oldPosition = sphere->getPosition();
+	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
+	longWallNodeRight->setMaterialFlag(video::EMF_LIGHTING, true);
+	longWallNodeRight->setPosition(core::vector3df(0, 0, -75));
 
-	//spawn enemies
+	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
+	longWallNodeLeft->setMaterialFlag(video::EMF_LIGHTING, true);
+	longWallNodeLeft->setPosition(core::vector3df(0, 0, 90));
+
+	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
+	shortWallNodeUp->setMaterialFlag(video::EMF_LIGHTING, true);
+	shortWallNodeUp->setPosition(core::vector3df(78.5, 0, 0));
+
+	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
+	shortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
+	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
+
+	ISceneNode* cube = smgr->addCubeSceneNode();
+	if (cube) {
+		cube->setPosition(core::vector3df(-30, 10, 10));
+		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
+
+	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
+	if (playerMesh) {
+		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
+	}
+	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
+	if (playerObject)
+	{
+		playerObject->setPosition(core::vector3df(0, 0, 30));
+	}
+	ISceneNode* cube2 = smgr->addCubeSceneNode();
+	if (cube2) {
+		cube2->setPosition(vector3df(10, 10, -30));
+		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
+
+	vector3df oldPosition = playerObject->getPosition();
 	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++)
 		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
 
-	const vector3df cameraPosition = vector3df(0, 50, 0);
-	const vector3df cameraTarget = vector3df(0, 0, 0);
+	const vector3df cameraPosition = vector3df(0, 150, 0);
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
@@ -70,6 +117,10 @@ int main()
 		camera->setTarget(cameraTarget);
 	}
 
+	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
+	SLight & lightData = directionalLight->getLightData();
+	lightData.Type = ELT_DIRECTIONAL;
+	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
 	int lastFPS = -1;
@@ -89,31 +140,25 @@ int main()
 		then = now;
 
 #pragma region Movement
-		core::vector3df nodePosition = sphere->getPosition();
-		if (!collision.SceneNodeWithSceneNode(sphere, Cube1) && !collision.SceneNodeWithSceneNode(sphere, Cube2))
-			oldPosition = sphere->getPosition();
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+		vector3df nodePosition = playerObject->getPosition();
+		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
+			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
+			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
+			oldPosition = playerObject->getPosition();
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
 
-		sphere->setPosition(nodePosition);
-
-		if (collision.SceneNodeWithSceneNode(sphere, Cube1) || collision.SceneNodeWithSceneNode(sphere, Cube2)) {
-			sphere->setPosition(oldPosition);
+		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
+			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
+			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
+			playerObject->setPosition(oldPosition);
 		}
+		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 
-		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
-		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
-#pragma endregion Movement
-
+		player->DrawHealthBar();
 		// Update all enemies
 		for (int i = 0; i < enemies.size(); i++)
 			enemyController.Update(enemies[i], nodePosition, frameDeltaTime);
@@ -126,7 +171,8 @@ int main()
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+
 			tmp += driver->getName();
 			tmp += L"] fps: ";
 			tmp += fps;

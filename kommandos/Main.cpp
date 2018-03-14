@@ -82,7 +82,7 @@ int main()
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
+	IMesh* playerMesh = smgr->getMesh("../media/Player_Arms_Down.3ds");
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}

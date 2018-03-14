@@ -136,15 +136,25 @@ int main()
 			oldPosition = player->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+		{
+			player->setRotation((core::vector3df(0, -90, 0)));
 			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		}
 		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
+		{
+			player->setRotation((core::vector3df(0, 90, 0)));
 			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-
+		}
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
+		{
+			player->setRotation((core::vector3df(0, -180, 0)));
 			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+		}
 		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
+		{
+			player->setRotation((core::vector3df(0, 0, 0)));
 			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-
+		}
 		player->setPosition(nodePosition);
 
 		player->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);

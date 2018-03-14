@@ -23,6 +23,7 @@ const f32 MOVEMENT_SPEED = 50.f;
 
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
+irr::core::CMatrix4<float> projectionMatrix;
 
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
@@ -105,6 +106,8 @@ int main()
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
+		projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
+		camera->setProjectionMatrix(projectionMatrix, true);
 	}
 
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();

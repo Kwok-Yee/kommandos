@@ -168,8 +168,8 @@ int main()
 		if (joystickInfo.size() > 0)
 		{
 			joystickConnected = true;
-			f32 hMove = 0.f;
-			f32 vMove = 0.f;
+			f32 axisY = 0.f;
+			f32 axisX = 0.f;
 
 			// Store a local reference from joystickState
 			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
@@ -181,15 +181,15 @@ int main()
 			// option to change this.
 			const f32 DEAD_ZONE = 0.05f;
 
-			hMove =
+			axisY =
 				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-			if (fabs(hMove) < DEAD_ZONE)
-				hMove = 0.f;
+			if (fabs(axisY) < DEAD_ZONE)
+				axisY = 0.f;
 
-			vMove =
+			axisX =
 				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-			if (fabs(vMove) < DEAD_ZONE)
-				vMove = 0.f;
+			if (fabs(axisX) < DEAD_ZONE)
+				axisX = 0.f;
 
 			// POV hat info is only currently supported on Windows, but the value is
 			// guaranteed to be 65535 if it's not supported, so we can check its range.
@@ -197,20 +197,20 @@ int main()
 			if (povDegrees < 360)
 			{
 				if (povDegrees > 0 && povDegrees < 180)
-					vMove = 1.f;
+					axisX = 1.f;
 				else if (povDegrees > 180)
-					vMove = -1.f;
+					axisX = -1.f;
 
 				if (povDegrees > 90 && povDegrees < 270)
-					hMove = -1.f;
+					axisY = -1.f;
 				else if (povDegrees > 270 || povDegrees < 90)
-					hMove = +1.f;
+					axisY = +1.f;
 			}
 
-			if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
+			if (!core::equals(axisX, 0.f) || !core::equals(axisY, 0.f))
 			{
-				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime * hMove;
-				nodePosition.Z += -(MOVEMENT_SPEED * frameDeltaTime * vMove);
+				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime * axisY;
+				nodePosition.Z += -(MOVEMENT_SPEED * frameDeltaTime * axisX);
 			}
 			player->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
 		}

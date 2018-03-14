@@ -16,6 +16,5 @@ public:
 
 private:
 	void SetBeginPoint(array<ISceneNode*> nodes);
-	void SetEndPoint(array<ISceneNode*> nodes);
 };
 

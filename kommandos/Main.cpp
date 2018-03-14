@@ -162,13 +162,16 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
+		bool joystickConnected = false;
 		core::vector3df nodePosition = player->getPosition();
 
 		if (joystickInfo.size() > 0)
 		{
-			f32 moveHorizontal = 0.f; // Range is -1.f for full left to +1.f for full right
-			f32 moveVertical = 0.f; // -1.f for full down to +1.f for full up.
+			joystickConnected = true;
+			f32 hMove = 0.f;
+			f32 vMove = 0.f;
 
+			// Store a local reference from joystickState
 			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
 
 			// We receive the full analog range of the axes, and so have to implement our
@@ -178,15 +181,15 @@ int main()
 			// option to change this.
 			const f32 DEAD_ZONE = 0.05f;
 
-			moveHorizontal =
-				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-			if (fabs(moveHorizontal) < DEAD_ZONE)
-				moveHorizontal = 0.f;
-
-			moveVertical =
+			hMove =
 				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-			if (fabs(moveVertical) < DEAD_ZONE)
-				moveVertical = 0.f;
+			if (fabs(hMove) < DEAD_ZONE)
+				hMove = 0.f;
+
+			vMove =
+				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+			if (fabs(vMove) < DEAD_ZONE)
+				vMove = 0.f;
 
 			// POV hat info is only currently supported on Windows, but the value is
 			// guaranteed to be 65535 if it's not supported, so we can check its range.
@@ -194,27 +197,22 @@ int main()
 			if (povDegrees < 360)
 			{
 				if (povDegrees > 0 && povDegrees < 180)
-					moveHorizontal = 1.f;
+					vMove = 1.f;
 				else if (povDegrees > 180)
-					moveHorizontal = -1.f;
+					vMove = -1.f;
 
 				if (povDegrees > 90 && povDegrees < 270)
-					moveVertical = -1.f;
+					hMove = -1.f;
 				else if (povDegrees > 270 || povDegrees < 90)
-					moveVertical = +1.f;
+					hMove = +1.f;
 			}
 
-			if (!core::equals(moveHorizontal, 0.f) || !core::equals(moveVertical, 0.f))
+			if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
 			{
-				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime * moveVertical;
-				nodePosition.Z += -(MOVEMENT_SPEED * frameDeltaTime * moveHorizontal);
+				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime * hMove;
+				nodePosition.Z += -(MOVEMENT_SPEED * frameDeltaTime * vMove);
 			}
-			if (joystickData.IsButtonPressed(7)) { // R2 button
-				player->setMaterialFlag(video::EMF_LIGHTING, true);
-			}
-			else {
-				player->setMaterialFlag(video::EMF_LIGHTING, false);
-			}
+			player->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
 		}
 
 		if (!collision.SceneNodeWithSceneNode(player, cube) && !collision.SceneNodeWithSceneNode(player, cube2)
@@ -222,19 +220,22 @@ int main()
 			&& !collision.SceneNodeWithSceneNode(player, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(player, shortWallNodeDown))
 			oldPosition = player->getPosition();
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+		if (!joystickConnected) {
+			if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
+			else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
+				nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+			if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
+				nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+			else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
+				nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+
+			player->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		}
 
 		player->setPosition(nodePosition);
 
-		player->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
 		if (collision.SceneNodeWithSceneNode(player, cube) || collision.SceneNodeWithSceneNode(player, cube2)
 			|| collision.SceneNodeWithSceneNode(player, longWallNodeLeft) || collision.SceneNodeWithSceneNode(player, longWallNodeRight)

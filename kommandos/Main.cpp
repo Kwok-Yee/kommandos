@@ -2,6 +2,7 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "Gameoverstate.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -33,6 +34,7 @@ int main()
 	Collision collision;
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
+	GameOverState gameOverState;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -47,10 +49,9 @@ int main()
 	scene::ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-
-	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
-	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
-	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	//IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	//IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	//planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
@@ -71,6 +72,8 @@ int main()
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
 	shortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
 	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
+
+	gameOverState.ShowGameOver(smgr, driver);
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
 

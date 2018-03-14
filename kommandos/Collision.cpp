@@ -16,29 +16,17 @@ using namespace gui;
 
 irr::core::array<ISceneNode*> staticList;
 
-Collision::Collision()
-{
-}
-
-Collision::~Collision()
-{
-}
-
-bool Collision::SceneNodeWithSceneNode(ISceneNode* tBox1, ISceneNode* tBox2)
+bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene::ISceneNode* tBox2)
 {
 	return(tBox1->getTransformedBoundingBox().intersectsWithBox(tBox2->getTransformedBoundingBox()));
 }
 
-void Collision::AddStaticToList(ISceneNode* staticObject) 
+void Collision::AddStaticToList(irr::scene::ISceneNode* staticObject)
 {
 	staticList.push_back(staticObject);
 }
 
-void Collision::RemoveStaticFromList(ISceneNode* staticObject) 
-{
-}
-
-bool Collision::CollidesWithStaticObjects(ISceneNode* dynamicObject) 
+bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
 {
 	for (u32 i = 0; i < staticList.size(); i++)
 		if (SceneNodeWithSceneNode(dynamicObject, staticList[i]))

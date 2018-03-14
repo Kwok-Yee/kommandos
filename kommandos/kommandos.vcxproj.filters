@@ -16,18 +16,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputReceiver.cpp">
-<<<<<<< HEAD
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBehaviour.cpp">
-=======
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
->>>>>>> origin/feature/player_health
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
@@ -36,9 +30,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Irrlicht.dll" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Irrlicht.dll" />
@@ -53,11 +44,8 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-<<<<<<< HEAD
-=======
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
->>>>>>> origin/feature/player_health
   </ItemGroup>
 </Project>

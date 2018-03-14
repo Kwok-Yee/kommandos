@@ -48,13 +48,8 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
-	collision.AddStaticToList(Cube1);
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
-
-	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
-	Cube2->setPosition(vector3df(10, 0, -30));
-	collision.AddStaticToList(Cube2);
 
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
@@ -84,6 +79,18 @@ int main()
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
+	ISceneNode* cube2 = smgr->addCubeSceneNode();
+	if (cube2) {
+		cube2->setPosition(vector3df(10, 10, -30));
+		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
+		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
+	}
+
+	// Add to collision for enemy
+	collision.AddStaticToList(cube);
+	collision.AddStaticToList(cube2);
+
 	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
@@ -92,13 +99,6 @@ int main()
 	if (playerObject)
 	{
 		playerObject->setPosition(core::vector3df(0, 0, 30));
-	}
-	ISceneNode* cube2 = smgr->addCubeSceneNode();
-	if (cube2) {
-		cube2->setPosition(vector3df(10, 10, -30));
-		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
-		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
-		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
 	vector3df oldPosition = playerObject->getPosition();

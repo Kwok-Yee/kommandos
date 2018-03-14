@@ -1,15 +1,17 @@
 #include <irrlicht.h>
+#include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
 #include "EnemyBehaviour.h"
+#include <ILogger.h>
 
 using namespace irr;
-
 using namespace core;
 using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
+using namespace std;
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
@@ -18,9 +20,10 @@ using namespace gui;
 
 int main()
 {
-	// Instance of inputReceiver
+	// Create instances of classes
 	InputReceiver inputReceiver;
 	EnemyBehaviour enemyController;
+	Collision collision;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -31,25 +34,33 @@ int main()
 		return 1;
 	}
 
-	video::IVideoDriver* driver = device->getVideoDriver();
-	scene::ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
+	ISceneManager* smgr = device->getSceneManager();
+	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	scene::ISceneNode* sphere = smgr->addSphereSceneNode();
+	IMeshSceneNode* Cube1 = smgr->addCubeSceneNode();
+	collision.AddStaticToList(Cube1);
+	IMeshSceneNode* Cube2 = smgr->addCubeSceneNode();
+	Cube2->setPosition(vector3df(10, 0, -30));
+	collision.AddStaticToList(Cube2);
+
+	ISceneNode * sphere = smgr->addSphereSceneNode();
 	if (sphere)
 	{
 		sphere->setPosition(core::vector3df(0, 0, 30));
 		sphere->setMaterialTexture(0, driver->getTexture("../media/wall.bmp"));
 		sphere->setMaterialFlag(video::EMF_LIGHTING, false);
 	}
+	core::vector3df oldPosition = sphere->getPosition();
 
 	//spawn enemies
-	array<IMeshSceneNode*> enemies;
+	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++)
-		enemies.push_back(enemyController.Spawn(device, vector3df(i*positionMultiplier, 0, i*positionMultiplier)));
+		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
 
-	const vector3df cameraPosition = vector3df(0, 150, 0);
+	const vector3df cameraPosition = vector3df(0, 50, 0);
 	const vector3df cameraTarget = vector3df(0, 0, 0);
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
@@ -77,11 +88,10 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
+#pragma region Movement
 		core::vector3df nodePosition = sphere->getPosition();
-
-		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++)
-			enemyController.Update(enemies[i], nodePosition, frameDeltaTime);
+		if (!collision.SceneNodeWithSceneNode(sphere, Cube1) && !collision.SceneNodeWithSceneNode(sphere, Cube2))
+			oldPosition = sphere->getPosition();
 
 		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
 			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
@@ -95,19 +105,28 @@ int main()
 
 		sphere->setPosition(nodePosition);
 
-		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		if (collision.SceneNodeWithSceneNode(sphere, Cube1) || collision.SceneNodeWithSceneNode(sphere, Cube2)) {
+			sphere->setPosition(oldPosition);
+		}
 
+		sphere->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
 
-		smgr->drawAll(); // draw the 3d scene
+#pragma endregion Movement
 
+		// Update all enemies
+		for (int i = 0; i < enemies.size(); i++)
+			enemyController.Update(enemies[i], nodePosition, frameDeltaTime);
+
+		smgr->drawAll();
+		guienv->drawAll();
 		driver->endScene();
 
 		int fps = driver->getFPS();
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"Movement - Irrlicht Engine [");
+			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
 			tmp += driver->getName();
 			tmp += L"] fps: ";
 			tmp += fps;

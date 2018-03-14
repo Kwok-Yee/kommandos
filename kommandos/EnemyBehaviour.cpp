@@ -1,5 +1,6 @@
 #include <irrlicht.h>
 #include "EnemyBehaviour.h"
+#include "Collision.h"
 
 using namespace irr;
 using namespace core;
@@ -24,7 +25,7 @@ irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector
 		/*enemyNode->setFrameLoop(0, 13); // For walking animation
 		enemyNode->setAnimationSpeed(15);*/
 
-		enemyNode->setScale(core::vector3df(1.f, 1.f, 1.f));
+		enemyNode->setScale(core::vector3df(2.f, 2.f, 2.f));
 		enemyNode->setRotation(core::vector3df(0, -90, 0));
 		enemyNode->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
@@ -36,6 +37,7 @@ irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector
 void EnemyBehaviour::Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime) 
 {
 	Move(enemyNode, playerPosition, frameDeltaTime);
+	//Attack();
 }
 
 void EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime)
@@ -50,7 +52,12 @@ void EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 	if (delta.getLength() > vector3df(5, 5, 5).getLength())
 	{
 		enemyPosition += deltaNormalized * ENEMY_MOVEMENT_SPEED * frameDeltaTime;
+		vector3df oldPosition = enemyNode->getPosition();
 		enemyNode->setPosition(enemyPosition);
+		Collision collision;
+		if(collision.CollidesWithStaticObjects(enemyNode))
+			enemyNode->setPosition(oldPosition);
+
 	}
 
 	//set object

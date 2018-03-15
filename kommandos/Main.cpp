@@ -116,16 +116,7 @@ int main()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	core::array<ISceneNode*> arenas;
-	const int maxArenas = 5;
-
-	for (int i = 0; i < maxArenas; i++)
-	{
-		arenas.push_back(smgr->addMeshSceneNode(planeMesh));
-		arenas[i]->setMaterialFlag(video::EMF_LIGHTING, true);
-	}
-
-	levelGeneration.PlaceArenas(arenas);
+	levelGeneration.PlaceArenas(smgr, cube, 5);
 
 	int lastFPS = -1;
 

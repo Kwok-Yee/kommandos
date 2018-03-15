@@ -159,7 +159,7 @@ int main()
 		// Update all enemies
 		for (int i = 0; i < enemies.size(); i++) 
 		{
-			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime))
+			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime) && player->health > 0)
 				player->TakeDamage(100);
 		}
 

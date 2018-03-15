@@ -23,6 +23,8 @@ const f32 MOVEMENT_SPEED = 50.f;
 
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
+
+//ProjectionMatrix for the orthographic camera
 irr::core::CMatrix4<float> projectionMatrix;
 
 // Initialize the paths for the object its textures
@@ -82,7 +84,7 @@ int main()
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	IMesh* playerMesh = smgr->getMesh("../media/Player_Arms_Down.3ds");
+	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}

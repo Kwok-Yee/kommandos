@@ -22,6 +22,9 @@ using namespace std;
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
 
+//ProjectionMatrix for the orthographic camera
+irr::core::CMatrix4<float> projectionMatrix;
+
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
@@ -78,7 +81,7 @@ int main()
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
+	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}
@@ -102,6 +105,8 @@ int main()
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
+		projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
+		camera->setProjectionMatrix(projectionMatrix, true);
 	}
 
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();

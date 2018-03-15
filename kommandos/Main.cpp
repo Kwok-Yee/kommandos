@@ -22,6 +22,9 @@ using namespace std;
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
 
+//ProjectionMatrix for the orthographic camera
+irr::core::CMatrix4<float> projectionMatrix;
+
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
@@ -78,7 +81,6 @@ int main()
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
-
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
 		cube2->setPosition(vector3df(10, 10, -30));
@@ -91,7 +93,8 @@ int main()
 	collision.AddStaticToList(cube);
 	collision.AddStaticToList(cube2);
 
-	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
+	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
+	
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}
@@ -114,6 +117,8 @@ int main()
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
+		projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
+		camera->setProjectionMatrix(projectionMatrix, true);
 	}
 
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -127,9 +132,6 @@ int main()
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
-
-	// This is the movement speed in units per second.
-	const f32 MOVEMENT_SPEED = 30.f;
 
 	while (device->run())
 	{

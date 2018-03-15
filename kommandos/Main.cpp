@@ -49,6 +49,9 @@ int main()
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	//IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	//IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	//planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);

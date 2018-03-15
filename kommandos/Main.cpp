@@ -45,6 +45,7 @@ int main()
 		return 1;
 	}
 	Player* player = new Player(device);
+	vector3df playerRotation;
 
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
@@ -148,7 +149,7 @@ int main()
 			oldPosition = playerObject->getPosition();
 
 		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
-
+		playerObject->setRotation(player->playerRotate(playerRotation, inputReceiver));
 		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
 			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)

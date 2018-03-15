@@ -5,21 +5,14 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 
-
-void LevelGeneration::SetBeginPoint(array<ISceneNode*> nodes)
-{
-
-}
-
 void LevelGeneration::PlaceArenas(ISceneManager* smgr, int maxArenas)
 {
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	core::array<ISceneNode*> arenas;
+	vector3df nextPosition;
 
 	//vector used for placing the arena's to the left or right of the previous arena.
 	vector3df horizontalVector = vector3df(0, 0, 177);
-
-	vector3df nextPosition;
 
 	for (int i = 0; i < maxArenas; i++)
 	{
@@ -33,8 +26,8 @@ void LevelGeneration::PlaceArenas(ISceneManager* smgr, int maxArenas)
 
 void LevelGeneration::PlaceDoors(ISceneManager* smgr, core::array<ISceneNode*> arenas)
 {
-
 	array<ISceneNode*> doors;
+
 	//Position for placing door at left side of the arena.
 	vector3df doorPosition = vector3df(0, 0, 80);
 

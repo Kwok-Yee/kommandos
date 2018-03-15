@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <irrlicht.h>
 #include "InputReceiver.h"
+#include "Gameoverstate.h"
 
 using namespace irr;
 using namespace core;
@@ -16,6 +17,7 @@ const f32 MOVEMENT_SPEED = 50.f;
 u32 then;
 IrrlichtDevice* iDevice;
 video::IVideoDriver* driver;
+GameOverState gameOverState;
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -25,7 +27,6 @@ Player::Player(IrrlichtDevice* device)
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	then = iDevice->getTimer()->getTime();
-	DrawHealthBar();
 }
 
 vector3df Player::Move(vector3df oldPosition, InputReceiver inputReceiver)
@@ -53,9 +54,8 @@ void Player::TakeDamage(f32 damage)
 	health -= damage;
 	if (health <= 0) 
 	{
-		//Game over screen.
+		gameOverState.ShowGameOver(iDevice);
 	}
-	DrawHealthBar();
 }
 void Player::DrawHealthBar()
 {

@@ -10,9 +10,10 @@ GameOverState::GameOverState()
 {
 }
 
-void GameOverState::ShowGameOver(ISceneManager* smgr, IVideoDriver* driver)
+void GameOverState::ShowGameOver(IrrlichtDevice* device)
 {
-
+	ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
 	IMesh* gameover = smgr->getMesh("../media/GameOverScreen.3ds");
 	IMeshSceneNode* gameOverNode = smgr->addMeshSceneNode(gameover);
 	if (gameOverNode) {

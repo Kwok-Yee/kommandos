@@ -2,7 +2,7 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
-#include "Gameoverstate.h"
+#include "Player.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -19,9 +19,6 @@ using namespace std;
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
 
-// This is the movement speed in units per second.
-const f32 MOVEMENT_SPEED = 50.f;
-
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
 
@@ -34,24 +31,24 @@ int main()
 	Collision collision;
 	// Instance of inputReceiver
 	InputReceiver inputReceiver;
-	GameOverState gameOverState;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
-		core::dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 
 	// No device found
 	if (!device) {
 		return 1;
 	}
+	Player* player = new Player(device);
 
-	video::IVideoDriver* driver = device->getVideoDriver();
-	scene::ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
+	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	//IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
-	//IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
-	//planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
@@ -73,10 +70,7 @@ int main()
 	shortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
 	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
 
-	gameOverState.ShowGameOver(smgr, driver);
-
 	ISceneNode* cube = smgr->addCubeSceneNode();
-
 	if (cube) {
 		cube->setPosition(core::vector3df(-30, 10, 10));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
@@ -88,10 +82,10 @@ int main()
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}
-	IMeshSceneNode* player = smgr->addMeshSceneNode(playerMesh);
-	if (player)
+	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
+	if (playerObject)
 	{
-		player->setPosition(core::vector3df(0, 0, 30));
+		playerObject->setPosition(core::vector3df(0, 0, 30));
 	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
@@ -101,7 +95,7 @@ int main()
 		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	core::vector3df oldPosition = player->getPosition();
+	vector3df oldPosition = playerObject->getPosition();
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
@@ -118,47 +112,29 @@ int main()
 
 	int lastFPS = -1;
 
-	// In order to do framerate independent movement, we have to know
-	// how long it was since the last frame
-	u32 then = device->getTimer()->getTime();
-
 	while (device->run())
 	{
-		// Work out a frame delta time.
-		const u32 now = device->getTimer()->getTime();
-		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
-		then = now;
 
-		core::vector3df nodePosition = player->getPosition();
-		if (!collision.SceneNodeWithSceneNode(player, cube) && !collision.SceneNodeWithSceneNode(player, cube2)
-			&& !collision.SceneNodeWithSceneNode(player, longWallNodeRight) && !collision.SceneNodeWithSceneNode(player, longWallNodeLeft)
-			&& !collision.SceneNodeWithSceneNode(player, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(player, shortWallNodeDown))
-			oldPosition = player->getPosition();
+		vector3df nodePosition = playerObject->getPosition();
+		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
+			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
+			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
+			oldPosition = playerObject->getPosition();
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
 
-		if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-		else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 
-		player->setPosition(nodePosition);
-
-		player->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
-
-		if (collision.SceneNodeWithSceneNode(player, cube) || collision.SceneNodeWithSceneNode(player, cube2)
-			|| collision.SceneNodeWithSceneNode(player, longWallNodeLeft) || collision.SceneNodeWithSceneNode(player, longWallNodeRight)
-			|| collision.SceneNodeWithSceneNode(player, shortWallNodeUp) || collision.SceneNodeWithSceneNode(player, shortWallNodeDown)) {
-			player->setPosition(oldPosition);
+		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
+			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
+			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
+			playerObject->setPosition(oldPosition);
 		}
-
-		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
+		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 
 		smgr->drawAll(); // draw the 3d scene
 		guienv->drawAll();
+		player->DrawHealthBar();
 
 		driver->endScene();
 
@@ -166,7 +142,7 @@ int main()
 
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
 
 			tmp += driver->getName();
 			tmp += L"] fps: ";

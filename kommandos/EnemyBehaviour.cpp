@@ -10,13 +10,19 @@ using namespace video;
 
 // This is the movement speed in units per second.
 const f32 ENEMY_MOVEMENT_SPEED = 15.f;
+const irr::s32 ENEMY_MAX_HEALTH = 100;
+
+irr::f32 enemyHealth;
+
 scene::IMeshSceneNode* enemyNode;
 
 irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)
 {
+
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
 
+	enemyHealth = ENEMY_MAX_HEALTH;
 	// spawn enemy
 	enemyNode = smgr->addMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
 	if (enemyNode)
@@ -64,4 +70,10 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 	}
 	else
 		return true;
+}
+
+bool EnemyBehaviour::TakeDamage(f32 damage) 
+{
+	enemyHealth -= damage;
+	return enemyHealth <= 0;
 }

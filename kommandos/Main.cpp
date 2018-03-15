@@ -4,6 +4,7 @@
 #include "InputReceiver.h"
 #include "EnemyBehaviour.h"
 #include "Player.h"
+#include "Gun.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -22,6 +23,9 @@ using namespace std;
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
 
+//ProjectionMatrix for the orthographic camera
+irr::core::CMatrix4<float> projectionMatrix;
+
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
@@ -30,8 +34,8 @@ int main()
 {
 	// Create instances of classes
 	InputReceiver inputReceiver;
-	EnemyBehaviour enemyController;
 	Collision collision;
+	Gun* gun;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -46,6 +50,8 @@ int main()
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
+
+	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
 
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
@@ -100,17 +106,38 @@ int main()
 	{
 		playerObject->setPosition(core::vector3df(0, 0, 30));
 	}
+	IMeshSceneNode* gunNode = smgr->addMeshSceneNode(gunModel);
+	ISceneNode* bullet = smgr->addSphereSceneNode();
 
+	if (gunNode)
+	{
+		gunNode->setPosition(vector3df(2, 5, -1));
+		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		gunNode->setMaterialFlag(EMF_LIGHTING, false);
+		gunNode->setMaterialTexture(0, driver->getTexture("../media/Gun_Color.png"));
+		playerObject->addChild(gunNode);
+		gun = new Gun(gunNode, device);
+	}
+
+	if (bullet) {
+		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		gunNode->setMaterialFlag(EMF_LIGHTING, false);
+		bullet->setVisible(false);
+		//gunNode->addChild(bullet);
+	}
+
+	vector3df oldPosition = playerObject->getPosition();
+	
+	irr::core::array<EnemyBehaviour> enemyBehaviours;
 	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
-	for (int i = 0; i < enemiesToSpawn; i++)
-		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
-
-	const vector3df cameraPosition = vector3df(0, 150, 0);
-
+	for (int i = 0; i < enemiesToSpawn; i++) {
+		enemyBehaviours.push_back(EnemyBehaviour());
+		enemies.push_back(enemyBehaviours[i].Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
+	}
+	
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
-
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
@@ -138,7 +165,6 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		vector3df oldPosition = playerObject->getPosition();
 		vector3df nodePosition = playerObject->getPosition();
 
 		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
@@ -155,12 +181,38 @@ int main()
 			playerObject->setPosition(oldPosition);
 		}
 
-		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++) 
-		{
-			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime))
-				player->TakeDamage(100);
+		if (inputReceiver.isLeftMouseButtonDown) {
+			//gunNode->removeChild(bullet);
+			gun->Shoot(bullet);
 		}
+
+		if (gun->hasShot) {
+			for (int i = 0; i < enemies.size(); i++)
+				if (collision.SceneNodeWithSceneNode(enemies[i], bullet))
+					bool N = enemyBehaviours[i].TakeDamage(10);
+		}
+
+		if (gun->hasShot && gun->CheckAnimEnd(bullet)) {
+			bullet->setPosition(vector3df(0, 0, 0));
+			//gunNode->addChild(bullet);
+		}
+
+		// Update all enemies
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			if (enemyBehaviours[i].Update(enemies[i], nodePosition, frameDeltaTime)) 
+			{
+				player->TakeDamage(100);
+			}
+			if (enemyBehaviours[i].TakeDamage(0))
+			{
+				smgr->addToDeletionQueue(enemies[i]);
+				enemies.erase(i);
+				enemyBehaviours.erase(i);
+			}
+		}
+
+		gun->LaserLine(inputReceiver.position, driver, camera);
 
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 		player->DrawHealthBar();

@@ -1,6 +1,7 @@
 #include <irrlicht.h>
 #include "EnemyBehaviour.h"
 #include "Collision.h"
+#include "Player.h"
 
 using namespace irr;
 using namespace core;
@@ -34,13 +35,12 @@ irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector
 	return NULL;
 }
 
-void EnemyBehaviour::Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime)
+bool EnemyBehaviour::Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime)
 {
-	Move(enemyNode, playerPosition, frameDeltaTime);
-	//Attack();
+	return Move(enemyNode, playerPosition, frameDeltaTime);
 }
 
-void EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime)
+bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime)
 {
 	// Get position delta compared to player position
 	vector3df enemyPosition = enemyNode->getPosition();
@@ -48,21 +48,20 @@ void EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 	vector3df deltaNormalized = delta;
 	deltaNormalized.normalize(); // If it isnt done in two lines, the delta gets normalized
 
+	enemyNode->setRotation(core::vector3df(0, atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI, 0));
+
 	// Change position based on delta and speed
-	if (delta.getLength() > vector3df(5, 5, 5).getLength())
+	if (delta.getLength() > vector3df(4, 4, 4).getLength())
 	{
 		enemyPosition += deltaNormalized * ENEMY_MOVEMENT_SPEED * frameDeltaTime;
 		vector3df oldPosition = enemyNode->getPosition();
 		enemyNode->setPosition(enemyPosition);
+
 		Collision collision;
 		if (collision.CollidesWithStaticObjects(enemyNode))
 			enemyNode->setPosition(oldPosition);
+		return false;
 	}
-
-	//set object
-	enemyNode->setRotation(core::vector3df(0, atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI, 0));
-}
-
-void EnemyBehaviour::Attack() {
-
+	else
+		return true;
 }

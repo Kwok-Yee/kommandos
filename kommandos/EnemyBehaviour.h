@@ -1,5 +1,6 @@
 #pragma once
 #include <irrlicht.h>
+#include "Player.h"
 
 using namespace irr;
 using namespace core;
@@ -10,11 +11,10 @@ class EnemyBehaviour
 public:
 
 	IMeshSceneNode* Spawn(IrrlichtDevice* device, vector3df startPosition);
-	void Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
+	bool Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
 
 private:
 
-	void Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
-	void Attack();
+	bool Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
 
 };

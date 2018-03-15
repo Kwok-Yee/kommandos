@@ -101,7 +101,6 @@ int main()
 		playerObject->setPosition(core::vector3df(0, 0, 30));
 	}
 
-	vector3df oldPosition = playerObject->getPosition();
 	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
@@ -139,9 +138,9 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-#pragma region Movement
-
+		vector3df oldPosition = playerObject->getPosition();
 		vector3df nodePosition = playerObject->getPosition();
+
 		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
 			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
 			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
@@ -155,20 +154,21 @@ int main()
 			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
 			playerObject->setPosition(oldPosition);
 		}
-		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 
-
-		player->DrawHealthBar();
 		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++)
-			enemyController.Update(enemies[i], nodePosition, frameDeltaTime);
+		for (int i = 0; i < enemies.size(); i++) 
+		{
+			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime))
+				player->TakeDamage(100);
+		}
 
+		driver->beginScene(true, true, SColor(255, 113, 113, 133));
+		player->DrawHealthBar();
 		smgr->drawAll();
 		guienv->drawAll();
 		driver->endScene();
 
 		int fps = driver->getFPS();
-
 		if (lastFPS != fps)
 		{
 			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");

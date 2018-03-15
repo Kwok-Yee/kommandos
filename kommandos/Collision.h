@@ -1,13 +1,12 @@
 #pragma once
 #include <irrlicht.h>
 
-class Collision
+static class Collision
 {
 public:
-
-	Collision();
-	~Collision();
 	//Checks collision between 2 IScene nodes
-	bool SceneNodeWithSceneNode(const irr::scene::ISceneNode* tBox1, const irr::scene::ISceneNode* tBox2);
+	bool SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene::ISceneNode* tBox2);
+	void AddStaticToList(irr::scene::ISceneNode* staticObject);
+	bool CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject);
 };
 

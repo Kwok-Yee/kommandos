@@ -14,15 +14,22 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
-Collision::Collision()
-{
-}
+irr::core::array<ISceneNode*> staticList;
 
-Collision::~Collision()
-{
-}
-
-bool Collision::SceneNodeWithSceneNode(const ISceneNode* tBox1, const ISceneNode* tBox2)
+bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene::ISceneNode* tBox2)
 {
 	return(tBox1->getTransformedBoundingBox().intersectsWithBox(tBox2->getTransformedBoundingBox()));
+}
+
+void Collision::AddStaticToList(irr::scene::ISceneNode* staticObject)
+{
+	staticList.push_back(staticObject);
+}
+
+bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
+{
+	for (u32 i = 0; i < staticList.size(); i++)
+		if (SceneNodeWithSceneNode(dynamicObject, staticList[i]))
+			return true;
+	return false;
 }

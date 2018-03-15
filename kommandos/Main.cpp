@@ -2,11 +2,11 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "EnemyBehaviour.h"
 #include "Player.h"
 #include <ILogger.h>
 
 using namespace irr;
-
 using namespace core;
 using namespace scene;
 using namespace video;
@@ -31,9 +31,10 @@ const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
-	Collision collision;
-	// Instance of inputReceiver
+	// Create instances of classes
 	InputReceiver inputReceiver;
+	EnemyBehaviour enemyController;
+	Collision collision;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -80,16 +81,6 @@ int main()
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
-
-	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
-	if (playerMesh) {
-		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
-	}
-	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
-	if (playerObject)
-	{
-		playerObject->setPosition(core::vector3df(0, 0, 30));
-	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
 		cube2->setPosition(vector3df(10, 10, -30));
@@ -98,7 +89,28 @@ int main()
 		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	vector3df oldPosition = playerObject->getPosition();
+	// Add to collision for enemy
+	collision.AddStaticToList(cube);
+	collision.AddStaticToList(cube2);
+
+	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
+	
+	if (playerMesh) {
+		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
+	}
+	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
+	if (playerObject)
+	{
+		playerObject->setPosition(core::vector3df(0, 0, 30));
+	}
+
+	irr::core::array<IMeshSceneNode*> enemies;
+	int enemiesToSpawn = 2;
+	int positionMultiplier = 10;
+	for (int i = 0; i < enemiesToSpawn; i++)
+		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
+
+	const vector3df cameraPosition = vector3df(0, 150, 0);
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
@@ -117,10 +129,20 @@ int main()
 
 	int lastFPS = -1;
 
+	// In order to do framerate independent movement, we have to know
+	// how long it was since the last frame
+	u32 then = device->getTimer()->getTime();
+
 	while (device->run())
 	{
+		// Work out a frame delta time.
+		const u32 now = device->getTimer()->getTime();
+		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
+		then = now;
 
+		vector3df oldPosition = playerObject->getPosition();
 		vector3df nodePosition = playerObject->getPosition();
+
 		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
 			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
 			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
@@ -129,22 +151,26 @@ int main()
 		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
 
 		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
-
 		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
 			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
 			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
 			playerObject->setPosition(oldPosition);
 		}
+
+		// Update all enemies
+		for (int i = 0; i < enemies.size(); i++) 
+		{
+			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime))
+				player->TakeDamage(100);
+		}
+
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
-
-		smgr->drawAll(); // draw the 3d scene
-		guienv->drawAll();
 		player->DrawHealthBar();
-
+		smgr->drawAll();
+		guienv->drawAll();
 		driver->endScene();
 
 		int fps = driver->getFPS();
-
 		if (lastFPS != fps)
 		{
 			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");

@@ -9,12 +9,14 @@ class LevelGeneration
 {
 public:
 	
-	void PlaceArenas(ISceneManager* smgr, ISceneNode* doorMesh, int maxArenas);	
+	//Places arenas in the scene and adds doors with the PlaceDoors method
+	void PlaceArenas(ISceneManager* smgr, int maxArenas);	
 
 	LevelGeneration();
 
 private:
-	void PlaceDoors(core::array<ISceneNode*> arenas, ISceneNode* doorMesh);
+	//Places a door in each arena
+	void PlaceDoors(ISceneManager* smgr, core::array<ISceneNode*> arenas);
 	void SetBeginPoint(core::array<ISceneNode*> nodes);
 };
 

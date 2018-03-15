@@ -11,10 +11,11 @@ void LevelGeneration::SetBeginPoint(array<ISceneNode*> nodes)
 
 }
 
-void LevelGeneration::PlaceArenas(ISceneManager* smgr, ISceneNode* doorMesh, int maxArenas)
+void LevelGeneration::PlaceArenas(ISceneManager* smgr, int maxArenas)
 {
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	core::array<ISceneNode*> arenas;
+
 	//vector used for placing the arena's to the left or right of the previous arena.
 	vector3df horizontalVector = vector3df(0, 0, 177);
 
@@ -23,25 +24,25 @@ void LevelGeneration::PlaceArenas(ISceneManager* smgr, ISceneNode* doorMesh, int
 	for (int i = 0; i < maxArenas; i++)
 	{
 		arenas.push_back(smgr->addMeshSceneNode(planeMesh));
-	}
-
-	for (size_t i = 0; i < arenas.size(); i++)
-	{
 		nextPosition += horizontalVector;
 		arenas[i]->setPosition(nextPosition);
 	}
 
-	PlaceDoors(arenas, doorMesh);
+	PlaceDoors(smgr, arenas);
 }
 
-void LevelGeneration::PlaceDoors(core::array<ISceneNode*> arenas, ISceneNode* doorMesh)
+void LevelGeneration::PlaceDoors(ISceneManager* smgr, core::array<ISceneNode*> arenas)
 {
-	const int MAX_DOORS = arenas.size() -2;
-	array<ISceneNode*> doors;
 
-	for (size_t i = 0; i < MAX_DOORS; i++)
+	array<ISceneNode*> doors;
+	//Position for placing door at left side of the arena.
+	vector3df doorPosition = vector3df(0, 0, 80);
+
+	for (size_t i = 0; i < arenas.size(); i++)
 	{
-		doors.push_back(doorMesh);
+		doors.push_back(smgr->addCubeSceneNode());
+		doors[i]->setPosition(arenas[i]->getPosition() + doorPosition);
+		if (i == arenas.size() - 1) doors[i]->setPosition(arenas[i]->getPosition() - doorPosition);
 	}
 }
 

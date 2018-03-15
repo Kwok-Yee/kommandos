@@ -116,7 +116,7 @@ int main()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	levelGeneration.PlaceArenas(smgr, cube, 5);
+	levelGeneration.PlaceArenas(smgr, 2);
 
 	int lastFPS = -1;
 

@@ -2,6 +2,7 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include <ILogger.h>
@@ -35,6 +36,8 @@ int main()
 	InputReceiver inputReceiver;
 	EnemyBehaviour enemyController;
 	Collision collision;
+
+	LevelGeneration levelGeneration;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -128,6 +131,9 @@ int main()
 	lightData.Type = ELT_DIRECTIONAL;
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
+
+	//Generates the level(arenas), adds 2 arena's
+	levelGeneration.PlaceArenas(smgr, 2);
 
 	int lastFPS = -1;
 

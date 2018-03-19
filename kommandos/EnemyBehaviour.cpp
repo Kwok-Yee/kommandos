@@ -72,8 +72,10 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 		return true;
 }
 
-bool EnemyBehaviour::TakeDamage(f32 damage) 
+f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health) 
 {
-	enemyHealth -= damage;
-	return enemyHealth <= 0;
+	if (health > 0) {
+		health -= damage;
+	}
+	return health;
 }

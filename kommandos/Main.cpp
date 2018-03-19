@@ -36,6 +36,7 @@ int main()
 	InputReceiver inputReceiver;
 	Collision collision;
 	Gun* gun;
+	EnemyBehaviour enemyBehaviour;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -128,13 +129,13 @@ int main()
 
 	vector3df oldPosition = playerObject->getPosition();
 	
-	irr::core::array<EnemyBehaviour> enemyBehaviours;
+	irr::core::array<f32> enemyHealthValues;
 	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++) {
-		enemyBehaviours.push_back(EnemyBehaviour());
-		enemies.push_back(enemyBehaviours[i].Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
+		enemyHealthValues.push_back(100);
+		enemies.push_back(enemyBehaviour.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
 	}
 	
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
@@ -188,7 +189,7 @@ int main()
 		if (gun->hasShot) {
 			for (int i = 0; i < enemies.size(); i++)
 				if (collision.SceneNodeWithSceneNode(enemies[i], bullet))
-					bool N = enemyBehaviours[i].TakeDamage(10);
+					enemyHealthValues[i] = enemyBehaviour.TakeDamage(10, enemyHealthValues[i]);
 		}
 
 		if (gun->hasShot && gun->CheckAnimEnd(bullet)) {
@@ -199,15 +200,15 @@ int main()
 		// Update all enemies
 		for (int i = 0; i < enemies.size(); i++)
 		{
-			if (enemyBehaviours[i].Update(enemies[i], nodePosition, frameDeltaTime)) 
+			if (enemyBehaviour.Update(enemies[i], nodePosition, frameDeltaTime)) 
 			{
 				player->TakeDamage(100);
 			}
-			if (enemyBehaviours[i].TakeDamage(0))
+			if (enemyHealthValues[i] <= 0)
 			{
 				smgr->addToDeletionQueue(enemies[i]);
 				enemies.erase(i);
-				enemyBehaviours.erase(i);
+				enemyHealthValues.erase(i);
 			}
 		}
 

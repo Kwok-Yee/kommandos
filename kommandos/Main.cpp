@@ -2,10 +2,11 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "EnemyBehaviour.h"
+#include "Player.h"
 #include <ILogger.h>
 
 using namespace irr;
-
 using namespace core;
 using namespace scene;
 using namespace video;
@@ -18,11 +19,11 @@ using namespace std;
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
 
-// This is the movement speed in units per second.
-const f32 MOVEMENT_SPEED = 50.f;
-
 const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
+
+//ProjectionMatrix for the orthographic camera
+irr::core::CMatrix4<float> projectionMatrix;
 
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
@@ -30,25 +31,28 @@ const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
-	Collision collision;
-	// Instance of inputReceiver
+	// Create instances of classes
 	InputReceiver inputReceiver;
+	EnemyBehaviour enemyController;
+	Collision collision;
 
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
-		core::dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 
 	// No device found
 	if (!device) {
 		return 1;
 	}
+	Player* player = new Player(device);
+	vector3df playerRotation;
 
 	inputReceiver.CheckJoystickPresent(device);
 
 	video::IVideoDriver* driver = device->getVideoDriver();
 	scene::ISceneManager* smgr = device->getSceneManager();
-	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
+	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
@@ -75,22 +79,11 @@ int main()
 	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
-
 	if (cube) {
 		cube->setPosition(core::vector3df(-30, 10, 10));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
 		cube->setMaterialFlag(video::EMF_LIGHTING, true);
-	}
-
-	IMesh* playerMesh = smgr->getMesh("../media/Color_Player_Large.3ds");
-	if (playerMesh) {
-		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
-	}
-	IMeshSceneNode* player = smgr->addMeshSceneNode(playerMesh);
-	if (player)
-	{
-		player->setPosition(core::vector3df(0, 0, 30));
 	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
@@ -100,13 +93,37 @@ int main()
 		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
 	}
 
-	core::vector3df oldPosition = player->getPosition();
+	// Add to collision for enemy
+	collision.AddStaticToList(cube);
+	collision.AddStaticToList(cube2);
+
+	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
+	
+	if (playerMesh) {
+		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
+	}
+	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
+	if (playerObject)
+	{
+		playerObject->setPosition(core::vector3df(0, 0, 30));
+	}
+	vector3df oldPosition = playerObject->getPosition();
+
+	irr::core::array<IMeshSceneNode*> enemies;
+	int enemiesToSpawn = 2;
+	int positionMultiplier = 10;
+	for (int i = 0; i < enemiesToSpawn; i++)
+		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
+
+	const vector3df cameraPosition = vector3df(0, 150, 0);
 
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
+		projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
+		camera->setProjectionMatrix(projectionMatrix, true);
 	}
 
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -129,14 +146,15 @@ int main()
 		then = now;
 
 		bool joystickConnected = false;
-		core::vector3df nodePosition = player->getPosition();
+		core::vector3df nodePosition = playerObject->getPosition();
 
 		if (inputReceiver.GetJoystickInfo().size() > 0)
 		{
 			joystickConnected = true;
-			f32 axisY = 0.f;
-			f32 axisX = 0.f;
 
+			f32 hMove = 0.f;
+			f32 vMove = 0.f;
+			f32 moveSpeed = 50.f;
 			// Store a local reference from joystickState
 			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
 
@@ -147,80 +165,58 @@ int main()
 			// option to change this.
 			const f32 DEAD_ZONE = 0.05f;
 
-			axisY =
+			vMove =
+				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
+			if (fabs(vMove) < DEAD_ZONE)
+				vMove = 0.f;
+
+			hMove =
 				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-			if (fabs(axisY) < DEAD_ZONE)
-				axisY = 0.f;
+			if (fabs(hMove) < DEAD_ZONE)
+				hMove = 0.f;
 
-			axisX =
-				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-			if (fabs(axisX) < DEAD_ZONE)
-				axisX = 0.f;
-
-			// POV hat info is only currently supported on Windows, but the value is
-			// guaranteed to be 65535 if it's not supported, so we can check its range.
-			const u16 povDegrees = joystickData.POV / 100;
-			if (povDegrees < 360)
+			if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
 			{
-				if (povDegrees > 0 && povDegrees < 180)
-					axisX = 1.f;
-				else if (povDegrees > 180)
-					axisX = -1.f;
-
-				if (povDegrees > 90 && povDegrees < 270)
-					axisY = -1.f;
-				else if (povDegrees > 270 || povDegrees < 90)
-					axisY = +1.f;
+				nodePosition.X += moveSpeed * frameDeltaTime * hMove;
+				nodePosition.Z += moveSpeed * frameDeltaTime * vMove;
 			}
-
-			if (!core::equals(axisX, 0.f) || !core::equals(axisY, 0.f))
-			{
-				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime * axisY;
-				nodePosition.Z += -(MOVEMENT_SPEED * frameDeltaTime * axisX);
-			}
-			player->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
+			playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
 		}
 
-		if (!collision.SceneNodeWithSceneNode(player, cube) && !collision.SceneNodeWithSceneNode(player, cube2)
-			&& !collision.SceneNodeWithSceneNode(player, longWallNodeRight) && !collision.SceneNodeWithSceneNode(player, longWallNodeLeft)
-			&& !collision.SceneNodeWithSceneNode(player, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(player, shortWallNodeDown))
-			oldPosition = player->getPosition();
 
+		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
+			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
+			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
+			oldPosition = playerObject->getPosition();
 		if (!joystickConnected) {
-			if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-				nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-			else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-				nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-
-			if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-				nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-			else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-				nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-
-			player->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+			playerObject->setPosition(player->Move(nodePosition, inputReceiver));
+			playerObject->setRotation(player->playerRotate(playerRotation, inputReceiver));
+			playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		}
+		playerObject->setPosition(nodePosition);
+		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
+			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
+			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
+			playerObject->setPosition(oldPosition);
 		}
 
-		player->setPosition(nodePosition);
-
-
-		if (collision.SceneNodeWithSceneNode(player, cube) || collision.SceneNodeWithSceneNode(player, cube2)
-			|| collision.SceneNodeWithSceneNode(player, longWallNodeLeft) || collision.SceneNodeWithSceneNode(player, longWallNodeRight)
-			|| collision.SceneNodeWithSceneNode(player, shortWallNodeUp) || collision.SceneNodeWithSceneNode(player, shortWallNodeDown)) {
-			player->setPosition(oldPosition);
+		// Update all enemies
+		for (int i = 0; i < enemies.size(); i++) 
+		{
+			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime) && player->health > 0)
+				player->TakeDamage(100);
 		}
 
-		driver->beginScene(true, true, video::SColor(255, 113, 113, 133));
-
-		smgr->drawAll(); // draw the 3d scene
+		driver->beginScene(true, true, SColor(255, 113, 113, 133));
+		smgr->drawAll();
 		guienv->drawAll();
-
+		player->DrawHealthBar();
 		driver->endScene();
 
 		int fps = driver->getFPS();
-
 		if (lastFPS != fps)
 		{
-			core::stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
 
 			tmp += driver->getName();
 			tmp += L"] fps: ";

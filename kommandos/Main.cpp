@@ -158,11 +158,7 @@ int main()
 			// Store a local reference from joystickState
 			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
 
-			// We receive the full analog range of the axes, and so have to implement our
-			// own dead zone.  This is an empirical value, since some joysticks have more
-			// jitter or creep around the center point than others.  We'll use 5% of the
-			// range as the dead zone, but generally you would want to give the user the
-			// option to change this.
+			// Base dead zone for the controller axis, user should be able to change this in-game
 			const f32 DEAD_ZONE = 0.05f;
 
 			vMove =
@@ -182,7 +178,6 @@ int main()
 			}
 			playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
 		}
-
 
 		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
 			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)

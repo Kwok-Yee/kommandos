@@ -20,5 +20,5 @@ public:
 
 private:
 	// Store the current state of each key
-	bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];
+	bool keyIsDown[irr::KEY_KEY_CODES_COUNT];
 };

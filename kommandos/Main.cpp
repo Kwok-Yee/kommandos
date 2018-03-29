@@ -98,7 +98,7 @@ int main()
 	collision.AddStaticToList(cube2);
 
 	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
-	
+
 	if (playerMesh) {
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
 	}
@@ -147,6 +147,7 @@ int main()
 
 		bool joystickConnected = false;
 		core::vector3df nodePosition = playerObject->getPosition();
+		core::vector3df nodeRotation = playerObject->getRotation();
 
 		if (inputReceiver.GetJoystickInfo().size() > 0)
 		{
@@ -155,21 +156,24 @@ int main()
 			f32 hMove = 0.f;
 			f32 vMove = 0.f;
 			f32 moveSpeed = 50.f;
+
+			f32 hRot = 0.f;
+			f32 vRot = 0.f;
+			f32 prevHRot = 0.f;
+			f32 prevVRot = 0.f;
+
 			// Store a local reference from joystickState
 			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
 
 			// Base dead zone for the controller axis, user should be able to change this in-game
 			const f32 DEAD_ZONE = 0.05f;
 
-			vMove =
-				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
-			if (fabs(vMove) < DEAD_ZONE)
-				vMove = 0.f;
-
-			hMove =
-				(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
+			hMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
 			if (fabs(hMove) < DEAD_ZONE)
 				hMove = 0.f;
+			vMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
+			if (fabs(vMove) < DEAD_ZONE)
+				vMove = 0.f;
 
 			if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
 			{
@@ -177,15 +181,36 @@ int main()
 				nodePosition.Z += moveSpeed * frameDeltaTime * vMove;
 			}
 			playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
-		}
 
+			vRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_V] / 32767.f;
+			if (fabs(vRot) < DEAD_ZONE) {
+				prevVRot = vRot;
+				vRot = 0.f;
+			}
+			hRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Z] / 32767.f;
+			if (fabs(hRot) < DEAD_ZONE) {
+				prevHRot = hRot;
+				hRot = 0.f;
+			}
+			if (hRot != 0 || vRot != 0) {
+				playerObject->setRotation(core::vector3df(0, atan2(vRot, hRot) * 180 / PI, 0));
+			}
+			else {
+				playerObject->setRotation(core::vector3df(0, atan2(prevVRot, prevHRot) * 180 / PI, 0));
+			}
+
+			if (joystickData.IsButtonPressed(6)) {
+				driver->drop();
+				return 0;
+			}
+
+		}
 		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
 			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
 			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
 			oldPosition = playerObject->getPosition();
 		if (!joystickConnected) {
 			playerObject->setPosition(player->Move(nodePosition, inputReceiver));
-			playerObject->setRotation(player->playerRotate(playerRotation, inputReceiver));
 			playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
 		}
 		playerObject->setPosition(nodePosition);
@@ -196,7 +221,7 @@ int main()
 		}
 
 		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++) 
+		for (int i = 0; i < enemies.size(); i++)
 		{
 			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime) && player->health > 0)
 				player->TakeDamage(100);

@@ -50,31 +50,31 @@ vector3df Player::Move(vector3df oldPosition, InputReceiver inputReceiver)
 		oldPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 	return oldPosition;
 }
-vector3df Player::playerRotate(vector3df playerRotation, InputReceiver inputReceiver)
-{
-	// Work out a frame delta time.
-	const u32 now = iDevice->getTimer()->getTime();
-	const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
-	then = now;
-
-	vector3df newposition;
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
-		playerRotation.Y = -90;
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-		playerRotation.Y = 90;
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-		playerRotation.Y = -180;
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-		playerRotation.Y = 0;
-	return playerRotation;
-}
+//vector3df Player::playerRotate(vector3df playerRotation, InputReceiver inputReceiver)
+//{
+//	// Work out a frame delta time.
+//	const u32 now = iDevice->getTimer()->getTime();
+//	const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
+//	then = now;
+//
+//	vector3df newposition;
+//	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+//		playerRotation.Y = -90;
+//	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
+//		playerRotation.Y = 90;
+//	if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
+//		playerRotation.Y = -180;
+//	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
+//		playerRotation.Y = 0;
+//	return playerRotation;
+//}
 
 void Player::TakeDamage(f32 damage)
 {
 	health -= damage;
 	if (health <= 0) 
 	{
-		gameOverState.ShowGameOver(iDevice);
+		//gameOverState.ShowGameOver(iDevice);
 	}
 }
 void Player::DrawHealthBar()

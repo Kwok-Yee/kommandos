@@ -54,6 +54,10 @@ int main()
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
+	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
+	IMeshSceneNode* portalNode = smgr->addMeshSceneNode(portalMesh);
+	portalNode->setPosition(core::vector3df(75, 0, 0));
+
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);

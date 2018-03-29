@@ -195,7 +195,7 @@ int main()
 		{
 			if (enemyBehaviour.Update(enemies[i], playerObject->getPosition(), frameDeltaTime))
 			{
-				player->TakeDamage(100);
+				player->TakeDamage(10,frameDeltaTime);
 			}
 
 			if (enemyHealthValues[i] <= 0)

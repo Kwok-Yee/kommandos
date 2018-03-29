@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <irrlicht.h>
+#include <iostream>
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
@@ -19,6 +20,7 @@ IrrlichtDevice* iDevice;
 video::IVideoDriver* driver;
 GameOverState gameOverState;
 Collision collision;
+int vulnerable = 0;
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -69,16 +71,20 @@ void Player::Move(irr::scene::ISceneNode* playerNode, InputReceiver inputReceive
 	playerNode->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerNode))
 		playerNode->setPosition(currentPosition);
+
+	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 
-void Player::TakeDamage(f32 damage)
+void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0) {
+	if (health > 0 && vulnerable <= 0 ) {
+		vulnerable = 500;
 		health -= damage;
 
 		if (health <= 0)
 			gameOverState.ShowGameOver(iDevice);
 	}
+	
 }
 void Player::DrawHealthBar()
 {

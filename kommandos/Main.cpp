@@ -2,6 +2,7 @@
 #include "Collision.h"
 #include "driverChoice.h"
 #include "InputReceiver.h"
+#include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include "Gun.h"
@@ -24,7 +25,7 @@ const vector3df cameraPosition = vector3df(0, 120, 0);
 const vector3df cameraTarget = vector3df(0, 0, 0);
 
 //ProjectionMatrix for the orthographic camera
-irr::core::CMatrix4<float> projectionMatrix;
+CMatrix4<float> projectionMatrix;
 
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
@@ -38,6 +39,8 @@ int main()
 	Gun* gun;
 	EnemyBehaviour enemyBehaviour;
 
+	LevelGeneration levelGeneration;
+
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
 		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
@@ -47,12 +50,15 @@ int main()
 		return 1;
 	}
 	Player* player = new Player(device);
+	vector3df playerRotation;
 
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
-	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
+	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
+	IMeshSceneNode* portalNode = smgr->addMeshSceneNode(portalMesh);
+	portalNode->setPosition(vector3df(75, 0, 0));
 
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
@@ -60,53 +66,53 @@ int main()
 
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
-	longWallNodeRight->setMaterialFlag(video::EMF_LIGHTING, true);
-	longWallNodeRight->setPosition(core::vector3df(0, 0, -75));
+	longWallNodeRight->setMaterialFlag(EMF_LIGHTING, true);
+	longWallNodeRight->setPosition(vector3df(0, 0, -75));
 
 	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
-	longWallNodeLeft->setMaterialFlag(video::EMF_LIGHTING, true);
-	longWallNodeLeft->setPosition(core::vector3df(0, 0, 90));
+	longWallNodeLeft->setMaterialFlag(EMF_LIGHTING, true);
+	longWallNodeLeft->setPosition(vector3df(0, 0, 90));
 
 	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
-	shortWallNodeUp->setMaterialFlag(video::EMF_LIGHTING, true);
-	shortWallNodeUp->setPosition(core::vector3df(78.5, 0, 0));
+	shortWallNodeUp->setMaterialFlag(EMF_LIGHTING, true);
+	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0));
 
 	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
-	shortWallNodeDown->setMaterialFlag(video::EMF_LIGHTING, true);
-	shortWallNodeDown->setPosition(core::vector3df(-93.5, 0, 0));
+	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
+	shortWallNodeDown->setPosition(vector3df(-93.5, 0, 0));
 
 	ISceneNode* cube = smgr->addCubeSceneNode();
 	if (cube) {
 		cube->setPosition(core::vector3df(-30, 10, 10));
 		cube->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube->setMaterialTexture(1, driver->getTexture(crateNormal));
-		cube->setMaterialFlag(video::EMF_LIGHTING, true);
+		cube->setMaterialFlag(EMF_LIGHTING, true);
 	}
 	ISceneNode* cube2 = smgr->addCubeSceneNode();
 	if (cube2) {
 		cube2->setPosition(vector3df(10, 10, -30));
 		cube2->setMaterialTexture(0, driver->getTexture(crateDiffuse));
 		cube2->setMaterialTexture(1, driver->getTexture(crateNormal));
-		cube2->setMaterialFlag(video::EMF_LIGHTING, true);
+		cube2->setMaterialFlag(EMF_LIGHTING, true);
 	}
 
 	// Add to collision for enemy
 	collision.AddStaticToList(cube);
 	collision.AddStaticToList(cube2);
+	collision.AddStaticToList(longWallNodeRight);
+	collision.AddStaticToList(longWallNodeLeft);
+	collision.AddStaticToList(shortWallNodeUp);
+	collision.AddStaticToList(shortWallNodeDown);
 
 	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
-	
-	if (playerMesh) {
-		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
-	}
 	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
-	{
 		playerObject->setPosition(core::vector3df(0, 0, 30));
 	}
+	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
 	IMeshSceneNode* gunNode = smgr->addMeshSceneNode(gunModel);
 	ISceneNode* bullet = smgr->addSphereSceneNode();
 
@@ -126,18 +132,18 @@ int main()
 		bullet->setVisible(false);
 		//gunNode->addChild(bullet);
 	}
-
-	vector3df oldPosition = playerObject->getPosition();
+	player->currentPosition = playerObject->getPosition();
 	
-	irr::core::array<f32> enemyHealthValues;
-	irr::core::array<IMeshSceneNode*> enemies;
+	<f32> enemyHealthValues;
+	<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++) {
 		enemyHealthValues.push_back(100);
 		enemies.push_back(enemyBehaviour.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
 	}
-	
+
+	const vector3df cameraPosition = vector3df(0, 150, 0);
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 	if (camera) {
 		camera->setPosition(cameraPosition);
@@ -152,8 +158,10 @@ int main()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	int lastFPS = -1;
+	//Generates the level(arenas), adds 2 arena's
+	levelGeneration.PlaceArenas(smgr, 2);
 
+	int lastFPS = -1;
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
@@ -164,22 +172,8 @@ int main()
 		const u32 now = device->getTimer()->getTime();
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
-
-		vector3df nodePosition = playerObject->getPosition();
-
-		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
-			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
-			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
-			oldPosition = playerObject->getPosition();
-
-		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
-
-		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
-		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
-			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
-			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
-			playerObject->setPosition(oldPosition);
-		}
+		
+		player->Move(playerObject, inputReceiver);
 
 		if (inputReceiver.isLeftMouseButtonDown) {
 			//gunNode->removeChild(bullet);
@@ -215,9 +209,9 @@ int main()
 		gun->LaserLine(inputReceiver.position, driver, camera);
 
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
-		player->DrawHealthBar();
 		smgr->drawAll();
 		guienv->drawAll();
+		player->DrawHealthBar();
 		driver->endScene();
 
 		int fps = driver->getFPS();

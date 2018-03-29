@@ -8,6 +8,7 @@ using namespace irr;
 using namespace core;
 using namespace std;
 
+irr::f32 health;
 const irr::s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
 const irr::s32 MAXHEALTH = 100; //bar size
 // This is the movement speed in units per second.

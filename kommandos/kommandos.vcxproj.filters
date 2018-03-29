@@ -39,6 +39,12 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Irrlicht.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputReceiver.h">
@@ -59,13 +65,8 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameOverState.h">
+    <ClInclude Include="Gun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Irrlicht.dll">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
 </Project>

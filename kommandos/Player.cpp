@@ -8,13 +8,12 @@ using namespace irr;
 using namespace core;
 using namespace std;
 
-irr::f32 health;
 const irr::s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
 const irr::s32 MAXHEALTH = 100; //bar size
 // This is the movement speed in units per second.
 const f32 MOVEMENT_SPEED = 50.f;
 
-f32 health;
+irr::f32 health;
 u32 then;
 IrrlichtDevice* iDevice;
 video::IVideoDriver* driver;
@@ -41,7 +40,7 @@ void Player::Move(irr::scene::ISceneNode* playerNode, InputReceiver inputReceive
 	vector3df newPosition = playerNode->getPosition();
 
 	if (collision.CollidesWithStaticObjects(playerNode))
-		 currentPosition = playerNode->getPosition();
+		currentPosition = playerNode->getPosition();
 
 	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
 	{
@@ -74,11 +73,12 @@ void Player::Move(irr::scene::ISceneNode* playerNode, InputReceiver inputReceive
 
 void Player::TakeDamage(f32 damage)
 {
-	if (health > 0)
+	if (health > 0) {
 		health -= damage;
 
-	if (health <= 0)
-		gameOverState.ShowGameOver(iDevice);
+		if (health <= 0)
+			gameOverState.ShowGameOver(iDevice);
+	}
 }
 void Player::DrawHealthBar()
 {

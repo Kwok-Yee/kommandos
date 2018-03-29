@@ -50,7 +50,6 @@ int main()
 		return 1;
 	}
 	Player* player = new Player(device);
-	vector3df playerRotation;
 
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
@@ -111,11 +110,11 @@ int main()
 	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
 		playerObject->setPosition(core::vector3df(0, 0, 30));
-	}
+
 	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
 	IMeshSceneNode* gunNode = smgr->addMeshSceneNode(gunModel);
 	ISceneNode* bullet = smgr->addSphereSceneNode();
-
+	int b = 0;
 	if (gunNode)
 	{
 		gunNode->setPosition(vector3df(2, 5, -1));
@@ -133,9 +132,9 @@ int main()
 		//gunNode->addChild(bullet);
 	}
 	player->currentPosition = playerObject->getPosition();
-	
-	<f32> enemyHealthValues;
-	<IMeshSceneNode*> enemies;
+
+	irr::core::array<f32> enemyHealthValues;
+	irr::core::array<IMeshSceneNode*> enemies;
 	int enemiesToSpawn = 2;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++) {
@@ -172,7 +171,7 @@ int main()
 		const u32 now = device->getTimer()->getTime();
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
-		
+
 		player->Move(playerObject, inputReceiver);
 
 		if (inputReceiver.isLeftMouseButtonDown) {
@@ -194,10 +193,11 @@ int main()
 		// Update all enemies
 		for (int i = 0; i < enemies.size(); i++)
 		{
-			if (enemyBehaviour.Update(enemies[i], nodePosition, frameDeltaTime)) 
+			if (enemyBehaviour.Update(enemies[i], playerObject->getPosition(), frameDeltaTime))
 			{
 				player->TakeDamage(100);
 			}
+
 			if (enemyHealthValues[i] <= 0)
 			{
 				smgr->addToDeletionQueue(enemies[i]);
@@ -227,6 +227,7 @@ int main()
 			lastFPS = fps;
 		}
 	}
+
 	device->drop();
 
 	return 0;

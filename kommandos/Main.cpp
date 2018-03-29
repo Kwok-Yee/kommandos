@@ -147,7 +147,6 @@ int main()
 
 		bool joystickConnected = false;
 		core::vector3df nodePosition = playerObject->getPosition();
-		core::vector3df nodeRotation = playerObject->getRotation();
 
 		if (inputReceiver.GetJoystickInfo().size() > 0)
 		{
@@ -183,16 +182,17 @@ int main()
 			playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
 
 			vRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_V] / 32767.f;
-			if (fabs(vRot) < DEAD_ZONE) {
+			if (fabs(vRot) < DEAD_ZONE + 0.05f) {
 				prevVRot = vRot;
 				vRot = 0.f;
 			}
 			hRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Z] / 32767.f;
-			if (fabs(hRot) < DEAD_ZONE) {
+			if (fabs(hRot) < DEAD_ZONE + 0.05f) {
 				prevHRot = hRot;
 				hRot = 0.f;
 			}
-			if (hRot != 0 || vRot != 0) {
+
+			if (fabs(hRot) != 0 || fabs(vRot) != 0) {
 				playerObject->setRotation(core::vector3df(0, atan2(vRot, hRot) * 180 / PI, 0));
 			}
 			else {

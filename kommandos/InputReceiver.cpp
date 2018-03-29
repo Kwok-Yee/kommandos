@@ -97,6 +97,9 @@ bool InputReceiver::IsKeyDown(EKEY_CODE keyCode) const
 	return keyIsDown[keyCode];
 }
 
+// We use this array to store the current state of each key
+bool keyIsDown[KEY_KEY_CODES_COUNT];
+
 InputReceiver::InputReceiver()
 {
 	for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)

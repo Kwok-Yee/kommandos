@@ -2,22 +2,23 @@
 #include <irrlicht.h>
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
+#include "Collision.h"
 
 using namespace irr;
-
 using namespace core;
 using namespace std;
 
 const irr::s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
 const irr::s32 MAXHEALTH = 100; //bar size
-
 // This is the movement speed in units per second.
 const f32 MOVEMENT_SPEED = 50.f;
 
+irr::f32 health;
 u32 then;
 IrrlichtDevice* iDevice;
 video::IVideoDriver* driver;
 GameOverState gameOverState;
+Collision collision;
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -29,34 +30,54 @@ Player::Player(IrrlichtDevice* device)
 	then = iDevice->getTimer()->getTime();
 }
 
-vector3df Player::Move(vector3df oldPosition, InputReceiver inputReceiver)
+void Player::Move(irr::scene::ISceneNode* playerNode, InputReceiver inputReceiver)
 {
 	// Work out a frame delta time.
 	const u32 now = iDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 	then = now;
-	
-	vector3df newposition;
+
+	vector3df newPosition = playerNode->getPosition();
+
+	if (collision.CollidesWithStaticObjects(playerNode))
+		currentPosition = playerNode->getPosition();
+
 	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
 	{
-		oldPosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		newPosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		playerNode->setRotation(vector3df(0, -90, 0));
 	}
 	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-		oldPosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+	{
+		newPosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+		playerNode->setRotation(vector3df(0, 90, 0));
+	}
 
 	if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-		oldPosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+	{
+		newPosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+		playerNode->setRotation(vector3df(0, -180, 0));
+	}
 	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-		oldPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-	return oldPosition;
+	{
+		newPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+		playerNode->setRotation(vector3df(0, 0, 0));
+	}
+
+	playerNode->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+
+	playerNode->setPosition(newPosition);
+	if (collision.CollidesWithStaticObjects(playerNode))
+		playerNode->setPosition(currentPosition);
 }
 
 void Player::TakeDamage(f32 damage)
 {
-	health -= damage;
-	if (health <= 0) 
-	{
-		//gameOverState.ShowGameOver(iDevice);
+	if (health > 0) {
+		health -= damage;
+
+		if (health <= 0)
+			gameOverState.ShowGameOver(iDevice);
 	}
 }
 void Player::DrawHealthBar()

@@ -18,7 +18,8 @@ void GameOverState::ShowGameOver(IrrlichtDevice* device)
 	IMeshSceneNode* gameOverNode = smgr->addMeshSceneNode(gameover);
 	if (gameOverNode) {
 
-		gameOverNode->setScale(vector3df(50, 50, 50));
+		gameOverNode->setScale(vector3df(100, 100, 100));
+		gameOverNode->setPosition(vector3df(-25, 0, 20));
 		gameOverNode->setMaterialTexture(0, driver->getTexture("../media/Game_Over_Screen.jpg"));
 		gameOverNode->setRotation(vector3df(0, -90, 0));
 		gameOverNode->setMaterialFlag(video::EMF_LIGHTING, false);

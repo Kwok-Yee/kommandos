@@ -96,29 +96,26 @@ int main()
 	// Add to collision for enemy
 	collision.AddStaticToList(cube);
 	collision.AddStaticToList(cube2);
+	collision.AddStaticToList(longWallNodeRight);
+	collision.AddStaticToList(longWallNodeLeft);
+	collision.AddStaticToList(shortWallNodeUp);
+	collision.AddStaticToList(shortWallNodeDown);
 
 	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
-	
-	if (playerMesh) {
+	if (playerMesh) 
 		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
-	}
 	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
-	{
 		playerObject->setPosition(core::vector3df(0, 0, 30));
-	}
-	vector3df oldPosition = playerObject->getPosition();
+	player->currentPosition = playerObject->getPosition();
 
 	irr::core::array<IMeshSceneNode*> enemies;
-	int enemiesToSpawn = 2;
-	int positionMultiplier = 10;
+	int enemiesToSpawn = 5, positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++)
 		enemies.push_back(enemyController.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
 
 	const vector3df cameraPosition = vector3df(0, 150, 0);
-
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
-
 	if (camera) {
 		camera->setPosition(cameraPosition);
 		camera->setTarget(cameraTarget);
@@ -136,7 +133,6 @@ int main()
 	levelGeneration.PlaceArenas(smgr, 2);
 
 	int lastFPS = -1;
-
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
@@ -148,25 +144,12 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		vector3df nodePosition = playerObject->getPosition();
-		if (!collision.SceneNodeWithSceneNode(playerObject, cube) && !collision.SceneNodeWithSceneNode(playerObject, cube2)
-			&& !collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight) && !collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft)
-			&& !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) && !collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown))
-			oldPosition = playerObject->getPosition();
-
-		playerObject->setPosition(player->Move(nodePosition, inputReceiver));
-		playerObject->setRotation(player->playerRotate(playerRotation, inputReceiver));
-		playerObject->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
-		if (collision.SceneNodeWithSceneNode(playerObject, cube) || collision.SceneNodeWithSceneNode(playerObject, cube2)
-			|| collision.SceneNodeWithSceneNode(playerObject, longWallNodeLeft) || collision.SceneNodeWithSceneNode(playerObject, longWallNodeRight)
-			|| collision.SceneNodeWithSceneNode(playerObject, shortWallNodeUp) || collision.SceneNodeWithSceneNode(playerObject, shortWallNodeDown)) {
-			playerObject->setPosition(oldPosition);
-		}
+		player->Move(playerObject, inputReceiver);
 
 		// Update all enemies
 		for (int i = 0; i < enemies.size(); i++) 
 		{
-			if (enemyController.Update(enemies[i], nodePosition, frameDeltaTime) && player->health > 0)
+			if (enemyController.Update(enemies[i], playerObject->getPosition(), frameDeltaTime))
 				player->TakeDamage(100);
 		}
 

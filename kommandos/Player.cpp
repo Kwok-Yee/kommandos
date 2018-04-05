@@ -42,33 +42,60 @@ void Player::Move(irr::scene::ISceneNode* playerNode, InputReceiver inputReceive
 	if (collision.CollidesWithStaticObjects(playerNode))
 		currentPosition = playerNode->getPosition();
 
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+	if (inputReceiver.GetJoystickInfo().size() > 0)
 	{
-		newPosition.X += MOVEMENT_SPEED * frameDeltaTime;
-		playerNode->setRotation(vector3df(0, -90, 0));
-	}
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
-	{
-		newPosition.X -= MOVEMENT_SPEED * frameDeltaTime;
-		playerNode->setRotation(vector3df(0, 90, 0));
-	}
+		f32 hMove = 0.f;
+		f32 vMove = 0.f;
+		f32 moveSpeed = 50.f;
 
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
-	{
-		newPosition.Z += MOVEMENT_SPEED * frameDeltaTime;
-		playerNode->setRotation(vector3df(0, -180, 0));
-	}
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
-	{
-		newPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
-		playerNode->setRotation(vector3df(0, 0, 0));
-	}
+		f32 hRot = 0.f;
+		f32 vRot = 0.f;
+		f32 prevHRot = 0.f;
+		f32 prevVRot = 0.f;
 
-	playerNode->setMaterialFlag(video::EMF_LIGHTING, inputReceiver.isLeftMouseButtonDown);
+		// Store a local reference from joystickState
+		const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
 
-	playerNode->setPosition(newPosition);
-	if (collision.CollidesWithStaticObjects(playerNode))
-		playerNode->setPosition(currentPosition);
+		// Base dead zone for the controller axis, user should be able to change this in-game
+		const f32 DEAD_ZONE = 0.05f;
+
+		hMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
+		if (fabs(hMove) < DEAD_ZONE)
+			hMove = 0.f;
+		vMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
+		if (fabs(vMove) < DEAD_ZONE)
+			vMove = 0.f;
+
+		if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
+		{
+			newPosition.X += moveSpeed * frameDeltaTime * hMove;
+			newPosition.Z += moveSpeed * frameDeltaTime * vMove;
+		}
+
+		playerNode->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
+
+		vRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_V] / 32767.f;
+		if (fabs(vRot) < DEAD_ZONE + 0.05f) {
+			prevVRot = vRot;
+			vRot = 0.f;
+		}
+		hRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Z] / 32767.f;
+		if (fabs(hRot) < DEAD_ZONE + 0.05f) {
+			prevHRot = hRot;
+			hRot = 0.f;
+		}
+
+		if (fabs(hRot) != 0 || fabs(vRot) != 0) {
+			playerNode->setRotation(core::vector3df(0, atan2(vRot, hRot) * 180 / PI, 0));
+		}
+		else {
+			playerNode->setRotation(core::vector3df(0, atan2(prevVRot, prevHRot) * 180 / PI, 0));
+		}
+
+		playerNode->setPosition(newPosition);
+		if (collision.CollidesWithStaticObjects(playerNode))
+			playerNode->setPosition(currentPosition);
+	}
 }
 
 void Player::TakeDamage(f32 damage)
@@ -76,8 +103,9 @@ void Player::TakeDamage(f32 damage)
 	if (health > 0) {
 		health -= damage;
 
-		if (health <= 0)
-			gameOverState.ShowGameOver(iDevice);
+		if (health <= 0) {
+			//gameOverState.ShowGameOver(iDevice);
+		}
 	}
 }
 void Player::DrawHealthBar()

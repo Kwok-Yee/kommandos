@@ -180,72 +180,7 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		bool joystickConnected = false;
-		core::vector3df nodePosition = playerObject->getPosition();
-
-		if (inputReceiver.GetJoystickInfo().size() > 0)
-		{
-			joystickConnected = true;
-
-			f32 hMove = 0.f;
-			f32 vMove = 0.f;
-			f32 moveSpeed = 50.f;
-
-			f32 hRot = 0.f;
-			f32 vRot = 0.f;
-			f32 prevHRot = 0.f;
-			f32 prevVRot = 0.f;
-
-			// Store a local reference from joystickState
-			const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
-
-			// Base dead zone for the controller axis, user should be able to change this in-game
-			const f32 DEAD_ZONE = 0.05f;
-
-			hMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-			if (fabs(hMove) < DEAD_ZONE)
-				hMove = 0.f;
-			vMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
-			if (fabs(vMove) < DEAD_ZONE)
-				vMove = 0.f;
-
-			if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
-			{
-				nodePosition.X += moveSpeed * frameDeltaTime * hMove;
-				nodePosition.Z += moveSpeed * frameDeltaTime * vMove;
-			}
-			playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
-
-			vRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_V] / 32767.f;
-			if (fabs(vRot) < DEAD_ZONE + 0.05f) {
-				prevVRot = vRot;
-				vRot = 0.f;
-			}
-			hRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Z] / 32767.f;
-			if (fabs(hRot) < DEAD_ZONE + 0.05f) {
-				prevHRot = hRot;
-				hRot = 0.f;
-			}
-
-			if (fabs(hRot) != 0 || fabs(vRot) != 0) {
-				playerObject->setRotation(core::vector3df(0, atan2(vRot, hRot) * 180 / PI, 0));
-			}
-			else {
-				playerObject->setRotation(core::vector3df(0, atan2(prevVRot, prevHRot) * 180 / PI, 0));
-			}
-
-			if (joystickData.IsButtonPressed(6)) {
-				driver->drop();
-				return 0;
-			}
-
-		}
-
-		playerObject->setPosition(nodePosition);
-
-		if (!joystickConnected) {
-			player->Move(playerObject, inputReceiver);
-		}
+		player->Move(playerObject, inputReceiver);
 
 		if (inputReceiver.isLeftMouseButtonDown) {
 			//gunNode->removeChild(bullet);

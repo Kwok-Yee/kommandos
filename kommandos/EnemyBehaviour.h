@@ -1,20 +1,14 @@
 #pragma once
 #include <irrlicht.h>
-#include "Player.h"
-
-using namespace irr;
-using namespace core;
-using namespace scene;
 
 class EnemyBehaviour 
 {
 public:
-
-	IMeshSceneNode* Spawn(IrrlichtDevice* device, vector3df startPosition);
-	bool Update(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
-	irr::f32 TakeDamage(f32 damage, f32 health);
+	EnemyBehaviour(irr::IrrlichtDevice* device);
+	irr::scene::IMeshSceneNode* Spawn(irr::core::vector3df startPosition);
+	bool Update(irr::scene::IMeshSceneNode* enemyNode, irr::core::vector3df playerPosition, irr::f32 frameDeltaTime);
+	irr::f32 TakeDamage(irr::f32 damage, irr::f32 health);
 	
 private:
-
-	bool Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f32 frameDeltaTime);
+	bool Move(irr::scene::IMeshSceneNode* enemyNode, irr::core::vector3df playerPosition, irr::f32 frameDeltaTime);
 };

@@ -12,19 +12,24 @@ using namespace video;
 const f32 ENEMY_MOVEMENT_SPEED = 15.f;
 const s32 ENEMY_MAX_HEALTH = 100;
 
+IrrlichtDevice* enemyBehaviourIDevice;
+IVideoDriver* enemyBevaiourDriver;
+ISceneManager* enemyBaviourSmgr;
 f32 enemyHealth;
 
 IMeshSceneNode* enemyNode;
 
-IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)
+EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
+	enemyBehaviourIDevice = device;
+	enemyBevaiourDriver = enemyBehaviourIDevice->getVideoDriver();
+	enemyBaviourSmgr = enemyBehaviourIDevice->getSceneManager();
+}
+
+IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 {
-
-	IVideoDriver* driver = device->getVideoDriver();
-	ISceneManager* smgr = device->getSceneManager();
-
 	enemyHealth = ENEMY_MAX_HEALTH;
 	// spawn enemy
-	enemyNode = smgr->addMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
+	enemyNode = enemyBaviourSmgr->addMeshSceneNode(enemyBaviourSmgr->getMesh("../media/ninja.b3d"));
 	if (enemyNode)
 	{
 		enemyNode->setMaterialFlag(video::EMF_LIGHTING, false);
@@ -34,7 +39,7 @@ IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPos
 
 		enemyNode->setScale(vector3df(2.f, 2.f, 2.f));
 		enemyNode->setRotation(vector3df(0, -90, 0));
-		enemyNode->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
+		enemyNode->setMaterialTexture(0, enemyBevaiourDriver->getTexture("../media/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
 		return enemyNode;
 	}

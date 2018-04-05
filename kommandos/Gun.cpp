@@ -9,7 +9,7 @@ using namespace io;
 using namespace gui;
 using namespace std;
 
-IrrlichtDevice * IDevice;
+IrrlichtDevice* gunIDevice;
 ISceneNodeAnimator* anim;
 vector3df endPos;
 vector3df toMousePosition;
@@ -18,7 +18,7 @@ vector3df mousePosition;
 Gun::Gun(ISceneNode* gun, IrrlichtDevice* device)
 {
 	gunNode = gun;
-	IDevice = device;
+	gunIDevice = device;
 	smgr = device->getSceneManager();
 }
 

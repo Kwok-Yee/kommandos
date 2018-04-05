@@ -18,12 +18,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputReceiver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,30 +33,24 @@
     <ClCompile Include="Gun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InputReceiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="LevelGeneration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Irrlicht.dll" />
-    <None Include="Debug\Irrlicht.dll" />
-    <None Include="Debug\vc141.idb" />
-    <None Include="Debug\vc141.pdb" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="InputReceiver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBehaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
@@ -71,20 +59,23 @@
     <ClInclude Include="GameOverState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="LevelGeneration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputReceiver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Object Include="Debug\Collision.obj" />
-    <Object Include="Debug\EnemyBehaviour.obj" />
-    <Object Include="Debug\GameOverState.obj" />
-    <Object Include="Debug\Gun.obj" />
-    <Object Include="Debug\InputReceiver.obj" />
-    <Object Include="Debug\LevelGeneration.obj" />
-    <Object Include="Debug\Main.obj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Debug\kommandos.log" />
+    <None Include="Irrlicht.dll" />
   </ItemGroup>
 </Project>

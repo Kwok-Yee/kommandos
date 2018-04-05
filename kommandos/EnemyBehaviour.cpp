@@ -10,17 +10,17 @@ using namespace video;
 
 // This is the movement speed in units per second.
 const f32 ENEMY_MOVEMENT_SPEED = 15.f;
-const irr::s32 ENEMY_MAX_HEALTH = 100;
+const s32 ENEMY_MAX_HEALTH = 100;
 
-irr::f32 enemyHealth;
+f32 enemyHealth;
 
-scene::IMeshSceneNode* enemyNode;
+IMeshSceneNode* enemyNode;
 
-irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)
+IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)
 {
 
-	video::IVideoDriver* driver = device->getVideoDriver();
-	scene::ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
+	ISceneManager* smgr = device->getSceneManager();
 
 	enemyHealth = ENEMY_MAX_HEALTH;
 	// spawn enemy
@@ -32,8 +32,8 @@ irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector
 		/*enemyNode->setFrameLoop(0, 13); // For walking animation
 		enemyNode->setAnimationSpeed(15);*/
 
-		enemyNode->setScale(core::vector3df(2.f, 2.f, 2.f));
-		enemyNode->setRotation(core::vector3df(0, -90, 0));
+		enemyNode->setScale(vector3df(2.f, 2.f, 2.f));
+		enemyNode->setRotation(vector3df(0, -90, 0));
 		enemyNode->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
 		return enemyNode;

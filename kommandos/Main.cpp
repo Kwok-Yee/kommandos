@@ -4,6 +4,7 @@
 #include "InputReceiver.h"
 #include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
+#include "EnemySpawner.h"
 #include "Player.h"
 #include "Gun.h"
 #include <ILogger.h>
@@ -45,6 +46,7 @@ int main()
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
 		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 
+	EnemySpawner enemySpawner(device);
 	// No device found
 	if (!device) {
 		return 1;
@@ -135,7 +137,7 @@ int main()
 
 	irr::core::array<f32> enemyHealthValues;
 	irr::core::array<IMeshSceneNode*> enemies;
-	int enemiesToSpawn = 2;
+	int enemiesToSpawn = 0;
 	int positionMultiplier = 10;
 	for (int i = 0; i < enemiesToSpawn; i++) {
 		enemyHealthValues.push_back(100);

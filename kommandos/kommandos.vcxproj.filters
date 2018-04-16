@@ -18,19 +18,10 @@
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputReceiver.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelGeneration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBehaviour.cpp">
@@ -39,11 +30,26 @@
     <ClCompile Include="GameOverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputReceiver.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Gun.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="InputReceiver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -53,25 +59,17 @@
     <ClInclude Include="Collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBehaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Gun.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameOverState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Irrlicht.dll">
-      <Filter>Resource Files</Filter>
-    </None>
+    <None Include="Irrlicht.dll" />
   </ItemGroup>
 </Project>

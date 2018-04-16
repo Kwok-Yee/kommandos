@@ -13,7 +13,7 @@ const f32 ENEMY_MOVEMENT_SPEED = 15.f;
 const irr::s32 ENEMY_MAX_HEALTH = 100;
 
 irr::f32 enemyHealth;
-Player player;
+Player* player;
 scene::IMeshSceneNode* enemyNode;
 
 irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)

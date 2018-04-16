@@ -51,8 +51,11 @@ int main()
 	}
 	Player* player = new Player(device);
 
-	IVideoDriver* driver = device->getVideoDriver();
-	ISceneManager* smgr = device->getSceneManager();
+	inputReceiver.CheckJoystickPresent(device);
+
+	video::IVideoDriver* driver = device->getVideoDriver();
+	scene::ISceneManager* smgr = device->getSceneManager();
+
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
@@ -107,6 +110,11 @@ int main()
 	collision.AddStaticToList(shortWallNodeDown);
 
 	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
+
+	if (playerMesh) {
+		playerMesh->setMaterialFlag(EMF_LIGHTING, false);
+	}
+
 	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
 		playerObject->setPosition(core::vector3df(0, 0, 30));
@@ -188,6 +196,7 @@ int main()
 		if (gun->hasShot && gun->CheckAnimEnd(bullet)) {
 			bullet->setPosition(vector3df(0, 0, 0));
 			//gunNode->addChild(bullet);
+
 		}
 
 		// Update all enemies

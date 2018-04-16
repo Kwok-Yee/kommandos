@@ -12,7 +12,6 @@ public:
 	
 private:
 	irr::scene::ISceneNode* gunNode;
-	irr::scene::ISceneManager* smgr;
 	
 };
 

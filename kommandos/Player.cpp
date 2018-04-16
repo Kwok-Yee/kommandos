@@ -3,6 +3,7 @@
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
+#include "Gun.h"
 
 using namespace irr;
 using namespace core;
@@ -20,8 +21,11 @@ IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
 GameOverState gameOverState;
 Collision collision;
+Gun* gun;
 
 ISceneNode* playerObject;
+IMeshSceneNode* gunNode;
+ISceneNode* bullet;
 f32 health;
 u32 time;
 vector3df currentPosition;
@@ -31,17 +35,42 @@ Player::Player(IrrlichtDevice* device)
 	playerIDevice = device;
 	playerDriver = playerIDevice->getVideoDriver();
 	playerSmgr = playerIDevice->getSceneManager();
+	Init();
 
+	// In order to do framerate independent movement, we have to know
+	// how long it was since the last frame
+	time = playerIDevice->getTimer()->getTime();
+}
+
+void Player::Init() 
+{
 	health = MAXHEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
 		playerObject->setPosition(vector3df(0, 0, 30));
 	currentPosition = playerObject->getPosition();
-	// In order to do framerate independent movement, we have to know
-	// how long it was since the last frame
-	time = playerIDevice->getTimer()->getTime();
+
+	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
+	gunNode = playerSmgr->addMeshSceneNode(gunModel);
+	bullet = playerSmgr->addSphereSceneNode();
+	if (gunNode)
+	{
+		gunNode->setPosition(vector3df(2, 5, -1));
+		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		gunNode->setMaterialFlag(EMF_LIGHTING, false);
+		gunNode->setMaterialTexture(0, playerDriver->getTexture("../media/Gun_Color.png"));
+		playerObject->addChild(gunNode);
+		gun = new Gun(gunNode, playerIDevice);
+	}
+	if (bullet) {
+		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		gunNode->setMaterialFlag(EMF_LIGHTING, false);
+		bullet->setVisible(false);
+		//gunNode->addChild(bullet);
+	}
 }
+
 
 void Player::Move(InputReceiver inputReceiver)
 {
@@ -82,6 +111,21 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
+
+	
+}
+
+void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) {
+	if (inputReceiver.isLeftMouseButtonDown) {
+		gun->LaserLine(inputReceiver.position, playerDriver, playerSmgr->getActiveCamera());
+		gun->Shoot(bullet);
+	}
+	if (gun->hasShot) {
+		for (int i = 0; i < enemies->getEnemies().size(); i++) {
+			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
+				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
+		}
+	}
 }
 
 void Player::TakeDamage(f32 damage)

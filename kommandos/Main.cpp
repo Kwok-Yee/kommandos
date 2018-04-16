@@ -34,7 +34,6 @@ const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
-
 	InputReceiver inputReceiver;
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
@@ -43,10 +42,9 @@ int main()
 	// Create instances of classes
 	Collision collision;
 	Player* player = new Player(device);
-	Gun* gun;
-	EnemyBehaviour* enemyBehaviour = new EnemyBehaviour(device);
+	//Gun* gun;
 	LevelGeneration levelGeneration;
-	EnemySpawner* enemySpawner = new EnemySpawner(device, enemyBehaviour, player);
+	EnemySpawner* enemySpawner = new EnemySpawner(device, player);
 	// No device found
 	if (!device) {
 		return 1;
@@ -107,27 +105,6 @@ int main()
 	collision.AddStaticToList(shortWallNodeUp);
 	collision.AddStaticToList(shortWallNodeDown);
 
-	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
-	IMeshSceneNode* gunNode = smgr->addMeshSceneNode(gunModel);
-	ISceneNode* bullet = smgr->addSphereSceneNode();
-	int b = 0;
-	if (gunNode)
-	{
-		gunNode->setPosition(vector3df(2, 5, -1));
-		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		gunNode->setMaterialTexture(0, driver->getTexture("../media/Gun_Color.png"));
-		player->getPlayerObject()->addChild(gunNode);
-		gun = new Gun(gunNode, device);
-	}
-
-	if (bullet) {
-		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		bullet->setVisible(false);
-		//gunNode->addChild(bullet);
-	}
-
 	const vector3df cameraPosition = vector3df(0, 150, 0);
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 	if (camera) {
@@ -160,25 +137,8 @@ int main()
 
 		player->Move(inputReceiver);
 		enemySpawner->UpdateEnemies();
-		if (inputReceiver.isLeftMouseButtonDown) {
-			//gunNode->removeChild(bullet);
-			gun->Shoot(bullet);
-		}
-
-		/*if (gun->hasShot) {
-			for (int i = 0; i < enemies.size(); i++)
-				if (collision.SceneNodeWithSceneNode(enemies[i], bullet))
-					enemyHealthValues[i] = enemyBehaviour.TakeDamage(10, enemyHealthValues[i]);
-		}*/
-
-		if (gun->hasShot && gun->CheckAnimEnd(bullet)) {
-			bullet->setPosition(vector3df(0, 0, 0));
-			//gunNode->addChild(bullet);
-		}
-
+		player->Shoot(inputReceiver, enemySpawner);
 		
-
-		gun->LaserLine(inputReceiver.position, driver, camera);
 
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 		smgr->drawAll();

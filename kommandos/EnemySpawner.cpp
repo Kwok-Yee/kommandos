@@ -18,18 +18,17 @@ Player* player;
 
 array<vector3df> spawnPositions;
 u32 amountOfEnemies;
-core::array<f32> enemyHealthValues;
 core::array<IMeshSceneNode*> enemies;
 int enemiesToSpawn = 0;
 int positionMultiplier = 10;
 
 u32 prevFrameTime;
 
-EnemySpawner::EnemySpawner(IrrlichtDevice* device, EnemyBehaviour* enemBehaviour, Player* Player)
+EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
-	enemyBehaviour = enemBehaviour;
+	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
 	player = Player;
 
 	amountOfEnemies = 6;
@@ -44,7 +43,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, EnemyBehaviour* enemBehaviour
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
 
-	EnemySpawner::Spawn();
+	Spawn();
 }
 
 void EnemySpawner::UpdateEnemies() {
@@ -68,6 +67,10 @@ void EnemySpawner::UpdateEnemies() {
 				enemyHealthValues.erase(i);
 			}
 		}
+
+		if (enemies.size() <= 0) {
+			Spawn();
+		}
 }
 
 void EnemySpawner::Spawn() {
@@ -78,5 +81,13 @@ void EnemySpawner::Spawn() {
 		enemyHealthValues.push_back(100);
 		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
 	}
+}
+
+core::array<IMeshSceneNode*> EnemySpawner::getEnemies() {
+	return enemies;
+}
+
+EnemyBehaviour* EnemySpawner::getEnemyBehaviour() {
+	return enemyBehaviour;
 }
 

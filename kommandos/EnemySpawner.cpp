@@ -11,6 +11,8 @@ using namespace core;
 using namespace scene;
 using namespace std;
 
+const u32 MAXWAVES = 10;
+
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
@@ -19,6 +21,7 @@ Player* player;
 array<vector3df> spawnPositions;
 u32 amountOfEnemies;
 core::array<IMeshSceneNode*> enemies;
+u32 currentWave = 0;
 int enemiesToSpawn = 0;
 int positionMultiplier = 10;
 
@@ -68,12 +71,14 @@ void EnemySpawner::UpdateEnemies() {
 			}
 		}
 
-		if (enemies.size() <= 0) {
+		if (enemies.size() <= 0 && currentWave < MAXWAVES) {
 			Spawn();
+			currentWave++;
 		}
 }
 
 void EnemySpawner::Spawn() {
+
 	for (int i = 0; i < amountOfEnemies; i++)
 	{
 		srand(time(NULL) * i);

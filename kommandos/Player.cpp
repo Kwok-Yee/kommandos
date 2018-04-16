@@ -104,7 +104,7 @@ void Player::TakeDamage(f32 damage)
 		health -= damage;
 
 		if (health <= 0) {
-			//gameOverState.ShowGameOver(iDevice);
+			gameOverState.ShowGameOver(iDevice);
 		}
 	}
 }

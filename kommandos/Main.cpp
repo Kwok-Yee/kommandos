@@ -50,8 +50,11 @@ int main()
 		return 1;
 	}
 
-	IVideoDriver* driver = device->getVideoDriver();
-	ISceneManager* smgr = device->getSceneManager();
+	inputReceiver.CheckJoystickPresent(device);
+
+	video::IVideoDriver* driver = device->getVideoDriver();
+	scene::ISceneManager* smgr = device->getSceneManager();
+
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
@@ -138,7 +141,6 @@ int main()
 		player->Move(inputReceiver);
 		enemySpawner->UpdateEnemies();
 		player->Shoot(inputReceiver, enemySpawner);
-		
 
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 		smgr->drawAll();

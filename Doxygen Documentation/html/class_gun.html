@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Kommandos: Player Class Reference</title>
+<title>Kommandos: Gun Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,36 +64,46 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="class_player-members.html">List of all members</a>  </div>
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="class_gun-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">Player Class Reference</div>  </div>
+<div class="title">Gun Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac207dd2957a2e3c4e734a9a074c2321d"><td class="memItemLeft" align="right" valign="top"><a id="ac207dd2957a2e3c4e734a9a074c2321d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b> (irr::IrrlichtDevice *device)</td></tr>
-<tr class="separator:ac207dd2957a2e3c4e734a9a074c2321d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae9f5a597f15e29673c47abe47c3f1d79"><td class="memItemLeft" align="right" valign="top"><a id="ae9f5a597f15e29673c47abe47c3f1d79"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>TakeDamage</b> (irr::f32 damage)</td></tr>
-<tr class="separator:ae9f5a597f15e29673c47abe47c3f1d79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6cc636d92ca5ccba15a5af2ef7f224a"><td class="memItemLeft" align="right" valign="top"><a id="aa6cc636d92ca5ccba15a5af2ef7f224a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>DrawHealthBar</b> ()</td></tr>
-<tr class="separator:aa6cc636d92ca5ccba15a5af2ef7f224a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8f50f5e8d8cb980959ba94655a0fcc1"><td class="memItemLeft" align="right" valign="top"><a id="af8f50f5e8d8cb980959ba94655a0fcc1"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Move</b> (irr::scene::ISceneNode *playerNode, <a class="el" href="class_input_receiver.html">InputReceiver</a> inputReceiver)</td></tr>
-<tr class="separator:af8f50f5e8d8cb980959ba94655a0fcc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0009484ffd24245d079b9acb3016f6cd"><td class="memItemLeft" align="right" valign="top"><a id="a0009484ffd24245d079b9acb3016f6cd"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Gun</b> (irr::scene::ISceneNode *gun, irr::IrrlichtDevice *device)</td></tr>
+<tr class="separator:a0009484ffd24245d079b9acb3016f6cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c047f8d241f2a8b6a584477767b4ec"><td class="memItemLeft" align="right" valign="top"><a id="aa1c047f8d241f2a8b6a584477767b4ec"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Shoot</b> (irr::scene::ISceneNode *bullet)</td></tr>
+<tr class="separator:aa1c047f8d241f2a8b6a584477767b4ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae35bb130cef3146dd0eff59ade621069"><td class="memItemLeft" align="right" valign="top"><a id="ae35bb130cef3146dd0eff59ade621069"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>LaserLine</b> (irr::core::vector3df endPosition, irr::video::IVideoDriver *driver, irr::scene::ICameraSceneNode *camera)</td></tr>
+<tr class="separator:ae35bb130cef3146dd0eff59ade621069"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9edcbf305d85e9052fc4773e938f248e"><td class="memItemLeft" align="right" valign="top"><a id="a9edcbf305d85e9052fc4773e938f248e"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CheckAnimEnd</b> (irr::scene::ISceneNode *bullet)</td></tr>
+<tr class="separator:a9edcbf305d85e9052fc4773e938f248e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a83dd8a4ec58053dd77e3f5e3e9b8e26e"><td class="memItemLeft" align="right" valign="top"><a id="a83dd8a4ec58053dd77e3f5e3e9b8e26e"></a>
-irr::core::vector3df&#160;</td><td class="memItemRight" valign="bottom"><b>currentPosition</b></td></tr>
-<tr class="separator:a83dd8a4ec58053dd77e3f5e3e9b8e26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac784396848d854a74100b0826e384c3d"><td class="memItemLeft" align="right" valign="top"><a id="ac784396848d854a74100b0826e384c3d"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>hasShot</b></td></tr>
+<tr class="separator:ac784396848d854a74100b0826e384c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a56a750ec1cffe0cc65802cc0034449dc"><td class="memItemLeft" align="right" valign="top"><a id="a56a750ec1cffe0cc65802cc0034449dc"></a>
+irr::scene::ISceneNode *&#160;</td><td class="memItemRight" valign="bottom"><b>gunNode</b></td></tr>
+<tr class="separator:a56a750ec1cffe0cc65802cc0034449dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61990e84dfab6ae29e6808691cc21db2"><td class="memItemLeft" align="right" valign="top"><a id="a61990e84dfab6ae29e6808691cc21db2"></a>
+irr::scene::ISceneManager *&#160;</td><td class="memItemRight" valign="bottom"><b>smgr</b></td></tr>
+<tr class="separator:a61990e84dfab6ae29e6808691cc21db2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>D:/Documenten/STUDIE GD/Game Engine/Irrlicht project/kommandos/<a class="el" href="_player_8h_source.html">Player.h</a></li>
-<li>D:/Documenten/STUDIE GD/Game Engine/Irrlicht project/kommandos/Player.cpp</li>
+<li>D:/Documenten/STUDIE GD/Game Engine/Irrlicht project/kommandos/<a class="el" href="_gun_8h_source.html">Gun.h</a></li>
+<li>D:/Documenten/STUDIE GD/Game Engine/Irrlicht project/kommandos/Gun.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

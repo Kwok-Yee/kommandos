@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: InputReceiver Class Reference</title>
+<title>Kommandos: InputReceiver Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -21,7 +21,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">My Project
+   <div id="projectname">Kommandos
    </div>
   </td>
  </tr>
@@ -81,6 +81,12 @@ Inheritance diagram for InputReceiver:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a93d0cb79217595eb9bc29f5785bb5620"><td class="memItemLeft" align="right" valign="top"><a id="a93d0cb79217595eb9bc29f5785bb5620"></a>
+irr::core::array&lt; irr::SJoystickInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetJoystickInfo</b> ()</td></tr>
+<tr class="separator:a93d0cb79217595eb9bc29f5785bb5620"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f4ecd33eace7fe2778cba699a06cd82"><td class="memItemLeft" align="right" valign="top"><a id="a0f4ecd33eace7fe2778cba699a06cd82"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>CheckJoystickPresent</b> (irr::IrrlichtDevice *device)</td></tr>
+<tr class="separator:a0f4ecd33eace7fe2778cba699a06cd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8cbad01c0e0dcaa953685b1c932d8ce6"><td class="memItemLeft" align="right" valign="top"><a id="a8cbad01c0e0dcaa953685b1c932d8ce6"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>OnEvent</b> (const irr::SEvent &amp;event)</td></tr>
 <tr class="separator:a8cbad01c0e0dcaa953685b1c932d8ce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,12 +102,18 @@ static bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLeftMouseBut
 <tr class="memitem:a4bffdbd7b8b83008a8f0d79ab018bb6b"><td class="memItemLeft" align="right" valign="top"><a id="a4bffdbd7b8b83008a8f0d79ab018bb6b"></a>
 static irr::core::vector3df&#160;</td><td class="memItemRight" valign="bottom"><b>position</b> = core::vector3df(0,0,0)</td></tr>
 <tr class="separator:a4bffdbd7b8b83008a8f0d79ab018bb6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5486727fcb5faf69809b69f311c0b27"><td class="memItemLeft" align="right" valign="top"><a id="ad5486727fcb5faf69809b69f311c0b27"></a>
+static irr::SEvent::SJoystickEvent&#160;</td><td class="memItemRight" valign="bottom"><b>joystickState</b></td></tr>
+<tr class="separator:ad5486727fcb5faf69809b69f311c0b27"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a86ce1bb3b52f6bb3499224a508178f10"><td class="memItemLeft" align="right" valign="top"><a id="a86ce1bb3b52f6bb3499224a508178f10"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>keyIsDown</b> [irr::KEY_KEY_CODES_COUNT]</td></tr>
 <tr class="separator:a86ce1bb3b52f6bb3499224a508178f10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab201d50024317b870b7020843033fd4a"><td class="memItemLeft" align="right" valign="top"><a id="ab201d50024317b870b7020843033fd4a"></a>
+irr::core::array&lt; irr::SJoystickInfo &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>joystickInfo</b></td></tr>
+<tr class="separator:ab201d50024317b870b7020843033fd4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>D:/Documenten/STUDIE GD/Game Engine/Irrlicht project/kommandos/<a class="el" href="_input_receiver_8h_source.html">InputReceiver.h</a></li>

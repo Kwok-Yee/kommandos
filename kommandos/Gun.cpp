@@ -9,7 +9,8 @@ using namespace io;
 using namespace gui;
 using namespace std;
 
-IrrlichtDevice * IDevice;
+IrrlichtDevice* gunIDevice;
+ISceneManager* gunSmgr;
 ISceneNodeAnimator* anim;
 vector3df endPos;
 vector3df toMousePosition;
@@ -18,15 +19,15 @@ vector3df mousePosition;
 Gun::Gun(ISceneNode* gun, IrrlichtDevice* device)
 {
 	gunNode = gun;
-	IDevice = device;
-	smgr = device->getSceneManager();
+	gunIDevice = device;
+	gunSmgr = device->getSceneManager();
 }
 
 void Gun::LaserLine(vector3df endPosition, IVideoDriver * driver, ICameraSceneNode* camera)
 {
 	vector2di rayScreenCoordination = vector2di(endPosition.X, endPosition.Z);
 	// Create a ray through the mouse cursor.
-	line3df ray = smgr->getSceneCollisionManager()->getRayFromScreenCoordinates(rayScreenCoordination, camera);
+	line3df ray = gunSmgr->getSceneCollisionManager()->getRayFromScreenCoordinates(rayScreenCoordination, camera);
 
 	// intersect the ray with a plane around the node facing towards the camera.
 	plane3df plane(gunNode->getPosition(), vector3df(0, -1, 0));
@@ -47,7 +48,7 @@ void Gun::Shoot(ISceneNode* bullet)
 
 		endPos = toMousePosition;
 
-		anim = smgr->createFlyStraightAnimator
+		anim = gunSmgr->createFlyStraightAnimator
 		(gunNode->getAbsolutePosition(), //spawn point
 			endPos, // destination
 			1000); //speed to destination

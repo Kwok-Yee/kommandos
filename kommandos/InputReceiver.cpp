@@ -6,11 +6,15 @@
 
 #include <irrlicht.h>
 #include "InputReceiver.h"
+#include <iostream>
 
 using namespace irr;
+using namespace std;
 
+// InputReceiver's static variables
 bool InputReceiver::isLeftMouseButtonDown = false;
 core::vector3df InputReceiver::position = core::vector3df(0,0,0);
+SEvent::SJoystickEvent InputReceiver::joystickState;
 
 bool InputReceiver::OnEvent(const SEvent& event)
 {
@@ -38,7 +42,53 @@ bool InputReceiver::OnEvent(const SEvent& event)
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 		keyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 
+	// Store the state of the first connected joystick
+	if (event.EventType == irr::EET_JOYSTICK_INPUT_EVENT
+		&& event.JoystickEvent.Joystick == 0)
+	{
+		InputReceiver::joystickState = event.JoystickEvent;
+	}
 	return false;
+}
+
+irr::core::array<irr::SJoystickInfo> InputReceiver::GetJoystickInfo() {
+	return joystickInfo;
+}
+
+void InputReceiver::CheckJoystickPresent(IrrlichtDevice* device) {
+	if (device->activateJoysticks(joystickInfo))
+	{
+		cout << "Joystick support is enabled and " << joystickInfo.size() << " joystick(s) are present." << endl;
+
+		for (u32 joystick = 0; joystick < joystickInfo.size(); ++joystick)
+		{
+			cout << "Joystick " << joystick << ":" << endl;
+			cout << "\tName: '" << joystickInfo[joystick].Name.c_str() << "'" << endl;
+			cout << "\tAxes: " << joystickInfo[joystick].Axes << endl;
+			cout << "\tButtons: " << joystickInfo[joystick].Buttons << endl;
+			cout << "\tHat is: ";
+
+			switch (joystickInfo[joystick].PovHat)
+			{
+			case SJoystickInfo::POV_HAT_PRESENT:
+				cout << "present" << endl;
+				break;
+
+			case SJoystickInfo::POV_HAT_ABSENT:
+				cout << "absent" << endl;
+				break;
+
+			case SJoystickInfo::POV_HAT_UNKNOWN:
+			default:
+				cout << "unknown" << endl;
+				break;
+			}
+		}
+	}
+	else
+	{
+		cout << "Joystick support is not enabled." << endl;
+	}
 }
 
 // This is used to check whether a key is being held down
@@ -49,7 +99,6 @@ bool InputReceiver::IsKeyDown(EKEY_CODE keyCode) const
 
 // We use this array to store the current state of each key
 bool keyIsDown[KEY_KEY_CODES_COUNT];
-
 
 InputReceiver::InputReceiver()
 {

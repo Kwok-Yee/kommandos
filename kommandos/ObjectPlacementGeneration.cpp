@@ -1,9 +1,11 @@
 #include "ObjectPlacementGeneration.h"
 #include <irrlicht.h>
+#include <iostream>
 
 using namespace irr;
 using namespace core;
 using namespace scene;
+using namespace std;
 
 
 
@@ -18,7 +20,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			positions.push_back(grid[i][j]);
+			positions.push_back(grid[i * rows + j]);
 		}
 	}
 
@@ -37,16 +39,17 @@ ObjectPlacementGeneration::ObjectPlacementGeneration()
 
 void ObjectPlacementGeneration::CreateGrid()
 {
-	int xStep = 12;
-	int zStep = 12;
+	int xStep = 10;
+	int zStep = 10;
 	const int y = 0;
-	vector3df startVector = vector3df(80, y, 75);
+	vector3df startVector = vector3df(startX, y, startZ);
+
 
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			grid[i][j] = startVector + vector3df(-xStep * j, y, -(i * zStep));
+			grid[i * rows + j] = startVector + vector3df(-xStep * j, y, -(i * zStep));
 		}
 	}
 }
@@ -59,5 +62,9 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena, ISceneNode* obs
 	rows = arenaSize.X / obstacleSize.X;
 	columns = arenaSize.Z / obstacleSize.Z;
 
-	grid[rows][columns];
+	startX = arenaSize.X / 2;
+	startZ = arenaSize.Z / 2;
+	cout << startX << endl;
+
+	grid = new vector3df[rows * columns];
 }

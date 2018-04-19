@@ -11,7 +11,8 @@ public:
 private:
 	int rows;
 	int columns;
-	irr::core::vector3df grid[1][1];
+	int startX, startZ;
+	irr::core::vector3df *grid;
 	void CreateGrid();
 	
 };

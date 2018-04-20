@@ -23,7 +23,7 @@ ISceneManager* playerSmgr;
 GameOverState gameOverState;
 Collision collision;
 
-int vulnerable = 0;
+//int vulnerable = 0;
 Gun* gun;
 
 ISceneNode* playerObject;
@@ -185,7 +185,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
 	if (health > 0 && vulnerable <= 0 ) {
-		vulnerable = 500;
+		vulnerable = 800;
 		health -= damage;
 
 	if (health <= 0)

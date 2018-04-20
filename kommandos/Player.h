@@ -12,6 +12,8 @@ public:
 	void Move(InputReceiver inputReceiver);
 	void Shoot(InputReceiver inputReceiver, EnemySpawner* enemies);
 	irr::scene::ISceneNode* getPlayerObject();
+	int vulnerable = 0;
+
 private:
 	void Init();
 };

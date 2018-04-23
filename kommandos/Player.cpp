@@ -4,6 +4,7 @@
 #include "Gameoverstate.h"
 #include "Collision.h"
 #include "Gun.h"
+#include "Score.h"
 
 using namespace irr;
 using namespace core;
@@ -22,6 +23,7 @@ ISceneManager* playerSmgr;
 GameOverState gameOverState;
 Collision collision;
 Gun* gun;
+Score scores;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -161,7 +163,6 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
-	
 }
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) 
@@ -176,6 +177,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 		}
 	}
+	scores.DisplayScore(0);
 }
 
 void Player::TakeDamage(f32 damage)
@@ -197,6 +199,7 @@ void Player::DrawHealthBar()
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0));
+	
 }
 
 ISceneNode* Player::getPlayerObject() {

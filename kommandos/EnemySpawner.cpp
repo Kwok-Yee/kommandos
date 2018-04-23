@@ -60,7 +60,7 @@ void EnemySpawner::UpdateEnemies() {
 		{
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				player->TakeDamage(100);
+				player->TakeDamage(10);
 			}
 
 			if (enemyHealthValues[i] <= 0)

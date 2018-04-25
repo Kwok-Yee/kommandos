@@ -173,11 +173,12 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
+			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
+				scores.DisplayScore(10);
+			}
 		}
 	}
-	scores.DisplayScore(0);
 }
 
 void Player::TakeDamage(f32 damage)

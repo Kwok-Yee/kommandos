@@ -4,8 +4,11 @@
 #include "InputReceiver.h"
 #include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
+#include "EnemySpawner.h"
 #include "Player.h"
 #include "Gun.h"
+#include "Score.h"
+#include "ObjectPlacementGeneration.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -33,26 +36,30 @@ const path crateNormal = "../media/crate/crate_normal.png";
 
 int main()
 {
-	// Create instances of classes
 	InputReceiver inputReceiver;
-	Collision collision;
-	Gun* gun;
-	EnemyBehaviour enemyBehaviour;
-
-	LevelGeneration levelGeneration;
-
 	// Create device
 	IrrlichtDevice* device = createDevice(video::EDT_DIRECT3D9,
 		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 
+	// Create instances of classes
+	Collision collision;
+	Player* player = new Player(device);
+	//Gun* gun;
+	Score score;
+	LevelGeneration levelGeneration;
+	ObjectPlacementGeneration objectPlacementGeneration;
+	EnemySpawner* enemySpawner = new EnemySpawner(device, player);
+	
 	// No device found
 	if (!device) {
 		return 1;
 	}
-	Player* player = new Player(device);
 
-	IVideoDriver* driver = device->getVideoDriver();
-	ISceneManager* smgr = device->getSceneManager();
+	inputReceiver.CheckJoystickPresent(device);
+
+	video::IVideoDriver* driver = device->getVideoDriver();
+	scene::ISceneManager* smgr = device->getSceneManager();
+
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 
 	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
@@ -106,42 +113,6 @@ int main()
 	collision.AddStaticToList(shortWallNodeUp);
 	collision.AddStaticToList(shortWallNodeDown);
 
-	IMesh* playerMesh = smgr->getMesh("../media/PlayerModel.3ds");
-	IMeshSceneNode* playerObject = smgr->addMeshSceneNode(playerMesh);
-	if (playerObject)
-		playerObject->setPosition(core::vector3df(0, 0, 30));
-
-	IMesh* gunModel = smgr->getMesh("../media/LowPoly_Irrlicht.3ds");
-	IMeshSceneNode* gunNode = smgr->addMeshSceneNode(gunModel);
-	ISceneNode* bullet = smgr->addSphereSceneNode();
-	int b = 0;
-	if (gunNode)
-	{
-		gunNode->setPosition(vector3df(2, 5, -1));
-		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		gunNode->setMaterialTexture(0, driver->getTexture("../media/Gun_Color.png"));
-		playerObject->addChild(gunNode);
-		gun = new Gun(gunNode, device);
-	}
-
-	if (bullet) {
-		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		bullet->setVisible(false);
-		//gunNode->addChild(bullet);
-	}
-	player->currentPosition = playerObject->getPosition();
-
-	irr::core::array<f32> enemyHealthValues;
-	irr::core::array<IMeshSceneNode*> enemies;
-	int enemiesToSpawn = 2;
-	int positionMultiplier = 10;
-	for (int i = 0; i < enemiesToSpawn; i++) {
-		enemyHealthValues.push_back(100);
-		enemies.push_back(enemyBehaviour.Spawn(device, vector3df((i + 1)*positionMultiplier, 0, (i + 1)*positionMultiplier)));
-	}
-
 	const vector3df cameraPosition = vector3df(0, 150, 0);
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 	if (camera) {
@@ -160,10 +131,19 @@ int main()
 	//Generates the level(arenas), adds 2 arena's
 	levelGeneration.PlaceArenas(smgr, 2);
 
+	//Generates object for the arena
+	objectPlacementGeneration.CalculateGrid(planeNode, cube);
+	objectPlacementGeneration.PlaceObjects(device);
+
 	int lastFPS = -1;
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
+
+	//s32 scor = 28;
+	//guienv->addStaticText(core::stringw(scor).c_str(),
+	//	rect<s32>(80, 80, 200, 100), true);
+	score.Scoring(device);
 
 	while (device->run())
 	{
@@ -172,52 +152,20 @@ int main()
 		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
 		then = now;
 
-		player->Move(playerObject, inputReceiver);
-
-		if (inputReceiver.isLeftMouseButtonDown) {
-			//gunNode->removeChild(bullet);
-			gun->Shoot(bullet);
-		}
-
-		if (gun->hasShot) {
-			for (int i = 0; i < enemies.size(); i++)
-				if (collision.SceneNodeWithSceneNode(enemies[i], bullet))
-					enemyHealthValues[i] = enemyBehaviour.TakeDamage(10, enemyHealthValues[i]);
-		}
-
-		if (gun->hasShot && gun->CheckAnimEnd(bullet)) {
-			bullet->setPosition(vector3df(0, 0, 0));
-			//gunNode->addChild(bullet);
-		}
-
-		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++)
-		{
-			if (enemyBehaviour.Update(enemies[i], playerObject->getPosition(), frameDeltaTime))
-			{
-				player->TakeDamage(100);
-			}
-
-			if (enemyHealthValues[i] <= 0)
-			{
-				smgr->addToDeletionQueue(enemies[i]);
-				enemies.erase(i);
-				enemyHealthValues.erase(i);
-			}
-		}
-
-		gun->LaserLine(inputReceiver.position, driver, camera);
-
+		player->Move(inputReceiver);
+		enemySpawner->UpdateEnemies();
+		player->Shoot(inputReceiver, enemySpawner);
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 		smgr->drawAll();
 		guienv->drawAll();
 		player->DrawHealthBar();
+		score.DisplayScore(0);
 		driver->endScene();
 
 		int fps = driver->getFPS();
 		if (lastFPS != fps)
 		{
-			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+			stringw tmp(L"KOMMANDOS - Irrlicht Engine");
 
 			tmp += driver->getName();
 			tmp += L"] fps: ";

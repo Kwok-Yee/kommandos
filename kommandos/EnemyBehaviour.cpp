@@ -2,6 +2,7 @@
 #include "EnemyBehaviour.h"
 #include "Collision.h"
 #include "Player.h"
+#include "Score.h"
 
 using namespace irr;
 using namespace core;
@@ -10,21 +11,29 @@ using namespace video;
 
 // This is the movement speed in units per second.
 const f32 ENEMY_MOVEMENT_SPEED = 15.f;
-const irr::s32 ENEMY_MAX_HEALTH = 100;
+const s32 ENEMY_MAX_HEALTH = 100;
 
-irr::f32 enemyHealth;
+//Player *player;
 
-scene::IMeshSceneNode* enemyNode;
+IrrlichtDevice* enemyBehaviourIDevice;
+IVideoDriver* enemyBevaiourDriver;
+ISceneManager* enemyBaviourSmgr;
+f32 enemyHealth;
 
-irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector3df startPosition)
+IMeshSceneNode* enemyNode;
+Score score;
+
+EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
+	enemyBehaviourIDevice = device;
+	enemyBevaiourDriver = enemyBehaviourIDevice->getVideoDriver();
+	enemyBaviourSmgr = enemyBehaviourIDevice->getSceneManager();
+}
+
+IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 {
-
-	video::IVideoDriver* driver = device->getVideoDriver();
-	scene::ISceneManager* smgr = device->getSceneManager();
-
 	enemyHealth = ENEMY_MAX_HEALTH;
 	// spawn enemy
-	enemyNode = smgr->addMeshSceneNode(smgr->getMesh("../media/ninja.b3d"));
+	enemyNode = enemyBaviourSmgr->addMeshSceneNode(enemyBaviourSmgr->getMesh("../media/ninja.b3d"));
 	if (enemyNode)
 	{
 		enemyNode->setMaterialFlag(video::EMF_LIGHTING, false);
@@ -32,9 +41,9 @@ irr::scene::IMeshSceneNode* EnemyBehaviour::Spawn(IrrlichtDevice* device, vector
 		/*enemyNode->setFrameLoop(0, 13); // For walking animation
 		enemyNode->setAnimationSpeed(15);*/
 
-		enemyNode->setScale(core::vector3df(2.f, 2.f, 2.f));
-		enemyNode->setRotation(core::vector3df(0, -90, 0));
-		enemyNode->setMaterialTexture(0, driver->getTexture("../media/nskinrd.jpg"));
+		enemyNode->setScale(vector3df(2.f, 2.f, 2.f));
+		enemyNode->setRotation(vector3df(0, -90, 0));
+		enemyNode->setMaterialTexture(0, enemyBevaiourDriver->getTexture("../media/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
 		return enemyNode;
 	}
@@ -67,10 +76,13 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 		if (collision.CollidesWithStaticObjects(enemyNode))
 			enemyNode->setPosition(oldPosition);
 		return false;
+
 	}
 	else
 		return true;
 }
+
+
 
 f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health) 
 {
@@ -78,4 +90,10 @@ f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 		health -= damage;
 	}
 	return health;
+	
+	if (health < 0) {
+		//score.Scoring(enemyBehaviourIDevice);
+		score.DisplayScore(10);
+	}
+	
 }

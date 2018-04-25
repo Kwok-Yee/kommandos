@@ -5,6 +5,7 @@
 #include "Gameoverstate.h"
 #include "Collision.h"
 #include "Gun.h"
+#include "Score.h"
 
 using namespace irr;
 using namespace core;
@@ -25,6 +26,7 @@ Collision collision;
 
 //int vulnerable = 0;
 Gun* gun;
+Score scores;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -176,8 +178,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
+			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
+				scores.DisplayScore(10);
+			}
 		}
 	}
 }
@@ -203,6 +207,7 @@ void Player::DrawHealthBar()
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0));
+	
 }
 
 ISceneNode* Player::getPlayerObject() {

@@ -2,6 +2,7 @@
 #include "EnemyBehaviour.h"
 #include "Collision.h"
 #include "Player.h"
+#include "Score.h"
 
 using namespace irr;
 using namespace core;
@@ -20,6 +21,7 @@ ISceneManager* enemyBaviourSmgr;
 f32 enemyHealth;
 
 IMeshSceneNode* enemyNode;
+Score score;
 
 EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
 	enemyBehaviourIDevice = device;
@@ -88,4 +90,10 @@ f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 		health -= damage;
 	}
 	return health;
+	
+	if (health < 0) {
+		//score.Scoring(enemyBehaviourIDevice);
+		score.DisplayScore(10);
+	}
+	
 }

@@ -5,11 +5,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "ParticleSystem.h"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
+using namespace io;
 
 const u32 MAXWAVES = 10;
 
@@ -25,6 +27,8 @@ u32 currentWave = 0;
 int enemiesToSpawn = 0;
 int positionMultiplier = 10;
 
+ParticleSystem particle;
+const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
@@ -65,6 +69,8 @@ void EnemySpawner::UpdateEnemies() {
 
 			if (enemyHealthValues[i] <= 0)
 			{
+				particle.hit = true;
+				particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
 				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 				enemies.erase(i);
 				enemyHealthValues.erase(i);

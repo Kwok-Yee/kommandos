@@ -3,6 +3,7 @@
 #include "Collision.h"
 #include "Player.h"
 
+
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -18,6 +19,8 @@ ISceneManager* enemyBaviourSmgr;
 f32 enemyHealth;
 
 IMeshSceneNode* enemyNode;
+
+
 
 EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
 	enemyBehaviourIDevice = device;
@@ -82,5 +85,7 @@ f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 	if (health > 0) {
 		health -= damage;
 	}
+
 	return health;
+
 }

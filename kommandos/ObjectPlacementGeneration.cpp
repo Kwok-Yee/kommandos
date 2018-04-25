@@ -8,36 +8,60 @@
 using namespace irr;
 using namespace core;
 using namespace scene;
+using namespace video;
+using namespace io;
 using namespace std;
 
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
 	CreateGrid();
+	const int amountOfObjects = 10;
+	
 	ISceneManager* smgr = device->getSceneManager();
-	core::array<ISceneNode*> obstacles;
+	ISceneNode* obstacles[amountOfObjects];
 	vector3df* usedPositions;
 
 	srand(time(0));
-	int amountOfObjects = 10;
+	
+	CreateObjects(device, obstacles, amountOfObjects);
 	usedPositions = new vector3df[amountOfObjects];
 	for (int i = 0; i < amountOfObjects; i++)
 	{
-		obstacles.push_back(smgr->addCubeSceneNode());
-		usedPositions[i] = grid[randomPosition()];
+		usedPositions[i] = grid[RandomPosition()];
 		obstacles[i]->setPosition(usedPositions[i]);
-
 	}
 
-	int count = 0;
+	//Code for not spawning on top of each other.
 	for (int i = 0; i < amountOfObjects - 1; i++)
 	{
 		for (int j = i + 1; j < amountOfObjects; j++)
 		{
 			if (usedPositions[i] == usedPositions[j]) {
-				printf("not unique");
+				unique = false;
+				while (!unique)
+				{
+					usedPositions[i] = grid[RandomPosition()];
+					for (int k = 0; k < amountOfObjects; k++)
+					{
+						if (usedPositions[i] == usedPositions[k]) {
+							unique = false;
+							usedPositions[i] = grid[RandomPosition()];
+							printf("changed");
+						}
+						else
+						{
+							unique = true;
+							for (int l = 0; l < amountOfObjects; l++)
+							{
+								obstacles[l]->setPosition(usedPositions[l]);
+							}
+						}
+					}
+				}
 			}
 		}
 	}
+
 }
 
 
@@ -49,6 +73,23 @@ ObjectPlacementGeneration::ObjectPlacementGeneration()
 void ObjectPlacementGeneration::AddObjectsToAvoid(ISceneNode* object)
 {
 	objectsToAvoid.push_back(object);
+}
+
+void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode* obstacles[], int size)
+{
+	ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
+
+	const path crateDiffuse = "../media/crate/crate_diffuse.png";
+	const path crateNormal = "../media/crate/crate_normal.png";
+
+	for (int i = 0; i < size; i++)
+	{
+		obstacles[i] = smgr->addCubeSceneNode();
+		obstacles[i]->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+		obstacles[i]->setMaterialTexture(1, driver->getTexture(crateNormal));
+		obstacles[i]->setMaterialFlag(EMF_LIGHTING, true);
+	}
 }
 
 void ObjectPlacementGeneration::CreateGrid()
@@ -68,7 +109,7 @@ void ObjectPlacementGeneration::CreateGrid()
 	}
 }
 
-int ObjectPlacementGeneration::randomPosition()
+int ObjectPlacementGeneration::RandomPosition()
 {
 	int r = rand() % (rows * columns);
 	return r;

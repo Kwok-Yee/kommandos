@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <irrlicht.h>
+#include <iostream>
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
@@ -22,6 +23,8 @@ IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
 GameOverState gameOverState;
 Collision collision;
+
+//int vulnerable = 0;
 Gun* gun;
 Score scores;
 
@@ -163,6 +166,8 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
+
+	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) 
@@ -181,14 +186,16 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 }
 
-void Player::TakeDamage(f32 damage)
+void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0) {
+	if (health > 0 && vulnerable <= 0 ) {
+		vulnerable = 800;
 		health -= damage;
 
 	if (health <= 0)
 		gameOverState.ShowGameOver(playerIDevice);
 	}
+	
 }
 void Player::DrawHealthBar()
 {

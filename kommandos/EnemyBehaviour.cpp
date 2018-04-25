@@ -13,6 +13,8 @@ using namespace video;
 const f32 ENEMY_MOVEMENT_SPEED = 15.f;
 const s32 ENEMY_MAX_HEALTH = 100;
 
+//Player *player;
+
 IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBevaiourDriver;
 ISceneManager* enemyBaviourSmgr;
@@ -74,10 +76,13 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 		if (collision.CollidesWithStaticObjects(enemyNode))
 			enemyNode->setPosition(oldPosition);
 		return false;
+
 	}
 	else
 		return true;
 }
+
+
 
 f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health) 
 {

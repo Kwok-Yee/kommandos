@@ -68,8 +68,6 @@ void EnemySpawner::UpdateEnemies() {
 
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				particle.hit = true;
-				particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
 				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 				enemies.erase(i);
 				enemyHealthValues.erase(i);
@@ -79,6 +77,8 @@ void EnemySpawner::UpdateEnemies() {
 
 		if (enemyHealthValues[i] <= 0)
 		{
+			particle.hit = true;
+			particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);

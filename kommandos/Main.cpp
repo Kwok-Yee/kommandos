@@ -6,6 +6,7 @@
 #include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
 #include "Player.h"
+#include "ParticleSystem.h"
 #include "Gun.h"
 #include "Score.h"
 #include <ILogger.h>
@@ -43,6 +44,7 @@ int main()
 	// Create instances of classes
 	Collision collision;
 	Player* player = new Player(device);
+	ParticleSystem particles;
 	//Gun* gun;
 	Score score;
 	LevelGeneration levelGeneration;
@@ -149,6 +151,7 @@ int main()
 		player->Move(inputReceiver);
 		enemySpawner->UpdateEnemies();
 		player->Shoot(inputReceiver, enemySpawner);
+		particles.SystemParticle(device);
 		driver->beginScene(true, true, SColor(255, 113, 113, 133));
 		smgr->drawAll();
 		guienv->drawAll();

@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "ParticleSystem.h"
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include "Collision.h"
@@ -11,6 +12,7 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
+using namespace io;
 
 const u32 MAXWAVES = 10;
 
@@ -26,6 +28,9 @@ core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 int enemiesToSpawn = 0;
 int positionMultiplier = 10;
+
+ParticleSystem particle;
+const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
@@ -63,6 +68,11 @@ void EnemySpawner::UpdateEnemies() {
 
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
+				particle.hit = true;
+				particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
+				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
+				enemies.erase(i);
+				enemyHealthValues.erase(i);
 				player->TakeDamage(10, frameDeltaTime);
 			}
 		}

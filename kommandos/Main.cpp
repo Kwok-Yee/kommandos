@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "ParticleSystem.h"
 #include "Gun.h"
+#include "Score.h"
 #include <ILogger.h>
 
 using namespace irr;
@@ -45,8 +46,10 @@ int main()
 	Player* player = new Player(device);
 	ParticleSystem particles;
 	//Gun* gun;
+	Score score;
 	LevelGeneration levelGeneration;
 	EnemySpawner* enemySpawner = new EnemySpawner(device, player);
+	
 	// No device found
 	if (!device) {
 		return 1;
@@ -133,7 +136,10 @@ int main()
 	// how long it was since the last frame
 	u32 then = device->getTimer()->getTime();
 
-
+	//s32 scor = 28;
+	//guienv->addStaticText(core::stringw(scor).c_str(),
+	//	rect<s32>(80, 80, 200, 100), true);
+	score.Scoring(device);
 
 	while (device->run())
 	{
@@ -150,12 +156,13 @@ int main()
 		smgr->drawAll();
 		guienv->drawAll();
 		player->DrawHealthBar();
+		score.DisplayScore(0);
 		driver->endScene();
 
 		int fps = driver->getFPS();
 		if (lastFPS != fps)
 		{
-			stringw tmp(L"KOMMANDOS - Irrlicht Engine [");
+			stringw tmp(L"KOMMANDOS - Irrlicht Engine");
 
 			tmp += driver->getName();
 			tmp += L"] fps: ";

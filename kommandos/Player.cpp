@@ -1,9 +1,11 @@
 #include "Player.h"
 #include <irrlicht.h>
+#include <iostream>
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
 #include "Gun.h"
+#include "Score.h"
 
 using namespace irr;
 using namespace core;
@@ -21,7 +23,10 @@ IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
 GameOverState gameOverState;
 Collision collision;
+
+//int vulnerable = 0;
 Gun* gun;
+Score scores;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -161,7 +166,8 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
-	
+
+	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) 
@@ -172,20 +178,24 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
+			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
+				scores.DisplayScore(10);
+			}
 		}
 	}
 }
 
-void Player::TakeDamage(f32 damage)
+void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0) {
+	if (health > 0 && vulnerable <= 0 ) {
+		vulnerable = 800;
 		health -= damage;
 
 	if (health <= 0)
 		gameOverState.ShowGameOver(playerIDevice);
 	}
+	
 }
 void Player::DrawHealthBar()
 {
@@ -197,6 +207,7 @@ void Player::DrawHealthBar()
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0));
+	
 }
 
 ISceneNode* Player::getPlayerObject() {

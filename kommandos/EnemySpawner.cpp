@@ -1,11 +1,12 @@
 #include "EnemySpawner.h"
-#include "EnemyBehaviour.h"
-#include "Player.h"
 #include <irrlicht.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "ParticleSystem.h"
+#include "EnemyBehaviour.h"
+#include "Player.h"
+#include "Collision.h"
 
 using namespace irr;
 using namespace core;
@@ -19,6 +20,7 @@ IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
 Player* player;
+Collision* collision;
 
 array<vector3df> spawnPositions;
 u32 amountOfEnemies;
@@ -54,33 +56,39 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 }
 
 void EnemySpawner::UpdateEnemies() {
-		// Work out a frame delta time.
-		const u32 now = enemySpawnerIDevice->getTimer()->getTime();
-		const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
-		prevFrameTime = now;
+	// Work out a frame delta time.
+	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
+	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
+	prevFrameTime = now;
 
-		// Update all enemies
-		for (int i = 0; i < enemies.size(); i++)
-		{
+	// Update all enemies
+	for (int i = 0; i < enemies.size(); i++)
+	{
+		if (!(player->vulnerable > 0 && collision->SceneNodeWithSceneNode(player->getPlayerObject(), enemies[i]))) {
+
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
-			{
-				player->TakeDamage(100);
-			}
-
-			if (enemyHealthValues[i] <= 0)
 			{
 				particle.hit = true;
 				particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
 				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 				enemies.erase(i);
 				enemyHealthValues.erase(i);
+				player->TakeDamage(10, frameDeltaTime);
 			}
 		}
 
-		if (enemies.size() <= 0 && currentWave < MAXWAVES) {
-			Spawn();
-			currentWave++;
+		if (enemyHealthValues[i] <= 0)
+		{
+			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
+			enemies.erase(i);
+			enemyHealthValues.erase(i);
 		}
+	}
+
+	if (enemies.size() <= 0 && currentWave < MAXWAVES) {
+		Spawn();
+		currentWave++;
+	}
 }
 
 void EnemySpawner::Spawn() {

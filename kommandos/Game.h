@@ -5,10 +5,14 @@ class Game
 {
 public:
 	irr::IrrlichtDevice * device;
-	Game();
+	Game(const Game&) = delete;
+	Game& operator=(const Game&) = delete;
+	static Game* GetInstance();
 	void Start();
 	void Update();
 	void Draw();
-	~Game();
+private:
+	Game();
+	static Game* instance;
 };
 

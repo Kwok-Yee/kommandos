@@ -12,6 +12,9 @@ using namespace video;
 using namespace io;
 using namespace std;
 
+
+// Method for placing objects which uses multiple arrays to create objects and put these in random positions
+// The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
 	CreateGrid();
@@ -70,11 +73,13 @@ ObjectPlacementGeneration::ObjectPlacementGeneration()
 
 }
 
+//Method for keeping track of the positions of objects already in the arena.
 void ObjectPlacementGeneration::AddObjectsToAvoid(ISceneNode* object)
 {
 	objectsToAvoid.push_back(object);
 }
 
+//Method for creating the objects with the correct material.
 void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode* obstacles[], int size)
 {
 	ISceneManager* smgr = device->getSceneManager();
@@ -92,6 +97,8 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 	}
 }
 
+// Create a grid on the arena which is based on step size and the amount of rows and columns.
+// Reason for using a normal array instead of a 2d array is because of memory use.
 void ObjectPlacementGeneration::CreateGrid()
 {
 	int xStep = 10;
@@ -109,12 +116,18 @@ void ObjectPlacementGeneration::CreateGrid()
 	}
 }
 
+//Method for getting a random position
 int ObjectPlacementGeneration::RandomPosition()
 {
 	int r = rand() % (rows * columns);
 	return r;
 }
 
+
+/*Method for finding the right grid size, the arena size is divided by the obstacle size.
+Rows and columns are scaled the so the grid is a bit smaller and the grid is made
+by multiplying the rows and columns
+*/
 void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena, ISceneNode* obstacle)
 {
 	vector3df arenaSize = arena->getTransformedBoundingBox().getExtent();

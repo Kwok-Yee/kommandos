@@ -55,6 +55,16 @@ Game::Game()
 		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 }
 
+Game* Game::instance = 0;
+
+Game* Game::GetInstance() {
+	if (!instance)
+	{
+		instance = new Game();
+	}
+	return instance;
+}
+
 void Game::Start() 
 {
 
@@ -180,9 +190,4 @@ void Game::Draw()
 		device->setWindowCaption(tmp.c_str());
 		lastFPS = fps;
 	}
-}
-
-
-Game::~Game()
-{
 }

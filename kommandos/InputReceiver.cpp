@@ -1,6 +1,6 @@
+#include <irrlicht.h>
 #include "InputReceiver.h"
 #include <iostream>
-#include <irrlicht.h>
 
 using namespace std;
 using namespace irr;

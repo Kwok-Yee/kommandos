@@ -73,12 +73,15 @@ void Game::Start()
 	enemySpawner = new EnemySpawner(device, player);
 	inputReceiver.CheckJoystickPresent(device);
 	score.Scoring(device);
+	particles.SystemParticle(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();
 	guienv = device->getGUIEnvironment();
 
 	objectPlacementGen.PlaceObjects(device);
+
+	//Create Camera
 	const vector3df cameraPosition = vector3df(0, 150, 0);
 	ICameraSceneNode* camera = smgr->addCameraSceneNode();
 	if (camera) {
@@ -88,6 +91,7 @@ void Game::Start()
 		camera->setProjectionMatrix(projectionMatrix, true);
 	}
 
+	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
 	SLight & lightData = directionalLight->getLightData();
 	lightData.Type = ELT_DIRECTIONAL;
@@ -97,6 +101,7 @@ void Game::Start()
 	//Generates the level(arenas), adds 2 arena's
 	levelGeneration.PlaceArenas(smgr, 2);
 
+	//This is used to calculate frame delta time
 	prevFrame = device->getTimer()->getTime();
 }
 
@@ -110,7 +115,6 @@ void Game::Update()
 	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
 	player->Shoot(inputReceiver, enemySpawner);
-	particles.SystemParticle(device);
 }
 
 void Game::Draw()
@@ -134,8 +138,4 @@ void Game::Draw()
 		device->setWindowCaption(tmp.c_str());
 		lastFPS = fps;
 	}
-}
-
-InputReceiver Game::GetInputReceiver() {
-	return inputReceiver;
 }

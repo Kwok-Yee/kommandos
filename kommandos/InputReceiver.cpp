@@ -1,9 +1,3 @@
-#ifdef _MSC_VER
-// We'll also define this to stop MSVC complaining about sprintf().
-#define _CRT_SECURE_NO_WARNINGS
-#pragma comment(lib, "Irrlicht.lib")
-#endif
-
 #include <irrlicht.h>
 #include "InputReceiver.h"
 #include <iostream>

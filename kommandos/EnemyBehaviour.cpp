@@ -22,7 +22,7 @@ ISceneManager* enemyBaviourSmgr;
 f32 enemyHealth;
 
 IMeshSceneNode* enemyNode;
-Score score;
+Score _score;
 
 
 

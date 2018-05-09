@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <irrlicht.h>
 #include <iostream>
+#include "Game.h"
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
@@ -22,11 +23,12 @@ IrrlichtDevice* playerIDevice;
 IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
 GameOverState gameOverState;
-Collision collision;
+Collision _collision;
 
 //int vulnerable = 0;
 Gun* gun;
 Score scores;
+Game* game;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -86,7 +88,7 @@ void Player::Move(InputReceiver inputReceiver)
 
 	vector3df newPosition = playerObject->getPosition();
 
-	if (collision.CollidesWithStaticObjects(playerObject))
+	if (_collision.CollidesWithStaticObjects(playerObject))
 		currentPosition = playerObject->getPosition();
 
 	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
@@ -164,13 +166,13 @@ void Player::Move(InputReceiver inputReceiver)
 	}
 
 	playerObject->setPosition(newPosition);
-	if (collision.CollidesWithStaticObjects(playerObject))
+	if (_collision.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
 
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 
-void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) 
+void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	if (inputReceiver.isLeftMouseButtonDown) {
 		gun->LaserLine(inputReceiver.position, playerDriver, playerSmgr->getActiveCamera());
@@ -178,7 +180,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
+			if (_collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				scores.DisplayScore(10);
 			}

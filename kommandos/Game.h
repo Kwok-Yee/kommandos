@@ -1,5 +1,6 @@
 #pragma once
 #include <irrlicht.h>
+#include "InputReceiver.h"
 
 class Game
 {
@@ -11,6 +12,7 @@ public:
 	void Start();
 	void Update();
 	void Draw();
+	InputReceiver GetInputReceiver();
 private:
 	Game();
 	static Game* instance;

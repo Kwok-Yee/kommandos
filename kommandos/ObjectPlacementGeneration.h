@@ -7,7 +7,6 @@ public:
 	ObjectPlacementGeneration();
 
 	void PlaceObjects(irr::IrrlichtDevice* device);
-	void CalculateGrid(irr::scene::ISceneNode* arena, irr::scene::ISceneNode* obstacle);
 	void AddObjectsToAvoid(irr::scene::ISceneNode* object);
 
 private:
@@ -20,6 +19,8 @@ private:
 
 	void CreateObjects(irr::IrrlichtDevice* device, irr::scene::ISceneNode* obstacles[] ,int size);
 	void CreateGrid();
+	void CalculateGrid(irr::scene::ISceneNode* arena);
+	void CreateWalls(irr::scene::ISceneManager* smgr);
 	int RandomPosition();
 	
 };

@@ -111,57 +111,6 @@ void Player::Move(InputReceiver inputReceiver)
 		newPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 		playerObject->setRotation(vector3df(0, 0, 0));
 	}
-	if (inputReceiver.GetJoystickInfo().size() > 0)
-	{
-
-		f32 hMove = 0.f;
-		f32 vMove = 0.f;
-		f32 moveSpeed = 50.f;
-
-		f32 hRot = 0.f;
-		f32 vRot = 0.f;
-		f32 prevHRot = 0.f;
-		f32 prevVRot = 0.f;
-
-		// Store a local reference from joystickState
-		const SEvent::SJoystickEvent & joystickData = inputReceiver.joystickState;
-
-		// Base dead zone for the controller axis, user should be able to change this in-game
-		const f32 DEAD_ZONE = 0.05f;
-
-		hMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-		if (fabs(hMove) < DEAD_ZONE)
-			hMove = 0.f;
-		vMove = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / -32767.f;
-		if (fabs(vMove) < DEAD_ZONE)
-			vMove = 0.f;
-
-		if (!core::equals(vMove, 0.f) || !core::equals(hMove, 0.f))
-		{
-			newPosition.X += moveSpeed * frameDeltaTime * hMove;
-			newPosition.Z += moveSpeed * frameDeltaTime * vMove;
-		}
-
-		playerObject->setMaterialFlag(video::EMF_LIGHTING, joystickData.IsButtonPressed(7));
-
-		vRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_V] / 32767.f;
-		if (fabs(vRot) < DEAD_ZONE + 0.05f) {
-			prevVRot = vRot;
-			vRot = 0.f;
-		}
-		hRot = (f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Z] / 32767.f;
-		if (fabs(hRot) < DEAD_ZONE + 0.05f) {
-			prevHRot = hRot;
-			hRot = 0.f;
-		}
-
-		if (fabs(hRot) != 0 || fabs(vRot) != 0) {
-			playerObject->setRotation(core::vector3df(0, atan2(vRot, hRot) * 180 / PI, 0));
-		}
-		else {
-			playerObject->setRotation(core::vector3df(0, atan2(prevVRot, prevHRot) * 180 / PI, 0));
-		}
-	}
 
 	playerObject->setPosition(newPosition);
 	if (collision.CollidesWithStaticObjects(playerObject))

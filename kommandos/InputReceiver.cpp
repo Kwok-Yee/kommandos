@@ -1,9 +1,9 @@
-#include <irrlicht.h>
 #include "InputReceiver.h"
 #include <iostream>
+#include <irrlicht.h>
 
-using namespace irr;
 using namespace std;
+using namespace irr;
 
 // InputReceiver's static variables
 bool InputReceiver::isLeftMouseButtonDown = false;

@@ -35,15 +35,15 @@ bool InputReceiver::OnEvent(const SEvent& event)
 	// Remember whether each key is down or up
 	if (event.EventType == irr::EET_KEY_INPUT_EVENT)
 	{
-		keyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
+		isKeyDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
 	}
 	return false;
 }
 
 // This is used to check whether a key is being held down
-bool InputReceiver::IsKeyDown(EKEY_CODE keyCode)
+bool InputReceiver::GetIsKeyDown(EKEY_CODE keyCode)
 {
-	return keyIsDown[keyCode];
+	return isKeyDown[keyCode];
 }
 
 vector3df InputReceiver::GetMousePosition() 
@@ -60,6 +60,6 @@ InputReceiver::InputReceiver()
 {
 	for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)
 	{
-		keyIsDown[i] = false;
+		isKeyDown[i] = false;
 	}
 }

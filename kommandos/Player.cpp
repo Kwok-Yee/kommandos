@@ -121,8 +121,8 @@ void Player::Move(InputReceiver inputReceiver)
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies) 
 {
-	if (inputReceiver.isLeftMouseButtonDown) {
-		gun->LaserLine(inputReceiver.position, playerDriver, playerSmgr->getActiveCamera());
+	if (inputReceiver.GetIsLeftMouseButtonPressed()) {
+		gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
 		gun->Shoot(bullet);
 	}
 	if (gun->hasShot) {

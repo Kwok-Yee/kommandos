@@ -9,6 +9,7 @@
 
 int main()
 {
+	// Get the game's singleton instance
 	Game* game = game->GetInstance();
 	game->Start();
 

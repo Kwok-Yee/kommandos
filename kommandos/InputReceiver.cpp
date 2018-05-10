@@ -41,7 +41,7 @@ bool InputReceiver::OnEvent(const SEvent& event)
 }
 
 // This is used to check whether a key is being held down
-bool InputReceiver::IsKeyDown(EKEY_CODE keyCode) const
+bool InputReceiver::IsKeyDown(EKEY_CODE keyCode)
 {
 	return keyIsDown[keyCode];
 }

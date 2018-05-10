@@ -8,7 +8,7 @@ public:
 	bool OnEvent(const irr::SEvent& event);
 
 	// Check whether a key is being held down
-	bool IsKeyDown(irr::EKEY_CODE keyCode) const;
+	bool IsKeyDown(irr::EKEY_CODE keyCode);
 
 	// Returns a vector3 of the mouse position
 	irr::core::vector3df GetMousePosition();

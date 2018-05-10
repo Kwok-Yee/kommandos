@@ -58,6 +58,7 @@ bool InputReceiver::GetIsLeftMouseButtonPressed()
 
 InputReceiver::InputReceiver()
 {
+	// Set all states of the keys to be "not pressed"
 	for (u32 i = 0; i < KEY_KEY_CODES_COUNT; ++i)
 	{
 		isKeyDown[i] = false;

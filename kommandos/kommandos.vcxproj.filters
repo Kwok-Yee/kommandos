@@ -86,9 +86,6 @@
     <ClInclude Include="EnemySpawner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LaserLineBehaviour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>

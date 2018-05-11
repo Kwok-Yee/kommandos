@@ -145,7 +145,7 @@ TAGLINKS =
 # PREDEFINED =
 # PROJECT_BRIEF =
 # PROJECT_LOGO =
-# PROJECT_NAME =
+PROJECT_NAME = "<style="color:red">Kommandos</style>"
 # PROJECT_NUMBER =
 # QT_AUTOBRIEF =
 # RECURSIVE =

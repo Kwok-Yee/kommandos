@@ -1,5 +1,5 @@
-#include "Game.h"
 #include <irrlicht.h>
+#include "Game.h"
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
@@ -19,14 +19,12 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
-IrrlichtDevice * device;
 IVideoDriver* driver;
 ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
 Player* player;
-Collision collision;
 ParticleSystem particles;
 Score score;
 LevelGeneration levelGeneration;

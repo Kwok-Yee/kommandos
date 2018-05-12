@@ -8,7 +8,7 @@
 # paths will be considered relative to the root of the repository, not the
 # location of the DOXYFILE.
 
-# DOXYFILE =
+DOXYFILE = DOXYFILE
 
 # Specify external repository to link documentation with.
 # This is similar to Doxygen's TAGFILES option, but will automatically link to
@@ -18,7 +18,7 @@
 #   TAGLINKS = doxygen/doxygen CodeDocs/osg
 # Note: these repositories must already be built on CodeDocs.
 
-# TAGLINKS =
+TAGLINKS =
 
 #---------------------------------------------------------------------------
 # Doxygen Configuration
@@ -54,10 +54,10 @@
 # DOTFILE_DIRS =
 # DOT_FONTNAME =
 # DOT_FONTSIZE =
-# DOT_GRAPH_MAX_NODES = 100
+# DOT_GRAPH_MAX_NODES =
 # DOT_IMAGE_FORMAT =
-# DOT_TRANSPARENT = YES
-# DOXYFILE_ENCODING = UTF-8
+# DOT_TRANSPARENT =
+# DOXYFILE_ENCODING =
 # ENABLED_SECTIONS =
 # ENABLE_PREPROCESSING =
 # ENUM_VALUES_PER_LINE =
@@ -72,7 +72,7 @@
 # EXTENSION_MAPPING =
 # EXTERNAL_GROUPS =
 # EXTERNAL_PAGES =
-# EXTRACT_ALL = YES
+# EXTRACT_ALL =
 # EXTRACT_ANON_NSPACES =
 # EXTRACT_LOCAL_CLASSES =
 # EXTRACT_LOCAL_METHODS =
@@ -111,8 +111,7 @@
 # HTML_HEADER =
 # HTML_INDEX_NUM_ENTRIES =
 # HTML_STYLESHEET =
-# HTML_TIMESTAMP = YES
-# HAVE_DOT = YES
+# HTML_TIMESTAMP =
 # IDL_PROPERTY_SUPPORT =
 # IGNORE_PREFIX =
 # IMAGE_PATH =
@@ -141,13 +140,13 @@
 # OPTIMIZE_OUTPUT_FOR_C =
 # OPTIMIZE_OUTPUT_JAVA =
 # OPTIMIZE_OUTPUT_VHDL =
-# OUTPUT_LANGUAGE = English
+# OUTPUT_LANGUAGE =
 # PLANTUML_JAR_PATH =
 # PREDEFINED =
 # PROJECT_BRIEF =
 # PROJECT_LOGO =
-PROJECT_NAME = "Kommandos"
-PROJECT_NUMBER = 1.0
+# PROJECT_NAME =
+# PROJECT_NUMBER =
 # QT_AUTOBRIEF =
 # RECURSIVE =
 # REFERENCED_BY_RELATION =
@@ -185,4 +184,3 @@ PROJECT_NUMBER = 1.0
 # UML_LOOK =
 # USE_MDFILE_AS_MAINPAGE =
 # VERBATIM_HEADERS =
-#

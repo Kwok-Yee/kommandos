@@ -29,17 +29,7 @@ TAGLINKS =
 # to http://doxygen.org/manual/config.html for detailed explanation of the
 # options. To request support for more options, contact support@codedocs.xyz.
 #
-ABBREVIATE_BRIEF = "The $name class" \
-                   "The $name widget" \
-                   "The $name file" \
-                   is \
-                   provides \
-                   specifies \
-                   contains \
-                   represents \
-                   a \
-                   an \
-                   the
+# ABBREVIATE_BRIEF =
 # ALIASES =
 # ALLEXTERNALS =
 # ALLOW_UNICODE_NAMES =

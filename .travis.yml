@@ -14,16 +14,16 @@ env:
 # Install dependencies
 addons:
   apt:
-    packages:
-      - doxygen
-      - doxygen-doc
-      - doxygen-latex
-      - doxygen-gui
-      - graphviz
+    update: true
+      packages:
+        - doxygen
+        - doxygen-doc
+        - doxygen-latex
+        - doxygen-gui
+        - graphviz
 
 # Decrypt SSH
 before_install:
-- sudo apt-get update -qq
 - openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d
 
 # Setup SSH

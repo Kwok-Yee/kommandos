@@ -1,3 +1,4 @@
+#!/bin/bash
 echo 'Setting up the script...'
 
 set -e

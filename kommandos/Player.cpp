@@ -89,24 +89,24 @@ void Player::Move(InputReceiver inputReceiver)
 	if (collision.CollidesWithStaticObjects(playerObject))
 		currentPosition = playerObject->getPosition();
 
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_W))
+	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_W))
 	{
 		newPosition.X += MOVEMENT_SPEED * frameDeltaTime;
 		playerObject->setRotation(vector3df(0, -90, 0));
 	}
 
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_S))
+	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_S))
 	{
 		newPosition.X -= MOVEMENT_SPEED * frameDeltaTime;
 		playerObject->setRotation(vector3df(0, 90, 0));
 	}
 
-	if (inputReceiver.IsKeyDown(irr::KEY_KEY_A))
+	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_A))
 	{
 		newPosition.Z += MOVEMENT_SPEED * frameDeltaTime;
 		playerObject->setRotation(vector3df(0, -180, 0));
 	}
-	else if (inputReceiver.IsKeyDown(irr::KEY_KEY_D))
+	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_D))
 	{
 		newPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
 		playerObject->setRotation(vector3df(0, 0, 0));

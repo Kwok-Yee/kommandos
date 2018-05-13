@@ -6,11 +6,6 @@ branches:
   except:
       - gh-pages
 
-# Environment variables
-env:
-  global:
-    - DOXYFILE: $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
-
 # Install dependencies
 addons:
   apt:

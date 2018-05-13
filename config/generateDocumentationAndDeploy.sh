@@ -12,7 +12,7 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-rm -rf !(index.html)
+rm -r !(index.html)
 
 echo "" > .nojekyll
 

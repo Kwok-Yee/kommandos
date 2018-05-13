@@ -1,6 +1,10 @@
 # Language
 language: cpp
 
+compile:
+- gcc
+- clang
+
 # Blacklist
 branches:
   except:

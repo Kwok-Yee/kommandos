@@ -6,7 +6,6 @@
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
 
-
 int main()
 {
 	// Get the game's singleton instance

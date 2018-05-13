@@ -14,5 +14,5 @@ script:
 - bash config/setup-ssh.sh
 after_success:
 - cd $TRAVIS_BUILD_DIR
-- chmod +x generateDocumentationAndDeploy.sh
+- chmod +x config/generateDocumentationAndDeploy.sh
 - ./generateDocumentationAndDeploy.sh

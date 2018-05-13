@@ -4,9 +4,7 @@ branches:
       - gh-pages
 env:
   global:
-    - GH_REPO_NAME: "Kwok-Yee"
-    - DOXYFILE: $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
-    - GH_REPO_REF: "github.com/&GH_REPO_NAME/kommandos.git"
+    - DOXYFILE: $TRAVIS_BUILD_DIR/DOXYFILE
 before_install:
 - sudo apt-get install doxygen graphviz
 - openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d

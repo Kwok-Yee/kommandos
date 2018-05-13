@@ -4,7 +4,7 @@ branches:
       - gh-pages
 env:
   global:
-    - DOXYFILE: $TRAVIS_BUILD_DIR/DOXYFILE
+    - DOXYFILE: $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 before_install:
 - sudo apt-get install doxygen graphviz
 - openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d

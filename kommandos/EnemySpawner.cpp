@@ -78,7 +78,7 @@ void EnemySpawner::UpdateEnemies() {
 		if (enemyHealthValues[i] <= 0)
 		{
 			particle.hit = true;
-			particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
+			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);

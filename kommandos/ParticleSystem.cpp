@@ -30,11 +30,11 @@ void ParticleSystem::SystemParticle(IrrlichtDevice* device) {
 	time = partcleIDevice->getTimer()->getTime();
 
 	if (hit) {
-		CreateParticle(vector3df(20,20,20),text);
+		CreateParticles(vector3df(20,20,20),text);
 	}
 }
-
-void ParticleSystem::CreateParticle(vector3df Position, path texture)
+//creates particles on the object position if "hit" is true
+void ParticleSystem::CreateParticles(vector3df Position, path texture)
 {
 	if (hit && setParticleTimer > 0) {
 		setParticleTimer--;
@@ -48,7 +48,7 @@ void ParticleSystem::CreateParticle(vector3df Position, path texture)
 			core::dimension2df(0.5f, 0.5f),         // min size texture
 			core::dimension2df(1.f, 1.f));        // max size texture
 
-		ps->setEmitter(em); // this grabs the emitter
+		ps->setEmitter(em); // this grabs the emitter, if "0" then it stop creating particles
 		em->drop(); // so we can drop it here without deleting it
 
 		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
@@ -63,6 +63,8 @@ void ParticleSystem::CreateParticle(vector3df Position, path texture)
 		ps->setMaterialTexture(0, partcleDriver->getTexture(texture));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 	}
+
+	//timer for the lifetime of each particle
 	if (setParticleTimer <= 0) {
 		hit = false;
 		ps->setEmitter(0);

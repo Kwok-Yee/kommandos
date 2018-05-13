@@ -5,7 +5,7 @@ branches:
 env:
   global:
     - GH_REPO_NAME: "Kwok-Yee"
-    - DOXYFILE: $TRAVIS_BUILD_DIR/DOXYFILE
+    - DOXYFILE: $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
     - GH_REPO_REF: "github.com/&GH_REPO_NAME/kommandos.git"
 before_install:
 - sudo apt-get install doxygen graphviz

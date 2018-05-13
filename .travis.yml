@@ -27,8 +27,8 @@ before_install:
 
 # Setup SSH
 script:
+- bash config/generateDocumentationAndDeploy.sh
 #- bash config/setup-ssh.sh
 
 # Generate and deploy documentation
 after_success:
-- bash config/generateDocumentationAndDeploy.sh

@@ -20,7 +20,7 @@ echo 'Generating Doxygen code documentation...'
 
 doxygen $DOXYFILE 2>&1 | tee doxygen.log
 
-if [ -d "../docs/html" ] && [ -f "../docs/html/index.html" ]; then
+if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 

@@ -1,4 +1,5 @@
 # Custom ignored files
+id_rsa
 kommandos/kommandos.vcxproj
 
 ## Ignore Visual Studio temporary files, build results, and

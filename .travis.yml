@@ -1,0 +1,18 @@
+language: cpp
+branches:
+  except:
+      - gh-pages
+env:
+  global:
+    - GH_REPO_NAME: "Kwok-Yee"
+    - DOXYFILE: $TRAVIS_BUILD_DIR/Doxyfile
+    - GH_REPO_REF: "github.com/&GH_REPO_NAME/kommandos.git"
+before_install:
+- sudo apt-get install doxygen graphviz
+- openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d
+script:
+- bash config/setup-ssh.sh
+after_success:
+- cd $TRAVIS_BUILD_DIR
+- chmod +x generateDocumentationAndDeploy.sh
+- ./generateDocumentationAndDeploy.sh

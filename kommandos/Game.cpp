@@ -55,6 +55,7 @@ Game::Game()
 		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
 }
 
+// Set instance to 0 (NULL)
 Game* Game::instance = 0;
 
 Game* Game::GetInstance() {

@@ -12,7 +12,7 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-rm -f !(index.html)
+rm !(index.html)
 
 echo "" > .nojekyll
 
@@ -28,7 +28,6 @@ if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     git commit -m "Deploy code docs to GitHub Pages Travis build: ${TRAVIS_BUILD_NUMBER}" -m "Commit: ${TRAVIS_COMMIT}"
 
-   
     git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}"
 else
     echo '' >&2

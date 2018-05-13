@@ -18,7 +18,7 @@ echo "" > .nojekyll
 
 echo 'Generating Doxygen code documentation...'
 
-doxygen kommandos/$DOXYFILE 2>&1 | tee doxygen.log
+doxygen $DOXYFILE 2>&1 | tee doxygen.log
 
 if [ -d "html" ] && [ -f "html/index.html" ]; then
 

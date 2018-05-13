@@ -1,14 +1,34 @@
+# Language
 language: cpp
+
+# Blacklist
 branches:
   except:
       - gh-pages
+
+# Environment variables
 env:
   global:
     - DOXYFILE: $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
+
+# Install dependencies
+addons:
+  apt:
+    packages:
+      - doxygen
+      - doxygen-doc
+      - doxygen-latex
+      - doxygen-gui
+      - graphviz
+
+# Decrypt SSH
 before_install:
-- sudo apt-get install doxygen graphviz
 - openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d
+
+# Setup SSH
 script:
 - bash config/setup-ssh.sh
+
+# Generate and deploy documentation
 after_success:
 - bash config/generateDocumentationAndDeploy.sh

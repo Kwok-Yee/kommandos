@@ -23,11 +23,11 @@ addons:
 
 # Decrypt SSH
 before_install:
-- openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d
+#- openssl aes-256-cbc -K $encrypted_26a857bea12a_key -iv $encrypted_26a857bea12a_iv -in config/id_rsa.enc -out config/id_rsa -d
 
 # Setup SSH
 script:
-- bash config/setup-ssh.sh
+#- bash config/setup-ssh.sh
 
 # Generate and deploy documentation
 after_success:

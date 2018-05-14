@@ -27,6 +27,7 @@ void GameOverState::ShowGameOver(IrrlichtDevice* device)
 
 		gameOverNode->setScale(objScale);
 		gameOverNode->setPosition(objPosition);
+		gameOverNode->setMaterialTexture(0, driver->getTexture("../media/Game_Over_Screen.jpg"));
 		gameOverNode->setRotation(objRotate);
 		gameOverNode->setMaterialFlag(video::EMF_LIGHTING, false);
 	}

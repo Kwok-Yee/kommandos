@@ -3,6 +3,8 @@ echo 'Setting up the script...'
 
 set -e
 
+echo 'Create directory code_docs'
+
 mkdir code_docs
 cd code_docs
 
@@ -13,40 +15,31 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-echo "REMOVE ALL"
 rm -rf *
 
-echo "CREATE .nojekyll"
 echo "" > .nojekyll
 
-echo "CURRENT WORKING DIRECTORY"
+echo 'Generating Doxygen code documentation...'
+
+doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
+
+echo "#############################################DEBUGGING"
 echo $PWD
 
-echo "FIND ALL IN CURRENT WORKING DIRECTORY"
 find .
 
-echo "GO BACK ONE DIRECTORY"
-cd ..
+if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
-echo "CURRENT WORKING DIRECTORY"
-echo $PWD
+    echo 'Uploading documentation to the gh-pages branch...'
 
-echo "FIND ALL IN CURRENT WORKING DIRECTORY"
-find .
+    git add --all
 
-echo "GO BACK ONE DIRECTORY"
-cd ..
+    git commit -m "Deploy code docs to GitHub Pages Travis build: ${TRAVIS_BUILD_NUMBER}" -m "Commit: ${TRAVIS_COMMIT}"
 
-echo "CURRENT WORKING DIRECTORY"
-echo $PWD
-
-echo "FIND ALL IN CURRENT WORKING DIRECTORY"
-find .
-
-echo "GO TO /kommandos directory"
-cd ./kommandos
-
-echo "CURRENT WORKING DIRECTORY"
-echo $PWD
-echo "FIND ALL IN CURRENT WORKING DIRECTORY"
-find .
+    git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}"
+else
+    echo '' >&2
+    echo 'Warning: No documentation (html) files have been found!' >&2
+    echo 'Warning: Not going to push the documentation to GitHub!' >&2
+    exit 1
+fi

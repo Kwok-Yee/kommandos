@@ -3,6 +3,12 @@ echo 'Setting up the script...'
 
 set -e
 
+# Go to correct working directory where the code is located
+cd ..
+cd ..
+
+echo 'Create directory code_docs'
+
 mkdir code_docs
 cd code_docs
 

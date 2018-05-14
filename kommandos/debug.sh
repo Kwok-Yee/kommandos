@@ -38,7 +38,7 @@ echo $PWD
 
 find .
 
-if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
+if [ -d "code_docs/docs/html" ] && [ -f "code_docs/docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 

@@ -26,7 +26,6 @@ IVideoDriver* driver;
 ISceneManager* smgr;
 IGUIEnvironment* guienv;
 
-
 Player* _player;
 InputReceiver inputReceiver;
 Collision _collision;
@@ -36,18 +35,10 @@ LevelGeneration levelGeneration;
 EnemySpawner* enemySpawner;
 Camera* camera;
 
-
-//const vector3df cameraPosition = vector3df(0, 120, 0); //
-//const vector3df cameraTarget = vector3df(0, 0, 0); //
-//vector3df newCameraPosition; //
-
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
 // how long it was since the last frame
 u32 then;
-
-//ProjectionMatrix for the orthographic camera
-//CMatrix4<float> projectionMatrix;                   ////////////////////////
 
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
@@ -134,15 +125,6 @@ void Game::Start()
 	_collision.AddStaticToList(shortWallNodeUp);
 	_collision.AddStaticToList(shortWallNodeDown);
 
-	//const vector3df cameraPosition = vector3df(0, 150, 0);
-	//ICameraSceneNode* camera = smgr->addCameraSceneNode();
-	//if (camera) {
-	//	camera->setPosition(cameraPosition);
-	//	camera->setTarget(cameraTarget);
-	//	//projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
-	//	//camera->setProjectionMatrix(projectionMatrix, true);
-	//}
-
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
 	SLight & lightData = directionalLight->getLightData();
 	lightData.Type = ELT_DIRECTIONAL;
@@ -179,20 +161,8 @@ void Game::Draw()
 	smgr->drawAll();
 	guienv->drawAll();
 	_player->DrawHealthBar();
-	_score.DisplayScore(0);
+	_score.DisplayScore(0); 
 	driver->endScene();
-
-	//Temporary
-	// if (camera) 
-	// {
-	// newCameraPosition.Y = 80;
-	//newCameraPosition.X = _player->getPlayerObject()->getPosition().X;
-	//newCameraPosition.Z = _player->getPlayerObject()->getPosition().Z;
-	//camera->setPosition(newCameraPosition);
-	//camera->setTarget(_player->getPlayerObject()->getPosition());
-	//}
-
-
 
 	int fps = driver->getFPS();
 	if (lastFPS != fps)

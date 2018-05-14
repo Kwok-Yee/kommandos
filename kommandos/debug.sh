@@ -40,13 +40,11 @@ if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 
-	git submodule add "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}" code_docs/kommandos
-
     git add --all
 
     git commit -m "Deploy code docs to GitHub Pages Travis build: ${TRAVIS_BUILD_NUMBER}" -m "Commit: ${TRAVIS_COMMIT}"
 
-    git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}"
+    git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}" HEAD:gh-pages
 else
     echo '' >&2
     echo 'Warning: No documentation (html) files have been found!' >&2

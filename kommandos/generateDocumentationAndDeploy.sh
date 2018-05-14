@@ -19,7 +19,7 @@ echo "" > .nojekyll
 
 echo 'Generating Doxygen code documentation...'
 
-doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
+doxygen $TRAVIS_BUILD_DIR/DOXYFILE
 
 if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 

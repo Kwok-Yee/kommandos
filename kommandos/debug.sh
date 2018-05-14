@@ -32,6 +32,10 @@ doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 
 find .
 
+cd ..
+cd ./code_docs
+find .
+
 if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'

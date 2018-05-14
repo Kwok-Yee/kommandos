@@ -40,7 +40,7 @@ if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 
-	git status
+	git checkout code_docs
 
     git add --all
 

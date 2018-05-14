@@ -7,15 +7,15 @@ branches:
       - gh-pages
 
 # Install dependencies
-addons:
-  apt:
-    packages:
-      - doxygen
-      - doxygen-doc
-      - doxygen-latex
-      - doxygen-gui
-      - graphviz
+#addons:
+#  apt:
+#    packages:
+#      - doxygen
+#      - doxygen-doc
+#      - doxygen-latex
+#      - doxygen-gui
+#      - graphviz
 
-# Setup SSH
+# Setup GitHub credentials and generate documentation
 script:
 - bash $TRAVIS_BUILD_DIR/kommandos/generateDocumentationAndDeploy.sh

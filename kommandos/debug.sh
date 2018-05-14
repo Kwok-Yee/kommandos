@@ -19,9 +19,19 @@ rm -rf *
 
 echo "" > .nojekyll
 
+echo "#############################################DEBUGGING"
+cd ..
+cd ..
+cd ./kommandos
+echo $PWD
+find .
+
 echo 'Generating Doxygen code documentation...'
 
 doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
+
+cd ..
+cd ./code_docs
 
 echo "#############################################DEBUGGING"
 echo $PWD

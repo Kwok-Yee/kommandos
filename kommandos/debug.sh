@@ -8,13 +8,6 @@ echo 'Create directory code_docs'
 mkdir code_docs
 cd code_docs
 
-echo "#############################################DEBUGGING"
-cd ..
-cd ..
-cd ./kommandos
-echo $PWD
-find .
-
 git clone -b gh-pages https://github.com/${TRAVIS_REPO_SLUG}
 cd ${TRAVIS_REPO_SLUG##*/}
 
@@ -26,13 +19,20 @@ rm -rf *
 
 echo "" > .nojekyll
 
+echo "#############################################DEBUGGING"
+cd ..
+cd ..
+cd ./kommandos
+echo $PWD
+find .
+
 echo 'Generating Doxygen code documentation...'
 
 doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 
 find .
 
-if [ -d "../../../docs/html" ] && [ -f "../../../docs/html/index.html" ]; then
+if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 

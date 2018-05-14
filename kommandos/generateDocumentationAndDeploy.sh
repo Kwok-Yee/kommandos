@@ -15,7 +15,8 @@ git config --global push.default simple
 git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
-rm -rf *
+shopt -s extglob
+rm -rf ./!(index.html|.gitignore)
 
 echo "" > .nojekyll
 

@@ -2,13 +2,17 @@
 *
 * \section intro_sec Introduction
 *
-* This is the introduction.
+* Top-down arcade shooter featuring waves of enemies in procedurally generated levels
+* For our main technical goals, we chose to implement: Procedural generation, performance optimization, and controller support
+* This would work perfectly in our game because we could randomly generate the layout of each level, 
+* while watching performance with the massive hordes of zombies that will be spawned, 
+* and allowing use of a ps4 controller for satisfying ease of use. 
+* The scope for our game is reachable by our team, while maintaining creative possibilities.
 *
 * \section install_sec Installation
 *
-* \subsection step1 Step 1: Opening the box
-*
-* etc...
+* \subsection step1 Step 1: Pulling
+* https://github.com/Kwok-Yee/kommandos
 */
 
 

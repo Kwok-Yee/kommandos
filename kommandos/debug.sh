@@ -30,6 +30,8 @@ echo 'Generating Doxygen code documentation...'
 
 doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 
+find .
+
 if [ -d "../../../docs/html" ] && [ -f "../../../docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'

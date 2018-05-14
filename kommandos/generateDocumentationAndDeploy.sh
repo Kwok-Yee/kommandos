@@ -16,7 +16,7 @@ git config user.name "Travis CI"
 git config user.email "travis@travis-ci.org"
 
 shopt -s extglob
-rm -rf ./!(index.html|.gitignore)
+rm -rf ./!(index.html)
 
 echo "" > .nojekyll
 

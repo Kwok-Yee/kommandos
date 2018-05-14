@@ -20,7 +20,7 @@ const vector3df cameraStartPosition = vector3df(0, 120, 0);
 const vector3df cameraStartTarget = vector3df(0, 0, 0);
 
 /// <summary>	The camera i device. </summary>
-IrrlichtDevice* CameraIDevice;
+IrrlichtDevice* cameraIDevice;
 /// <summary>	The camera scenemanager. </summary>
 ISceneManager* cameraSmgr;
 /// <summary>	The camera. </summary>
@@ -36,8 +36,8 @@ vector3df newCameraPosition;
 
 Camera::Camera(IrrlichtDevice* device)
 {
-	CameraIDevice = device;
-	cameraSmgr = CameraIDevice->getSceneManager();
+	cameraIDevice = device;
+	cameraSmgr = cameraIDevice->getSceneManager();
 	CameraInit();
 }
 

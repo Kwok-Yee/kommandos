@@ -17,13 +17,14 @@ using namespace std;
 // The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
-	CreateGrid();
 	const int amountOfObjects = 10;
 	
 	ISceneManager* smgr = device->getSceneManager();
 	ISceneNode* obstacles[amountOfObjects];
 	vector3df* usedPositions;
 
+	CreateWalls(smgr);
+	CreateGrid();
 	srand(time(0));
 	
 	CreateObjects(device, obstacles, amountOfObjects);
@@ -88,6 +89,7 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 	const path crateDiffuse = "../media/crate/crate_diffuse.png";
 	const path crateNormal = "../media/crate/crate_normal.png";
 
+
 	for (int i = 0; i < size; i++)
 	{
 		obstacles[i] = smgr->addCubeSceneNode();
@@ -128,10 +130,10 @@ int ObjectPlacementGeneration::RandomPosition()
 Rows and columns are scaled the so the grid is a bit smaller and the grid is made
 by multiplying the rows and columns
 */
-void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena, ISceneNode* obstacle)
+void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 {
 	vector3df arenaSize = arena->getTransformedBoundingBox().getExtent();
-	vector3df obstacleSize = obstacle->getBoundingBox().getExtent();
+	vector3df obstacleSize = vector3df(10.0f,10.0f,10.0f);
 
 	f32 scale = 0.9;
 
@@ -142,4 +144,43 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena, ISceneNode* obs
 	startZ = (arenaSize.Z * scale) / 2 - obstacleSize.Z;
 
 	grid = new vector3df[rows * columns];
+}
+
+void ObjectPlacementGeneration::CreateWalls(ISceneManager* smgr) {
+
+	IMesh* portalMesh = smgr->getMesh("../media/PortalRed.3ds");
+	IMeshSceneNode* portalNode = smgr->addMeshSceneNode(portalMesh);
+	portalNode->setPosition(vector3df(75, 0, 0));
+
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+
+	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
+	longWallNodeRight->setMaterialFlag(EMF_LIGHTING, true);
+	longWallNodeRight->setPosition(vector3df(0, 0, -75));
+
+	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
+	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
+	longWallNodeLeft->setMaterialFlag(EMF_LIGHTING, true);
+	longWallNodeLeft->setPosition(vector3df(0, 0, 90));
+
+	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
+	shortWallNodeUp->setMaterialFlag(EMF_LIGHTING, true);
+	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0));
+
+	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
+	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
+	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
+	shortWallNodeDown->setPosition(vector3df(-93.5, 0, 0));
+
+	CalculateGrid(planeNode);
+
+	/* Add to collision for enemy
+	collision.AddStaticToList(longWallNodeRight);
+	collision.AddStaticToList(longWallNodeLeft);
+	collision.AddStaticToList(shortWallNodeUp);
+	collision.AddStaticToList(shortWallNodeDown);*/
 }

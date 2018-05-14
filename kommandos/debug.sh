@@ -3,6 +3,13 @@ echo 'Setting up the script...'
 
 set -e
 
+echo "#############################################DEBUGGING"
+cd ..
+cd ..
+cd ./kommandos
+echo $PWD
+find .
+
 echo 'Create directory code_docs'
 
 mkdir code_docs
@@ -18,14 +25,6 @@ git config user.email "travis@travis-ci.org"
 rm -rf *
 
 echo "" > .nojekyll
-
-echo "#############################################DEBUGGING"
-cd ..
-cd ..
-cd ./kommandos
-echo $PWD
-find .
-
 echo 'Generating Doxygen code documentation...'
 
 doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE

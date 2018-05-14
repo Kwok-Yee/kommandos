@@ -3,10 +3,6 @@ echo 'Setting up the script...'
 
 set -e
 
-# Go to correct working directory where the code is located
-cd ..
-cd ..
-
 echo 'Create directory code_docs'
 
 mkdir code_docs
@@ -22,6 +18,10 @@ git config user.email "travis@travis-ci.org"
 rm -rf *
 
 echo "" > .nojekyll
+
+# Go to correct working directory where the code is located
+cd ..
+cd ..
 
 echo 'Generating Doxygen code documentation...'
 

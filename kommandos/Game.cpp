@@ -73,8 +73,6 @@ void Game::Start()
 	//Gun* gun;
 	enemySpawner = new EnemySpawner(device, _player);
 
-	inputReceiver.CheckJoystickPresent(device);
-
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();
 	guienv = device->getGUIEnvironment();

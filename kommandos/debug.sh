@@ -40,7 +40,7 @@ if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
 
-	git checkout code_docs
+	git submodule add "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}" code_docs/kommandos
 
     git add --all
 

@@ -3,17 +3,17 @@ echo 'Setting up the script...'
 
 set -e
 
+echo 'Create directory code_docs'
+
+mkdir code_docs
+cd code_docs
+
 echo "#############################################DEBUGGING"
 cd ..
 cd ..
 cd ./kommandos
 echo $PWD
 find .
-
-echo 'Create directory code_docs'
-
-mkdir code_docs
-cd code_docs
 
 git clone -b gh-pages https://github.com/${TRAVIS_REPO_SLUG}
 cd ${TRAVIS_REPO_SLUG##*/}
@@ -25,6 +25,7 @@ git config user.email "travis@travis-ci.org"
 rm -rf *
 
 echo "" > .nojekyll
+
 echo 'Generating Doxygen code documentation...'
 
 doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE

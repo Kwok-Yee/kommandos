@@ -42,3 +42,11 @@ echo $PWD
 
 echo "FIND ALL IN CURRENT WORKING DIRECTORY"
 find .
+
+echo "GO TO /kommandos directory"
+cd /kommandos
+
+echo "CURRENT WORKING DIRECTORY"
+echo $PWD
+echo "FIND ALL IN CURRENT WORKING DIRECTORY"
+find .

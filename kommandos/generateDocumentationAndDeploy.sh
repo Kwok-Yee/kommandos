@@ -19,7 +19,6 @@ rm -rf *
 
 echo "" > .nojekyll
 
-# Go to correct working directory where the code is located
 cd ..
 cd ..
 cd ./kommandos
@@ -31,11 +30,6 @@ doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 cd ..
 cd ./code_docs
 
-echo "#############################################DEBUGGING"
-echo $PWD
-
-find .
-
 if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'
@@ -44,7 +38,7 @@ if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     git commit -m "Deploy code docs to GitHub Pages Travis build: ${TRAVIS_BUILD_NUMBER}" -m "Commit: ${TRAVIS_COMMIT}"
 
-    git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}"
+    git push --force "https://${GH_REPO_TOKEN}@github.com/${TRAVIS_REPO_SLUG}" HEAD:gh-pages
 else
     echo '' >&2
     echo 'Warning: No documentation (html) files have been found!' >&2

@@ -17,8 +17,6 @@ git config user.email "travis@travis-ci.org"
 
 rm -rf *
 
-echo "" > .nojekyll
-
 cd ..
 cd ..
 cd ./kommandos

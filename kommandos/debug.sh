@@ -36,6 +36,8 @@ cd ..
 cd ./code_docs
 find .
 
+rm -rf *
+
 if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'

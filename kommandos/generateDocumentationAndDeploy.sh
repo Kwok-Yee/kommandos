@@ -22,7 +22,7 @@ echo "" > .nojekyll
 # Go to correct working directory where the code is located
 cd ..
 cd ..
-cd /kommandos
+cd ./kommandos
 
 echo 'Generating Doxygen code documentation...'
 

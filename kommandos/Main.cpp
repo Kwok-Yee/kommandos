@@ -1,4 +1,4 @@
-/*! \mainpage My Personal Index Page
+/*! \mainpage Kommandos | Irrlicht Engine
 *
 * \section intro_sec Introduction
 *

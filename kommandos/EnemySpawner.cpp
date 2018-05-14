@@ -19,8 +19,8 @@ const u32 MAXWAVES = 10;
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
-Player* player;
-Collision* collision;
+Player* _player;
+Collision* _collision;
 
 array<vector3df> spawnPositions;
 u32 amountOfEnemies;
@@ -38,7 +38,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
-	player = Player;
+	_player = Player;
 
 	amountOfEnemies = 6;
 	//setting spawnpositions in the corners.
@@ -64,11 +64,11 @@ void EnemySpawner::UpdateEnemies() {
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		if (!(player->vulnerable > 0 && collision->SceneNodeWithSceneNode(player->getPlayerObject(), enemies[i]))) {
+		if (!(_player->vulnerable > 0 && _collision->SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i]))) {
 
-			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
+			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				player->TakeDamage(10, frameDeltaTime);
+				_player->TakeDamage(10, frameDeltaTime);
 			}
 		}
 

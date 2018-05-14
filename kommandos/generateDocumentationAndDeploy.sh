@@ -31,6 +31,11 @@ doxygen $TRAVIS_BUILD_DIR/kommandos/DOXYFILE
 cd ..
 cd ./code_docs
 
+echo "#############################################DEBUGGING"
+echo $PWD
+
+find .
+
 if [ -d "docs/html" ] && [ -f "docs/html/index.html" ]; then
 
     echo 'Uploading documentation to the gh-pages branch...'

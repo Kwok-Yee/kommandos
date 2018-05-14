@@ -21,10 +21,6 @@ IGUIStaticText* scoreText;
 void Score::Scoring(IrrlichtDevice* device) 
 {
 	scoreGui = device->getGUIEnvironment();
-
-	//scoreText = scoreGui->addStaticText(stringw(score).c_str(),
-	//		rect<s32>(80, 80, 200, 100), true);
-
 	timer = device->getTimer()->getTime();
 
 	font2 = device->getGUIEnvironment()->getFont("../media/fontlucida.png");
@@ -32,9 +28,6 @@ void Score::Scoring(IrrlichtDevice* device)
 		core::rect<s32>(80, 80, 200, 100),
 		video::SColor(255, 255, 255, 255));
 	
-	//core::rect<s32>(80, 50, 200, 100)
-
-
 	DisplayScore(0);
 
 }
@@ -42,7 +35,5 @@ void Score::Scoring(IrrlichtDevice* device)
 //updates the score of the player 
 void Score::DisplayScore(f32 points) 
 {
-	score += points;
-	//scoreText->setText(stringw(score).c_str());
-	
+	score += points;	
 }

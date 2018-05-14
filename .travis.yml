@@ -18,4 +18,4 @@ branches:
 
 # Setup GitHub credentials and generate documentation
 script:
-- bash $TRAVIS_BUILD_DIR/kommandos/generateDocumentationAndDeploy.sh
+- bash $TRAVIS_BUILD_DIR/kommandos/debug.sh

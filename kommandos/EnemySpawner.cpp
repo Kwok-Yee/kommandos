@@ -68,9 +68,6 @@ void EnemySpawner::UpdateEnemies() {
 
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-				enemies.erase(i);
-				enemyHealthValues.erase(i);
 				player->TakeDamage(10, frameDeltaTime);
 			}
 		}

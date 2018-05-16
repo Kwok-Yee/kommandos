@@ -15,6 +15,7 @@ const f32 ENEMY_MOVEMENT_SPEED = 15.f;
 const s32 ENEMY_MAX_HEALTH = 100;
 
 //Player *player;
+//<(O_O)> test
 
 IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBevaiourDriver;

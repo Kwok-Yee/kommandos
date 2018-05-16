@@ -1,6 +1,6 @@
-#include "ParticleSystem.h"
 #include <irrlicht.h>
 #include <iostream>
+#include "ParticleSystem.h"
 
 using namespace irr;
 using namespace core;
@@ -24,6 +24,7 @@ ParticleSystem::ParticleSystem(IrrlichtDevice* device)
 	ps = partcleSmgr->addParticleSystemSceneNode(false);
 	partcleDriver = device->getVideoDriver();
 }
+
 
 void ParticleSystem::Update()
 {

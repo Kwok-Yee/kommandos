@@ -6,8 +6,6 @@
 
 #pragma once
 #include <irrlicht.h>
-#include "Player.h"
-#include "GameOverState.h"
 
 using namespace irr;
 using namespace core;

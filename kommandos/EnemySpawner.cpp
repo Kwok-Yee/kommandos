@@ -1,5 +1,5 @@
-#include "EnemySpawner.h"
 #include <irrlicht.h>
+#include "EnemySpawner.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -12,7 +12,6 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
-using namespace io;
 
 const u32 maxWaves = 10;
 
@@ -67,15 +66,16 @@ void EnemySpawner::UpdateEnemies()
 		{
 			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 				_player->TakeDamage(10, frameDeltaTime);
 			}
 		}
 
 		if (enemyHealthValues[i] <= 0)
 		{
+			//creates a particle
 			particle.hit = true;
 			particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
+			//deletes enemy
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);

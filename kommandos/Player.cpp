@@ -1,6 +1,5 @@
-#include "Player.h"
 #include <irrlicht.h>
-#include <iostream>
+#include "Player.h"
 #include "Game.h"
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
@@ -12,7 +11,6 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
-using namespace std;
 
 const s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
 #define MAXHEALTH 100; //bar size
@@ -151,6 +149,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 void Player::DrawHealthBar()
 {
 	const s32 barSize = MAXHEALTH;
+	//draws multiple bars to make i look nice
 	playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(X1_BAR, Y1_BAR, (barSize * 5) + X2_BAR, Y2_BAR));
 	playerDriver->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(X1_BAR + 1, Y1_BAR + 1, barSize * 5 + X2_BAR - 1, Y2_BAR - 1));
 	playerDriver->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(X1_BAR + 3, Y1_BAR + 3, barSize * 5 + X2_BAR - 3, Y2_BAR - 3));

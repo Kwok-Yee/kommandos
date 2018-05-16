@@ -8,7 +8,6 @@ using namespace io;
 class ParticleSystem
 {
 public:
-	ParticleSystem();
 	void SystemParticle(irr::IrrlichtDevice* device);
 	void CreateParticles(vector3df Position, path);
 

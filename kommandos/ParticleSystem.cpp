@@ -1,6 +1,5 @@
-#include "ParticleSystem.h"
 #include <irrlicht.h>
-
+#include "ParticleSystem.h"
 
 using namespace irr;
 using namespace core;
@@ -15,10 +14,6 @@ IVideoDriver* partcleDriver;
 const path text = "";
 s32 setParticleTimer = 1;
 s32 time;
-
-ParticleSystem::ParticleSystem()
-{
-}
 
 void ParticleSystem::SystemParticle(IrrlichtDevice* device) 
 {

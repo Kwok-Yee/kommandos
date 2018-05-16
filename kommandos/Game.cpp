@@ -173,7 +173,7 @@ void Game::Draw()
 	smgr->drawAll();
 	guienv->drawAll();
 	_player->DrawHealthBar();
-	_score.DisplayScore(0);
+	_score.Scoring(device);
 	driver->endScene();
 
 	int fps = driver->getFPS();

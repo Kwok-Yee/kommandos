@@ -1,6 +1,5 @@
-#include "Player.h"
 #include <irrlicht.h>
-#include <iostream>
+#include "Player.h"
 #include "Game.h"
 #include "InputReceiver.h"
 #include "Gameoverstate.h"
@@ -12,22 +11,21 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
-using namespace std;
 
 const s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
-const s32 MAXHEALTH = 100; //bar size
+#define MAXHEALTH 100; //bar size
 // This is the movement speed in units per second.
-const f32 MOVEMENT_SPEED = 50.f;
+#define MOVEMENT_SPEED 50.f;
 
 IrrlichtDevice* playerIDevice;
 IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
 GameOverState gameOverState;
-Collision _collision;
+Collision playerCol;
 
 //int vulnerable = 0;
 Gun* gun;
-Score scores;
+Score playerScores;
 Game* game;
 
 ISceneNode* playerObject;
@@ -88,34 +86,34 @@ void Player::Move(InputReceiver inputReceiver)
 
 	vector3df newPosition = playerObject->getPosition();
 
-	if (_collision.CollidesWithStaticObjects(playerObject))
+	if (playerCol.CollidesWithStaticObjects(playerObject))
 		currentPosition = playerObject->getPosition();
 
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_W))
 	{
-		newPosition.X += MOVEMENT_SPEED * frameDeltaTime;
+		newPosition.X +=  frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, -90, 0));
 	}
 
 	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_S))
 	{
-		newPosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+		newPosition.X -= frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, 90, 0));
 	}
 
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_A))
 	{
-		newPosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+		newPosition.Z += frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, -180, 0));
 	}
 	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_D))
 	{
-		newPosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+		newPosition.Z -= frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, 0, 0));
 	}
 
 	playerObject->setPosition(newPosition);
-	if (_collision.CollidesWithStaticObjects(playerObject))
+	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
 
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
@@ -129,9 +127,9 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (_collision.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
-				scores.DisplayScore(10);
+				playerScores.DisplayScore(10);
 			}
 		}
 	}
@@ -150,9 +148,11 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 }
 void Player::DrawHealthBar()
 {
-	playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(X1_BAR, Y1_BAR, (MAXHEALTH * 5) + X2_BAR, Y2_BAR));
-	playerDriver->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(X1_BAR + 1, Y1_BAR + 1, MAXHEALTH * 5 + X2_BAR - 1, Y2_BAR - 1));
-	playerDriver->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(X1_BAR + 3, Y1_BAR + 3, MAXHEALTH * 5 + X2_BAR - 3, Y2_BAR - 3));
+	const s32 barSize = MAXHEALTH;
+	//draws multiple bars to make i look nice
+	playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(X1_BAR, Y1_BAR, (barSize * 5) + X2_BAR, Y2_BAR));
+	playerDriver->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(X1_BAR + 1, Y1_BAR + 1, barSize * 5 + X2_BAR - 1, Y2_BAR - 1));
+	playerDriver->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(X1_BAR + 3, Y1_BAR + 3, barSize * 5 + X2_BAR - 3, Y2_BAR - 3));
 	playerDriver->draw2DRectangle(rect<s32>(X1_BAR + 3, Y1_BAR + 3, health * 5 + X2_BAR - 3, Y2_BAR - 3),
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55, 0),

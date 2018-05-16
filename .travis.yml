@@ -1,10 +1,10 @@
 # Language
 language: cpp
 
-# Blacklist
+# Branches
 branches:
-  except:
-      - gh-pages
+  only:
+      - master
 
 # Install dependencies
 addons:

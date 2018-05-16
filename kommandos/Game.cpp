@@ -28,7 +28,6 @@ IGUIEnvironment* guienv;
 Player* _player;
 InputReceiver inputReceiver;
 Collision _collision;
-ParticleSystem particles;
 Score _score;
 LevelGeneration levelGeneration;
 EnemySpawner* enemySpawner;
@@ -65,7 +64,7 @@ Game* Game::GetInstance() {
 	return instance;
 }
 
-void Game::Start() 
+void Game::Start()
 {
 
 	// Create instances of classes
@@ -166,7 +165,6 @@ void Game::Update()
 	_player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
 	_player->Shoot(inputReceiver, enemySpawner);
-	particles.SystemParticle(device);
 }
 
 void Game::Draw()

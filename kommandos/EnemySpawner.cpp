@@ -29,12 +29,13 @@ u32 currentWave = 0;
 int enemiesToSpawn = 0;
 int positionMultiplier = 10;
 
-ParticleSystem particle;
+ParticleSystem* particle;
 const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
+	particle = new ParticleSystem(device);
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
@@ -60,7 +61,7 @@ void EnemySpawner::UpdateEnemies() {
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-
+	particle->Update();
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
@@ -68,17 +69,13 @@ void EnemySpawner::UpdateEnemies() {
 
 			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-				enemies.erase(i);
-				enemyHealthValues.erase(i);
 				player->TakeDamage(10, frameDeltaTime);
 			}
 		}
 
 		if (enemyHealthValues[i] <= 0)
 		{
-			particle.hit = true;
-			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
+			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);

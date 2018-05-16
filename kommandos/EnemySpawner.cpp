@@ -1,5 +1,5 @@
-#include "EnemySpawner.h"
 #include <irrlicht.h>
+#include "EnemySpawner.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -12,22 +12,19 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
-using namespace io;
 
-const u32 MAXWAVES = 10;
+const u32 maxWaves = 10;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
-Player* player;
-Collision* collision;
+Player* _player;
+Collision collision;
 
 array<vector3df> spawnPositions;
 u32 amountOfEnemies;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
-int enemiesToSpawn = 0;
-int positionMultiplier = 10;
 
 ParticleSystem particle;
 const path bloodSplatter = "../media/blood.bmp";
@@ -38,7 +35,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
-	player = Player;
+	_player = Player;
 
 	amountOfEnemies = 6;
 	//setting spawnpositions in the corners.
@@ -55,7 +52,8 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	Spawn();
 }
 
-void EnemySpawner::UpdateEnemies() {
+void EnemySpawner::UpdateEnemies() 
+{
 	// Work out a frame delta time.
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
@@ -64,28 +62,26 @@ void EnemySpawner::UpdateEnemies() {
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		if (!(player->vulnerable > 0 && collision->SceneNodeWithSceneNode(player->getPlayerObject(), enemies[i]))) {
-
-			if (enemyBehaviour->Update(enemies[i], player->getPlayerObject()->getPosition(), frameDeltaTime))
+		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i]))) 
+		{
+			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
-				enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-				enemies.erase(i);
-				enemyHealthValues.erase(i);
-				player->TakeDamage(10, frameDeltaTime);
+				_player->TakeDamage(10, frameDeltaTime);
 			}
 		}
 
 		if (enemyHealthValues[i] <= 0)
 		{
+			//creates a particle
 			particle.hit = true;
-			particle.CreateParticle(enemies[i]->getPosition(), bloodSplatter);
+			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);
 		}
 	}
 
-	if (enemies.size() <= 0 && currentWave < MAXWAVES) {
+	if (enemies.size() <= 0 && currentWave < maxWaves) {
 		Spawn();
 		currentWave++;
 	}

@@ -10,6 +10,7 @@
 #include "ParticleSystem.h"
 #include "Gun.h"
 #include "Score.h"
+#include "Camera.h"
 #include "ObjectPlacementGeneration.h"
 
 using namespace irr;
@@ -30,17 +31,12 @@ Score score;
 LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
-
-const vector3df cameraPosition = vector3df(0, 120, 0);
-const vector3df cameraTarget = vector3df(0, 0, 0);
+Camera* camera;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
 // how long it was since the last frame
 u32 prevFrame;
-
-//ProjectionMatrix for the orthographic camera
-CMatrix4<float> projectionMatrix;
 
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
@@ -66,6 +62,7 @@ Game* Game::GetInstance() {
 void Game::Start() 
 {
 	// Create instances of classes
+	camera = new Camera(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
@@ -76,16 +73,6 @@ void Game::Start()
 	guienv = device->getGUIEnvironment();
 
 	objectPlacementGen.PlaceObjects(device);
-
-	//Create Camera
-	const vector3df cameraPosition = vector3df(0, 150, 0);
-	ICameraSceneNode* camera = smgr->addCameraSceneNode();
-	if (camera) {
-		camera->setPosition(cameraPosition);
-		camera->setTarget(cameraTarget);
-		projectionMatrix.buildProjectionMatrixOrthoLH(f32(100 * 2), f32(60 * 2 * 1080 / 720), 1, 300);
-		camera->setProjectionMatrix(projectionMatrix, true);
-	}
 
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -108,6 +95,7 @@ void Game::Update()
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
 
+	camera->CameraUpdate();
 	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
 	player->Shoot(inputReceiver, enemySpawner);

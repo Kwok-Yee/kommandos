@@ -13,11 +13,10 @@ u32 timer;
 
 EGUI_ALIGNMENT upperleft,upperright;
 
-
 s32 score = 0;
 IGUIStaticText* scoreText;
 
-
+//method for displaying score
 void Score::Scoring(IrrlichtDevice* device) 
 {
 	scoreGui = device->getGUIEnvironment();
@@ -29,7 +28,6 @@ void Score::Scoring(IrrlichtDevice* device)
 		video::SColor(255, 255, 255, 255));
 	
 	DisplayScore(0);
-
 }
 
 //updates the score of the player 

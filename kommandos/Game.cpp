@@ -26,8 +26,8 @@ IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
 Player* player;
-ParticleSystem particles;
 Score score;
+Collision _collision;
 LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
@@ -72,13 +72,13 @@ bool Game::SetIsGameOver(bool state)
 }
 
 void Game::Start() 
+
 {
 	// Create instances of classes
 	camera = new Camera(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
-	particles.SystemParticle(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();

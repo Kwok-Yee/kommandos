@@ -47,7 +47,7 @@ Player::Player(IrrlichtDevice* device)
 	time = playerIDevice->getTimer()->getTime();
 }
 
-void Player::Init() 
+void Player::Init()
 {
 	health = MAXHEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
@@ -91,7 +91,7 @@ void Player::Move(InputReceiver inputReceiver)
 
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_W))
 	{
-		newPosition.X +=  frameDeltaTime * MOVEMENT_SPEED;
+		newPosition.X += frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, -90, 0));
 	}
 
@@ -137,14 +137,18 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerable <= 0 ) {
+	game = game->GetInstance();
+	if (health > 0 && vulnerable <= 0) {
 		vulnerable = 800;
 		health -= damage;
 
-	if (health <= 0)
-		gameOverState.ShowGameOver(playerIDevice);
+		if (health <= 0)
+		{
+			gameOverState.ShowGameOver(playerIDevice);
+			game->SetIsGameOver(true);
+		}
 	}
-	
+
 }
 void Player::DrawHealthBar()
 {
@@ -158,7 +162,7 @@ void Player::DrawHealthBar()
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0));
-	
+
 }
 
 ISceneNode* Player::getPlayerObject() {

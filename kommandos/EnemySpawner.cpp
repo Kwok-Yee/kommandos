@@ -29,13 +29,15 @@ u32 currentWave = 0;
 ParticleSystem particle;
 const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
+u32 prevTime;
 
-EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
+
+EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* player)
 {
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
-	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
-	_player = Player;
+	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice, player);
+	_player = player;
 
 	amountOfEnemies = 6;
 	//setting spawnpositions in the corners.
@@ -48,6 +50,8 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
+	prevTime = prevFrameTime;
+
 
 	Spawn();
 }
@@ -58,6 +62,12 @@ void EnemySpawner::UpdateEnemies()
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
+
+	if (now >= prevTime + (frameDeltaTime * 1000)) {
+	enemyBehaviour->ResetPath();
+	prevTime = now;
+	}
+
 
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)

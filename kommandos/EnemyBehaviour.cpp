@@ -1,6 +1,8 @@
 #include <irrlicht.h>
 #include "EnemyBehaviour.h"
 #include "Collision.h"
+#include "Pathfinding.h"
+#include "Player.h"
 
 using namespace irr;
 using namespace core;
@@ -16,12 +18,16 @@ IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBehaviourDriver;
 ISceneManager* enemyBehaviourSmgr;
 IMeshSceneNode* enemyNode;
+Player* ePlayer;
 Collision col;
+Pathfinding* pathfinding;
 
-EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
+EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device, Player* player) {
 	enemyBehaviourIDevice = device;
 	enemyBehaviourDriver = enemyBehaviourIDevice->getVideoDriver();
 	enemyBehaviourSmgr = enemyBehaviourIDevice->getSceneManager();
+	pathfinding = new Pathfinding();
+	ePlayer = player;
 }
 
 IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
@@ -38,6 +44,7 @@ IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 		enemyNode->setRotation(vector3df(0, -90, 0));
 		enemyNode->setMaterialTexture(0, enemyBehaviourDriver->getTexture("../media/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
+		pathfinding->FindPath(startPosition, ePlayer->getPlayerObject()->getPosition());
 		return enemyNode;
 	}
 	return NULL;
@@ -52,17 +59,23 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 {
 	// Get position delta compared to player position
 	vector3df enemyPosition = enemyNode->getPosition();
-	vector3df delta = playerPosition - enemyPosition; // Save delta
-	vector3df deltaNormalized = delta;
-	deltaNormalized.normalize(); // It is done in two lines, so the delta doesnt get normalized
+	//pathfinding->FindPath(enemyPosition, playerPosition);
+	vector3df delta = playerPosition - enemyPosition; //Save delta
+	vector3df enemyMovementNormalized;
+	if (pathfinding->foundGoal)
+	{
+		enemyMovementNormalized = pathfinding->NextPathPos(enemyNode) - enemyPosition;
+		enemyMovementNormalized.normalize();
+	}
 
-	enemyNode->setRotation(vector3df(0, atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI, 0));
+
+	enemyNode->setRotation(vector3df(0, atan2(enemyMovementNormalized.X, enemyMovementNormalized.Z) * 180 / PI, 0));
 
 	// Change position based on delta and speed
 	if (delta.getLength() > meleeRange) // If farther than melee attack range,
 	{
 		// Move towards player
-		enemyPosition += deltaNormalized * frameDeltaTime * ENEMY_MOVEMENT_SPEED;
+		enemyPosition += enemyMovementNormalized * frameDeltaTime * ENEMY_MOVEMENT_SPEED;
 		vector3df oldPosition = enemyNode->getPosition();
 		enemyNode->setPosition(enemyPosition);
 
@@ -74,6 +87,13 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 	else
 		return true;
 }
+
+void EnemyBehaviour::ResetPath() {
+	pathfinding->initStartGoal = false;
+	pathfinding->foundGoal = false;
+	pathfinding->FindPath(enemyNode->getPosition(), ePlayer->getPlayerObject()->getPosition());z
+}
+
 
 f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 {

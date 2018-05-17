@@ -1,78 +1,79 @@
 #include <irrlicht.h>
 #include "ParticleSystem.h"
+#include <iostream>
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
+using namespace std;
 
-IrrlichtDevice* partcleIDevice;
-ISceneManager* partcleSmgr;
+IrrlichtDevice* particleIDevice;
+ISceneManager* particleSmgr;
 IParticleSystemSceneNode* ps;
-IVideoDriver* partcleDriver;
+IVideoDriver* particleDriver;
 
-const path text = "";
-s32 setParticleTimer = 1;
+s32 particleTimer = 0;
 s32 time;
 
-void ParticleSystem::SystemParticle(IrrlichtDevice* device) 
+ParticleSystem::ParticleSystem(IrrlichtDevice* device)
 {
-	partcleIDevice = device;
-	partcleSmgr = device->getSceneManager();
-	ps = partcleSmgr->addParticleSystemSceneNode(false);
-	partcleDriver = device->getVideoDriver();
+	particleIDevice = device;
+	particleSmgr = device->getSceneManager();
+	ps = particleSmgr->addParticleSystemSceneNode(false);
+	particleDriver = device->getVideoDriver();
+}
+
+
+void ParticleSystem::Update()
+{
 
 	// Work out a frame delta time.
-	const u32 now = partcleIDevice->getTimer()->getTime();
+	const u32 now = particleIDevice->getTimer()->getTime();
 	const f32 frameTime = (f32)(now - time) / 1000.f; // Time in seconds
 	time = now;
 
-	//if enemy is hit then create bloodparticle
-	if (hit) 
+	//for removing particle on position
+	if (activePs && particleTimer > 0)
 	{
-		CreateParticles(vector3df(20,20,20),text);
-		setParticleTimer = 100;
-	}
-
-	if (hit && setParticleTimer > 0) 
-	{ 
-		setParticleTimer = setParticleTimer -= frameTime; 
-		hit = false;
-
+		particleTimer -= frameTime;
+		
+		if (particleTimer <= 0)
+		{
+			activePs = false;
+			ps->setEmitter(0);
+		}
 	}
 }
-//creates particles on the object position if "hit" is true
+//creates particles on the object position if "activePs" is true
 void ParticleSystem::CreateParticles(vector3df Position, path texture)
 {
-		scene::IParticleEmitter * em = ps->createBoxEmitter(
-			core::aabbox3d<f32>(-7, 0, -7, 7, 1, 7), // emitter size
-			core::vector3df(0.0f, 0.06f, 0.0f),   // initial direction
-			1, 10,                            // min and max particles per sec
-			video::SColor(0, 255, 255, 255),       // darkest color
-			video::SColor(0, 255, 255, 255),       // brightest color
-			800, 2000, 0,                         // min and max age, angle
-			core::dimension2df(0.5f, 0.5f),         // min size texture
-			core::dimension2df(1.f, 1.f));        // max size texture
+	activePs = true;
+	particleTimer = 1000;
 
-		ps->setEmitter(em); // this grabs the emitter, if "0" then it stop creating particles
-		em->drop(); // so we can drop it here without deleting it
+	scene::IParticleEmitter * em = ps->createBoxEmitter(
+		core::aabbox3d<f32>(-7, 0, -7, 7, 1, 7), // emitter size
+		core::vector3df(0.0f, 0.06f, 0.0f),   // initial direction
+		1, 10,                            // min and max particles per sec
+		video::SColor(0, 255, 255, 255),       // darkest color
+		video::SColor(0, 255, 255, 255),       // brightest color
+		800, 2000, 0,                         // min and max age, angle
+		core::dimension2df(0.5f, 0.5f),         // min size texture
+		core::dimension2df(1.f, 1.f));        // max size texture
 
-		scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+	ps->setEmitter(em); // this grabs the emitter, if "0" then it stop creating particles
+	em->drop(); // so we can drop it here without deleting it
 
-		ps->addAffector(paf); // same goes for the affector
-		paf->drop();
+	scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
 
-		ps->setPosition(Position);
-		ps->setScale(core::vector3df(1, 1, 1));
-		ps->setMaterialFlag(video::EMF_LIGHTING, false);
-		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-		ps->setMaterialTexture(0, partcleDriver->getTexture(texture));
-		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+	ps->addAffector(paf); // same goes for the affector
+	paf->drop();
 
-		//if timer is "0" then remove particle
-		//if (setParticleTimer <= 0)
-		//{
-		//	ps->setEmitter(0);
-		//}
+	ps->setPosition(Position);
+	ps->setScale(core::vector3df(1, 1, 1));
+	ps->setMaterialFlag(video::EMF_LIGHTING, false);
+	ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
+	ps->setMaterialTexture(0, particleDriver->getTexture(texture));
+	ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 
 }

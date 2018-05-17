@@ -27,7 +27,7 @@ core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
 ParticleSystem particle;
-const path bloodSplatter = "../media/blood.bmp";
+const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)

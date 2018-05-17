@@ -22,7 +22,7 @@ void Score::Scoring(IrrlichtDevice* device)
 	scoreGui = device->getGUIEnvironment();
 	timer = device->getTimer()->getTime();
 
-	font2 = device->getGUIEnvironment()->getFont("../media/fontlucida.png");
+	font2 = device->getGUIEnvironment()->getFont("../media/Fonts/fontlucida.png");
 	font2->draw(stringw(score).c_str(),
 		core::rect<s32>(80, 80, 200, 100),
 		video::SColor(255, 255, 255, 255));

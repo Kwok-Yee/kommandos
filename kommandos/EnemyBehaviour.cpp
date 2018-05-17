@@ -36,7 +36,7 @@ IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 
 		enemyNode->setScale(scaleVect);
 		enemyNode->setRotation(vector3df(0, -90, 0));
-		enemyNode->setMaterialTexture(0, enemyBehaviourDriver->getTexture("../media/nskinrd.jpg"));
+		enemyNode->setMaterialTexture(0, enemyBehaviourDriver->getTexture("../media/Textures/nskinrd.jpg"));
 		enemyNode->setPosition(startPosition);
 		return enemyNode;
 	}

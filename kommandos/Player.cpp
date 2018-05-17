@@ -50,7 +50,7 @@ Player::Player(IrrlichtDevice* device)
 void Player::Init() 
 {
 	health = MAXHEALTH;
-	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
+	IMesh* playerMesh = playerSmgr->getMesh("../media/Models/player/PlayerModel.3ds");
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
 		playerObject->setPosition(vector3df(0, 0, 30));
@@ -64,7 +64,7 @@ void Player::Init()
 		gunNode->setPosition(vector3df(2, 5, -1));
 		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
 		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		gunNode->setMaterialTexture(0, playerDriver->getTexture("../media/Gun_Color.png"));
+		gunNode->setMaterialTexture(0, playerDriver->getTexture("../media/Textures/Gun_Color.png"));
 		playerObject->addChild(gunNode);
 		gun = new Gun(gunNode, playerIDevice);
 	}

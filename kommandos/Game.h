@@ -9,6 +9,8 @@ public:
 	Game& operator=(const Game&) = delete;
 	//Returns the Game instance
 	static Game* GetInstance();
+	bool GetIsGameOver();
+	bool SetIsGameOver(bool state);
 	//initialize all objects.
 	void Start();
 	//Updates all objects in the game.
@@ -18,5 +20,6 @@ public:
 private:
 	Game();
 	static Game* instance;
+	bool isGameOver;
 };
 

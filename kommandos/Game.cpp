@@ -42,6 +42,8 @@ u32 prevFrame;
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
 
+bool isGameOver;
+
 Game::Game()
 {
 	// Create device
@@ -58,6 +60,15 @@ Game* Game::GetInstance() {
 		instance = new Game();
 	}
 	return instance;
+}
+
+bool Game::GetIsGameOver() {
+	return isGameOver;
+}
+
+bool Game::SetIsGameOver(bool state)
+{
+	return isGameOver = state;
 }
 
 void Game::Start() 

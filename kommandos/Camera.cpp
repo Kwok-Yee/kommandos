@@ -16,7 +16,7 @@ using namespace core;
 using namespace scene;
 
 /// <summary>	The camera start position. </summary>
-const vector3df cameraStartPosition = vector3df(0, 150, 0);
+const vector3df cameraStartPosition = vector3df(0, 450, 0);
 /// <summary>	The camera start target. </summary>
 const vector3df cameraStartTarget = vector3df(0, 0, 0);
 
@@ -42,6 +42,7 @@ Camera::Camera(IrrlichtDevice* device)
 {
 	cameraIDevice = device;
 	cameraSmgr = cameraIDevice->getSceneManager();
+	game_ = game_->GetInstance();
 	CameraInit();
 }
 
@@ -56,7 +57,7 @@ void Camera::CameraInit()
 	{
 		camera->setPosition(cameraStartPosition);
 		camera->setTarget(cameraStartTarget);
-		newCameraPosition.Y = 80;
+		newCameraPosition.Y = 180; //80
 	}
 }
 
@@ -66,8 +67,6 @@ void Camera::CameraInit()
 
 void Camera::CameraUpdate()
 {
-	game_ = game_->GetInstance();
-
 	if (game_->GetIsGameOver() == true)
 	{
 		camera->setPosition(cameraStartPosition);

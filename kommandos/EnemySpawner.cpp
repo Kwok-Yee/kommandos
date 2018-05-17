@@ -7,6 +7,7 @@
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include "Collision.h"
+#include "Game.h"
 
 using namespace irr;
 using namespace core;
@@ -19,16 +20,19 @@ IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
 Player* _player;
+Game* game_EnemySpawner;
 Collision collision;
 
 array<vector3df> spawnPositions;
-u32 amountOfEnemies, Resize;
+u32 amountOfEnemies, resize;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
 ParticleSystem* particle;
 const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
+
+
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
@@ -37,14 +41,15 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
 	_player = Player;
+	game_EnemySpawner = game_EnemySpawner->GetInstance();
 
 	amountOfEnemies = 6;
-	Resize = 2;
+	resize = 2;
 	//setting spawnpositions in the corners.
-	spawnPositions.push_back(vector3df(-82, 0, -78) * Resize);
-	spawnPositions.push_back(vector3df(78, 0, -78) * Resize);
-	spawnPositions.push_back(vector3df(78, 0, 78) * Resize);
-	spawnPositions.push_back(vector3df(-82, 0, 78) * Resize);
+	spawnPositions.push_back(vector3df(-82, 0, -78) * resize);
+	spawnPositions.push_back(vector3df(78, 0, -78) * resize);
+	spawnPositions.push_back(vector3df(78, 0, 78) * resize);
+	spawnPositions.push_back(vector3df(-82, 0, 78) * resize);
 
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
@@ -53,8 +58,9 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	Spawn();
 }
 
-void EnemySpawner::UpdateEnemies() 
+void EnemySpawner::UpdateEnemies()
 {
+
 	// Work out a frame delta time.
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
@@ -63,7 +69,7 @@ void EnemySpawner::UpdateEnemies()
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i]))) 
+		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i])))
 		{
 			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 			{
@@ -77,6 +83,13 @@ void EnemySpawner::UpdateEnemies()
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);
+		}
+		if (game_EnemySpawner->GetIsGameOver() == true)
+		{
+			printf("enemy should be dead");
+			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
+			enemies.erase(i);
+			//enemyHealthValues.erase(i);
 		}
 	}
 

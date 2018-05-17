@@ -12,7 +12,7 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
-const s32 X1_BAR = 10, Y1_BAR = 10, X2_BAR = 10, Y2_BAR = 25; //healthbar size
+const s32 x1Bar = 10, y1Bar = 10, x2Bar = 10, y2Bar = 25; //healthbar size
 #define MAXHEALTH 100; //bar size
 // This is the movement speed in units per second.
 #define MOVEMENT_SPEED 50.f;
@@ -47,7 +47,7 @@ Player::Player(IrrlichtDevice* device)
 	time = playerIDevice->getTimer()->getTime();
 }
 
-void Player::Init() 
+void Player::Init()
 {
 	health = MAXHEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
@@ -91,7 +91,7 @@ void Player::Move(InputReceiver inputReceiver)
 
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_W))
 	{
-		newPosition.X +=  frameDeltaTime * MOVEMENT_SPEED;
+		newPosition.X += frameDeltaTime * MOVEMENT_SPEED;
 		playerObject->setRotation(vector3df(0, -90, 0));
 	}
 
@@ -137,28 +137,32 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerable <= 0 ) {
+	game = game->GetInstance();
+	if (health > 0 && vulnerable <= 0) {
 		vulnerable = 800;
 		health -= damage;
 
-	if (health <= 0)
-		gameOverState.ShowGameOver(playerIDevice);
+		if (health <= 0)
+		{
+			gameOverState.ShowGameOver(playerIDevice);
+			game->SetIsGameOver(true);
+		}
 	}
-	
+
 }
 void Player::DrawHealthBar()
 {
 	const s32 barSize = MAXHEALTH;
 	//draws multiple bars to make i look nice
-	playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(X1_BAR, Y1_BAR, (barSize * 5) + X2_BAR, Y2_BAR));
-	playerDriver->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(X1_BAR + 1, Y1_BAR + 1, barSize * 5 + X2_BAR - 1, Y2_BAR - 1));
-	playerDriver->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(X1_BAR + 3, Y1_BAR + 3, barSize * 5 + X2_BAR - 3, Y2_BAR - 3));
-	playerDriver->draw2DRectangle(rect<s32>(X1_BAR + 3, Y1_BAR + 3, health * 5 + X2_BAR - 3, Y2_BAR - 3),
+	playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(x1Bar, y1Bar, (barSize * 5) + x2Bar, y2Bar));
+	playerDriver->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(x1Bar + 1, y1Bar + 1, barSize * 5 + x2Bar - 1, y2Bar - 1));
+	playerDriver->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(x1Bar + 3, y1Bar + 3, barSize * 5 + x2Bar - 3, y2Bar - 3));
+	playerDriver->draw2DRectangle(rect<s32>(x1Bar + 3, y1Bar + 3, health * 5 + x2Bar - 3, y2Bar - 3),
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0),
 		SColor(255, 255 - health * 2.55, health*2.55 - 150, 0));
-	
+
 }
 
 ISceneNode* Player::getPlayerObject() {

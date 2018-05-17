@@ -1,6 +1,6 @@
 #include <irrlicht.h>
-#include <iostream>
 #include "ParticleSystem.h"
+#include <iostream>
 
 using namespace irr;
 using namespace core;

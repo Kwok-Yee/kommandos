@@ -12,6 +12,6 @@ public:
 	void Update();
 	void CreateParticles(vector3df Position, path);
 
-	bool hit = false;
+	bool activePs = false;// activePs = Active ParticleSystem
 };
 

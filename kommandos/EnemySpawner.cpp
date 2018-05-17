@@ -22,7 +22,7 @@ Player* _player;
 Collision collision;
 
 array<vector3df> spawnPositions;
-u32 amountOfEnemies;
+u32 amountOfEnemies, Resize;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
@@ -38,11 +38,12 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	_player = Player;
 
 	amountOfEnemies = 6;
+	Resize = 2;
 	//setting spawnpositions in the corners.
-	spawnPositions.push_back(vector3df(-82, 0, -78));
-	spawnPositions.push_back(vector3df(78, 0, -78));
-	spawnPositions.push_back(vector3df(78, 0, 78));
-	spawnPositions.push_back(vector3df(-82, 0, 78));
+	spawnPositions.push_back(vector3df(-82, 0, -78) * Resize);
+	spawnPositions.push_back(vector3df(78, 0, -78) * Resize);
+	spawnPositions.push_back(vector3df(78, 0, 78) * Resize);
+	spawnPositions.push_back(vector3df(-82, 0, 78) * Resize);
 
 
 	// In order to do framerate independent movement, we have to know

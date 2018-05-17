@@ -15,12 +15,13 @@ using namespace io;
 using namespace std;
 
 Collision coll; // object for collision
+u32 Resize = 4;
 
 // Method for placing objects which uses multiple arrays to create objects and put these in random positions
 // The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
-	const int amountOfObjects = 10; // set amount of objects
+	const int amountOfObjects = 300; // set amount of objects
 	
 	//Get device for creating obstacles
 	ISceneManager* smgr = device->getSceneManager();
@@ -148,12 +149,12 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 
 	f32 scale = 0.9; // scale for not using the entire arena as a place where the grid spawns.
 
-	rows = (arenaSize.X * scale) / obstacleSize.X; // calculate the amount of rows.
-	columns = (arenaSize.Z * scale) / obstacleSize.Z;// calculate the amount of columns
+	rows = ((arenaSize.X * Resize) * scale) / obstacleSize.X; // calculate the amount of rows.
+	columns = ((arenaSize.Z * Resize) * scale) / obstacleSize.Z;// calculate the amount of columns
 
-	// start X and Z where the grid spawns based on the arena size scaled and divided by 2 and adjusted by the obstacle size
-	startX = (arenaSize.X * scale) / 2 - obstacleSize.X;
-	startZ = (arenaSize.Z * scale) / 2 - obstacleSize.Z;
+															 // start X and Z where the grid spawns based on the arena size scaled and divided by 2 and adjusted by the obstacle size
+	startX = ((arenaSize.X * Resize) * scale) / 2 - obstacleSize.X;
+	startZ = ((arenaSize.Z * Resize) * scale) / 2 - obstacleSize.Z;
 
 	grid = new vector3df[rows * columns]; // initialize grid based on rows times columns.
 }
@@ -165,27 +166,32 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	planeNode->setScale(vector3df(3.65f, 1, 4.0f));
 
 	//Walls with texture and position.
 	IMesh* longWallMeshRight = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
 	longWallNodeRight->setMaterialFlag(EMF_LIGHTING, true);
-	longWallNodeRight->setPosition(vector3df(0, 0, -75));
+	longWallNodeRight->setScale(vector3df(3.65f, 1, 1));
+	longWallNodeRight->setPosition(vector3df(0, 0, -85) * Resize);
 
 	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
 	longWallNodeLeft->setMaterialFlag(EMF_LIGHTING, true);
-	longWallNodeLeft->setPosition(vector3df(0, 0, 90));
+	longWallNodeLeft->setScale(vector3df(3.65f, 1, 1));
+	longWallNodeLeft->setPosition(vector3df(-0.1f, 0, 90) * Resize);
 
 	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
 	shortWallNodeUp->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0));
+	shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.24f));
+	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0) * Resize);
 
 	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
 	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeDown->setPosition(vector3df(-93.5, 0, 0));
+	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.24f));
+	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, 0) * Resize);
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);

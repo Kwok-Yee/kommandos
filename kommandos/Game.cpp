@@ -26,8 +26,8 @@ IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
 Player* player;
-ParticleSystem particles;
 Score score;
+Collision _collision;
 LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
@@ -41,6 +41,8 @@ u32 prevFrame;
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
+
+bool isGameOver;
 
 Game::Game()
 {
@@ -60,14 +62,23 @@ Game* Game::GetInstance() {
 	return instance;
 }
 
+bool Game::GetIsGameOver() {
+	return isGameOver;
+}
+
+bool Game::SetIsGameOver(bool state)
+{
+	return isGameOver = state;
+}
+
 void Game::Start() 
+
 {
 	// Create instances of classes
 	camera = new Camera(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
-	particles.SystemParticle(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();

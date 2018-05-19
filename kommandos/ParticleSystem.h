@@ -8,10 +8,9 @@ using namespace io;
 class ParticleSystem
 {
 public:
-	ParticleSystem(irr::IrrlichtDevice* device);
-	void Update();
+	void SystemParticle(irr::IrrlichtDevice* device);
 	void CreateParticles(vector3df Position, path);
 
-	bool activePs = false;// activePs = Active ParticleSystem
+	bool hit = false;
 };
 

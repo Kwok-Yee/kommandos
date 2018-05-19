@@ -21,9 +21,9 @@ void LevelGeneration::PlaceArenas(ISceneManager* smgr, int maxArenas)
 		arenas[i]->setPosition(nextPosition);
 	}
 
-	//PlaceDoors(smgr, arenas);
+	PlaceDoors(smgr, arenas);
 }
-/*
+
 void LevelGeneration::PlaceDoors(ISceneManager* smgr, core::array<ISceneNode*> arenas)
 {
 	array<ISceneNode*> doors;
@@ -38,7 +38,6 @@ void LevelGeneration::PlaceDoors(ISceneManager* smgr, core::array<ISceneNode*> a
 		if (i == arenas.size() - 1) doors[i]->setPosition(arenas[i]->getPosition() - doorPosition);
 	}
 }
-*/
 
 LevelGeneration::LevelGeneration()
 {

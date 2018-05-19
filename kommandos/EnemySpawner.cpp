@@ -22,29 +22,28 @@ Player* _player;
 Collision collision;
 
 array<vector3df> spawnPositions;
-u32 amountOfEnemies, Resize;
+u32 amountOfEnemies;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
-ParticleSystem* particle;
+ParticleSystem particle;
 const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
-	particle = new ParticleSystem(device);
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
 	_player = Player;
 
 	amountOfEnemies = 6;
-	Resize = 2;
 	//setting spawnpositions in the corners.
-	spawnPositions.push_back(vector3df(-82, 0, -78) * Resize);
-	spawnPositions.push_back(vector3df(78, 0, -78) * Resize);
-	spawnPositions.push_back(vector3df(78, 0, 78) * Resize);
-	spawnPositions.push_back(vector3df(-82, 0, 78) * Resize);
+	spawnPositions.push_back(vector3df(-82, 0, -78));
+	spawnPositions.push_back(vector3df(78, 0, -78));
+	spawnPositions.push_back(vector3df(78, 0, 78));
+	spawnPositions.push_back(vector3df(-82, 0, 78));
+
 
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
@@ -59,7 +58,7 @@ void EnemySpawner::UpdateEnemies()
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particle->Update();
+
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
@@ -73,7 +72,9 @@ void EnemySpawner::UpdateEnemies()
 
 		if (enemyHealthValues[i] <= 0)
 		{
-			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
+			//creates a particle
+			particle.hit = true;
+			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);
@@ -104,3 +105,4 @@ core::array<IMeshSceneNode*> EnemySpawner::getEnemies() {
 EnemyBehaviour* EnemySpawner::getEnemyBehaviour() {
 	return enemyBehaviour;
 }
+

@@ -18,10 +18,26 @@
 #include <irrlicht.h>
 #include "Game.h"
 
+#define CATCH_CONFIG_MAIN
+
+#include "catch.hpp"
+
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
+
+TEST_CASE("TEST 1") {
+	REQUIRE(1 + 1 == 4);
+}
+
+int sum(int a, int b) {
+	return a + b;
+}
+
+TEST_CASE("TEST 3") {
+	REQUIRE(sum(10, 20) == 3);
+}
 
 int main()
 {

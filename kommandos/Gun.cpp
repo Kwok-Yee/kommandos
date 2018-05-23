@@ -14,7 +14,6 @@ ISceneManager* gunSmgr;
 ISceneNodeAnimator* anim;
 vector3df endPos;
 vector3df toMousePosition;
-vector3df mousePosition;
 
 Gun::Gun(ISceneNode* gun, IrrlichtDevice* device)
 {
@@ -91,4 +90,9 @@ bool Gun::BulletShootAnim(irr::scene::ISceneNode * bullet)
 		return true;
 	}
 	return false;
+}
+
+vector3df Gun::GetMousePosition()
+{
+	return mousePosition;
 }

@@ -1,5 +1,5 @@
-#include <irrlicht.h>
 #pragma once
+#include <irrlicht.h>
 
 class Gun
 {
@@ -22,8 +22,11 @@ public:
 	bool CheckAnimEnd(irr::scene::ISceneNode* bullet);
 	bool BulletShootAnim(irr::scene::ISceneNode * bullet);
 	bool hasShot;
+
+	irr::core::vector3df GetMousePosition();
 	
 private:
 	irr::scene::ISceneNode* gunNode;
+	irr::core::vector3df mousePosition;
 };
 

@@ -6,16 +6,22 @@
 #include "Collision.h"
 #include "Gun.h"
 #include "Score.h"
+#include "BulletPool.h"
+#include "Bullet.h"
+#include "iostream"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
+using namespace std;
 
 const s32 x1Bar = 10, y1Bar = 10, x2Bar = 10, y2Bar = 25; //healthbar size
-#define MAXHEALTH 100; //bar size
+#define MAXHEALTH 100 //bar size
 // This is the movement speed in units per second.
-#define MOVEMENT_SPEED 50.f;
+#define MOVEMENT_SPEED 50.f
+// Correction for rotating the Y Axis on the player object
+#define Y_AXIS_CORRECTION -90.f
 
 IrrlichtDevice* playerIDevice;
 IVideoDriver* playerDriver;
@@ -35,6 +41,9 @@ f32 health;
 u32 time;
 vector3df currentPosition;
 
+BulletPool* pool;
+Bullet* one;
+
 Player::Player(IrrlichtDevice* device)
 {
 	playerIDevice = device;
@@ -53,7 +62,9 @@ void Player::Init()
 	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
+	{
 		playerObject->setPosition(vector3df(0, 0, 30));
+	}
 	currentPosition = playerObject->getPosition();
 
 	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
@@ -74,8 +85,16 @@ void Player::Init()
 		bullet->setVisible(false);
 		//gunNode->addChild(bullet);
 	}
+	pool = pool->GetInstance();
+	one = pool->GetResource();
+	one->SetBullet(bullet);
+	ISceneNode* holder = one->GetBullet();
+	holder = playerSmgr->addSphereSceneNode();
+	if (holder) {
+		holder->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		holder->setPosition(vector3df(0, 0, 10));
+	}
 }
-
 
 void Player::Move(InputReceiver inputReceiver)
 {
@@ -92,43 +111,46 @@ void Player::Move(InputReceiver inputReceiver)
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_W))
 	{
 		newPosition.X += frameDeltaTime * MOVEMENT_SPEED;
-		playerObject->setRotation(vector3df(0, -90, 0));
 	}
 
 	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_S))
 	{
 		newPosition.X -= frameDeltaTime * MOVEMENT_SPEED;
-		playerObject->setRotation(vector3df(0, 90, 0));
 	}
 
 	if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_A))
 	{
 		newPosition.Z += frameDeltaTime * MOVEMENT_SPEED;
-		playerObject->setRotation(vector3df(0, -180, 0));
 	}
 	else if (inputReceiver.GetIsKeyDown(irr::KEY_KEY_D))
 	{
 		newPosition.Z -= frameDeltaTime * MOVEMENT_SPEED;
-		playerObject->setRotation(vector3df(0, 0, 0));
 	}
 
 	playerObject->setPosition(newPosition);
 	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
-
-	// NOT WORKING PLAYER ROTATION
-	vector3df delta = inputReceiver.GetMousePosition() - playerObject->getPosition();
-	vector3df deltaNormalized = delta.normalize();
-	playerObject->setRotation(vector3df(0, atan2(deltaNormalized.Z, deltaNormalized.X) * 180 / PI, 0));
+	
+	// Rotate player towards mouse position
+	float angle = atan2(gun->GetMousePosition().Z - playerObject->getPosition().Z,
+		gun->GetMousePosition().X - playerObject->getPosition().X);
+	angle *= -(RADTODEG);
+	if (angle < 0)
+	{
+		angle = 360 - (-angle);
+	}
+	playerObject->setRotation(vector3df(0, Y_AXIS_CORRECTION + angle, 0));
 
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
+	gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
 	if (inputReceiver.GetIsLeftMouseButtonPressed()) {
-		gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
+		
 		gun->Shoot(bullet);
+		pool->ReturnResource(one);
 	}
 	if (gun->hasShot) {
 		for (int i = 0; i < enemies->getEnemies().size(); i++) {

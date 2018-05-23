@@ -57,7 +57,7 @@ void Camera::CameraInit()
 	{
 		camera->setPosition(cameraStartPosition);
 		camera->setTarget(cameraStartTarget);
-		newCameraPosition.Y = 180; 
+		newCameraPosition.Y = 80; 
 	}
 }
 //

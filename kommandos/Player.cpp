@@ -151,7 +151,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
 	if (health > 0 && vulnerable <= 0) 
 	{
-		vulnerable = 200;
+		vulnerable = 800;
 		health -= damage;
 
 		if (health <= 0)

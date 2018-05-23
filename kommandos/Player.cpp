@@ -131,14 +131,17 @@ void Player::Move(InputReceiver inputReceiver)
 	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
 	
-	// Rotate player towards mouse position
+	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(gun->GetMousePosition().Z - playerObject->getPosition().Z,
 		gun->GetMousePosition().X - playerObject->getPosition().X);
+	// Calculate the inverted angle
 	angle *= -(RADTODEG);
+	// Set the angle value to be between 0 and 360
 	if (angle < 0)
 	{
 		angle = 360 - (-angle);
 	}
+	// Rotate player towards mouse position using the Y Axis correction and the calculated angle
 	playerObject->setRotation(vector3df(0, Y_AXIS_CORRECTION + angle, 0));
 
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }

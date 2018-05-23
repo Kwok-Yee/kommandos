@@ -116,6 +116,11 @@ void Player::Move(InputReceiver inputReceiver)
 	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
 
+	// NOT WORKING PLAYER ROTATION
+	vector3df delta = inputReceiver.GetMousePosition() - playerObject->getPosition();
+	vector3df deltaNormalized = delta.normalize();
+	playerObject->setRotation(vector3df(0, atan2(deltaNormalized.Z, deltaNormalized.X) * 180 / PI, 0));
+
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }
 

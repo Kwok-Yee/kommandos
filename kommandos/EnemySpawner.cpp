@@ -76,6 +76,7 @@ void EnemySpawner::UpdateEnemies()
 			particle.hit = true;
 			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
+			collision.RemoveDynamicFromList(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);
 		}
@@ -95,6 +96,7 @@ void EnemySpawner::Spawn() {
 		u32 randomPos = rand() % 4;
 		enemyHealthValues.push_back(100);
 		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
+		collision.AddDynamicToList(enemies[i]);
 	}
 }
 

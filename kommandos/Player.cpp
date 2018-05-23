@@ -56,6 +56,8 @@ void Player::Init()
 		playerObject->setPosition(vector3df(0, 0, 30));
 	currentPosition = playerObject->getPosition();
 
+	playerCol.AddDynamicToList(playerObject);
+
 	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
 	gunNode = playerSmgr->addMeshSceneNode(gunModel);
 	bullet = playerSmgr->addSphereSceneNode();
@@ -113,8 +115,8 @@ void Player::Move(InputReceiver inputReceiver)
 	}
 
 	playerObject->setPosition(newPosition);
-	if (playerCol.CollidesWithStaticObjects(playerObject))
-		playerObject->setPosition(currentPosition);
+	/*if (playerCol.CollidesWithStaticObjects(playerObject))
+		playerObject->setPosition(currentPosition);*/
 
 	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
 }

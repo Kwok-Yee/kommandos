@@ -191,8 +191,8 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	CalculateGrid(planeNode);
 
 	//Add to collision for player and enemy
-	coll.AddStaticToList(longWallNodeRight);
-	coll.AddStaticToList(longWallNodeLeft);
-	coll.AddStaticToList(shortWallNodeUp);
-	coll.AddStaticToList(shortWallNodeDown);
+	coll.AddWallToList(longWallNodeLeft);
+	coll.AddWallToList(shortWallNodeUp);
+	coll.AddWallToList(longWallNodeRight);
+	coll.AddWallToList(shortWallNodeDown);
 }

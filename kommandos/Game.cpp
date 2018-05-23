@@ -32,6 +32,7 @@ LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
+Collision collisionManager;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -100,6 +101,7 @@ void Game::Update()
 	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
 	player->Shoot(inputReceiver, enemySpawner);
+	collisionManager.DiscreteCollisionUpdate();
 }
 
 void Game::Draw()

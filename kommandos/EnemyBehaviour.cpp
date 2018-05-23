@@ -67,8 +67,8 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 		enemyNode->setPosition(enemyPosition);
 
 		// Confirm static object collision
-		if (col.CollidesWithStaticObjects(enemyNode))
-			enemyNode->setPosition(oldPosition);
+		/*if (col.CollidesWithStaticObjects(enemyNode))
+			enemyNode->setPosition(oldPosition);*/
 		return false;
 	}
 	else

@@ -70,7 +70,8 @@ void Player::Init()
 		playerObject->addChild(gunNode);
 		gun = new Gun(gunNode, playerIDevice);
 	}
-	if (bullet) {
+	if (bullet)
+	{
 		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
 		gunNode->setMaterialFlag(EMF_LIGHTING, false);
 		bullet->setVisible(false);
@@ -118,44 +119,53 @@ void Player::Move(InputReceiver inputReceiver)
 	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
 
-	if (vulnerable > 0) { vulnerable -= frameDeltaTime; }
+	if (vulnerable > 0)
+	{
+		vulnerable -= frameDeltaTime;
+	}
 }
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
-	if (inputReceiver.GetIsLeftMouseButtonPressed()) {
+
+	if (inputReceiver.GetIsLeftMouseButtonPressed())
+	{
 		gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
 		gun->Shoot(bullet);
 	}
-	if (gun->hasShot) {
-		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
+	if (gun->hasShot)
+	{
+		for (int i = 0; i < enemies->getEnemies().size(); i++)
+		{
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) 
+			{
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				playerScores.DisplayScore(10);
 			}
 		}
 	}
+
 }
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerable <= 0) {
+	if (health > 0 && vulnerable <= 0) 
+	{
 		vulnerable = 200;
 		health -= damage;
 
 		if (health <= 0)
 		{
-			//gameOverState.ShowGameOver(playerIDevice);  temp removal
+			gameOverState.ShowGameOver(playerIDevice);
 			game->SetIsGameOver(true);
-			playerObject->remove();
-			//playerSmgr->addToDeletionQueue(playerObject);
 		}
 	}
 
 }
 void Player::DrawHealthBar()
 {
-	if (game->GetIsGameOver() != true) {
+	if (game->GetIsGameOver() != true) 
+	{
 		const s32 barSize = MAXHEALTH;
 		//draws multiple bars to make i look nice
 		playerDriver->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(x1Bar, y1Bar, (barSize * 5) + x2Bar, y2Bar));
@@ -169,6 +179,7 @@ void Player::DrawHealthBar()
 	}
 }
 
-ISceneNode* Player::getPlayerObject() {
+ISceneNode* Player::getPlayerObject() 
+{
 	return playerObject;
 }

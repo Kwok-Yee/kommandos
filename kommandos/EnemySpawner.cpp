@@ -86,20 +86,20 @@ void EnemySpawner::UpdateEnemies()
 		}
 		if (game_EnemySpawner->GetIsGameOver() == true)
 		{
-			printf("enemy should be dead");
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			enemies.erase(i);
-			//enemyHealthValues.erase(i);
 		}
 	}
 
-	if (enemies.size() <= 0 && currentWave < maxWaves) {
+	if (enemies.size() <= 0 && currentWave < maxWaves) 
+	{
 		Spawn();
 		currentWave++;
 	}
 }
 
-void EnemySpawner::Spawn() {
+void EnemySpawner::Spawn() 
+{
 
 	for (int i = 0; i < amountOfEnemies; i++)
 	{
@@ -110,10 +110,12 @@ void EnemySpawner::Spawn() {
 	}
 }
 
-core::array<IMeshSceneNode*> EnemySpawner::getEnemies() {
+core::array<IMeshSceneNode*> EnemySpawner::getEnemies() 
+{
 	return enemies;
 }
 
-EnemyBehaviour* EnemySpawner::getEnemyBehaviour() {
+EnemyBehaviour* EnemySpawner::getEnemyBehaviour() 
+{
 	return enemyBehaviour;
 }

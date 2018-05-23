@@ -16,7 +16,7 @@ using namespace core;
 using namespace scene;
 
 /// <summary>	The camera start position. </summary>
-const vector3df cameraStartPosition = vector3df(0, 450, 0);
+const vector3df cameraStartPosition = vector3df(0, 150, 0);
 /// <summary>	The camera start target. </summary>
 const vector3df cameraStartTarget = vector3df(0, 0, 0);
 
@@ -57,10 +57,10 @@ void Camera::CameraInit()
 	{
 		camera->setPosition(cameraStartPosition);
 		camera->setTarget(cameraStartTarget);
-		newCameraPosition.Y = 180; //80
+		newCameraPosition.Y = 180; 
 	}
 }
-
+//
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Update camera position relative to the player while game is playing and move camera to start pos when game is over </summary>
 ///-------------------------------------------------------------------------------------------------

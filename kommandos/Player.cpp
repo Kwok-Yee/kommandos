@@ -56,7 +56,7 @@ void Player::Init()
 		playerObject->setPosition(vector3df(0, 0, 30));
 	currentPosition = playerObject->getPosition();
 
-	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
+	IMesh* gunModel = playerSmgr->getMesh("../media/Models/weapons/LowPoly_Irrlicht.3ds");
 	gunNode = playerSmgr->addMeshSceneNode(gunModel);
 	bullet = playerSmgr->addSphereSceneNode();
 	if (gunNode)

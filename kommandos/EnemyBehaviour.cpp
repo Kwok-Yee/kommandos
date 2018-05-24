@@ -26,7 +26,7 @@ EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
 
 IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 {
-	enemyNode = enemyBehaviourSmgr->addMeshSceneNode(enemyBehaviourSmgr->getMesh("../media/ninja.b3d"));
+	enemyNode = enemyBehaviourSmgr->addMeshSceneNode(enemyBehaviourSmgr->getMesh("../media/Models/enemy/zombie.3ds"));
 	if (enemyNode)
 	{
 		enemyNode->setMaterialFlag(video::EMF_LIGHTING, false);
@@ -36,7 +36,7 @@ IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 
 		enemyNode->setScale(scaleVect);
 		enemyNode->setRotation(vector3df(0, -90, 0));
-		enemyNode->setMaterialTexture(0, enemyBehaviourDriver->getTexture("../media/Textures/nskinrd.jpg"));
+		enemyNode->setMaterialTexture(0, enemyBehaviourDriver->getTexture("../media/Textures/zombieskin.png"));
 		enemyNode->setPosition(startPosition);
 		return enemyNode;
 	}

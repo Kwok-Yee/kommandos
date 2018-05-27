@@ -11,7 +11,7 @@ private:
 	int rows;
 	int columns;
 	int startX, startZ;
-	bool unique;
+
 	irr::core::vector3df *grid;
 	irr::core::array<irr::scene::ISceneNode*> objectsToAvoid;
 

@@ -40,6 +40,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 		obstacles[i]->setPosition(usedPositions[i]);
 	}
 
+	//Check if obstacles behave to the rule of not spawning on-top of each other.
 	CheckObstaclePosition(obstacles, usedPositions, amountOfObjects);
 
 }
@@ -171,7 +172,8 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	coll.AddStaticToList(shortWallNodeDown);
 }
 
-void ObjectPlacementGeneration::CheckObstaclePosition(irr::scene::ISceneNode * obstacles[], irr::core::vector3df* usedPositions, int size)
+//Method for checking if an obstacle position is unique.
+void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
 {
 	for (int i = 0; i < size - 1; i++)
 	{

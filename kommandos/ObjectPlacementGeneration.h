@@ -19,6 +19,7 @@ private:
 	void CreateGrid();
 	void CalculateGrid(irr::scene::ISceneNode* arena);
 	void CreateDefaultObjects(irr::scene::ISceneManager* smgr);
+	void ChangeObstaclePosition(irr::scene::ISceneNode* obstacles[], irr::core::vector3df* usedPositions, int size);
 	int RandomPosition();
 	
 };

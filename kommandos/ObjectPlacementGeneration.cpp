@@ -40,41 +40,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 		obstacles[i]->setPosition(usedPositions[i]);
 	}
 
-	//First Rule: Objects can't spawn on-top of each other.
-	for (int i = 0; i < amountOfObjects - 1; i++)
-	{
-		for (int j = i + 1; j < amountOfObjects; j++)
-		{
-			//Check if there are any positions that are the same.
-			if (usedPositions[i] == usedPositions[j]) {
-				// if there are positions the same unqiue equals false.
-				unique = false;
-				//While unique is false get a new random position for that used position.
-				while (!unique)
-				{
-					usedPositions[i] = grid[RandomPosition()];
-					for (int k = 0; k < amountOfObjects; k++)
-					{
-						// if unique is still false change it again untill it is unique.
-						if (usedPositions[i] == usedPositions[k]) {
-							unique = false;
-							usedPositions[i] = grid[RandomPosition()];
-							printf("changed");
-						}
-						else
-						{
-							unique = true;
-							for (int l = 0; l < amountOfObjects; l++)
-							{
-								// set position to new unqiue position.
-								obstacles[l]->setPosition(usedPositions[l]);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	CheckObstaclePosition(obstacles, usedPositions, amountOfObjects);
 
 }
 
@@ -203,4 +169,25 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	coll.AddStaticToList(longWallNodeLeft);
 	coll.AddStaticToList(shortWallNodeUp);
 	coll.AddStaticToList(shortWallNodeDown);
+}
+
+void ObjectPlacementGeneration::CheckObstaclePosition(irr::scene::ISceneNode * obstacles[], irr::core::vector3df* usedPositions, int size)
+{
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			//Check if there are any positions that are the same.
+			if (usedPositions[i] == usedPositions[j]) {
+				// if there are positions the same unqiue equals false.
+				usedPositions[i] = grid[RandomPosition()];
+				CheckObstaclePosition(obstacles, usedPositions, size);
+			}
+			else
+			{
+				//set obstacle to unique position.
+				obstacles[i]->setPosition(usedPositions[i]);
+			}
+		}
+	}
 }

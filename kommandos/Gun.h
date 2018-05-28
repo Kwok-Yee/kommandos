@@ -7,7 +7,6 @@ public:
 	Gun(irr::scene::ISceneNode* gun, irr::IrrlichtDevice* device);
 	// bullet properties
 	void Shoot(irr::scene::ISceneNode* bullet);
-	void Bullet(irr::scene::ISceneNode * bullet);
 
 	void BulletAnimation(float animSpeed, irr::scene::ISceneNode * bullet);
 

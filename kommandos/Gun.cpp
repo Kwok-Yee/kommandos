@@ -32,7 +32,15 @@ void Gun::LaserLine(vector3df endPosition, IVideoDriver * driver, ICameraSceneNo
 
 void Gun::Shoot(ISceneNode* bullet)
 {
-	Bullet(bullet);
+	float animSpeed = 1000;
+	if (bullet) 
+	{
+		bullet->setVisible(true);
+		hasShot = true;
+		endPos = toMousePosition;
+
+		BulletAnimation(animSpeed, bullet);
+	}
 }
 
 bool Gun::CheckAnimEnd(ISceneNode* bullet) 
@@ -58,19 +66,6 @@ void Gun::RayFromScreen(irr::core::vector3df &endPosition, irr::scene::ICameraSc
 bool Gun::OnLineIntersect(irr::core::plane3df &plane, irr::core::line3df &ray)
 {
 	return plane.getIntersectionWithLine(ray.start, ray.getVector(), mousePosition);
-}
-
-// bullet checks
-void Gun::Bullet(irr::scene::ISceneNode * bullet)
-{
-	float animSpeed = 1000;
-	if (bullet) {
-		bullet->setVisible(true);
-		hasShot = true;
-		endPos = toMousePosition;
-
-		BulletAnimation(animSpeed, bullet);
-	}
 }
 
 void Gun::BulletAnimation(float animSpeed, irr::scene::ISceneNode * bullet)

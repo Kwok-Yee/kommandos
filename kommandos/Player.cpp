@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "InputReceiver.h"
+#include "ParticleSystem.h"
 #include "Gameoverstate.h"
 #include "Collision.h"
 #include "Gun.h"
@@ -12,6 +13,7 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
+const path muzzle = "../media/fire.bmp";
 const s32 x1Bar = 10, y1Bar = 10, x2Bar = 10, y2Bar = 25; //healthbar size
 #define MAXHEALTH 100; //bar size
 // This is the movement speed in units per second.
@@ -27,6 +29,7 @@ Collision playerCol;
 Gun* gun;
 Score playerScores;
 Game* game;
+ParticleSystem* particlePlayer;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -42,6 +45,7 @@ Player::Player(IrrlichtDevice* device)
 	playerSmgr = playerIDevice->getSceneManager();
 	game = game->GetInstance();
 	Init();
+	particlePlayer = new ParticleSystem(device);
 
 
 	// In order to do framerate independent movement, we have to know
@@ -82,6 +86,8 @@ void Player::Init()
 
 void Player::Move(InputReceiver inputReceiver)
 {
+	particlePlayer->Update(); //inefficient
+
 	// Work out a frame delta time.
 	const u32 now = playerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - time) / 1000.f; // Time in seconds
@@ -127,17 +133,25 @@ void Player::Move(InputReceiver inputReceiver)
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
-
+	
 	if (inputReceiver.GetIsLeftMouseButtonPressed())
 	{
+		if (particlePlayer->muzzleActive == false)
+		{
+			particlePlayer->CreateMuzzleFlash(playerObject->getPosition(), muzzle);
+
+		}
+		//particlePlayer->muzzleActive = true;
 		gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
 		gun->Shoot(bullet);
+
 	}
 	if (gun->hasShot)
 	{
+
 		for (int i = 0; i < enemies->getEnemies().size(); i++)
 		{
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) 
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
 			{
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				playerScores.DisplayScore(10);
@@ -149,7 +163,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerable <= 0) 
+	if (health > 0 && vulnerable <= 0)
 	{
 		vulnerable = 800;
 		health -= damage;
@@ -164,7 +178,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 }
 void Player::DrawHealthBar()
 {
-	if (game->GetIsGameOver() != true) 
+	if (game->GetIsGameOver() != true)
 	{
 		const s32 barSize = MAXHEALTH;
 		//draws multiple bars to make i look nice
@@ -179,7 +193,7 @@ void Player::DrawHealthBar()
 	}
 }
 
-ISceneNode* Player::getPlayerObject() 
+ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
 }

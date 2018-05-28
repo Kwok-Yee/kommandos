@@ -108,9 +108,12 @@ void Game::Update()
 	prevFrame = currentFrame;
 
 	camera->CameraUpdate();
-	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
+	if (isGameOver != true)
+	{
+	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
+	}
 }
 
 void Game::Draw()

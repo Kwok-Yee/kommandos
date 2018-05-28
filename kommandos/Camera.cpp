@@ -42,6 +42,7 @@ Camera::Camera(IrrlichtDevice* device)
 {
 	cameraIDevice = device;
 	cameraSmgr = cameraIDevice->getSceneManager();
+	game_ = game_->GetInstance();
 	CameraInit();
 }
 
@@ -56,18 +57,16 @@ void Camera::CameraInit()
 	{
 		camera->setPosition(cameraStartPosition);
 		camera->setTarget(cameraStartTarget);
-		newCameraPosition.Y = 80;
+		newCameraPosition.Y = 80; 
 	}
 }
-
+//
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Update camera position relative to the player while game is playing and move camera to start pos when game is over </summary>
 ///-------------------------------------------------------------------------------------------------
 
 void Camera::CameraUpdate()
 {
-	game_ = game_->GetInstance();
-
 	if (game_->GetIsGameOver() == true)
 	{
 		camera->setPosition(cameraStartPosition);

@@ -14,6 +14,6 @@ public:
 	//returns true if the dynamicObject collides with a static
 	bool CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject);
 	//passive update, resolves interpenetration with O(n2)
-	void DiscreteCollisionUpdate();
+	void DiscreteCollisionUpdate(irr::f32 frameDeltaTime);
 };
 

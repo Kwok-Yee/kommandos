@@ -2,7 +2,6 @@
 #include "irrlicht.h"
 
 using namespace irr;
-
 using namespace core;
 using namespace scene;
 using namespace video;
@@ -29,7 +28,10 @@ void Collision::RemoveDynamicFromList(ISceneNode* dynamicObject)
 {
 	for (int i = 0; i < dynamicList.size(); i++)
 		if (dynamicList[i] == dynamicObject)
+		{
 			dynamicList.erase(i);
+			break;
+		}
 }
 
 bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
@@ -40,43 +42,42 @@ bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
 	return false;
 }
 
-void Collision::DiscreteCollisionUpdate()
+void Collision::DiscreteCollisionUpdate(f32 frameDeltaTime)
 {
 	vector3df difference, seperation;
 	//for all dynamic objects
 	for (u32 i = 0; i < dynamicList.size(); i++)
 	{
 		vector3df colliderExtent = dynamicList[i]->getBoundingBox().getExtent() / 2;
-		vector3df collPos = dynamicList[i]->getPosition();
+		vector3df colliderPos = dynamicList[i]->getPosition();
 
 		//for all dynamic objects,...
-		if (!i == dynamicList.size()) {
-			for (u32 j = i++; j < dynamicList.size(); j++)
+		for (u32 j = i + 1; j < dynamicList.size(); j++)
+		{
+			if (j > dynamicList.size())
+				break;
+			//if one overlaps the other
+			if (SceneNodeWithSceneNode(dynamicList[i], dynamicList[j]))
 			{
-				//if one overlaps the other
-				if (SceneNodeWithSceneNode(dynamicList[i], dynamicList[j]))
-				{
-					//solve interpenetration
-					vector3df dynamicPos = dynamicList[j]->getPosition();
-					vector3df dynamicExtent = dynamicList[j]->getBoundingBox().getExtent() / 2;
-					vector3df center = collPos + dynamicPos / 2;
+				//solve interpenetration
+				vector3df dynamicPos = dynamicList[j]->getPosition();
+				vector3df dynamicExtent = dynamicList[j]->getBoundingBox().getExtent() / 2;
 
-					difference = center - collPos;
-					seperation = difference.normalize() * (colliderExtent.getLength() + dynamicExtent.getLength() / 2);
-					seperation.Y = 0;
-					//dissect Y, so it does not average all object heights
-					dynamicList[i]->setPosition(center + seperation);
+				vector3df center;
+				if (colliderPos == dynamicPos) //if they are on top of eachother
+					center = colliderPos + vector3df(1, 0, 1); //seperate at a random vector
+				else
+					center = (colliderPos + dynamicPos) / 2; //average of both positions
 
-					difference = center - dynamicList[j]->getPosition();
-					seperation = difference.normalize() * (colliderExtent.getLength() + dynamicExtent.getLength() / 2);
-					seperation.Y = 0;
-					//dissect Y, so it does not average all object heights
-					dynamicList[j]->setPosition(center + seperation);
-				}
+				difference = center - colliderPos;
+				seperation = difference.normalize() * (colliderExtent.getLength() + dynamicExtent.getLength())* frameDeltaTime;
+				seperation.Y = 0;
+				//dissect Y, so it does not average all object heights
+				dynamicList[j]->setPosition(dynamicPos + (seperation));
 			}
 		}
 
-		//...static objects...
+		//...AND static objects
 		for (u32 j = 0; j < staticList.size(); j++)
 		{
 			//if one overlaps the other
@@ -85,45 +86,38 @@ void Collision::DiscreteCollisionUpdate()
 				//solve interpenetration
 				vector3df staticExtent = staticList[j]->getBoundingBox().getExtent() / 2;
 				vector3df staticPos = staticList[j]->getPosition();
-				difference = collPos - staticPos;
-				seperation = difference.normalize() * (colliderExtent.getLength() + staticExtent.getLength());
+				difference = colliderPos - staticPos;
+				seperation = difference.normalize() * (colliderExtent.getLength() + staticExtent.getLength()) / 50;
 				seperation.Y = 0;
 
-				dynamicList[i]->setPosition(staticPos + seperation);
+				dynamicList[i]->setPosition(colliderPos + seperation);
 			}
 		}
-		//...AND walls
 		for (u32 j = 0; j < wallList.size(); j++)
 		{
+
 			//if one overlaps the other
 			if (SceneNodeWithSceneNode(dynamicList[i], wallList[j]))
 			{
-				//solve interpenetration
-				vector3df wallExtent = wallList[j]->getBoundingBox().getExtent() / 2;
-
-				switch (j)
-				{
-				case 0: //Left Wall, so move right
-					dynamicList[i]->setPosition(
-						vector3df(collPos.X, collPos.Y, wallList[j]->getPosition().Z - wallExtent.Z - colliderExtent.Z));
+				switch (j) {
+				case 0: // left wall
+					seperation = vector3df(0, 0, -100) * frameDeltaTime;
+					dynamicList[i]->setPosition(colliderPos + seperation);
 					break;
-				case 1: //Top Wall, so move down
-					dynamicList[i]->setPosition(
-						vector3df(wallList[j]->getPosition().X + wallExtent.X + colliderExtent.X, collPos.Y, collPos.Z));
+				case 1: // top wall
+					seperation = vector3df(-100, 0, 0) * frameDeltaTime;
+					dynamicList[i]->setPosition(colliderPos + seperation);
 					break;
-				case 2: //Right Wall, so move left
-					dynamicList[i]->setPosition(
-						vector3df(collPos.X, collPos.Y, wallList[j]->getPosition().Z + wallExtent.Z + colliderExtent.Z));
+				case 2: // right wall
+					seperation = vector3df(0, 0, 100) * frameDeltaTime;
+					dynamicList[i]->setPosition(colliderPos + seperation);
 					break;
-				case 3: //Bottom Wall, so move up
-					dynamicList[i]->setPosition(
-						vector3df(wallList[j]->getPosition().X - wallExtent.X - colliderExtent.X, collPos.Y, collPos.Z));
+				case 3: // bottom wall
+					seperation = vector3df(100, 0, 0) * frameDeltaTime;
+					dynamicList[i]->setPosition(colliderPos + seperation);
 					break;
 				}
 			}
 		}
 	}
-
-
-
 }

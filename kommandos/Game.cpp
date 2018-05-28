@@ -101,7 +101,7 @@ void Game::Update()
 	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
 	player->Shoot(inputReceiver, enemySpawner);
-	collisionManager.DiscreteCollisionUpdate();
+	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 }
 
 void Game::Draw()

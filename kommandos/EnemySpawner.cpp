@@ -52,7 +52,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	Spawn();
 }
 
-void EnemySpawner::UpdateEnemies() 
+void EnemySpawner::UpdateEnemies()
 {
 	// Work out a frame delta time.
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
@@ -62,9 +62,9 @@ void EnemySpawner::UpdateEnemies()
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i]))) 
+		if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 		{
-			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
+			if (!(_player->vulnerable > 0))
 			{
 				_player->TakeDamage(10, frameDeltaTime);
 			}
@@ -96,15 +96,10 @@ void EnemySpawner::Spawn() {
 		u32 randomPos = rand() % 4;
 		enemyHealthValues.push_back(100);
 		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
-		collision.AddDynamicToList(enemies[i]);
+		collision.AddDynamicToList(enemies.getLast());
 	}
 }
 
-core::array<IMeshSceneNode*> EnemySpawner::getEnemies() {
-	return enemies;
-}
-
-EnemyBehaviour* EnemySpawner::getEnemyBehaviour() {
-	return enemyBehaviour;
-}
+core::array<IMeshSceneNode*> EnemySpawner::getEnemies() { return enemies; }
+EnemyBehaviour* EnemySpawner::getEnemyBehaviour() { return enemyBehaviour; }
 

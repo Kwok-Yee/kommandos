@@ -43,6 +43,12 @@ vector3df currentPosition;
 
 BulletPool* pool;
 Bullet* one;
+ISceneNode* holder;
+
+// FRAMEDELTATIME
+u32 now;
+f32 frameDeltaTime;
+vector3df pos;
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -83,24 +89,25 @@ void Player::Init()
 		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
 		gunNode->setMaterialFlag(EMF_LIGHTING, false);
 		bullet->setVisible(false);
-		//gunNode->addChild(bullet);
 	}
 	pool = pool->GetInstance();
 	one = pool->GetResource();
 	one->SetBullet(bullet);
-	ISceneNode* holder = one->GetBullet();
+	holder = one->GetBullet();
 	holder = playerSmgr->addSphereSceneNode();
 	if (holder) {
+		holder->setVisible(false);
 		holder->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		holder->setPosition(vector3df(0, 0, 10));
+		holder->setPosition(playerObject->getPosition());
 	}
+	pos = playerObject->getPosition();
 }
 
 void Player::Move(InputReceiver inputReceiver)
 {
 	// Work out a frame delta time.
-	const u32 now = playerIDevice->getTimer()->getTime();
-	const f32 frameDeltaTime = (f32)(now - time) / 1000.f; // Time in seconds
+	now = playerIDevice->getTimer()->getTime();
+	frameDeltaTime = (f32)(now - time) / 1000.f; // Time in seconds
 	time = now;
 
 	vector3df newPosition = playerObject->getPosition();
@@ -150,14 +157,20 @@ void Player::Move(InputReceiver inputReceiver)
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
-	if (inputReceiver.GetIsLeftMouseButtonPressed()) {
-		
-		gun->Shoot(bullet);
-		pool->ReturnResource(one);
+	if (inputReceiver.GetIsLeftMouseButtonPressed()) 
+	{
+		pos += gun->GetMousePosition().normalize() * frameDeltaTime * 30.f;
+		pos.Y = 1.f;
+		gun->Shoot(holder);
 	}
-	if (gun->hasShot) {
-		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
+	holder->setPosition(pos);
+	if (gun->hasShot) 
+	{
+		//pool->ReturnResource(one);
+		for (int i = 0; i < enemies->getEnemies().size(); i++) 
+		{
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], holder)) 
+			{
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				playerScores.DisplayScore(10);
 			}

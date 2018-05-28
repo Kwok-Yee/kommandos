@@ -32,15 +32,20 @@ void Gun::LaserLine(vector3df endPosition, IVideoDriver * driver, ICameraSceneNo
 
 void Gun::Shoot(ISceneNode* bullet)
 {
-	float animSpeed = 1000;
-	if (bullet) 
+	if (bullet)
 	{
 		bullet->setVisible(true);
 		hasShot = true;
-		endPos = toMousePosition;
-
-		BulletAnimation(animSpeed, bullet);
 	}
+	//float animSpeed = 1000;
+	//if (bullet) 
+	//{
+	//	bullet->setVisible(true);
+	//	hasShot = true;
+	//	endPos = toMousePosition;
+
+	//	BulletAnimation(animSpeed, bullet);
+	//}
 }
 
 bool Gun::CheckAnimEnd(ISceneNode* bullet) 

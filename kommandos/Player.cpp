@@ -43,12 +43,13 @@ vector3df currentPosition;
 
 BulletPool* pool;
 Bullet* one;
-ISceneNode* holder;
 
 // FRAMEDELTATIME
 u32 now;
 f32 frameDeltaTime;
+vector3df delta;
 vector3df pos;
+bool hasShot = false;
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -92,13 +93,11 @@ void Player::Init()
 	}
 	pool = pool->GetInstance();
 	one = pool->GetResource();
-	one->SetBullet(bullet);
-	holder = one->GetBullet();
-	holder = playerSmgr->addSphereSceneNode();
-	if (holder) {
-		holder->setVisible(false);
-		holder->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		holder->setPosition(playerObject->getPosition());
+	one->SetBullet(playerSmgr->addSphereSceneNode());
+	if (one->GetBullet())
+	{
+		one->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		one->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
 	}
 	pos = playerObject->getPosition();
 }
@@ -159,22 +158,28 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
 	if (inputReceiver.GetIsLeftMouseButtonPressed()) 
 	{
-		pos += gun->GetMousePosition().normalize() * frameDeltaTime * 30.f;
-		pos.Y = 1.f;
-		gun->Shoot(holder);
+		//gun->Shoot(one->GetBullet());
+		hasShot = true;
+		one->GetBullet()->setVisible(true);
 	}
-	holder->setPosition(pos);
-	if (gun->hasShot) 
+	if (inputReceiver.GetIsKeyDown(KEY_F5)) playerIDevice->closeDevice();
+	if (inputReceiver.GetIsKeyDown(KEY_KEY_X))
 	{
-		//pool->ReturnResource(one);
+		hasShot = false;
+		pool->ReturnResource(one);
+	}
+	if (hasShot) 
+	{
+		one->UpdateBullet(gun->GetMousePosition(), playerObject->getPosition(), frameDeltaTime, 30.f);
 		for (int i = 0; i < enemies->getEnemies().size(); i++) 
 		{
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], holder)) 
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], one->GetBullet())) 
 			{
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				playerScores.DisplayScore(10);
 			}
 		}
+		//gun->hasShot = false;
 	}
 }
 

@@ -167,14 +167,12 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 	int resizeWall = 4;
 
-	const path floorDiffuse = "../media/grass/ground.jpg";
-	const path floorNormal = "../media/grass/ground_normal.jpg";
+	const path floorDiffuse = "../media/ground/ground_diffuse.jpg";
 
 	//Arena mesh with texture placed in the scene.
-	IMesh* planeMesh = smgr->getMesh("../media/test.3ds");
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaFloor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
 	planeNode->setMaterialTexture(0, driver->getTexture(floorDiffuse));
-	planeNode->setMaterialTexture(1, driver->getTexture(floorNormal));
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
 	planeNode->setPosition(vector3df(0, 0.1, 0));
 	planeNode->setScale(vector3df(3.65f, 1, 4.0f));
@@ -203,12 +201,6 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
 	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.24f));
 	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, 0) * resizeWall);
-
-	/*IMesh* testMesh = smgr->getMesh("../media/test.3ds");
-	IMeshSceneNode* testNode = smgr->addMeshSceneNode(testMesh);
-	testNode->setMaterialFlag(EMF_LIGHTING, true);
-	testNode->setPosition(vector3df(0, 1, 0));
-	testNode->setScale(vector3df(3.65f, 1, 4.0f));*/
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);

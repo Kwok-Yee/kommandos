@@ -47,8 +47,6 @@ Bullet* one;
 // FRAMEDELTATIME
 u32 now;
 f32 frameDeltaTime;
-vector3df delta;
-vector3df pos;
 bool hasShot = false;
 
 Player::Player(IrrlichtDevice* device)
@@ -98,8 +96,8 @@ void Player::Init()
 	{
 		one->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
 		one->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		one->GetBullet()->setVisible(false);
 	}
-	pos = playerObject->getPosition();
 }
 
 void Player::Move(InputReceiver inputReceiver)

@@ -11,7 +11,7 @@ ISceneManager* partcleSmgr;
 IParticleSystemSceneNode* ps;
 IVideoDriver* partcleDriver;
 
-const path text = "";
+const path text = "../media/blood.bmp";
 s32 setParticleTimer = 1;
 s32 time;
 
@@ -30,7 +30,7 @@ void ParticleSystem::SystemParticle(IrrlichtDevice* device)
 	//if enemy is hit then create bloodparticle
 	if (hit) 
 	{
-		CreateParticles(vector3df(20,20,20),text);
+		CreateParticles(vector3df(20,20,20));
 		setParticleTimer = 100;
 	}
 
@@ -42,7 +42,7 @@ void ParticleSystem::SystemParticle(IrrlichtDevice* device)
 	}
 }
 //creates particles on the object position if "hit" is true
-void ParticleSystem::CreateParticles(vector3df Position, path texture)
+void ParticleSystem::CreateParticles(vector3df Position)
 {
 		scene::IParticleEmitter * em = ps->createBoxEmitter(
 			core::aabbox3d<f32>(-7, 0, -7, 7, 1, 7), // emitter size
@@ -66,7 +66,7 @@ void ParticleSystem::CreateParticles(vector3df Position, path texture)
 		ps->setScale(core::vector3df(1, 1, 1));
 		ps->setMaterialFlag(video::EMF_LIGHTING, false);
 		ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
-		ps->setMaterialTexture(0, partcleDriver->getTexture(texture));
+		ps->setMaterialTexture(0, partcleDriver->getTexture(text));
 		ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 
 		//if timer is "0" then remove particle

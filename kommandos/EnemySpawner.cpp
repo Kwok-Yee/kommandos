@@ -3,55 +3,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "ParticleSystem.h"
+#include <list>
+#include <iostream>
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include "Collision.h"
+#include "Game.h"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
 
-const u32 maxWaves = 10;
-
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
-EnemyBehaviour* enemyBehaviour;
+Game* game;
 Player* _player;
 Collision collision;
 
-array<vector3df> spawnPositions;
-u32 amountOfEnemies;
-core::array<IMeshSceneNode*> enemies;
+core::array<vector3df> spawnPositions;
+std::list<EnemyBehaviour*> enemies;
 u32 currentWave = 0;
 
-ParticleSystem particle;
-const path bloodSplatter = "../media/blood.bmp";
 u32 prevFrameTime;
 u32 prevTime;
 
 
-EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* player)
+EnemySpawner::EnemySpawner()
 {
-	enemySpawnerIDevice = device;
+	game = game->GetInstance();
+	enemySpawnerIDevice = game->device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
-	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice, player);
-	_player = player;
-
-	amountOfEnemies = 6;
+	_player = game->player;
+	
 	//setting spawnpositions in the corners.
-	spawnPositions.push_back(vector3df(-82, 0, -78));
-	spawnPositions.push_back(vector3df(78, 0, -78));
-	spawnPositions.push_back(vector3df(78, 0, 78));
-	spawnPositions.push_back(vector3df(-82, 0, 78));
+	spawnPositions.push_back(vector3df(-79, 0, -79));
+	spawnPositions.push_back(vector3df(79, 0, -79));
+	spawnPositions.push_back(vector3df(79, 0, 79));
+	spawnPositions.push_back(vector3df(-79, 0, 79));
 
 
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
 	prevTime = prevFrameTime;
-
 
 	Spawn();
 }
@@ -63,56 +58,53 @@ void EnemySpawner::UpdateEnemies()
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
 
-	if (now >= prevTime + (frameDeltaTime * 1000)) {
-	enemyBehaviour->ResetPath();
+	/*if (now >= prevTime + (frameDeltaTime * 80000)) {
+		for each (EnemyBehaviour* enemy in enemies)
+		{
+			enemy->ResetPath(_player->getPlayerObject()->getPosition());
+		}
 	prevTime = now;
-	}
+	}*/
 
 
 	// Update all enemies
-	for (int i = 0; i < enemies.size(); i++)
+	for each (EnemyBehaviour* enemy in enemies)
 	{
-		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i]))) 
+		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemy->GetEnemyObject())))
 		{
-			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
-			{
-				_player->TakeDamage(10, frameDeltaTime);
-			}
-		}
-
-		if (enemyHealthValues[i] <= 0)
-		{
-			//creates a particle
-			particle.hit = true;
-			particle.CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
-			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-			enemies.erase(i);
-			enemyHealthValues.erase(i);
+			enemy->Update(frameDeltaTime);
 		}
 	}
-
-	if (enemies.size() <= 0 && currentWave < maxWaves) {
+	//after all enemies are dead spawn new enemies
+	if (enemies.size() <= 0 && currentWave < MAX_WAVES) {
 		Spawn();
 		currentWave++;
 	}
 }
 
-void EnemySpawner::Spawn() {
-
-	for (int i = 0; i < amountOfEnemies; i++)
+void EnemySpawner::Spawn() 
+{
+	for (int i = 0; i < AMOUNT_OF_ENEMIES; i++)
 	{
 		srand(time(NULL) * i);
-		u32 randomPos = rand() % 4;
-		enemyHealthValues.push_back(100);
-		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
+		u32 randomPos = rand() % 4; 
+		EnemyBehaviour* newEnemy = new EnemyBehaviour();
+		newEnemy->spawner = this;
+		//newEnemy->Init();
+		newEnemy->Spawn(spawnPositions[randomPos]);
+		//newEnemy->ResetPath(_player->getPlayerObject()->getPosition());
+		enemies.push_back(newEnemy);
 	}
 }
 
-core::array<IMeshSceneNode*> EnemySpawner::getEnemies() {
+void EnemySpawner::RemoveFromList(EnemyBehaviour* enemy) 
+{
+	enemies.remove(enemy);
+	enemySpawnerSmgr->addToDeletionQueue(enemy->GetEnemyObject());
+}
+
+std::list<EnemyBehaviour*> EnemySpawner::GetEnemies() {
 	return enemies;
 }
 
-EnemyBehaviour* EnemySpawner::getEnemyBehaviour() {
-	return enemyBehaviour;
-}
 

@@ -25,11 +25,8 @@ ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
-Player* player;
-ParticleSystem particles;
 Score score;
 LevelGeneration levelGeneration;
-ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 
@@ -41,6 +38,8 @@ u32 prevFrame;
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
+
+bool isGameOver;
 
 Game::Game()
 {
@@ -60,20 +59,28 @@ Game* Game::GetInstance() {
 	return instance;
 }
 
+bool Game::GetIsGameOver() {
+	return isGameOver;
+}
+
+bool Game::SetIsGameOver(bool state)
+{
+	return isGameOver = state;
+}
+
 void Game::Start() 
 {
+	//Places objects in the arena.
+	objectPlacementGen.PlaceObjects(device);
 	// Create instances of classes
 	camera = new Camera(device);
 	player = new Player(device);
-	enemySpawner = new EnemySpawner(device, player);
+	enemySpawner = new EnemySpawner();
 	score.Scoring(device);
-	particles.SystemParticle(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();
 	guienv = device->getGUIEnvironment();
-
-	objectPlacementGen.PlaceObjects(device);
 
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -95,9 +102,11 @@ void Game::Update()
 	const u32 currentFrame = device->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
-
+	//Update the Camera
 	camera->CameraUpdate();
+	//Update the Player movement
 	player->Move(inputReceiver);
+	//Update all enemies in the game
 	enemySpawner->UpdateEnemies();
 	player->Shoot(inputReceiver, enemySpawner);
 }
@@ -107,7 +116,9 @@ void Game::Draw()
 	driver->beginScene(true, true, SColor(255, 113, 113, 133));
 	smgr->drawAll();
 	guienv->drawAll();
+	//draws the healthbar of the player
 	player->DrawHealthBar();
+	//Draws score
 	score.Scoring(device);
 	driver->endScene();
 

@@ -20,20 +20,18 @@ Collision coll; // object for collision
 // The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
-	const int amountOfObjects = 10; // set amount of objects
-	
 	//Get device for creating obstacles
 	ISceneManager* smgr = device->getSceneManager();
-	ISceneNode* obstacles[amountOfObjects]; // set amount of obstacles for the array.
+	
 	vector3df* usedPositions; // Start of array for used positions.
 
 	CreateDefaultObjects(smgr); // Creates playing field objects.
 	CreateGrid(); //Creates the grid which is used for object spawning.
 	srand(time(0)); //get a seed for the random so every run is different.
 	
-	CreateObjects(device, obstacles, amountOfObjects); // Adds objects with texture to the obstacles array.
-	usedPositions = new vector3df[amountOfObjects]; // initialize the used position array with the amount of objects.
-	for (int i = 0; i < amountOfObjects; i++)
+	CreateObjects(device, obstacles, AMOUNT_OF_OBJECTS); // Adds objects with texture to the obstacles array.
+	usedPositions = new vector3df[AMOUNT_OF_OBJECTS]; // initialize the used position array with the amount of objects.
+	for (int i = 0; i < AMOUNT_OF_OBJECTS; i++)
 	{
 		//set used position to a random position on the grid and set the position of the obstacles to these positions.
 		usedPositions[i] = grid[RandomPosition()];
@@ -41,9 +39,9 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	}
 
 	//First Rule: Objects can't spawn on-top of each other.
-	for (int i = 0; i < amountOfObjects - 1; i++)
+	for (int i = 0; i < AMOUNT_OF_OBJECTS - 1; i++)
 	{
-		for (int j = i + 1; j < amountOfObjects; j++)
+		for (int j = i + 1; j < AMOUNT_OF_OBJECTS; j++)
 		{
 			//Check if there are any positions that are the same.
 			if (usedPositions[i] == usedPositions[j]) {
@@ -53,18 +51,17 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 				while (!unique)
 				{
 					usedPositions[i] = grid[RandomPosition()];
-					for (int k = 0; k < amountOfObjects; k++)
+					for (int k = 0; k < AMOUNT_OF_OBJECTS; k++)
 					{
 						// if unique is still false change it again untill it is unique.
 						if (usedPositions[i] == usedPositions[k]) {
 							unique = false;
 							usedPositions[i] = grid[RandomPosition()];
-							printf("changed");
 						}
 						else
 						{
 							unique = true;
-							for (int l = 0; l < amountOfObjects; l++)
+							for (int l = 0; l < AMOUNT_OF_OBJECTS; l++)
 							{
 								// set position to new unqiue position.
 								obstacles[l]->setPosition(usedPositions[l]);
@@ -191,8 +188,8 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	CalculateGrid(planeNode);
 
 	//Add to collision for player and enemy
-	coll.AddStaticToList(longWallNodeRight);
+	/*coll.AddStaticToList(longWallNodeRight);
 	coll.AddStaticToList(longWallNodeLeft);
 	coll.AddStaticToList(shortWallNodeUp);
-	coll.AddStaticToList(shortWallNodeDown);
+	coll.AddStaticToList(shortWallNodeDown);*/
 }

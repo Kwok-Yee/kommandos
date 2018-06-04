@@ -1,23 +1,34 @@
 #pragma once
 #include <irrlicht.h>
+#include "EnemySpawner.h"
 
 class Player;
 
+// Movement speed in units per second.
+#define ENEMY_MOVEMENT_SPEED 15.f
+#define MAX_HEALTH 100
+#define MAX_SEE_AHEAD 10
+#define MAX_AVOID_FORCE 1
 class EnemyBehaviour
 {
 public:
+	irr::f32 health;
+	EnemySpawner* spawner;
 	// Constructor
-	EnemyBehaviour(irr::IrrlichtDevice* device, Player* player);
+	EnemyBehaviour();
 	// Initializer
-	irr::scene::IMeshSceneNode* Spawn(irr::core::vector3df startPosition);
+	void Spawn(irr::core::vector3df startPosition);
 	// Container method for Move()
-	bool Update(irr::scene::IMeshSceneNode* enemyNode, irr::core::vector3df playerPosition, irr::f32 frameDeltaTime);
+	void Update(irr::f32 frameDeltaTime);
 	// Returns the health of the enemy that took damage
-	irr::f32 TakeDamage(irr::f32 damage, irr::f32 health);
+	void TakeDamage(irr::f32 damage);
 	//Resets the path so it can find a new one.
-	void ResetPath();
+	void ResetPath(irr::core::vector3df playerPosition);
+	irr::scene::ISceneNode* GetEnemyObject();
 
 private:
 	// Movement, melee detection, and collision is handled here
-	bool Move(irr::scene::IMeshSceneNode* enemyNode, irr::core::vector3df playerPosition, irr::f32 frameDeltaTime);
+	void Move(irr::f32 frameDeltaTime);
+	irr::scene::ISceneNode* enemyNode;
+	irr::core::vector3df enemyPosition;
 };

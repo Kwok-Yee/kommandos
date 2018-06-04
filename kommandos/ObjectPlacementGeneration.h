@@ -1,9 +1,12 @@
 #include <irrlicht.h>
 
 #pragma once
+
+#define AMOUNT_OF_OBJECTS 10 // set amount of objects
 class ObjectPlacementGeneration
 {
 public:
+	irr::scene::ISceneNode * obstacles[AMOUNT_OF_OBJECTS]; // set amount of obstacles for the array.
 	void PlaceObjects(irr::IrrlichtDevice* device);
 	void AddObjectsToAvoid(irr::scene::ISceneNode* object);
 

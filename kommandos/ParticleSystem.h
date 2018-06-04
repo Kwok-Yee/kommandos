@@ -9,7 +9,7 @@ class ParticleSystem
 {
 public:
 	void SystemParticle(irr::IrrlichtDevice* device);
-	void CreateParticles(vector3df Position, path);
+	void CreateParticles(vector3df Position);
 
 	bool hit = false;
 };

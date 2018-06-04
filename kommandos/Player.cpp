@@ -6,6 +6,7 @@
 #include "Collision.h"
 #include "Gun.h"
 #include "Score.h"
+#include "EnemyBehaviour.h"
 
 using namespace irr;
 using namespace core;
@@ -26,7 +27,6 @@ Collision playerCol;
 //int vulnerable = 0;
 Gun* gun;
 Score playerScores;
-Game* game;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
@@ -70,6 +70,7 @@ void Player::Init()
 	}
 	if (bullet) {
 		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
+		//bullet->setPosition(vector3df(999, 999, 999));
 		gunNode->setMaterialFlag(EMF_LIGHTING, false);
 		bullet->setVisible(false);
 		//gunNode->addChild(bullet);
@@ -126,9 +127,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		gun->Shoot(bullet);
 	}
 	if (gun->hasShot) {
-		for (int i = 0; i < enemies->getEnemies().size(); i++) {
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) {
-				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
+		for each (EnemyBehaviour* enemy in enemies->GetEnemies())
+		{
+			if (playerCol.SceneNodeWithSceneNode(enemy->GetEnemyObject(), bullet)) {
+				enemy->TakeDamage(100);
 				playerScores.DisplayScore(10);
 			}
 		}

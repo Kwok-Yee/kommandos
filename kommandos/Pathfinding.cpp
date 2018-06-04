@@ -2,15 +2,26 @@
 #include <irrlicht.h>
 #include <iostream>
 #include "GridNode.h"
+#include "Game.h"
+#include "ObjectPlacementGeneration.h"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace std;
 
+Game* pGame;
+ObjectPlacementGeneration objPlace;
+ISceneNode* obstaclesToAvoid[AMOUNT_OF_OBJECTS];
 Pathfinding::Pathfinding() {
 	initStartGoal = false;
 	foundGoal = false;
+	pGame = pGame->GetInstance();
+	objPlace = pGame->objectPlacementGen;
+	for (int i = 0; i < AMOUNT_OF_OBJECTS; i++)
+	{
+		obstaclesToAvoid[i] = pGame->objectPlacementGen.obstacles[i];
+	}
 }
 
 void Pathfinding::FindPath(vector3df currentPos, vector3df targetPos) 
@@ -39,7 +50,6 @@ void Pathfinding::FindPath(vector3df currentPos, vector3df targetPos)
 		GridCell start;
 		start.xCoord = currentPos.X;
 		start.yCoord = currentPos.Z;
-
 		GridCell goal;
 		goal.xCoord = targetPos.X;
 		goal.yCoord = targetPos.Z;
@@ -92,16 +102,20 @@ GridCell* Pathfinding::GetNextCell()
 
 void Pathfinding::PathOpen(s32 x, s32 y, f32 newCost, GridCell *parent) 
 {
-	if (x > 80 || x < -85 || y > 80 || y < -80)//boundries of the game 
+	if (x > 79 || x < -79 || y > 79 || y < -79)//boundries of the game 
 	{
 		return;
 	}
-	/*if (CELL_BLOCKED) 
+	for (int i = 0; i < AMOUNT_OF_OBJECTS; i++)
 	{
-		return;
-	}*/
+		if (x == objPlace.obstacles[i]->getPosition().X && y == objPlace.obstacles[i]->getPosition().Z)
+		{
+			//cout << "object avoided at: " << x << " , " << y << endl;
+			return;
+		}
+	}
 
-	s32 id = y * WORLD_SIZE + x;
+	s32 id = x * WORLD_SIZE + y;
 	for (int i = 0; i < visitedList.size(); i++)
 	{
 		if (id == visitedList[i]->id)
@@ -170,9 +184,9 @@ void Pathfinding::ContinuePath()
 		//left-topCell
 		PathOpen(currentCell->xCoord - 1, currentCell->yCoord + 1, currentCell->g + 1.414, currentCell);
 		//right-bottomCell
-		PathOpen(currentCell->xCoord + 1, currentCell->yCoord - 1, currentCell->g + 1, currentCell);
+		PathOpen(currentCell->xCoord + 1, currentCell->yCoord - 1, currentCell->g + 1.414, currentCell);
 		//left-bottomCell
-		PathOpen(currentCell->xCoord - 1, currentCell->yCoord - 1, currentCell->g = 1, currentCell);
+		PathOpen(currentCell->xCoord - 1, currentCell->yCoord - 1, currentCell->g + 1.414, currentCell);
 
 		for (int i = 0; i < openList.size(); i++)
 		{
@@ -200,7 +214,6 @@ vector3df Pathfinding::NextPathPos(scene::ISceneNode* enemy)
 			pathToGoal.erase(pathToGoal.size() - index);
 		}
 	}
-
 	return nextPos;
 }
 

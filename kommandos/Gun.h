@@ -8,7 +8,7 @@ public:
 	void Shoot(irr::scene::ISceneNode* bullet);
 	void LaserLine(irr::core::vector3df endPosition, irr::video::IVideoDriver* driver, irr::scene::ICameraSceneNode* camera);
 	bool CheckAnimEnd(irr::scene::ISceneNode* bullet);
-	bool hasShot;
+	bool hasShot = false;
 	
 private:
 	irr::scene::ISceneNode* gunNode;

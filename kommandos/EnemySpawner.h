@@ -1,18 +1,20 @@
 #pragma once
 #include <irrlicht.h>
-#include "EnemyBehaviour.h"
+#include <list>
 
+class EnemyBehaviour;
 class Player;
+
+#define MAX_WAVES 10
+#define AMOUNT_OF_ENEMIES 1
 class EnemySpawner
 {
 public:
-	EnemySpawner(irr::IrrlichtDevice* device, Player* player);
+	EnemySpawner();
 	void UpdateEnemies();
 	//retruns a list of all enemy objects in the scene
-	irr::core::array<irr::scene::IMeshSceneNode*> getEnemies();
-	//returns the enemyBehaviour script
-	EnemyBehaviour* getEnemyBehaviour();
-	irr::core::array<irr::f32> enemyHealthValues;
+	std::list<EnemyBehaviour*> GetEnemies();
+	void RemoveFromList(EnemyBehaviour* enemy);
 private:
 	//Spawns a enemy at a random spaw position
 	void Spawn();

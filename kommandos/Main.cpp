@@ -51,7 +51,9 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-/* test cases*/
+/* 
+* test cases
+*/
 
 TEST_CASE("TEST 1") {
 	REQUIRE(1 + 1 == 4);

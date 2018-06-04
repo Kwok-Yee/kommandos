@@ -202,34 +202,36 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.27f));
 	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, -0.2) * resizeWall);
 
+
+	// Below here the building models are defined and placed.
 	const path buildingDiffuse = "../media//BuildingsHighRise.jpg";
-	
-	IMesh* testMesh = smgr->getMesh("../media/test.3ds");
-	IMeshSceneNode* testNode = smgr->addMeshSceneNode(testMesh);
-	testNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
-	testNode->setMaterialFlag(EMF_LIGHTING, false);
-	testNode->setScale(vector3df(12.7, 10, 10));
-	testNode->setPosition(vector3df(0, -2, -423));
+	IMesh* buildingMesh = smgr->getMesh("../media/Building.3ds");
 
-	IMeshSceneNode* testNode2 = smgr->addMeshSceneNode(testMesh);
-	testNode2->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
-	testNode2->setMaterialFlag(EMF_LIGHTING, false);
-	testNode2->setScale(vector3df(14, 10, 10));
-	testNode2->setPosition(vector3df(393, -2, 0));
-	testNode2->setRotation(vector3df(0, 90, 0));
+	IMeshSceneNode* rightBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	rightBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	rightBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	rightBuildingNode->setScale(vector3df(12.7, 10, 10));
+	rightBuildingNode->setPosition(vector3df(0, -2, 424));
 
-	IMeshSceneNode* testNode3 = smgr->addMeshSceneNode(testMesh);
-	testNode3->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
-	testNode3->setMaterialFlag(EMF_LIGHTING, false);
-	testNode3->setScale(vector3df(12.7, 10, 10));
-	testNode3->setPosition(vector3df(0, -2, 424));
+	IMeshSceneNode* leftBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	leftBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	leftBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	leftBuildingNode->setScale(vector3df(12.7, 10, 10));
+	leftBuildingNode->setPosition(vector3df(0, -2, -423));
 
-	IMeshSceneNode* testNode4 = smgr->addMeshSceneNode(testMesh);
-	testNode4->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
-	testNode4->setMaterialFlag(EMF_LIGHTING, false);
-	testNode4->setScale(vector3df(14, 10, 10));
-	testNode4->setPosition(vector3df(-393, -2, 0));
-	testNode4->setRotation(vector3df(0, 90, 0));
+	IMeshSceneNode* topBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	topBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	topBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	topBuildingNode->setScale(vector3df(14, 10, 10));
+	topBuildingNode->setPosition(vector3df(393, -2, 0));
+	topBuildingNode->setRotation(vector3df(0, 90, 0));
+
+	IMeshSceneNode* bottomBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	bottomBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	bottomBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	bottomBuildingNode->setScale(vector3df(14, 10, 10));
+	bottomBuildingNode->setPosition(vector3df(-393, -2, 0));
+	bottomBuildingNode->setRotation(vector3df(0, 90, 0));
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);

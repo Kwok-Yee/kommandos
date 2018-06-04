@@ -24,7 +24,12 @@ void Bullet::SetBullet(ISceneNode* newBullet)
 	bullet = newBullet;
 }
 
-void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDeltaTime, float speed)
+float Bullet::GetDamage()
+{
+	return damage;
+}
+
+void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDeltaTime)
 {
 	if (setOnce) 
 	{
@@ -41,4 +46,6 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 Bullet::Bullet() 
 {
 	bullet = 0;
+	speed = 100.f;
+	damage = 25.f;
 }

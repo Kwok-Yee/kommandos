@@ -36,13 +36,14 @@ Game* game;
 
 ISceneNode* playerObject;
 IMeshSceneNode* gunNode;
-ISceneNode* bullet;
 f32 health;
 u32 time;
 vector3df currentPosition;
 
 BulletPool* pool;
-Bullet* one;
+core::array<Bullet*> activeBullets;
+s32 bulletTimer = 0;
+s32 bulletBaseTime = 200;
 
 // FRAMEDELTATIME
 u32 now;
@@ -74,7 +75,6 @@ void Player::Init()
 
 	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
 	gunNode = playerSmgr->addMeshSceneNode(gunModel);
-	bullet = playerSmgr->addSphereSceneNode();
 	if (gunNode)
 	{
 		gunNode->setPosition(vector3df(2, 5, -1));
@@ -84,20 +84,10 @@ void Player::Init()
 		playerObject->addChild(gunNode);
 		gun = new Gun(gunNode, playerIDevice);
 	}
-	if (bullet) {
-		bullet->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		bullet->setVisible(false);
-	}
+	// Get the instance of BulletPool
 	pool = pool->GetInstance();
-	one = pool->GetResource();
-	one->SetBullet(playerSmgr->addSphereSceneNode());
-	if (one->GetBullet())
-	{
-		one->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
-		one->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-		one->GetBullet()->setVisible(false);
-	}
+	// Set the timer to the bullet base time
+	bulletTimer = bulletBaseTime;
 }
 
 void Player::Move(InputReceiver inputReceiver)
@@ -134,7 +124,7 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 	if (playerCol.CollidesWithStaticObjects(playerObject))
 		playerObject->setPosition(currentPosition);
-	
+
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(gun->GetMousePosition().Z - playerObject->getPosition().Z,
 		gun->GetMousePosition().X - playerObject->getPosition().X);
@@ -154,27 +144,54 @@ void Player::Move(InputReceiver inputReceiver)
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	gun->LaserLine(inputReceiver.GetMousePosition(), playerDriver, playerSmgr->getActiveCamera());
-	if (inputReceiver.GetIsLeftMouseButtonPressed()) 
+	if (bulletTimer > 0) {
+		bulletTimer -= frameDeltaTime;
+	}
+	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
 		//gun->Shoot(one->GetBullet());
+		Bullet* bullet = pool->GetResource();
+		activeBullets.push_back(bullet);
+		bullet->SetBullet(playerSmgr->addSphereSceneNode());
+		if (bullet->GetBullet())
+		{
+			bullet->GetBullet()->setVisible(false);
+			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		}
 		hasShot = true;
-		one->GetBullet()->setVisible(true);
+		bullet->GetBullet()->setVisible(true);
+		bulletTimer = bulletBaseTime;
 	}
 	if (inputReceiver.GetIsKeyDown(KEY_F5)) playerIDevice->closeDevice();
-	if (inputReceiver.GetIsKeyDown(KEY_KEY_X))
+	if (hasShot)
 	{
-		hasShot = false;
-		pool->ReturnResource(one);
-	}
-	if (hasShot) 
-	{
-		one->UpdateBullet(gun->GetMousePosition(), playerObject->getPosition(), frameDeltaTime, 30.f);
-		for (int i = 0; i < enemies->getEnemies().size(); i++) 
+		if (!activeBullets.empty())
 		{
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], one->GetBullet())) 
+			for (int i = 0; i < activeBullets.size(); i++) 
 			{
-				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
-				playerScores.DisplayScore(10);
+				activeBullets[i]->UpdateBullet(gun->GetMousePosition(), playerObject->getPosition(), frameDeltaTime);
+				for (int j = 0; j < enemies->getEnemies().size(); j++)
+				{
+					if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[j], activeBullets[i]->GetBullet()))
+					{
+						enemies->enemyHealthValues[j] = enemies->getEnemyBehaviour()->TakeDamage(activeBullets[i]->GetDamage(), enemies->enemyHealthValues[j]);
+						playerScores.DisplayScore(10);
+						pool->ReturnResource(activeBullets[i]);
+						activeBullets.erase(i);
+						// return to correct the index
+						return;
+					}
+				}
+				if (activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet()))
+				{
+					pool->ReturnResource(activeBullets[i]);
+					activeBullets.erase(i);
+				}
+				if (activeBullets.empty())
+				{
+					hasShot = false;
+				}
 			}
 		}
 		//gun->hasShot = false;

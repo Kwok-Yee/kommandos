@@ -22,12 +22,10 @@ Bullet* BulletPool::GetResource()
 {
 	if (resources.empty())
 	{
-		cout << "Creating new." << endl;
 		return new Bullet();
 	}
 	else
 	{
-		cout << "Reusing existing." << endl;
 		Bullet* bullet = resources.front();
 		resources.pop_front();
 		return bullet;

@@ -27,7 +27,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	ISceneNode* obstacles[amountOfObjects]; // set amount of obstacles for the array.
 	vector3df* usedPositions; // Start of array for used positions.
 
-	CreateDefaultObjects(smgr); // Creates playing field objects.
+	CreateDefaultObjects(device); // Creates playing field objects.
 	CreateGrid(); //Creates the grid which is used for object spawning.
 	srand(time(0)); //get a seed for the random so every run is different.
 	
@@ -160,14 +160,21 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 }
 
 //Method for spawning default objects like walls and the arena floor.
-void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
+void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
+
+	ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
 
 	int resizeWall = 4;
 
+	const path floorDiffuse = "../media/ground/ground_diffuse.jpg";
+
 	//Arena mesh with texture placed in the scene.
-	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaFloor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	planeNode->setMaterialTexture(0, driver->getTexture(floorDiffuse));
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	planeNode->setPosition(vector3df(0, 0.1, 0));
 	planeNode->setScale(vector3df(3.65f, 1, 4.0f));
 
 	//Walls with texture and position.
@@ -175,7 +182,7 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
 	longWallNodeRight->setMaterialFlag(EMF_LIGHTING, true);
 	longWallNodeRight->setScale(vector3df(3.65f, 1, 1));
-	longWallNodeRight->setPosition(vector3df(0, 0, -85) * resizeWall);
+	longWallNodeRight->setPosition(vector3df(0, 0, -86) * resizeWall);
 
 	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
@@ -186,8 +193,8 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
 	shortWallNodeUp->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.24f));
-	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0) * resizeWall);
+	shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.27f));
+	shortWallNodeUp->setPosition(vector3df(78.5, 0, -0.2) * resizeWall);
 
 	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);

@@ -3,7 +3,6 @@
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
-#include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
 #include "Player.h"
@@ -28,7 +27,6 @@ InputReceiver inputReceiver;
 Player* player;
 Score score;
 Collision _collision;
-LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
@@ -93,9 +91,6 @@ void Game::Start()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	//Generates the level(arenas), adds 2 arena's
-	levelGeneration.PlaceArenas(smgr, 2);
-
 	//This is used to calculate frame delta time
 	prevFrame = device->getTimer()->getTime();
 }
@@ -108,9 +103,12 @@ void Game::Update()
 	prevFrame = currentFrame;
 
 	camera->CameraUpdate();
-	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
+	if (isGameOver != true)
+	{
+	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
+	}
 }
 
 void Game::Draw()

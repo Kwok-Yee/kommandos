@@ -18,7 +18,7 @@ private:
 	void CreateObjects(irr::IrrlichtDevice* device, irr::scene::ISceneNode* obstacles[] ,int size);
 	void CreateGrid();
 	void CalculateGrid(irr::scene::ISceneNode* arena);
-	void CreateDefaultObjects(irr::scene::ISceneManager* smgr);
+	void CreateDefaultObjects(irr::IrrlichtDevice* device);
 	void CheckObstaclePosition(irr::scene::ISceneNode* obstacles[], irr::core::vector3df* usedPositions, int size);
 	int RandomPosition();
 	

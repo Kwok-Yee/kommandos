@@ -1,8 +1,9 @@
 #include <irrlicht.h>
 #include "EnemyBehaviour.h"
-#include <math.h>
+#include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include "Collision.h"
 #include "Pathfinding.h"
 #include "Player.h"
@@ -14,6 +15,7 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
+using namespace std;
 
 const vector3df scaleVect = vector3df(2.0f, 2.0f, 2.0f);
 const f32 meleeRange = vector3df(4, 4, 4).getLength();
@@ -28,7 +30,7 @@ Game* eGame;
 ParticleSystem particle;
 const path bloodSplatter = "../media/blood.bmp";
 
-EnemyBehaviour::EnemyBehaviour() 
+EnemyBehaviour::EnemyBehaviour()
 {
 	eGame = eGame->GetInstance();
 	enemyBehaviourIDevice = eGame->device;
@@ -71,36 +73,47 @@ void EnemyBehaviour::Move(f32 frameDeltaTime)
 	//if (!pathfinding->foundGoal) return;
 	// Get position delta compared to player position
 	//vector3df enemyPosition = enemyNode->getPosition();
-	enemyBehaviourDriver->setTransform(video::ETS_WORLD, core::IdentityMatrix);
 	vector3df delta = ePlayer->getPlayerObject()->getPosition() - enemyPosition; //Save delta
 	vector3df enemyMovementNormalized = delta;
 	enemyMovementNormalized.normalize();
-	vector3df ahead = enemyPosition +( enemyMovementNormalized * MAX_SEE_AHEAD);
+	velocity = vector3df(0, 0, 0);
+	vector3df steering = enemyMovementNormalized;// -velocity;
+	ahead = enemyPosition +(steering * MAX_SEE_AHEAD);
+	ahead.Y = 1;
 	line3df aheadLine = line3df(enemyPosition, ahead);
-	vector3df avoidance;
-	ISceneNode* treath = col.GetCollidedObjectWithLine(aheadLine);
-	if (treath)
+	threat = col.findMostThreateningObstacle(ahead, enemyPosition);
+	avoid = false;
+	//ISceneNode* treath = col.GetCollidedObjectWithLine(aheadLine);
+	if (threat)
 	{
+		cout << "avoiding " << threat->getAbsolutePosition().X << " , " << threat->getAbsolutePosition().Z << endl;
 		//ISceneNode* treath = col.GetCollidedObjectWithLine(aheadLine);
-		avoidance = ahead - treath->getPosition();
-		avoidance.normalize();
+		avoidance = ahead - threat->getAbsolutePosition();//finds delta between the object and the ahead
+		avoidance.normalize();//normalize for the direction.
 		avoidance *= MAX_AVOID_FORCE;
-		enemyMovementNormalized += avoidance;
-		enemyMovementNormalized.normalize();
+		steering += avoidance;//add it to steering
+		steering.normalize();
+		avoid = true;
 	}
+
+	//velocity += steering;
+	//velocity.normalize();
 	if (pathfinding->foundGoal)
 	{
 		//enemyMovementNormalized = pathfinding->NextPathPos(enemyNode) - enemyPosition;
 		//enemyMovementNormalized.normalize();
 	}
 
-	enemyNode->setRotation(vector3df(0, atan2(enemyMovementNormalized.X, enemyMovementNormalized.Z) * 180 / PI, 0));
+	enemyNode->setRotation(vector3df(0, atan2(steering.X, steering.Z) * 180 / PI, 0));
 
 	// Change position based on delta and speed
 	if (delta.getLength() > meleeRange) // If farther than melee attack range,
 	{
 		// Move towards player
-		enemyPosition += enemyMovementNormalized * frameDeltaTime * ENEMY_MOVEMENT_SPEED;
+		/*if(threat)
+			enemyPosition += avoidance * frameDeltaTime * ENEMY_MOVEMENT_SPEED;
+		else*/
+		enemyPosition += steering * frameDeltaTime * ENEMY_MOVEMENT_SPEED;
 		vector3df oldPosition = enemyNode->getPosition();
 		enemyNode->setPosition(enemyPosition);
 
@@ -110,6 +123,15 @@ void EnemyBehaviour::Move(f32 frameDeltaTime)
 	}
 	else
 		ePlayer->TakeDamage(10, frameDeltaTime);
+}
+
+void EnemyBehaviour::Draw()
+{
+	enemyBehaviourDriver->draw3DLine(vector3df(0,0,0), ahead, SColor(255, 0, 0, 255));
+	if (avoid) 
+	{
+		enemyBehaviourDriver->draw3DLine(enemyPosition, avoidance, SColor(255, 255, 0, 0));
+	}
 }
 
 void EnemyBehaviour::ResetPath(vector3df playerPosition) {
@@ -124,16 +146,16 @@ ISceneNode* EnemyBehaviour::GetEnemyObject() {
 
 void EnemyBehaviour::TakeDamage(f32 damage)
 {
-	if (health > 0) 
+	if (health > 0)
 	{
 		health -= damage;
 	}
-	if(health <= 0)
+	if (health <= 0)
 	{
 		//creates a particle
 		particle.hit = true;
 		particle.CreateParticles(enemyNode->getPosition());// for creating blood on enemies
-		
+
 		spawner->RemoveFromList(this);
 	};
 }

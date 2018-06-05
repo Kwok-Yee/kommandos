@@ -12,6 +12,7 @@ class EnemySpawner
 public:
 	EnemySpawner();
 	void UpdateEnemies();
+	void Draw();
 	//retruns a list of all enemy objects in the scene
 	std::list<EnemyBehaviour*> GetEnemies();
 	void RemoveFromList(EnemyBehaviour* enemy);

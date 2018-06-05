@@ -82,6 +82,17 @@ void EnemySpawner::UpdateEnemies()
 	}
 }
 
+void EnemySpawner::Draw() 
+{// Work out a frame delta time.
+	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
+	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
+	prevFrameTime = now;
+	for each (EnemyBehaviour* enemy in enemies)
+	{
+		enemy->Draw();
+	}
+}
+
 void EnemySpawner::Spawn() 
 {
 	for (int i = 0; i < AMOUNT_OF_ENEMIES; i++)

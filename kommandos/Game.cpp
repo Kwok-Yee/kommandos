@@ -116,6 +116,7 @@ void Game::Draw()
 	driver->beginScene(true, true, SColor(255, 113, 113, 133));
 	smgr->drawAll();
 	guienv->drawAll();
+	enemySpawner->Draw();
 	//draws the healthbar of the player
 	player->DrawHealthBar();
 	//Draws score

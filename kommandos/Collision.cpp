@@ -27,7 +27,7 @@ void Collision::AddStaticToList(ISceneNode* staticObject)
 	staticList.push_back(staticObject);
 }
 
-bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
+bool Collision::CollidesWithStaticObjects(ISceneNode* dynamicObject)
 {
 	for (u32 i = 0; i < staticList.size(); i++)
 		if (SceneNodeWithSceneNode(dynamicObject, staticList[i]))
@@ -51,3 +51,33 @@ ISceneNode* Collision::GetCollidedObjectWithLine(line3df line)
 	}
 	return false;
 }
+
+//a^2 + b^2 = c^2
+f32 Collision::distance(vector3df a, vector3df b)
+{
+	return sqrt((a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y));
+}
+
+bool Collision::lineIntersectsCircle(vector3df ahead, vector3df ahead2, ISceneNode* obstacle)
+{
+	// the property "center" of the obstacle is a Vector3D.
+	return distance(obstacle->getAbsolutePosition(), ahead) <= 1.5 || distance(obstacle->getAbsolutePosition(), ahead2) <= 1.5;
+}
+
+//finds object which may have a collision with
+ISceneNode* Collision::findMostThreateningObstacle(vector3df ahead, vector3df position)
+{
+	ISceneNode* mostThreatening = NULL;
+
+	for (int i = 0; i < staticList.size(); i++) {
+		ISceneNode* obstacle = staticList[i];
+		bool collision = lineIntersectsCircle(ahead, ahead / 2, obstacle);
+
+		// "position" is the character's current position
+		if (collision && (mostThreatening == NULL || distance(position, obstacle->getAbsolutePosition()) < distance(position, mostThreatening->getAbsolutePosition()))) {
+			mostThreatening = obstacle;
+		}
+	}
+	return mostThreatening;
+}
+

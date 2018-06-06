@@ -72,7 +72,7 @@ bool Game::SetIsGameOver(bool state)
 	return isGameOver = state;
 }
 
-void Game::Start() 
+void Game::Start()
 
 {
 	// Create instances of classes
@@ -109,10 +109,11 @@ void Game::Update()
 	camera->CameraUpdate();
 	if (!isGameOver)
 	{
-	player->Move(inputReceiver);
-	player->Shoot(inputReceiver, enemySpawner);
-	enemySpawner->UpdateEnemies();
-	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
+		tutorial.Update(frameDeltaTime);
+		player->Move(inputReceiver);
+		player->Shoot(inputReceiver, enemySpawner);
+		enemySpawner->UpdateEnemies();
+		collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 	}
 }
 

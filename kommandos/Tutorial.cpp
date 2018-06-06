@@ -8,6 +8,8 @@ using namespace scene;
 using namespace video;
 
 IGUIEnvironment* tutorialGUI;
+IGUIImage* img;
+int timer = 180;
 
 void Tutorial::ShowTutorial(IrrlichtDevice* device)
 {
@@ -22,11 +24,25 @@ void Tutorial::ShowTutorial(IrrlichtDevice* device)
 	tutorialGUI = device->getGUIEnvironment();
 	ITexture* tutorialImage = driver->getTexture("../media/Textures/Tutorial_Resize.png");
 	tutorialGUI->addMessageBox(objectiveHeader, objectiveText);
-
-	tutorialGUI->addImage(tutorialImage, position2d<int>(250, 90));
+	img = tutorialGUI->addImage(tutorialImage, position2d<int>(250, 90));
 }
 
 void Tutorial::RemoveTutorial()
 {
-	
+	img->remove();
+	img = NULL;
+}
+
+void Tutorial::Update(irr::f32 frameDeltaTime)
+{
+	if (img) 
+	{
+		if (timer > 0) {
+			timer -= frameDeltaTime;
+		}
+		else
+		{
+			RemoveTutorial();
+		}
+	}
 }

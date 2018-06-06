@@ -104,13 +104,13 @@ void Game::Update()
 	prevFrame = currentFrame;
 
 	camera->CameraUpdate();
-	enemySpawner->UpdateEnemies();
-	if (isGameOver != true)
+	if (!isGameOver)
 	{
 	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
-	}
+	enemySpawner->UpdateEnemies();
 	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
+	}
 }
 
 void Game::Draw()

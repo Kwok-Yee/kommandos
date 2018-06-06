@@ -110,6 +110,9 @@
     <ClInclude Include="EnemyBehaviour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="catch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="generateDocumentationAndDeploy.sh" />

@@ -3,7 +3,6 @@
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
-#include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
 #include "Player.h"
@@ -26,9 +25,8 @@ IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
 Player* player;
-ParticleSystem particles;
 Score score;
-LevelGeneration levelGeneration;
+Collision _collision;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
@@ -42,6 +40,8 @@ u32 prevFrame;
 // Initialize the paths for the object its textures
 const path crateDiffuse = "../media/crate/crate_diffuse.png";
 const path crateNormal = "../media/crate/crate_normal.png";
+
+bool isGameOver;
 
 Game::Game()
 {
@@ -61,14 +61,23 @@ Game* Game::GetInstance() {
 	return instance;
 }
 
+bool Game::GetIsGameOver() {
+	return isGameOver;
+}
+
+bool Game::SetIsGameOver(bool state)
+{
+	return isGameOver = state;
+}
+
 void Game::Start() 
+
 {
 	// Create instances of classes
 	camera = new Camera(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
-	particles.SystemParticle(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();
@@ -98,9 +107,12 @@ void Game::Update()
 	prevFrame = currentFrame;
 
 	camera->CameraUpdate();
-	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
+	if (isGameOver != true)
+	{
+	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
+	}
 	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 }
 

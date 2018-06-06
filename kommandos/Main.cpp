@@ -17,6 +17,9 @@
 
 #include <irrlicht.h>
 #include "Game.h"
+#include <iostream>
+#include <irrKlang.h>
+
 
 #define CATCH_CONFIG_MAIN
 
@@ -24,11 +27,18 @@
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
+#pragma comment(lib, "IrrKlang.lib")
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
 
+using namespace irrklang;
+
 int main(int argc, char* argv[])
 {
+	ISoundEngine* engine = createIrrKlangDevice();
+
+	if (!engine)
+		return 0;
 
 	int result = Catch::Session().run(argc, argv);
 
@@ -42,10 +52,11 @@ int main(int argc, char* argv[])
 	}
 	while (game->device->run())
 	{
+		//engine->play2D("../media/blood_harvest.mp3", true);
 		game->Update();
 		game->Draw();
 	}
-
+	engine->drop();
 	game->device->drop();
 
 	return 0;

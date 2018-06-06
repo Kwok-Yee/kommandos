@@ -1,4 +1,5 @@
 #include <irrlicht.h>
+#include <irrKlang.h>
 #include "Game.h"
 #include "driverChoice.h"
 #include "Collision.h"
@@ -12,12 +13,14 @@
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
 
+
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
+using namespace irrklang;
 
 IVideoDriver* driver;
 ISceneManager* smgr;
@@ -73,6 +76,15 @@ bool Game::SetIsGameOver(bool state)
 void Game::Start() 
 
 {
+
+	// start irrKlang with default parameters
+	//ISoundEngine* engine = createIrrKlangDevice();
+	//if (!engine)
+		//return 0;
+	ISoundEngine* engine = createIrrKlangDevice();
+	
+	engine->play2D("../media/blood_harvest.mp3", true);
+
 	// Create instances of classes
 	camera = new Camera(device);
 	player = new Player(device);
@@ -111,6 +123,7 @@ void Game::Update()
 	player->Shoot(inputReceiver, enemySpawner);
 	}
 	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
+
 }
 
 void Game::Draw()

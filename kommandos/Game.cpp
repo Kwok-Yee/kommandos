@@ -10,6 +10,7 @@
 #include "Score.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
+#include "Tutorial.h"
 
 using namespace irr;
 using namespace core;
@@ -30,6 +31,7 @@ ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;
+Tutorial tutorial;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -69,7 +71,7 @@ bool Game::SetIsGameOver(bool state)
 	return isGameOver = state;
 }
 
-void Game::Start() 
+void Game::Start()
 
 {
 	// Create instances of classes
@@ -77,6 +79,7 @@ void Game::Start()
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
+	tutorial.ShowTutorial(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();
@@ -105,10 +108,11 @@ void Game::Update()
 	camera->CameraUpdate();
 	if (!isGameOver)
 	{
-	player->Move(inputReceiver);
-	player->Shoot(inputReceiver, enemySpawner);
-	enemySpawner->UpdateEnemies();
-	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
+		tutorial.Update(frameDeltaTime);
+		player->Move(inputReceiver);
+		player->Shoot(inputReceiver, enemySpawner);
+		enemySpawner->UpdateEnemies();
+		collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 	}
 }
 

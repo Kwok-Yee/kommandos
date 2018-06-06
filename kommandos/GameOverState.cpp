@@ -12,10 +12,6 @@ vector3df objPosition(-25, 0, 20);
 vector3df objRotate(0, -90, 0);
 const path gameOver = "../media/Models/arena/GameOverScreen.3ds";
 
-GameOverState::GameOverState()
-{
-}
-
 //creates a scenenode for showing a gameoverscreen
 void GameOverState::ShowGameOver(IrrlichtDevice* device)
 {

@@ -10,7 +10,7 @@ using namespace video;
 // Movement speed in units per second.
 #define ENEMY_MOVEMENT_SPEED 15.f;
 const vector3df scaleVect = vector3df(2.0f, 2.0f, 2.0f);
-const f32 meleeRange = vector3df(4, 4, 4).getLength();
+const f32 meleeRange = vector3df(6, 6, 6).getLength();
 
 IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBehaviourDriver;
@@ -67,8 +67,8 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 		enemyNode->setPosition(enemyPosition);
 
 		// Confirm static object collision
-		if (col.CollidesWithStaticObjects(enemyNode))
-			enemyNode->setPosition(oldPosition);
+		/*if (col.CollidesWithStaticObjects(enemyNode))
+			enemyNode->setPosition(oldPosition);*/
 		return false;
 	}
 	else

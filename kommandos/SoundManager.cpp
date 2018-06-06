@@ -7,8 +7,6 @@ using namespace irrklang;
 
 SoundManager::SoundManager()
 {
-	//mute = false;
-	//volume = 100;
 	engine = createIrrKlangDevice();
 }
 

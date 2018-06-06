@@ -9,6 +9,7 @@ using namespace video;
 using namespace std;
 using namespace io;
 
+//Singleton SoundManager that call upon the IrrKlang library
 class SoundManager
 {
 	public:

@@ -1,4 +1,3 @@
-
 #include "SoundManager.h"
 #include <iostream>
 #include <irrKlang.h>

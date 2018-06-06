@@ -1,14 +1,19 @@
 #include <irrlicht.h>
+#include <irrKlang.h>
 #include "EnemyBehaviour.h"
+#include "SoundManager.h"
 #include "Collision.h"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
+using namespace irrklang;
 
 // Movement speed in units per second.
 #define ENEMY_MOVEMENT_SPEED 15.f;
+#define ZOMBIE_TAKE_DAMAGE_SOUND "../media/Sounds/zombiehurt.mp3"
+//#define ZOMBIE_DEATH_SOUND "../media/Sounds/zombiedeath.mp3"
 const vector3df scaleVect = vector3df(2.0f, 2.0f, 2.0f);
 const f32 meleeRange = vector3df(6, 6, 6).getLength();
 
@@ -16,16 +21,19 @@ IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBehaviourDriver;
 ISceneManager* enemyBehaviourSmgr;
 IMeshSceneNode* enemyNode;
+SoundManager* soundManagerEnemy;
 Collision col;
 
 EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
 	enemyBehaviourIDevice = device;
 	enemyBehaviourDriver = enemyBehaviourIDevice->getVideoDriver();
 	enemyBehaviourSmgr = enemyBehaviourIDevice->getSceneManager();
+	soundManagerEnemy = soundManagerEnemy->GetInstance();
 }
 
 IMeshSceneNode* EnemyBehaviour::Spawn(vector3df startPosition)
 {
+
 	enemyNode = enemyBehaviourSmgr->addMeshSceneNode(enemyBehaviourSmgr->getMesh("../media/Models/enemy/zombie.3ds"));
 	if (enemyNode)
 	{
@@ -78,8 +86,13 @@ bool EnemyBehaviour::Move(IMeshSceneNode* enemyNode, vector3df playerPosition, f
 f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 {
 	if (health > 0) {
+		soundManagerEnemy->PlaySound(ZOMBIE_TAKE_DAMAGE_SOUND, false);
 		health -= damage;
 	}
-	else health = 0;
+	else
+	{
+		//soundManagerEnemy->PlaySound(ZOMBIE_DEATH_SOUND, false);
+		health = 0;
+	}
 	return health;
 }

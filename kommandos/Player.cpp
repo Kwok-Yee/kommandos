@@ -1,4 +1,5 @@
 #include <irrlicht.h>
+#include <irrKlang.h>
 #include "Player.h"
 #include "Game.h"
 #include "InputReceiver.h"
@@ -7,6 +8,7 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "SoundManager.h"
 #include "iostream"
 
 using namespace irr;
@@ -14,6 +16,7 @@ using namespace core;
 using namespace scene;
 using namespace video;
 using namespace std;
+using namespace irrklang;
 
 // Healthbar
 #define X1BAR 10
@@ -30,6 +33,8 @@ using namespace std;
 #define PLAYER_MODEL "../media/Models/player/PlayerModel.3ds"
 #define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
+#define GUN_SHOT_SOUND "../media/Sounds/gunshot02.mp3"
+#define TAKE_DAMAGE_SOUND "../media/Sounds/takedamage.mp3"
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
@@ -37,6 +42,7 @@ using namespace std;
 IrrlichtDevice* playerIDevice;
 IVideoDriver* playerDriver;
 ISceneManager* playerSmgr;
+SoundManager* soundManager;
 GameOverState gameOverState;
 Collision playerCol;
 
@@ -64,6 +70,7 @@ bool hasShot = false;
 
 Player::Player(IrrlichtDevice* device)
 {
+	soundManager = soundManager->GetInstance();
 	playerIDevice = device;
 	playerDriver = playerIDevice->getVideoDriver();
 	playerSmgr = playerIDevice->getSceneManager();
@@ -166,6 +173,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
+		soundManager->PlaySound(GUN_SHOT_SOUND, false);
 		Bullet* bullet = pool->GetResource();
 		activeBullets.push_back(bullet);
 		bullet->SetBullet(playerSmgr->addSphereSceneNode());
@@ -216,9 +224,10 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
 	if (health > 0 && vulnerableTimer <= 0)
 	{
+		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-
+		
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);

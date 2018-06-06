@@ -87,7 +87,7 @@ void Collision::DiscreteCollisionUpdate(f32 frameDeltaTime)
 				vector3df staticExtent = staticList[j]->getBoundingBox().getExtent() / 2;
 				vector3df staticPos = staticList[j]->getPosition();
 				difference = colliderPos - staticPos;
-				seperation = difference.normalize() * (colliderExtent.getLength() + staticExtent.getLength()) / 50;
+				seperation = difference.normalize() * (colliderExtent.getLength() + staticExtent.getLength()) / 20;
 				seperation.Y = 0;
 
 				dynamicList[i]->setPosition(colliderPos + seperation);

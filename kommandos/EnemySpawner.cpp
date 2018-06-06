@@ -28,7 +28,7 @@ u32 amountOfEnemies, resize;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
-ParticleSystem particle;
+ParticleSystem *particle;
 const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
 

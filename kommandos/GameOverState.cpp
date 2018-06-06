@@ -10,7 +10,7 @@ using namespace io;
 vector3df objScale (100,100,100);
 vector3df objPosition(-25, 0, 20);
 vector3df objRotate(0, -90, 0);
-const path gameOver = "../media/GameOverScreen.3ds";
+const path gameOver = "../media/Models/arena/GameOverScreen.3ds";
 
 //creates a scenenode for showing a gameoverscreen
 void GameOverState::ShowGameOver(IrrlichtDevice* device)
@@ -23,7 +23,7 @@ void GameOverState::ShowGameOver(IrrlichtDevice* device)
 
 		gameOverNode->setScale(objScale);
 		gameOverNode->setPosition(objPosition);
-		gameOverNode->setMaterialTexture(0, driver->getTexture("../media/Game_Over_Screen.jpg"));
+		gameOverNode->setMaterialTexture(0, driver->getTexture("../media/Textures/Game_Over_Screen.jpg"));
 		gameOverNode->setRotation(objRotate);
 		gameOverNode->setMaterialFlag(video::EMF_LIGHTING, false);
 	}

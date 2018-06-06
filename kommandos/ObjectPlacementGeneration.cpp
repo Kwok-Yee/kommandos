@@ -6,7 +6,6 @@
 #include <algorithm>
 #include "Collision.h"
 
-
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -20,7 +19,7 @@ Collision coll; // object for collision
 // The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
-	const int amountOfObjects = 300; // set amount of objects
+	const int amountOfObjects = 125; // set amount of objects
 	
 	//Get device for creating obstacles
 	ISceneManager* smgr = device->getSceneManager();
@@ -40,48 +39,9 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 		obstacles[i]->setPosition(usedPositions[i]);
 	}
 
-	//First Rule: Objects can't spawn on-top of each other.
-	for (int i = 0; i < amountOfObjects - 1; i++)
-	{
-		for (int j = i + 1; j < amountOfObjects; j++)
-		{
-			//Check if there are any positions that are the same.
-			if (usedPositions[i] == usedPositions[j]) {
-				// if there are positions the same unqiue equals false.
-				unique = false;
-				//While unique is false get a new random position for that used position.
-				while (!unique)
-				{
-					usedPositions[i] = grid[RandomPosition()];
-					for (int k = 0; k < amountOfObjects; k++)
-					{
-						// if unique is still false change it again untill it is unique.
-						if (usedPositions[i] == usedPositions[k]) {
-							unique = false;
-							usedPositions[i] = grid[RandomPosition()];
-							printf("changed");
-						}
-						else
-						{
-							unique = true;
-							for (int l = 0; l < amountOfObjects; l++)
-							{
-								// set position to new unqiue position.
-								obstacles[l]->setPosition(usedPositions[l]);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	//Check if obstacles behave to the rule of not spawning on-top of each other.
+	CheckObstaclePosition(obstacles, usedPositions, amountOfObjects);
 
-}
-
-//Method for keeping track of the positions of objects already in the arena.
-void ObjectPlacementGeneration::AddObjectsToAvoid(ISceneNode* object)
-{
-	objectsToAvoid.push_back(object);
 }
 
 //Method for creating the objects with the correct material.
@@ -242,4 +202,28 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	coll.AddWallToList(shortWallNodeUp);
 	coll.AddWallToList(longWallNodeRight);
 	coll.AddWallToList(shortWallNodeDown);
+}
+
+//Method for checking if an obstacle position is unique.
+void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
+{
+	vector3df defaultPosition = vector3df(266, 0, 266);
+
+	for (int i = 0; i < size - 1; i++)
+	{
+		for (int j = i + 1; j < size; j++)
+		{
+			//Check if there are any positions that are the same.
+			if (usedPositions[i] == usedPositions[j] || usedPositions[i] == defaultPosition) {
+				// if there are positions the same unqiue equals false.
+				usedPositions[i] = grid[RandomPosition()];
+				CheckObstaclePosition(obstacles, usedPositions, size);
+			}
+			else
+			{
+				//set obstacle to unique position.
+				obstacles[i]->setPosition(usedPositions[i]);
+			}
+		}
+	}
 }

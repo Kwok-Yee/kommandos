@@ -27,9 +27,9 @@ using namespace std;
 // Correction for rotating the Y Axis on the player object
 #define Y_AXIS_CORRECTION -90.f
 
-#define PLAYER_MODEL "../media/PlayerModel.3ds"
-#define GUN_MODEL "../media/LowPoly_Irrlicht.3ds"
-#define GUN_COLOR "../media/Gun_Color.png"
+#define PLAYER_MODEL "../media/Models/player/PlayerModel.3ds"
+#define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
+#define GUN_COLOR "../media/Textures/Gun_Color.png"
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
@@ -82,7 +82,7 @@ void Player::Init()
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
 	{
-		playerObject->setPosition(vector3df(0, 0, 30));
+		playerObject->setPosition(vector3df(266, 0, 266));
 	}
 	currentPosition = playerObject->getPosition();
 

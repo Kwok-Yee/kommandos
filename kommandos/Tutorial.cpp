@@ -9,7 +9,7 @@ using namespace video;
 
 IGUIEnvironment* tutorialGUI;
 IGUIImage* img;
-int timer = 180;
+int timer = 600;
 
 void Tutorial::ShowTutorial(IrrlichtDevice* device)
 {

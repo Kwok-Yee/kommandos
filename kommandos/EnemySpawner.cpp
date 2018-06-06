@@ -28,8 +28,8 @@ u32 amountOfEnemies, resize;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
-ParticleSystem* particle;
-const path bloodSplatter = "../media/blood.bmp";
+ParticleSystem *particle;
+const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
 
 
@@ -93,14 +93,14 @@ void EnemySpawner::UpdateEnemies()
 		}
 	}
 
-	if (enemies.size() <= 0 && currentWave < maxWaves) 
+	if (enemies.size() <= 0 && currentWave < maxWaves)
 	{
 		Spawn();
 		currentWave++;
 	}
 }
 
-void EnemySpawner::Spawn() 
+void EnemySpawner::Spawn()
 {
 
 	for (int i = 0; i < amountOfEnemies; i++)

@@ -12,7 +12,7 @@
 #include "Score.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
-
+#include "SoundManager.h"
 
 using namespace irr;
 using namespace core;
@@ -81,9 +81,9 @@ void Game::Start()
 	//ISoundEngine* engine = createIrrKlangDevice();
 	//if (!engine)
 		//return 0;
-	ISoundEngine* engine = createIrrKlangDevice();
+	SoundManager* engine = engine->GetInstance();
 	
-	engine->play2D("../media/blood_harvest.mp3", true);
+	engine->PlaySound("../media/blood_harvest.mp3", true);
 
 	// Create instances of classes
 	camera = new Camera(device);

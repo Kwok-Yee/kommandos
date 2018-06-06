@@ -6,7 +6,6 @@
 #include <algorithm>
 #include "Collision.h"
 
-
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -43,12 +42,6 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	//Check if obstacles behave to the rule of not spawning on-top of each other.
 	CheckObstaclePosition(obstacles, usedPositions, amountOfObjects);
 
-}
-
-//Method for keeping track of the positions of objects already in the arena.
-void ObjectPlacementGeneration::AddObjectsToAvoid(ISceneNode* object)
-{
-	objectsToAvoid.push_back(object);
 }
 
 //Method for creating the objects with the correct material.
@@ -214,12 +207,14 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 //Method for checking if an obstacle position is unique.
 void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
 {
+	vector3df defaultPosition = vector3df(266, 0, 266);
+
 	for (int i = 0; i < size - 1; i++)
 	{
 		for (int j = i + 1; j < size; j++)
 		{
 			//Check if there are any positions that are the same.
-			if (usedPositions[i] == usedPositions[j]) {
+			if (usedPositions[i] == usedPositions[j] || usedPositions[i] == defaultPosition) {
 				// if there are positions the same unqiue equals false.
 				usedPositions[i] = grid[RandomPosition()];
 				CheckObstaclePosition(obstacles, usedPositions, size);

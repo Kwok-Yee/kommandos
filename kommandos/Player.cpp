@@ -55,7 +55,7 @@ void Player::Init()
 	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
-		playerObject->setPosition(vector3df(0, 0, 30));
+		playerObject->setPosition(vector3df(266, 0, 266));
 	currentPosition = playerObject->getPosition();
 
 	playerCol.AddDynamicToList(playerObject);

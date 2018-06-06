@@ -72,7 +72,7 @@ void EnemySpawner::UpdateEnemies()
 	{
 		if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 		{
-			if (!(_player->vulnerable > 0))
+			if (!(_player->getVulnerableTimer() > 0))
 			{
 				_player->TakeDamage(10, frameDeltaTime);
 			}

@@ -14,16 +14,9 @@
 * https://github.com/Kwok-Yee/kommandos
 */
 
-
 #include <irrlicht.h>
-#include "Game.h"
-#include <iostream>
 #include <irrKlang.h>
-
-
-#define CATCH_CONFIG_MAIN
-
-#include "catch.hpp"
+#include "Game.h"
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
@@ -38,9 +31,7 @@ int main(int argc, char* argv[])
 	ISoundEngine* engine = createIrrKlangDevice();
 
 	if (!engine)
-		return 0;
-
-	int result = Catch::Session().run(argc, argv);
+	return 0;
 
 	// Get the game's singleton instance
 	Game* game = game->GetInstance();
@@ -52,7 +43,6 @@ int main(int argc, char* argv[])
 	}
 	while (game->device->run())
 	{
-		//engine->play2D("../media/blood_harvest.mp3", true);
 		game->Update();
 		game->Draw();
 	}
@@ -60,24 +50,4 @@ int main(int argc, char* argv[])
 	game->device->drop();
 
 	return 0;
-}
-
-/* 
-* test cases
-*/
-
-TEST_CASE("TEST 1") {
-	REQUIRE(1 + 1 == 4);
-}
-
-int sum(int a, int b) {
-	return a + b;
-}
-
-TEST_CASE("TEST 2") {
-	REQUIRE(1 + 1 == 2);
-}
-
-TEST_CASE("TEST 3") {
-	REQUIRE(sum(10, 20) == 3);
 }

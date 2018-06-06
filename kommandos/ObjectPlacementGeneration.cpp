@@ -20,7 +20,7 @@ Collision coll; // object for collision
 // The method uses one rule to stop objects from spawning on top of each other.
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
-	const int amountOfObjects = 300; // set amount of objects
+	const int amountOfObjects = 125; // set amount of objects
 	
 	//Get device for creating obstacles
 	ISceneManager* smgr = device->getSceneManager();

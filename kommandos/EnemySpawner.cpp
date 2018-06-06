@@ -51,6 +51,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	spawnPositions.push_back(vector3df(78, 0, 78) * resize);
 	spawnPositions.push_back(vector3df(-82, 0, 78) * resize);
 
+
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
@@ -69,9 +70,9 @@ void EnemySpawner::UpdateEnemies()
 	// Update all enemies
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		if (!(_player->vulnerable > 0 && collision.SceneNodeWithSceneNode(_player->getPlayerObject(), enemies[i])))
+		if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
 		{
-			if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
+			if (!(_player->vulnerable > 0))
 			{
 				_player->TakeDamage(10, frameDeltaTime);
 			}
@@ -81,6 +82,7 @@ void EnemySpawner::UpdateEnemies()
 		{
 			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
+			collision.RemoveDynamicFromList(enemies[i]);
 			enemies.erase(i);
 			enemyHealthValues.erase(i);
 		}
@@ -107,15 +109,9 @@ void EnemySpawner::Spawn()
 		u32 randomPos = rand() % 4;
 		enemyHealthValues.push_back(100);
 		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
+		collision.AddDynamicToList(enemies.getLast());
 	}
 }
 
-core::array<IMeshSceneNode*> EnemySpawner::getEnemies() 
-{
-	return enemies;
-}
-
-EnemyBehaviour* EnemySpawner::getEnemyBehaviour() 
-{
-	return enemyBehaviour;
-}
+core::array<IMeshSceneNode*> EnemySpawner::getEnemies() { return enemies; }
+EnemyBehaviour* EnemySpawner::getEnemyBehaviour() { return enemyBehaviour; }

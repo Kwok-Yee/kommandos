@@ -166,17 +166,49 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
 	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.24f));
-	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, 0) * resizeWall);
+	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.27f));
+	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, -0.2) * resizeWall);
+
+
+	// Below here the building models are defined and placed.
+	const path buildingDiffuse = "../media//BuildingsHighRise.jpg";
+	IMesh* buildingMesh = smgr->getMesh("../media/Building.3ds");
+	f32 yPos = -5.0f;
+
+	IMeshSceneNode* rightBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	rightBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	rightBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	rightBuildingNode->setScale(vector3df(12.7, 10, 10));
+	rightBuildingNode->setPosition(vector3df(0, yPos, 424));
+
+	IMeshSceneNode* leftBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	leftBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	leftBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	leftBuildingNode->setScale(vector3df(12.7, 10, 10));
+	leftBuildingNode->setPosition(vector3df(0, yPos, -423));
+
+	IMeshSceneNode* topBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	topBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	topBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	topBuildingNode->setScale(vector3df(14, 10, 10));
+	topBuildingNode->setPosition(vector3df(393, yPos, 0));
+	topBuildingNode->setRotation(vector3df(0, 90, 0));
+
+	IMeshSceneNode* bottomBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	bottomBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	bottomBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	bottomBuildingNode->setScale(vector3df(14, 10, 10));
+	bottomBuildingNode->setPosition(vector3df(-393, yPos, 0));
+	bottomBuildingNode->setRotation(vector3df(0, 90, 0));
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);
 
 	//Add to collision for player and enemy
-	coll.AddStaticToList(longWallNodeRight);
-	coll.AddStaticToList(longWallNodeLeft);
-	coll.AddStaticToList(shortWallNodeUp);
-	coll.AddStaticToList(shortWallNodeDown);
+	coll.AddWallToList(longWallNodeLeft);
+	coll.AddWallToList(shortWallNodeUp);
+	coll.AddWallToList(longWallNodeRight);
+	coll.AddWallToList(shortWallNodeDown);
 }
 
 //Method for checking if an obstacle position is unique.

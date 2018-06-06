@@ -110,16 +110,14 @@ void Game::Update()
 	const u32 currentFrame = device->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
-
 	camera->CameraUpdate();
-	enemySpawner->UpdateEnemies();
-	if (isGameOver != true)
+	if (!isGameOver)
 	{
 	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
-	}
+	enemySpawner->UpdateEnemies();
 	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
-
+	}
 }
 
 void Game::Draw()

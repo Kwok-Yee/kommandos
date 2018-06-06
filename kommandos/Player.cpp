@@ -52,15 +52,15 @@ Player::Player(IrrlichtDevice* device)
 void Player::Init()
 {
 	health = MAXHEALTH;
-	IMesh* playerMesh = playerSmgr->getMesh("../media/PlayerModel.3ds");
+	IMesh* playerMesh = playerSmgr->getMesh("../media/Models/player/PlayerModel.3ds");
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
 	if (playerObject)
-		playerObject->setPosition(vector3df(0, 0, 30));
+		playerObject->setPosition(vector3df(266, 0, 266));
 	currentPosition = playerObject->getPosition();
 
-	playerCol.AddDynamicToList(playerObject);
 
-	IMesh* gunModel = playerSmgr->getMesh("../media/LowPoly_Irrlicht.3ds");
+	IMesh* gunModel = playerSmgr->getMesh("../media/Models/weapons/LowPoly_Irrlicht.3ds");
+	playerCol.AddDynamicToList(playerObject);
 	gunNode = playerSmgr->addMeshSceneNode(gunModel);
 	bullet = playerSmgr->addSphereSceneNode();
 	if (gunNode)
@@ -68,7 +68,7 @@ void Player::Init()
 		gunNode->setPosition(vector3df(2, 5, -1));
 		gunNode->setScale(vector3df(0.125f, 0.125f, 0.125f));
 		gunNode->setMaterialFlag(EMF_LIGHTING, false);
-		gunNode->setMaterialTexture(0, playerDriver->getTexture("../media/Gun_Color.png"));
+		gunNode->setMaterialTexture(0, playerDriver->getTexture("../media/Textures/Gun_Color.png"));
 		playerObject->addChild(gunNode);
 		gun = new Gun(gunNode, playerIDevice);
 	}
@@ -139,7 +139,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		for (int i = 0; i < enemies->getEnemies().size(); i++)
 		{
-			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet)) 
+			if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[i], bullet))
 			{
 				enemies->enemyHealthValues[i] = enemies->getEnemyBehaviour()->TakeDamage(10, enemies->enemyHealthValues[i]);
 				playerScores.DisplayScore(10);
@@ -151,7 +151,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerable <= 0) 
+	if (health > 0 && vulnerable <= 0)
 	{
 		vulnerable = 800;
 		health -= damage;
@@ -166,7 +166,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 }
 void Player::DrawHealthBar()
 {
-	if (game->GetIsGameOver() != true) 
+	if (game->GetIsGameOver() != true)
 	{
 		const s32 barSize = MAXHEALTH;
 		//draws multiple bars to make i look nice
@@ -181,7 +181,7 @@ void Player::DrawHealthBar()
 	}
 }
 
-ISceneNode* Player::getPlayerObject() 
+ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
 }

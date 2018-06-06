@@ -27,7 +27,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	ISceneNode* obstacles[amountOfObjects]; // set amount of obstacles for the array.
 	vector3df* usedPositions; // Start of array for used positions.
 
-	CreateDefaultObjects(smgr); // Creates playing field objects.
+	CreateDefaultObjects(device); // Creates playing field objects.
 	CreateGrid(); //Creates the grid which is used for object spawning.
 	srand(time(0)); //get a seed for the random so every run is different.
 	
@@ -160,14 +160,21 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 }
 
 //Method for spawning default objects like walls and the arena floor.
-void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
+void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
+
+	ISceneManager* smgr = device->getSceneManager();
+	IVideoDriver* driver = device->getVideoDriver();
 
 	int resizeWall = 4;
 
+	const path floorDiffuse = "../media/ground/ground_diffuse.jpg";
+
 	//Arena mesh with texture placed in the scene.
-	IMesh* planeMesh = smgr->getMesh("../media/ArenaColor.3ds");
+	IMesh* planeMesh = smgr->getMesh("../media/ArenaFloor.3ds");
 	IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+	planeNode->setMaterialTexture(0, driver->getTexture(floorDiffuse));
 	planeNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	planeNode->setPosition(vector3df(0, 0.1, 0));
 	planeNode->setScale(vector3df(3.65f, 1, 4.0f));
 
 	//Walls with texture and position.
@@ -175,7 +182,7 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
 	longWallNodeRight->setMaterialFlag(EMF_LIGHTING, true);
 	longWallNodeRight->setScale(vector3df(3.65f, 1, 1));
-	longWallNodeRight->setPosition(vector3df(0, 0, -85) * resizeWall);
+	longWallNodeRight->setPosition(vector3df(0, 0, -86) * resizeWall);
 
 	IMesh* longWallMeshLeft = smgr->getMesh("../media/LongWall.3ds");
 	IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
@@ -186,21 +193,53 @@ void ObjectPlacementGeneration::CreateDefaultObjects(ISceneManager* smgr) {
 	IMesh* shortWallMeshUp = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
 	shortWallNodeUp->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.24f));
-	shortWallNodeUp->setPosition(vector3df(78.5, 0, 0) * resizeWall);
+	shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.27f));
+	shortWallNodeUp->setPosition(vector3df(78.5, 0, -0.2) * resizeWall);
 
 	IMesh* shortWallMeshDown = smgr->getMesh("../media/ShortWall.3ds");
 	IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
 	shortWallNodeDown->setMaterialFlag(EMF_LIGHTING, true);
-	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.24f));
-	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, 0) * resizeWall);
+	shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.27f));
+	shortWallNodeDown->setPosition(vector3df(-82.27f, 0, -0.2) * resizeWall);
+
+
+	// Below here the building models are defined and placed.
+	const path buildingDiffuse = "../media//BuildingsHighRise.jpg";
+	IMesh* buildingMesh = smgr->getMesh("../media/Building.3ds");
+	f32 yPos = -5.0f;
+
+	IMeshSceneNode* rightBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	rightBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	rightBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	rightBuildingNode->setScale(vector3df(12.7, 10, 10));
+	rightBuildingNode->setPosition(vector3df(0, yPos, 424));
+
+	IMeshSceneNode* leftBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	leftBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	leftBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	leftBuildingNode->setScale(vector3df(12.7, 10, 10));
+	leftBuildingNode->setPosition(vector3df(0, yPos, -423));
+
+	IMeshSceneNode* topBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	topBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	topBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	topBuildingNode->setScale(vector3df(14, 10, 10));
+	topBuildingNode->setPosition(vector3df(393, yPos, 0));
+	topBuildingNode->setRotation(vector3df(0, 90, 0));
+
+	IMeshSceneNode* bottomBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+	bottomBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+	bottomBuildingNode->setMaterialFlag(EMF_LIGHTING, false);
+	bottomBuildingNode->setScale(vector3df(14, 10, 10));
+	bottomBuildingNode->setPosition(vector3df(-393, yPos, 0));
+	bottomBuildingNode->setRotation(vector3df(0, 90, 0));
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);
 
 	//Add to collision for player and enemy
-	coll.AddStaticToList(longWallNodeRight);
-	coll.AddStaticToList(longWallNodeLeft);
-	coll.AddStaticToList(shortWallNodeUp);
-	coll.AddStaticToList(shortWallNodeDown);
+	coll.AddWallToList(longWallNodeLeft);
+	coll.AddWallToList(shortWallNodeUp);
+	coll.AddWallToList(longWallNodeRight);
+	coll.AddWallToList(shortWallNodeDown);
 }

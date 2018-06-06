@@ -14,7 +14,6 @@
 * https://github.com/Kwok-Yee/kommandos
 */
 
-
 #include <irrlicht.h>
 #include "Game.h"
 
@@ -23,7 +22,7 @@
 #pragma comment(linker, "/subsystem:console /ENTRY:mainCRTStartup")
 #endif
 
-int main()
+int main(int argc, char* argv[])
 {
 	// Get the game's singleton instance
 	Game* game = game->GetInstance();

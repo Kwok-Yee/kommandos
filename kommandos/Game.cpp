@@ -3,12 +3,10 @@
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
-#include "LevelGeneration.h"
 #include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
 #include "Player.h"
 #include "ParticleSystem.h"
-#include "Gun.h"
 #include "Score.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
@@ -28,10 +26,10 @@ InputReceiver inputReceiver;
 Player* player;
 Score score;
 Collision _collision;
-LevelGeneration levelGeneration;
 ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
+Collision collisionManager;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -48,7 +46,7 @@ Game::Game()
 {
 	// Create device
 	device = createDevice(EDT_DIRECT3D9,
-		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+		dimension2d<u32>(800, 600), 16, false, false, true, &inputReceiver);
 }
 
 // Set instance to 0 (NULL)
@@ -93,9 +91,6 @@ void Game::Start()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	//Generates the level(arenas), adds 2 arena's
-	levelGeneration.PlaceArenas(smgr, 2);
-
 	//This is used to calculate frame delta time
 	prevFrame = device->getTimer()->getTime();
 }
@@ -108,9 +103,13 @@ void Game::Update()
 	prevFrame = currentFrame;
 
 	camera->CameraUpdate();
-	player->Move(inputReceiver);
 	enemySpawner->UpdateEnemies();
+	if (isGameOver != true)
+	{
+	player->Move(inputReceiver);
 	player->Shoot(inputReceiver, enemySpawner);
+	}
+	collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 }
 
 void Game::Draw()

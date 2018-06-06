@@ -7,7 +7,6 @@
 #include "EnemySpawner.h"
 #include "Player.h"
 #include "ParticleSystem.h"
-#include "Gun.h"
 #include "Score.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
@@ -49,7 +48,7 @@ Game::Game()
 {
 	// Create device
 	device = createDevice(EDT_DIRECT3D9,
-		dimension2d<u32>(800, 600), 16, false, false, false, &inputReceiver);
+		dimension2d<u32>(800, 600), 16, false, false, true, &inputReceiver);
 }
 
 // Set instance to 0 (NULL)

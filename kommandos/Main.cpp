@@ -14,13 +14,8 @@
 * https://github.com/Kwok-Yee/kommandos
 */
 
-
 #include <irrlicht.h>
 #include "Game.h"
-
-#define CATCH_CONFIG_MAIN
-
-#include "catch.hpp"
 
 #ifdef _IRR_WINDOWS_
 #pragma comment(lib, "Irrlicht.lib")
@@ -29,9 +24,6 @@
 
 int main(int argc, char* argv[])
 {
-
-	int result = Catch::Session().run(argc, argv);
-
 	// Get the game's singleton instance
 	Game* game = game->GetInstance();
 	game->Start();

@@ -11,6 +11,7 @@
 #include "Score.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
+#include "Tutorial.h"
 
 using namespace irr;
 using namespace core;
@@ -31,6 +32,7 @@ ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;
+Tutorial tutorial;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -78,6 +80,7 @@ void Game::Start()
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);
+	tutorial.ShowTutorial(device);
 
 	driver = device->getVideoDriver();
 	smgr = device->getSceneManager();

@@ -61,7 +61,7 @@ f32 Collision::distance(vector3df a, vector3df b)
 bool Collision::lineIntersectsCircle(vector3df ahead, vector3df ahead2, ISceneNode* obstacle)
 {
 	// the property "center" of the obstacle is a Vector3D.
-	return distance(obstacle->getAbsolutePosition(), ahead) <= 1.5 || distance(obstacle->getAbsolutePosition(), ahead2) <= 1.5;
+	return distance(obstacle->getPosition(), ahead) <= 1 || distance(obstacle->getPosition(), ahead2) <= 1;
 }
 
 //finds object which may have a collision with
@@ -74,7 +74,7 @@ ISceneNode* Collision::findMostThreateningObstacle(vector3df ahead, vector3df po
 		bool collision = lineIntersectsCircle(ahead, ahead / 2, obstacle);
 
 		// "position" is the character's current position
-		if (collision && (mostThreatening == NULL || distance(position, obstacle->getAbsolutePosition()) < distance(position, mostThreatening->getAbsolutePosition()))) {
+		if (collision && (mostThreatening == NULL || distance(position, obstacle->getPosition()) < distance(position, mostThreatening->getPosition()))) {
 			mostThreatening = obstacle;
 		}
 	}

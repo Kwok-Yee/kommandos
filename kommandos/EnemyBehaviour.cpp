@@ -19,6 +19,7 @@ using namespace std;
 
 const vector3df scaleVect = vector3df(2.0f, 2.0f, 2.0f);
 const f32 meleeRange = vector3df(4, 4, 4).getLength();
+vector3df avoidank;
 
 IrrlichtDevice* enemyBehaviourIDevice;
 IVideoDriver* enemyBehaviourDriver;
@@ -78,19 +79,21 @@ void EnemyBehaviour::Move(f32 frameDeltaTime)
 	enemyMovementNormalized.normalize();
 	velocity = vector3df(0, 0, 0);
 	vector3df steering = enemyMovementNormalized;// -velocity;
+	enemyBehaviourDriver->setTransform(video::ETS_WORLD, core::IdentityMatrix);
 	ahead = enemyPosition +(steering * MAX_SEE_AHEAD);
-	ahead.Y = 1;
-	line3df aheadLine = line3df(enemyPosition, ahead);
+	//line3df aheadLine = line3df(enemyPosition, ahead);
 	threat = col.findMostThreateningObstacle(ahead, enemyPosition);
 	avoid = false;
+	ahead.Y = 0.4;
 	//ISceneNode* treath = col.GetCollidedObjectWithLine(aheadLine);
 	if (threat)
 	{
-		cout << "avoiding " << threat->getAbsolutePosition().X << " , " << threat->getAbsolutePosition().Z << endl;
+		//cout << "avoiding " << threat->getAbsolutePosition().X << " , " << threat->getAbsolutePosition().Z << endl;
 		//ISceneNode* treath = col.GetCollidedObjectWithLine(aheadLine);
-		avoidance = ahead - threat->getAbsolutePosition();//finds delta between the object and the ahead
+		avoidank = ahead - threat->getAbsolutePosition();//finds delta between the object and the ahead
+		avoidance = avoidank;
 		avoidance.normalize();//normalize for the direction.
-		avoidance *= MAX_AVOID_FORCE;
+		//avoidance *= MAX_AVOID_FORCE;
 		steering += avoidance;//add it to steering
 		steering.normalize();
 		avoid = true;
@@ -100,8 +103,8 @@ void EnemyBehaviour::Move(f32 frameDeltaTime)
 	//velocity.normalize();
 	if (pathfinding->foundGoal)
 	{
-		//enemyMovementNormalized = pathfinding->NextPathPos(enemyNode) - enemyPosition;
-		//enemyMovementNormalized.normalize();
+		//steering = pathfinding->NextPathPos(enemyNode) - enemyPosition;
+		//steering.normalize();
 	}
 
 	enemyNode->setRotation(vector3df(0, atan2(steering.X, steering.Z) * 180 / PI, 0));
@@ -127,10 +130,11 @@ void EnemyBehaviour::Move(f32 frameDeltaTime)
 
 void EnemyBehaviour::Draw()
 {
-	enemyBehaviourDriver->draw3DLine(vector3df(0,0,0), ahead, SColor(255, 0, 0, 255));
+	enemyBehaviourDriver->setTransform(video::ETS_WORLD, core::IdentityMatrix);
+	enemyBehaviourDriver->draw3DLine(enemyPosition, ahead, SColor(255, 0, 0, 255));
 	if (avoid) 
 	{
-		enemyBehaviourDriver->draw3DLine(enemyPosition, avoidance, SColor(255, 255, 0, 0));
+		enemyBehaviourDriver->draw3DLine(enemyPosition, avoidank, SColor(255, 255, 0, 0));
 	}
 }
 

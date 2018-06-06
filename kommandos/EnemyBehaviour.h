@@ -7,7 +7,7 @@ class Player;
 // Movement speed in units per second.
 #define ENEMY_MOVEMENT_SPEED 15.f
 #define MAX_HEALTH 100
-#define MAX_SEE_AHEAD 15
+#define MAX_SEE_AHEAD 20
 #define MAX_AVOID_FORCE 5
 class EnemyBehaviour
 {

@@ -115,4 +115,3 @@ void EnemySpawner::Spawn()
 
 core::array<IMeshSceneNode*> EnemySpawner::getEnemies() { return enemies; }
 EnemyBehaviour* EnemySpawner::getEnemyBehaviour() { return enemyBehaviour; }
-{

@@ -92,9 +92,6 @@ void Game::Start()
 	directionalLight->setRotation(vector3df(90, 0, 0));
 	device->getCursorControl()->setVisible(true);
 
-	//Generates the level(arenas), adds 2 arena's
-	levelGeneration.PlaceArenas(smgr, 2);
-
 	//This is used to calculate frame delta time
 	prevFrame = device->getTimer()->getTime();
 }

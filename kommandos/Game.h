@@ -20,6 +20,6 @@ public:
 private:
 	Game();
 	static Game* instance;
-	bool isGameOver;
+	bool isGameOver = false;
 };
 

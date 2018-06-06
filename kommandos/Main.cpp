@@ -50,23 +50,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
-/* 
-* test cases
-*/
-
-TEST_CASE("TEST 1") {
-	REQUIRE(1 + 1 == 4);
-}
-
-int sum(int a, int b) {
-	return a + b;
-}
-
-TEST_CASE("TEST 2") {
-	REQUIRE(1 + 1 == 2);
-}
-
-TEST_CASE("TEST 3") {
-	REQUIRE(sum(10, 20) == 3);
-}

@@ -21,8 +21,10 @@ using namespace std;
 
 Collision coll; // object for collision
 
-// Method for placing objects which uses multiple arrays to create objects and put these in random positions
-// The method uses one rule to stop objects from spawning on top of each other.
+///-------------------------------------------------------------------------------------------------
+///<summary>  Method for placing objects which uses multiple arrays to create objects and put these in random positions 
+/// The method uses one rule to stop objects from spawning on top of each other.  </summary>
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
 	const int amountOfObjects = 125; // set amount of objects

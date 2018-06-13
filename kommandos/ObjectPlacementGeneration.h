@@ -1,6 +1,9 @@
 #include <irrlicht.h>
 
 #pragma once
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Object placment generation for placing obstacles and default objects. </summary>
+///-------------------------------------------------------------------------------------------------
 class ObjectPlacementGeneration
 {
 public:

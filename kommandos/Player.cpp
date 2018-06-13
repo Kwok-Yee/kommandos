@@ -1,3 +1,9 @@
+///-------------------------------------------------------------------------------------------------
+// file:	Player.cpp
+//
+// summary:	Implements the player class
+///-------------------------------------------------------------------------------------------------
+
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include "Player.h"
@@ -18,7 +24,8 @@ using namespace video;
 using namespace std;
 using namespace irrklang;
 
-// Healthbar
+
+/// <summary>	Healthbar. </summary>
 #define X1BAR 10
 #define X2BAR 10
 #define Y1BAR 10
@@ -39,34 +46,59 @@ using namespace irrklang;
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
 
+/// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
+/// <summary>	The player driver. </summary>
 IVideoDriver* playerDriver;
+/// <summary>	The player smgr. </summary>
 ISceneManager* playerSmgr;
+/// <summary>	Manager for sound. </summary>
 SoundManager* soundManager;
+/// <summary>	State of the game over. </summary>
 GameOverState gameOverState;
+/// <summary>	The player col. </summary>
 Collision playerCol;
 
+/// <summary>	The player scores. </summary>
 Score playerScores;
+/// <summary>	The game. </summary>
 Game* game;
 
+/// <summary>	The player object. </summary>
 ISceneNode* playerObject;
+/// <summary>	The gun node. </summary>
 ISceneNode* gunNode;
+/// <summary>	The health. </summary>
 f32 health;
+/// <summary>	The time. </summary>
 u32 time;
+/// <summary>	The current position. </summary>
 vector3df currentPosition;
 
+/// <summary>	The mouse position. </summary>
 vector3df mousePosition;
+/// <summary>	to mouse position. </summary>
 vector3df toMousePos;
 
+/// <summary>	The vulnerable timer. </summary>
 s32 vulnerableTimer = 0;
 
+/// <summary>	The pool. </summary>
 BulletPool* pool;
+/// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
+/// <summary>	The bullet timer. </summary>
 s32 bulletTimer = 0;
 
 // FRAMEDELTATIME
+/// <summary>	The frame delta time. </summary>
 f32 frameDeltaTime;
+/// <summary>	True if has shot, false if not. </summary>
 bool hasShot = false;
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Constructor. </summary>
+///-------------------------------------------------------------------------------------------------
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -81,6 +113,10 @@ Player::Player(IrrlichtDevice* device)
 	// how long it was since the last frame
 	time = playerIDevice->getTimer()->getTime();
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Initializes this object. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Init()
 {
@@ -111,6 +147,10 @@ void Player::Init()
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Moves the given input receiver. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Move(InputReceiver inputReceiver)
 {
@@ -163,6 +203,10 @@ void Player::Move(InputReceiver inputReceiver)
 		vulnerableTimer -= frameDeltaTime;
 	}
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Shoots. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
@@ -220,6 +264,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Take damage. </summary>
+///-------------------------------------------------------------------------------------------------
+
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
 	if (health > 0 && vulnerableTimer <= 0)
@@ -235,6 +283,10 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 		}
 	}
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Draw health bar. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::DrawHealthBar()
 {
@@ -253,10 +305,18 @@ void Player::DrawHealthBar()
 	}
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets player object. </summary>
+///-------------------------------------------------------------------------------------------------
+
 ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Raycasts. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Raycast(vector3df endPosition, ICameraSceneNode* camera)
 {
@@ -273,15 +333,28 @@ void Player::Raycast(vector3df endPosition, ICameraSceneNode* camera)
 }
 
 // intersect the ray with a plane around the node facing towards the mouse.
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Executes the line intersect action. </summary>
+///-------------------------------------------------------------------------------------------------
+
 bool Player::OnLineIntersect(irr::core::plane3df &plane, irr::core::line3df &ray)
 {
 	return plane.getIntersectionWithLine(ray.start, ray.getVector(), mousePosition);
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets vulnerable timer. </summary>
+///-------------------------------------------------------------------------------------------------
+
 s32 Player::getVulnerableTimer()
 {
 	return vulnerableTimer;
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets mouse position. </summary>
+///-------------------------------------------------------------------------------------------------
 
 vector3df Player::GetMousePosition()
 {

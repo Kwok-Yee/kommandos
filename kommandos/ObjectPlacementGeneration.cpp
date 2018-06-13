@@ -1,3 +1,9 @@
+///-------------------------------------------------------------------------------------------------
+// file:	ObjectPlacementGeneration.cpp
+//
+// summary: Object placement generation class
+///-------------------------------------------------------------------------------------------------
+
 #include <irrlicht.h>
 #include "ObjectPlacementGeneration.h"
 #include <iostream>

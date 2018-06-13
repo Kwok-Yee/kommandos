@@ -19,11 +19,12 @@ using namespace video;
 using namespace io;
 using namespace std;
 
-Collision coll; // object for collision
+/// <summary> Collision object. </summary>
+Collision coll;
 
 ///-------------------------------------------------------------------------------------------------
-///<summary>  Method for placing objects which uses multiple arrays to create objects and put these in random positions 
-/// The method uses one rule to stop objects from spawning on top of each other.  </summary>
+/// Method for placing objects which uses multiple arrays to create objects and put these in random positions 
+/// The method uses one rule to stop objects from spawning on top of each other.
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
@@ -52,7 +53,9 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 
 }
 
-//Method for creating the objects with the correct material.
+///-------------------------------------------------------------------------------------------------
+/// Method for creating the objects with the correct material.
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode* obstacles[], int size)
 {
 	//Scene manager and driver for creating obstacles
@@ -75,8 +78,11 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 	}
 }
 
-// Create a grid on the arena which is based on step size and the amount of rows and columns.
-// Reason for using a normal array instead of a 2d array is because of memory use.
+
+///-------------------------------------------------------------------------------------------------
+/// Create a grid on the arena which is based on step size and the amount of rows and columns. 
+/// Reason for using a normal array instead of a 2d array is because of memory use.
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateGrid()
 {
 	
@@ -96,7 +102,9 @@ void ObjectPlacementGeneration::CreateGrid()
 	}
 }
 
-//Method for getting a random position
+///-------------------------------------------------------------------------------------------------
+/// Method for getting a random position.
+///-------------------------------------------------------------------------------------------------
 int ObjectPlacementGeneration::RandomPosition()
 {
 	// random int for choosing a position from the grid array.
@@ -104,11 +112,11 @@ int ObjectPlacementGeneration::RandomPosition()
 	return r;
 }
 
-
-/*Method for finding the right grid size, the arena size is divided by the obstacle size.
-Rows and columns are scaled the so the grid is a bit smaller and the grid is made
-by multiplying the rows and columns
-*/
+///-------------------------------------------------------------------------------------------------
+///Method for finding the right grid size, the arena size is divided by the obstacle size.
+///Rows and columns are scaled the so the grid is a bit smaller and the grid is made
+///by multiplying the rows and columns
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 {
 	int resize = 4;
@@ -127,7 +135,9 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 	grid = new vector3df[rows * columns]; // initialize grid based on rows times columns.
 }
 
-//Method for spawning default objects like walls and the arena floor.
+///-------------------------------------------------------------------------------------------------
+/// Method for spawning default objects like walls and the arena floor.
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 	ISceneManager* smgr = device->getSceneManager();
@@ -212,7 +222,12 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	coll.AddWallToList(shortWallNodeDown);
 }
 
-//Method for checking if an obstacle position is unique.
+
+///-------------------------------------------------------------------------------------------------
+/// Method for checking if an obstacle position is unique.
+/// First rule is that objects can't spawn on-top of each other.
+/// Second rule is that objects can't spawn on the default position.
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
 {
 	vector3df defaultPosition = vector3df(266, 0, 266);

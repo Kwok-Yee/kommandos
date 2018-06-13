@@ -1,7 +1,13 @@
 ///-------------------------------------------------------------------------------------------------
 // file:	ObjectPlacementGeneration.cpp
 //
-// summary: Object placement generation class
+// summary: Object placement generation class. In this class multiple objects are defined.
+// The class was used for an object placement technique, but was later turned into a general object placement class.
+// Default objects are created and placed in this script. The box objects are placed randomly but according to two rules.
+// For placing objects PCG style Poisson Disk Sampling was referenced but not fully used.
+// This class has 5 methods for the obstacle generation part, 1 default object method and 1 method to create every object.
+//
+// author:	Nino Thijs
 ///-------------------------------------------------------------------------------------------------
 
 #include <irrlicht.h>

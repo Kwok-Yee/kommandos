@@ -29,11 +29,12 @@ using namespace std;
 Collision coll;
 
 ///-------------------------------------------------------------------------------------------------
-/// <summary> Method for placing objects which uses multiple arrays to create objects and put these in random positions.  </summary>
-/// <para> The method uses one rule to stop objects from spawning on top of each other. </para>
+/// <summary> Method for placing objects which uses multiple arrays to create objects and put these in random positions. </summary>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
+	///The method uses one rule to stop objects from spawning on top of each other.
+
 	const int amountOfObjects = 125; // set amount of objects
 	
 	//Get device for creating obstacles
@@ -86,12 +87,12 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 
 
 ///-------------------------------------------------------------------------------------------------
-/// <summary> Create a grid on the arena which is based on step size and the amount of rows and columns. </summary>
-/// <para >Reason for using a normal array instead of a 2d array is because of memory use. </para>
+/// <summary> Create a grid on the arena which is based on step size and the amount of rows and columns.  </summary>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateGrid()
 {
-	
+	///Reason for using a normal array instead of a 2d array is because of memory use.
+
 	int xStep = 10; //X step for changing position
 	int zStep = 10; //Z step for changing position
 	const int startY = 0; // Y never changes.
@@ -120,10 +121,11 @@ int ObjectPlacementGeneration::RandomPosition()
 
 ///-------------------------------------------------------------------------------------------------
 ///  <summary> Method for finding the right grid size, the arena size is divided by the obstacle size. </summary>
-/// <para> Rows and columns are scaled the so the grid is a bit smaller and the grid is made by multiplying the rows and columns </para>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 {
+	///Rows and columns are scaled the so the grid is a bit smaller and the grid is made by multiplying the rows and columns 
+
 	int resize = 4;
 	vector3df arenaSize = arena->getTransformedBoundingBox().getExtent(); // get size of the arena.
 	vector3df obstacleSize = vector3df(10,10,10); // set the obstacle size.
@@ -230,11 +232,12 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 ///-------------------------------------------------------------------------------------------------
 /// <summary>  Method for checking if an obstacle position is unique. </summary> 
-/// <para>First rule is that objects can't spawn on-top of each other. Second rule is that objects can't spawn on the default position. </para>
-
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
 {
+	///First rule is that objects can't spawn on-top of each other. 
+	///Second rule is that objects can't spawn on the default position. 
+
 	vector3df defaultPosition = vector3df(266, 0, 266);
 
 	for (int i = 0; i < size - 1; i++)

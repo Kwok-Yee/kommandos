@@ -29,8 +29,8 @@ using namespace std;
 Collision coll;
 
 ///-------------------------------------------------------------------------------------------------
-/// Method for placing objects which uses multiple arrays to create objects and put these in random positions 
-/// The method uses one rule to stop objects from spawning on top of each other.
+/// <summary> Method for placing objects which uses multiple arrays to create objects and put these in random positions.  </summary>
+/// <para> The method uses one rule to stop objects from spawning on top of each other. </para>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
@@ -60,7 +60,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 }
 
 ///-------------------------------------------------------------------------------------------------
-/// Method for creating the objects with the correct material.
+///<summary>  Method for creating the objects with the correct material. </summary>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode* obstacles[], int size)
 {
@@ -86,8 +86,8 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 
 
 ///-------------------------------------------------------------------------------------------------
-/// Create a grid on the arena which is based on step size and the amount of rows and columns. 
-/// Reason for using a normal array instead of a 2d array is because of memory use.
+/// <summary> Create a grid on the arena which is based on step size and the amount of rows and columns. </summary>
+/// <para >Reason for using a normal array instead of a 2d array is because of memory use. </para>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateGrid()
 {
@@ -109,7 +109,7 @@ void ObjectPlacementGeneration::CreateGrid()
 }
 
 ///-------------------------------------------------------------------------------------------------
-/// Method for getting a random position.
+/// <summary> Method for getting a random position.  </summary>
 ///-------------------------------------------------------------------------------------------------
 int ObjectPlacementGeneration::RandomPosition()
 {
@@ -119,9 +119,8 @@ int ObjectPlacementGeneration::RandomPosition()
 }
 
 ///-------------------------------------------------------------------------------------------------
-///Method for finding the right grid size, the arena size is divided by the obstacle size.
-///Rows and columns are scaled the so the grid is a bit smaller and the grid is made
-///by multiplying the rows and columns
+///  <summary> Method for finding the right grid size, the arena size is divided by the obstacle size. </summary>
+/// <para> Rows and columns are scaled the so the grid is a bit smaller and the grid is made by multiplying the rows and columns </para>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 {
@@ -142,7 +141,7 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 }
 
 ///-------------------------------------------------------------------------------------------------
-/// Method for spawning default objects like walls and the arena floor.
+/// <summary> Method for spawning default objects like walls and the arena floor. </summary>
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
@@ -230,9 +229,9 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 
 ///-------------------------------------------------------------------------------------------------
-/// Method for checking if an obstacle position is unique.
-/// First rule is that objects can't spawn on-top of each other.
-/// Second rule is that objects can't spawn on the default position.
+/// <summary>  Method for checking if an obstacle position is unique. </summary> 
+/// <para>First rule is that objects can't spawn on-top of each other. Second rule is that objects can't spawn on the default position. </para>
+
 ///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, int size)
 {

@@ -14,11 +14,37 @@ using namespace scene;
 using namespace core;
 
 ///-------------------------------------------------------------------------------------------------
+/// <summary>	Set the Bullet Mode. </summary>
+///-------------------------------------------------------------------------------------------------
+
+void Bullet::SetBulletMode(BulletMode mode)
+{
+	bulletMode = mode;
+	switch (mode)
+	{
+	case BulletMode::basic:
+		speed = 250.f;
+		damage = 25.f;
+		bulletTimer = 30;
+		return;
+	case BulletMode::rapidFire:
+		speed = 300.f;
+		bulletTimer = 10;
+		return;
+	case BulletMode::splitFire:
+		speed = 250.f;
+		bulletTimer = 20;
+		return;
+	}
+}
+
+///-------------------------------------------------------------------------------------------------
 /// <summary>	Resets this object. </summary>
 ///-------------------------------------------------------------------------------------------------
 
 void Bullet::Reset()
 {
+	SetBulletMode(BulletMode::basic);
 	bullet->setVisible(false);
 	bullet->setPosition(vector3df(0, 0, 0));
 	setOnce = true;
@@ -57,7 +83,7 @@ float Bullet::GetDamage()
 
 void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDeltaTime)
 {
-	if (setOnce) 
+	if (setOnce)
 	{
 		velocity = playerPos;
 		delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
@@ -70,12 +96,24 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 }
 
 ///-------------------------------------------------------------------------------------------------
+/// <summary>	Sets the bullet speed. </summary>
+///-------------------------------------------------------------------------------------------------
+void Bullet::SetSpeed(float s)
+{
+	speed = s;
+}
+
+s32 Bullet::GetBulletTimer()
+{
+	return bulletTimer;
+}
+
+///-------------------------------------------------------------------------------------------------
 /// <summary>	Default constructor. </summary>
 ///-------------------------------------------------------------------------------------------------
 
-Bullet::Bullet() 
+Bullet::Bullet()
 {
 	bullet = 0;
-	speed = 100.f;
-	damage = 25.f;
+	SetBulletMode(BulletMode::basic);
 }

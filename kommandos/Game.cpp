@@ -6,7 +6,6 @@
 #include "InputReceiver.h"
 #include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
-#include "Player.h"
 #include "ParticleSystem.h"
 #include "Score.h"
 #include "Camera.h"
@@ -27,7 +26,6 @@ ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
-Player* player;
 Score score;
 Collision _collision;
 ObjectPlacementGeneration objectPlacementGen;
@@ -144,4 +142,9 @@ void Game::Draw()
 		device->setWindowCaption(tmp.c_str());
 		lastFPS = fps;
 	}
+}
+
+Player* Game::GetPlayer()
+{
+	return player;
 }

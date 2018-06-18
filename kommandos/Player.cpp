@@ -87,8 +87,6 @@ s32 vulnerableTimer = 0;
 BulletPool* pool;
 /// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
-/// <summary>	The bullet timer. </summary>
-s32 bulletTimer = 0;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -144,8 +142,10 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
+	SetRapidFireTimer(1000);
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -215,10 +215,18 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		bulletTimer -= frameDeltaTime;
 	}
+	if (rapidFireTimer > 0)
+	{
+		rapidFireTimer -= frameDeltaTime;
+	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
 		soundManager->PlaySound(GUN_SHOT_SOUND, false);
 		Bullet* bullet = pool->GetResource();
+		if (rapidFireTimer > 0)
+		{
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+		}
 		activeBullets.push_back(bullet);
 		bullet->SetBullet(playerSmgr->addSphereSceneNode());
 		if (bullet->GetBullet())
@@ -229,7 +237,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		}
 		hasShot = true;
 		bullet->GetBullet()->setVisible(true);
-		bulletTimer = BULLET_BASE_TIMER;
+		bulletTimer = bullet->GetBulletTimer();
 	}
 	if (hasShot)
 	{
@@ -359,4 +367,9 @@ s32 Player::getVulnerableTimer()
 vector3df Player::GetMousePosition()
 {
 	return mousePosition;
+}
+
+void Player::SetRapidFireTimer(s32 timer)
+{
+	rapidFireTimer = timer;
 }

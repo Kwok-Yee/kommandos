@@ -4,7 +4,7 @@ language: cpp
 # Branches
 branches:
   only:
-      - comment
+      - master
 
 # Install dependencies
 addons:

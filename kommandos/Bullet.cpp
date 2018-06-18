@@ -13,6 +13,12 @@ using namespace irr;
 using namespace scene;
 using namespace core;
 
+// Split fire mode variables
+vector3df leftBulletDelta;
+vector3df rightBulletDelta;
+vector3df leftBulletVelocity;
+vector3df rightBulletVelocity;
+
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Set the Bullet Mode. </summary>
 ///-------------------------------------------------------------------------------------------------
@@ -25,7 +31,7 @@ void Bullet::SetBulletMode(BulletMode mode)
 	case BulletMode::basic:
 		speed = 250.f;
 		damage = 25.f;
-		bulletTimer = 30;
+		bulletTimer = 25;
 		return;
 	case BulletMode::rapidFire:
 		speed = 300.f;
@@ -33,7 +39,7 @@ void Bullet::SetBulletMode(BulletMode mode)
 		return;
 	case BulletMode::splitFire:
 		speed = 250.f;
-		bulletTimer = 20;
+		bulletTimer = 17;
 		return;
 	}
 }
@@ -80,16 +86,25 @@ float Bullet::GetDamage()
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Updates the bullet. </summary>
 ///-------------------------------------------------------------------------------------------------
-
 void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDeltaTime)
 {
 	if (setOnce)
 	{
-		velocity = playerPos;
-		delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
-		delta.normalize();
+		if (bulletMode == BulletMode::basic || bulletMode == Bullet::rapidFire)
+		{
+			velocity = playerPos;
+			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
+			delta.normalize();
+		}
+		if (bulletMode == BulletMode::splitFire)
+		{
+			velocity = playerPos;
+			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z + offset);
+			delta.normalize();
+		}
 		setOnce = false;
 	}
+
 	velocity += delta * frameDeltaTime * speed;
 	velocity.Y = 1.f;
 	bullet->setPosition(velocity);
@@ -106,6 +121,11 @@ void Bullet::SetSpeed(float s)
 s32 Bullet::GetBulletTimer()
 {
 	return bulletTimer;
+}
+
+void Bullet::SetBulletOffset(float o)
+{
+	offset = o;
 }
 
 ///-------------------------------------------------------------------------------------------------

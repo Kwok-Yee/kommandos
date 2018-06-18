@@ -87,6 +87,8 @@ public:
 
 	void SetRapidFireTimer(s32 timer);
 
+	void SetSplitFireTimer(s32 timer);
+
 private:
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Initializes this object. </summary>
@@ -97,5 +99,7 @@ private:
 	irr::s32 bulletTimer;
 	/// <summary>	The rapid fire power up timer. </summary>
 	irr::s32 rapidFireTimer;
+	/// <summary>	The split fire power up timer. </summary>
+	irr::s32 splitFireTimer;
 };
 

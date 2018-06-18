@@ -12,6 +12,21 @@
 
 class Bullet {
 public:
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Bullet Modes. </summary>
+	///-------------------------------------------------------------------------------------------------
+	
+	enum BulletMode {
+		basic,
+		rapidFire,
+		splitFire
+	};
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Set the Bullet Mode. </summary>
+	///-------------------------------------------------------------------------------------------------
+
+	void SetBulletMode(BulletMode mode);
 
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Resets this object. </summary>
@@ -44,13 +59,25 @@ public:
 	void UpdateBullet(irr::core::vector3df mousePos, irr::core::vector3df playerPos, float frameDeltaTime);
 
 	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Sets the bullet speed. </summary>
+	///-------------------------------------------------------------------------------------------------
+
+	void SetSpeed(float s);
+
+	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Default constructor. </summary>
 	///-------------------------------------------------------------------------------------------------
+	
+	irr::s32 GetBulletTimer();
+	
+	void SetBulletOffset(float o);
 
 	Bullet();
 private:
 	/// <summary>	The bullet. </summary>
 	irr::scene::ISceneNode* bullet;
+	/// <summary>	The Bullet mode. </summary>
+	BulletMode bulletMode;
 	/// <summary>	True to set once. </summary>
 	bool setOnce = true;
 	/// <summary>	The velocity. </summary>
@@ -61,4 +88,8 @@ private:
 	float speed;
 	/// <summary>	The damage. </summary>
 	float damage;
+	/// <summary>	The bullet timer. </summary>
+	irr::s32 bulletTimer;
+	/// <summary>	The bullet offset. </summary>
+	float offset;
 };

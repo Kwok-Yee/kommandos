@@ -87,8 +87,6 @@ s32 vulnerableTimer = 0;
 BulletPool* pool;
 /// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
-/// <summary>	The bullet timer. </summary>
-s32 bulletTimer = 0;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -144,6 +142,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
@@ -215,11 +214,45 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		bulletTimer -= frameDeltaTime;
 	}
+	if (rapidFireTimer > 0)
+	{
+		rapidFireTimer -= frameDeltaTime;
+	}
+	if (splitFireTimer > 0)
+	{
+		splitFireTimer -= frameDeltaTime;
+	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
 		soundManager->PlaySound(GUN_SHOT_SOUND, false);
+
+		// Bullet instances
 		Bullet* bullet = pool->GetResource();
+		Bullet* leftBullet = pool->GetResource();
+		Bullet* rightBullet = pool->GetResource();
+
+		// Rapid fire active
+		if (rapidFireTimer > 0)
+		{
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+		}
+
+		// Split fire active
+		if (splitFireTimer > 0)
+		{
+			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			leftBullet->SetBulletOffset(-15.f);
+			rightBullet->SetBulletOffset(15.f);
+			// Push bullets to active bullets list
+			activeBullets.push_back(leftBullet);
+			activeBullets.push_back(rightBullet);
+		}
+
+		// Push bullets to active bullets list
 		activeBullets.push_back(bullet);
+
+		// Main bullet
 		bullet->SetBullet(playerSmgr->addSphereSceneNode());
 		if (bullet->GetBullet())
 		{
@@ -227,9 +260,40 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
 			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
 		}
+
+		// Left bullet for split fire
+		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		if (leftBullet->GetBullet())
+		{
+			leftBullet->GetBullet()->setVisible(false);
+			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		}
+
+		// Right bullet for split fire
+		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		if (rightBullet->GetBullet())
+		{
+			rightBullet->GetBullet()->setVisible(false);
+			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		}
+
 		hasShot = true;
+
+		// Bullet visibility
 		bullet->GetBullet()->setVisible(true);
-		bulletTimer = BULLET_BASE_TIMER;
+
+		// Split fire active
+		if (splitFireTimer > 0)
+		{
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+		}
+
+		// Timer reset
+		bulletTimer = bullet->GetBulletTimer();
 	}
 	if (hasShot)
 	{
@@ -359,4 +423,14 @@ s32 Player::getVulnerableTimer()
 vector3df Player::GetMousePosition()
 {
 	return mousePosition;
+}
+
+void Player::SetRapidFireTimer(s32 timer)
+{
+	rapidFireTimer = timer;
+}
+
+void Player::SetSplitFireTimer(s32 timer)
+{
+	splitFireTimer = timer;
 }

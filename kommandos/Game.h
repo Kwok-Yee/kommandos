@@ -1,5 +1,6 @@
 #pragma once
 #include <irrlicht.h>
+#include "Player.h"
 
 class Game
 {
@@ -17,9 +18,11 @@ public:
 	void Update();
 	//Draws everything in the game.
 	void Draw();
+	Player* GetPlayer();
 private:
 	Game();
 	static Game* instance;
 	bool isGameOver = false;
+	Player* player;
 };
 

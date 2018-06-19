@@ -45,6 +45,7 @@ using namespace irrklang;
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
+#define MOUSE_DISTANCE_FROM_PLAYER 15.f
 
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
@@ -142,7 +143,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
-	
+
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
@@ -210,6 +211,7 @@ void Player::Move(InputReceiver inputReceiver)
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	Raycast(inputReceiver.GetMousePosition(), playerSmgr->getActiveCamera());
+
 	if (bulletTimer > 0)
 	{
 		bulletTimer -= frameDeltaTime;
@@ -314,7 +316,9 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 						return;
 					}
 				}
-				if (activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet()))
+				// Check collision with static walls or the life time of the bullet
+				if ((activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet())) ||
+					(activeBullets[i] && activeBullets[i]->GetBulletLifeTimer() == 0))
 				{
 					pool->ReturnResource(activeBullets[i]);
 					activeBullets.erase(i);
@@ -334,18 +338,18 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	if (health > 0 && vulnerableTimer <= 0)
+	/*if (health > 0 && vulnerableTimer <= 0)
 	{
 		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-		
+
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);
 			game->SetIsGameOver(true);
 		}
-	}
+	}*/
 }
 
 ///-------------------------------------------------------------------------------------------------

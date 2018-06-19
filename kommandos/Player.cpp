@@ -45,7 +45,6 @@ using namespace irrklang;
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
-#define MOUSE_DISTANCE_FROM_PLAYER 15.f
 
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;

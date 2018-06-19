@@ -338,7 +338,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
-	/*if (health > 0 && vulnerableTimer <= 0)
+	if (health > 0 && vulnerableTimer <= 0)
 	{
 		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
@@ -349,7 +349,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 			gameOverState.ShowGameOver(playerIDevice);
 			game->SetIsGameOver(true);
 		}
-	}*/
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------

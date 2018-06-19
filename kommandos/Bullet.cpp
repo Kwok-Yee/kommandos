@@ -97,18 +97,16 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 	}
 	if (setOnce)
 	{
+		velocity = playerPos;
 		if (bulletMode == BulletMode::basic || bulletMode == Bullet::rapidFire)
 		{
-			velocity = playerPos;
 			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
-			delta.normalize();
 		}
 		if (bulletMode == BulletMode::splitFire)
 		{
-			velocity = playerPos;
 			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z + offset);
-			delta.normalize();
 		}
+		delta.normalize();
 		setOnce = false;
 	}
 

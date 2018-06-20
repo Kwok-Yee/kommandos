@@ -4,6 +4,9 @@
 #include "SoundManager.h"
 #include "Collision.h"
 
+#ifndef ENEMYBEHAVIOUR_H //TEST: if works
+#include "IEnemyStats.cpp"
+
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -23,6 +26,31 @@ ISceneManager* enemyBehaviourSmgr;
 IMeshSceneNode* enemyNode;
 SoundManager* soundManagerEnemy;
 Collision col;
+IEnemyStats iEnemyStats;
+
+class FastEnemy : public IEnemyStats {
+public:
+	//for now it's 2 classes doing the same but you can add for example:
+	// speed * health/2 or something in the future with different behaviours maybe
+	virtual void setSpeed(float s);
+};
+
+class BulkEnemy : public IEnemyStats {
+public:
+	virtual void setSpeed(float s);
+};
+
+#endif // !ENEMYBEHAVIOUR_H
+
+int main() {
+	FastEnemy fastEnemy;
+	BulkEnemy bulkEnemy;
+
+	fastEnemy.setSpeed(20);
+	bulkEnemy.setSpeed(10);
+
+	return 0;
+}
 
 EnemyBehaviour::EnemyBehaviour(IrrlichtDevice* device) {
 	enemyBehaviourIDevice = device;

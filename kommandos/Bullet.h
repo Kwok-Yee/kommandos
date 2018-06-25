@@ -69,6 +69,8 @@ public:
 	///-------------------------------------------------------------------------------------------------
 	
 	irr::s32 GetBulletTimer();
+
+	irr::s32 GetBulletLifeTimer();
 	
 	void SetBulletOffset(float o);
 
@@ -90,6 +92,8 @@ private:
 	float damage;
 	/// <summary>	The bullet timer. </summary>
 	irr::s32 bulletTimer;
+	/// <summary>	The bullet life timer. </summary>
+	irr::s32 bulletLifeTimer;
 	/// <summary>	The bullet offset. </summary>
 	float offset;
 };

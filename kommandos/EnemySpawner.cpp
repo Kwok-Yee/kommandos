@@ -10,7 +10,7 @@
 #include "Game.h"
 
 #ifndef ENEMYSPAWNER_H //TEST: if works
-#include "IEnemyStats.cpp"
+#include "IEnemyStats.h"
 
 using namespace irr;
 using namespace core;
@@ -25,7 +25,7 @@ EnemyBehaviour* enemyBehaviour;
 Player* _player;
 Game* game_EnemySpawner;
 Collision collision;
-IEnemyStats iEnemyStats;
+IEnemyStats* iEnemyStats;
 
 core::array<vector3df> spawnPositions;
 u32 amountOfEnemies, resize;
@@ -38,16 +38,15 @@ u32 prevFrameTime;
 
 class FastEnemy : public IEnemyStats {
 public:
-	virtual void setHealth(float h);
+	void setHealth(float h);
 };
 
 class BulkEnemy : public IEnemyStats {
 public:
 	//for now it's 2 classes doing the same but you can add for example:
 	// speed * health/2 or something in the future with different behaviours maybe
-	virtual void setHealth(float h);
+	void setHealth(float h);
 };
-#endif // !ENEMYSPAWNER_H
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
@@ -137,3 +136,5 @@ void EnemySpawner::Spawn()
 
 core::array<IMeshSceneNode*> EnemySpawner::getEnemies() { return enemies; }
 EnemyBehaviour* EnemySpawner::getEnemyBehaviour() { return enemyBehaviour; }
+
+#endif // !ENEMYSPAWNER_H

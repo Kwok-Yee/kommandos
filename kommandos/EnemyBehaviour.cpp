@@ -5,7 +5,7 @@
 #include "Collision.h"
 
 #ifndef ENEMYBEHAVIOUR_H //TEST: if works
-#include "IEnemyStats.cpp"
+#include "IEnemyStats.h"
 
 using namespace irr;
 using namespace core;
@@ -26,21 +26,20 @@ ISceneManager* enemyBehaviourSmgr;
 IMeshSceneNode* enemyNode;
 SoundManager* soundManagerEnemy;
 Collision col;
-IEnemyStats iEnemyStats;
+IEnemyStats* iEnemyStats;
 
 class FastEnemy : public IEnemyStats {
 public:
 	//for now it's 2 classes doing the same but you can add for example:
 	// speed * health/2 or something in the future with different behaviours maybe
-	virtual void setSpeed(float s);
+	void setSpeed(float s);
 };
 
 class BulkEnemy : public IEnemyStats {
 public:
-	virtual void setSpeed(float s);
+	void setSpeed(float s);
 };
 
-#endif // !ENEMYBEHAVIOUR_H
 
 int main() {
 	FastEnemy fastEnemy;
@@ -124,3 +123,5 @@ f32 EnemyBehaviour::TakeDamage(f32 damage, f32 health)
 	}
 	return health;
 }
+
+#endif // !ENEMYBEHAVIOUR_H

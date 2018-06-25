@@ -1,5 +1,7 @@
 #include <irrlicht.h>
 #include "PowerUpSpawner.h"
+#include "collision.h"
+#include "player.h"
 
 using namespace irr;
 using namespace core;
@@ -10,6 +12,9 @@ using namespace io;
 IrrlichtDevice* powerUpIDevice;
 ISceneManager* powerUpSmgr;
 IVideoDriver* powerUpDriver;
+
+Player* player;
+Collision* collision;
 
 s32 powerTimer;
 s32 time;
@@ -53,6 +58,11 @@ void PowerUpSpawner::UpdatePowerUp()
 
 void PowerUpSpawner::PowerUpSpawn()
 {
+	if (collision->CollidesWithStaticObjects(player->getPlayerObject)) 
+	{
+		
+	}
+
 	IMesh* powerupMesh = powerUpSmgr->getMesh("../media/powerup.3ds");
 	IMeshSceneNode* powerupNode = powerUpSmgr->addMeshSceneNode(powerupMesh);
 	//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture(FireRate));

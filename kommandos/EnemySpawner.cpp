@@ -3,10 +3,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 #include "ParticleSystem.h"
 #include "EnemyBehaviour.h"
 #include "Player.h"
 #include "Collision.h"
+#include "PowerUpSpawner.h"
 #include "Game.h"
 
 using namespace irr;
@@ -15,15 +17,17 @@ using namespace scene;
 using namespace std;
 
 const u32 maxWaves = 10;
+int killedEnemies = 0;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 EnemyBehaviour* enemyBehaviour;
 Player* _player;
 Game* game_EnemySpawner;
+PowerUpSpawner* powerUpSpawner;
 Collision collision;
 
-array<vector3df> spawnPositions;
+core::array<vector3df> spawnPositions;
 u32 amountOfEnemies, resize;
 core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
@@ -81,6 +85,10 @@ void EnemySpawner::UpdateEnemies()
 		if (enemyHealthValues[i] <= 0)
 		{
 			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
+
+			killedEnemies++;
+			powerUpSpawner->PowerUpSpawn(enemySpawnerIDevice, enemies[i]->getPosition());
+
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			collision.RemoveDynamicFromList(enemies[i]);
 			enemies.erase(i);

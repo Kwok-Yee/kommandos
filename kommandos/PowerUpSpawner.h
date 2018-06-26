@@ -9,7 +9,7 @@ class PowerUpSpawner
 public:
 	void PowerUpDevice(irr::IrrlichtDevice* device);
 	void UpdatePowerUp();
-	void PowerUpSpawn();
+	void PowerUpSpawn(irr::IrrlichtDevice* device, vector3df powerUpPosition);
 
 	bool pickUpPower = false;
 };

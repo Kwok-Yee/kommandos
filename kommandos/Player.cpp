@@ -146,7 +146,12 @@ void Player::Move(InputReceiver inputReceiver)
 	}
 
 	playerObject->setPosition(newPosition);
-	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime);
+
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*5);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone) {
+		TakeDamage(1, frameDeltaTime);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);

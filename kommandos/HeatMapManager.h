@@ -8,7 +8,7 @@ class HeatMapManager
 public:
 	enum Zone
 	{
-		Zone0,//no Zone
+		Zone0,//No Zone
 		Zone1,//Left-Top
 		Zone2,//Right-Top
 		Zone3,//Left-Bot
@@ -20,6 +20,7 @@ public:
 	//Returns the Game instance
 	static HeatMapManager* GetInstance();
 	Zone activeZone;
+	bool isPoisonCloudActive = false;
 	void AddWeight(Zone zone, float weight);
 	int GetWeight(Zone zone);
 	Zone CheckZoneFromPosition(irr::core::vector3df pos);

@@ -66,11 +66,11 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		if (zone1Weight < MAX_WEIGHT) 
 		{
 			zone1Weight += weight;
-			cout << "zone 1 weight " << zone1Weight << endl;
 		}
 		else 
 		{
 			CreateCountdown(Zone1);
+			zone1Weight = 0;
 		}
 		break;
 	case Zone2:
@@ -81,6 +81,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		else
 		{
 			CreateCountdown(Zone2);
+			zone2Weight = 0;
 		}
 		break;
 	case Zone3:
@@ -91,6 +92,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		else
 		{
 			CreateCountdown(Zone3);
+			zone3Weight = 0;
 		}
 		break;
 	case Zone4:
@@ -101,6 +103,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		else
 		{
 			CreateCountdown(Zone4);
+			zone4Weight = 0;
 		}
 		break;
 	default:
@@ -135,7 +138,7 @@ void HeatMapManager::Update()
 	{
 		seconds -= 0.016;
 
-		stringw newText("There will be gas in ");
+		stringw newText("There will be gas in Zone ");
 		newText += activeZone;
 		newText += " in ";
 		newText += seconds;
@@ -147,7 +150,19 @@ void HeatMapManager::Update()
 			CreatePoisonCloud(activeZone);
 			ui->clear();
 		}
-
+	}
+	if (isPoisonCloudActive) 
+	{
+		seconds -= 0.016;
+		if (seconds < 0) 
+		{
+			hGame->objectPlacementGen.GenerateNewObjects(activeZone);
+			hsmgr->addToDeletionQueue(GetPoisonCloud());
+			//poisonCloud->setVisible(false);
+			isZoneActive = false;
+			isPoisonCloudActive = false;
+			activeZone = Zone0;
+		}
 	}
 }
 
@@ -162,7 +177,7 @@ void HeatMapManager::CreateCountdown(Zone zone)
 	countdownText = ui->addStaticText(text.c_str(), rect<int>(350, 80, 450, 120), true, true, 0, -1, true);
 	countdownText->setMinSize(dimension2du(100, 40));
 	countdownText->setMaxSize(dimension2du(100, 40));
-	//This is used to calculate frame delta time
+
 	seconds = MAX_SECONDS;
 }
 
@@ -191,7 +206,6 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	}
 	cloudPosition.X *= 5;
 	cloudPosition.Z *= 5;
-	cout << "Creating Cloud at: " << cloudPosition.X << "," << cloudPosition.Z << " with size " << size << endl;
 	poisonCloud = hsmgr->addCubeSceneNode();
 	if (poisonCloud) {
 		poisonCloud->setPosition(cloudPosition);
@@ -211,6 +225,8 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 
 		}
 	}
+	isPoisonCloudActive = true;
+	seconds = MAX_SECONDS * 5;
 }
 
 ISceneNode* HeatMapManager::GetPoisonCloud() {

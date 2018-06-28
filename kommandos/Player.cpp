@@ -148,7 +148,7 @@ void Player::Move(InputReceiver inputReceiver)
 	playerObject->setPosition(newPosition);
 
 	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*5);
-	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone) {
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone && heatMapManager->isPoisonCloudActive) {
 		TakeDamage(1, frameDeltaTime);
 	}
 	heatMapManager->Update();

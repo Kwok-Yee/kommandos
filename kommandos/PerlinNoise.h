@@ -1,4 +1,3 @@
-#include <irrlicht.h>
 #include <vector>
 #pragma once
 

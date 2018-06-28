@@ -15,6 +15,7 @@
 #include "BulletPool.h"
 #include "Bullet.h"
 #include "SoundManager.h"
+#include "HeatMapManager.h"
 #include "iostream"
 
 using namespace irr;
@@ -58,6 +59,7 @@ SoundManager* soundManager;
 GameOverState gameOverState;
 /// <summary>	The player col. </summary>
 Collision playerCol;
+HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
 /// <summary>	The player scores. </summary>
 Score playerScores;
@@ -184,6 +186,11 @@ void Player::Move(InputReceiver inputReceiver)
 
 	playerObject->setPosition(newPosition);
 
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*5);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone) {
+		TakeDamage(1, frameDeltaTime);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);

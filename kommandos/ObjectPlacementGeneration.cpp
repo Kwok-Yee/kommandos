@@ -17,6 +17,7 @@
 #include <ctime>
 #include <algorithm>
 #include "Collision.h"
+#include "HeatMapManager.h"
 
 using namespace irr;
 using namespace core;
@@ -221,6 +222,9 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 	//Calculate the grid using the arena floor
 	CalculateGrid(planeNode);
+
+	HeatMapManager* h = h->GetInstance();
+	h->level = planeNode;
 
 	//Add to collision for player and enemy
 	coll.AddWallToList(longWallNodeLeft);

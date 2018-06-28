@@ -2,6 +2,7 @@
 #include <irrlicht.h>
 
 using namespace irr;
+using namespace scene;
 using namespace core;
 
 class PowerUpSpawner
@@ -12,5 +13,6 @@ public:
 	void PowerUpSpawn();
 
 	bool pickUpPower = false;
+	IMeshSceneNode* powerupNode;
 };
 

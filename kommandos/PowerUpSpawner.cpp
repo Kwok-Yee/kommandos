@@ -1,7 +1,6 @@
 #include <irrlicht.h>
 #include "PowerUpSpawner.h"
 #include "collision.h"
-#include "player.h"
 
 using namespace irr;
 using namespace core;
@@ -13,11 +12,15 @@ IrrlichtDevice* powerUpIDevice;
 ISceneManager* powerUpSmgr;
 IVideoDriver* powerUpDriver;
 
-Player* player;
 Collision* collision;
 
+IMeshSceneNode* powerupSpreadNode;
+
+
 s32 powerTimer;
-s32 time;
+s32 powerUptime;
+
+
 
 const path FireRate = "../media/Models/powerup";
 
@@ -29,44 +32,45 @@ void PowerUpSpawner::PowerUpDevice(IrrlichtDevice* device)
 	powerUpDriver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 
-	IMesh* powerupMesh = smgr->getMesh("../media/powerup.3ds");
-	IMeshSceneNode* powerupNode = smgr->addMeshSceneNode(powerupMesh);
-	//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture(FireRate));
-	powerupNode->setMaterialFlag(video::EMF_LIGHTING, true);
-	powerupNode->setPosition(vector3df(266, 0, 266));
-	powerupNode->setScale(vector3df(2, 1, 2));
+	if (device) 
+	{
+		PowerUpSpawn();
+	}
+	
 }
 
 void PowerUpSpawner::UpdatePowerUp() 
 {
 	// Work out a frame delta time.
-	const u32 now = powerUpIDevice->getTimer()->getTime();
-	const f32 frameTime = (f32)(now - time) / 1000.f; // Time in seconds
-	time = now;
+	//const u32 now = powerUpIDevice->getTimer()->getTime();
+	//const f32 frameTime = (f32)(now - powerUptime) / 1000.f; // Time in seconds
+	//powerUptime = now;
+
+	//if (collision->SceneNodeWithSceneNode(player->PlayerObject, powerupNode))
+	//{
+	//	//powerupNode->remove;
+	//}
 
 	//for removing particle on position
-	if (pickUpPower && powerTimer > 0)
-	{
-		powerTimer -= frameTime;
+	
+	//if (pickUpPower && powerTimer > 0)
+	//{
+	//	powerTimer -= frameTime;
 
-		if (powerTimer <= 0)
-		{
-			pickUpPower = false;
-		}
-	}
+	//	if (powerTimer <= 0)
+	//	{
+	//		pickUpPower = false;
+	//	}
+	//}
 }
 
 void PowerUpSpawner::PowerUpSpawn()
 {
-	if (collision->CollidesWithStaticObjects(player->getPlayerObject)) 
-	{
-		
-	}
-
 	IMesh* powerupMesh = powerUpSmgr->getMesh("../media/powerup.3ds");
 	IMeshSceneNode* powerupNode = powerUpSmgr->addMeshSceneNode(powerupMesh);
 	//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture(FireRate));
 	powerupNode->setMaterialFlag(video::EMF_LIGHTING, true);
-	powerupNode->setPosition(vector3df(266, 0, 266));
+	powerupNode->setPosition(vector3df(280, 0, 280));
 	powerupNode->setScale(vector3df(2, 1, 2));
+
 }

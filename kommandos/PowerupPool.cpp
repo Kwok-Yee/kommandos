@@ -2,15 +2,17 @@
 #include "PowerupPool.h"
 #include <iostream>
 
-PowerupPool::PowerupPool() { }
+irr::IrrlichtDevice* powPoolDevice;
+
+PowerupPool::PowerupPool(irr::IrrlichtDevice* device) { powPoolDevice = device; }
 
 PowerupPool* PowerupPool::instance = 0;
 
-PowerupPool* PowerupPool::GetInstance()
+PowerupPool* PowerupPool::GetInstance(irr::IrrlichtDevice* device)
 {
 	if (!instance)
 	{
-		instance = new PowerupPool();
+		instance = new PowerupPool(device);
 	}
 	return instance;
 }
@@ -19,7 +21,7 @@ Powerup* PowerupPool::GetResource()
 {
 	if (resources.empty())
 	{
-		return new Powerup();
+		return new Powerup(powPoolDevice->getSceneManager());
 	}
 	else
 	{

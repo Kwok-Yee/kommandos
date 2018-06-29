@@ -10,13 +10,13 @@ public:
 
 	PowerupPool(const PowerupPool&) = delete;
 	PowerupPool& operator=(const PowerupPool&) = delete;
-	static PowerupPool* GetInstance();
+	static PowerupPool* GetInstance(irr::IrrlichtDevice* device);
 	Powerup* GetResource();
 	void ReturnResource(Powerup* object);
 
 private:
 
-	PowerupPool();
+	PowerupPool(irr::IrrlichtDevice* device);
 	std::list<Powerup*> resources;
 	static PowerupPool* instance;
 

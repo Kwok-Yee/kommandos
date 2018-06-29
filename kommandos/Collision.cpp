@@ -54,7 +54,7 @@ Powerup *Collision::CollidesWithPowerup(irr::scene::ISceneNode* player)
 			return pow;
 		}
 			
-	return false;
+	return NULL;
 }
 
 void Collision::DiscreteCollisionUpdate(f32 frameDeltaTime)

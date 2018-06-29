@@ -9,8 +9,7 @@ class PowerUpSpawner
 {
 public:
 	void PowerUpDevice(irr::IrrlichtDevice* device);
-	void UpdatePowerUp();
-	void PowerUpSpawn();
+	void PowerUpSpawn(vector3df postion);
 
 	bool pickUpPower = false;
 	IMeshSceneNode* powerupNode;

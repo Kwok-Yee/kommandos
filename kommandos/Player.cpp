@@ -14,6 +14,8 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "PowerupPool.h"
+#include "Powerup.h"
 #include "SoundManager.h"
 #include "iostream"
 
@@ -90,6 +92,8 @@ core::array<Bullet*> activeBullets;
 /// <summary>	The bullet timer. </summary>
 s32 bulletTimer = 0;
 
+PowerupPool* powPool;
+
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
 f32 frameDeltaTime;
@@ -144,6 +148,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	powPool = powPool->GetInstance(playerIDevice);
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
@@ -217,7 +222,8 @@ void Player::Move(InputReceiver inputReceiver)
 			//splitShot
 			break;
 		}
-
+		powPool->ReturnResource(pow);
+		
 	}
 }
 

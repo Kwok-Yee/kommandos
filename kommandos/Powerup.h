@@ -13,7 +13,7 @@ public:
 	irr::scene::ISceneNode* GetNode();
 	void SetPowerup(irr::scene::ISceneNode* newPowerup);
 	irr::s32 GetPowerupType();
-	Powerup();
+	Powerup(irr::scene::ISceneManager* smgr);
 	void SetPowerupType(irr::s32 powType);
 
 private:

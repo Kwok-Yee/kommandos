@@ -12,6 +12,9 @@ using namespace std;
 using namespace irr;
 using namespace scene;
 using namespace core;
+using namespace io;
+
+const path FireRate = "../media/Models/powerup";
 
 void Powerup::Reset()
 {
@@ -51,8 +54,17 @@ s32 Powerup::GetPowerupType()
 	return type;
 }
 
-Powerup::Powerup()
+Powerup::Powerup(ISceneManager* smgr)
 {
 	powerup = 0;
 	type = PowerupType::base;
+
+	IMesh* powerupMesh = smgr->getMesh("../media/powerup.3ds");
+	IMeshSceneNode* powerupNode = smgr->addMeshSceneNode(powerupMesh);
+	//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture(FireRate));
+	powerupNode->setMaterialFlag(video::EMF_LIGHTING, true);
+	powerupNode->setPosition(vector3df(280, 0, 280));
+	powerupNode->setScale(vector3df(2, 1, 2));
+
 }
+

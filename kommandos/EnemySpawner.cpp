@@ -116,17 +116,17 @@ void EnemySpawner::UpdateEnemies()
 void EnemySpawner::InitialiseWaveData()
 {
 				        //Amount of enemies:
-	waveData[0] = new WaveData(1, 1, 0, 0);//10
-	waveData[1] = new WaveData(2, 0, 0, 10);//10
+	waveData[0] = new WaveData(1, 5, 0, 0);//5
+	waveData[1] = new WaveData(2, 10, 0, 0);//10
 	waveData[2] = new WaveData(3, 8, 3, 0);//11
 	waveData[3] = new WaveData(4, 12, 5, 0);//17
 	waveData[4] = new WaveData(5, 15, 2, 2);//19
 	waveData[5] = new WaveData(6, 10, 0, 7);//17
-	waveData[6] = new WaveData(7, 10, 0, 0);//Rest will change depending on yet to be added enemy types
-	waveData[7] = new WaveData(8, 10, 0, 0);
-	waveData[8] = new WaveData(9, 10, 0, 0);
-	waveData[9] = new WaveData(10, 30, 0, 0);
-	waveData[10] = new WaveData(11, 10, 0, 0);
+	waveData[6] = new WaveData(7, 7, 7, 4); //18
+	waveData[7] = new WaveData(8, 0, 15, 0); //15
+	waveData[8] = new WaveData(9, 0, 0, 15); //15
+	waveData[9] = new WaveData(10, 10, 10, 10); //30
+	waveData[10] = new WaveData(11, 0, 15, 15); //30
 }
 
 void EnemySpawner::Spawn()

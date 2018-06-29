@@ -21,7 +21,7 @@ Powerup* PowerupPool::GetResource()
 {
 	if (resources.empty())
 	{
-		return new Powerup(powPoolDevice->getSceneManager());
+		return new Powerup(powPoolDevice);
 	}
 	else
 	{

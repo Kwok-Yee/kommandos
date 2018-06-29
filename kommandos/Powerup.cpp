@@ -16,6 +16,10 @@ using namespace io;
 
 const path FireRate = "../media/Models/powerup";
 
+IrrlichtDevice* powerupIDevice;
+irr::video::IVideoDriver* powerupDriver;
+ISceneManager* powerupSmgr;
+
 void Powerup::Reset()
 {
 	powerup->setVisible(false);
@@ -46,7 +50,6 @@ void Powerup::SetPowerupType(s32 powType)
 		Powerup::type = Powerup::PowerupType::splitshot;
 		break;
 	}
-	
 }
 
 s32 Powerup::GetPowerupType()
@@ -54,17 +57,23 @@ s32 Powerup::GetPowerupType()
 	return type;
 }
 
-Powerup::Powerup(ISceneManager* smgr)
+Powerup::Powerup(IrrlichtDevice* device)
 {
+	powerupIDevice = device;
+	powerupDriver = powerupIDevice->getVideoDriver();
+	powerupSmgr = powerupIDevice->getSceneManager();
+
 	powerup = 0;
-	type = PowerupType::base;
 
-	IMesh* powerupMesh = smgr->getMesh("../media/powerup.3ds");
-	IMeshSceneNode* powerupNode = smgr->addMeshSceneNode(powerupMesh);
-	//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture(FireRate));
-	powerupNode->setMaterialFlag(video::EMF_LIGHTING, true);
-	powerupNode->setPosition(vector3df(280, 0, 280));
-	powerupNode->setScale(vector3df(2, 1, 2));
+	powerup = powerupSmgr->addMeshSceneNode(powerupSmgr->getMesh("../media/powerup.3ds"));
+	if (powerup)
+	{
+		powerup->setMaterialFlag(video::EMF_LIGHTING, false);
 
+		powerup->setScale(vector3df(2, 1, 2));
+		powerup->setMaterialTexture(0, powerupDriver->getTexture(FireRate));
+		powerup->setVisible(false);
+	}
+	SetPowerupType(PowerupType::base);
 }
 

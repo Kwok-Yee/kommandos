@@ -35,7 +35,7 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
 	///The method uses one rule to stop objects from spawning on top of each other.
 
-	const int amountOfObjects = 125; // set amount of objects
+	const int amountOfObjects = 100; // set amount of objects
 	
 	//Get device for creating obstacles
 	ISceneManager* smgr = device->getSceneManager();

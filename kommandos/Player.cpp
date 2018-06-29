@@ -202,6 +202,23 @@ void Player::Move(InputReceiver inputReceiver)
 	{
 		vulnerableTimer -= frameDeltaTime;
 	}
+
+	Powerup* pow = playerCol.CollidesWithPowerup(playerObject);
+	if (pow)
+	{
+		switch (pow->GetPowerupType())
+		{
+		case 0:
+			break;
+		case 1:
+			//fireratePowerup
+			break;
+		case 2:
+			//splitShot
+			break;
+		}
+
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -275,7 +292,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-		
+
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);

@@ -19,7 +19,7 @@ void Powerup::Reset()
 	powerup->setPosition(vector3df(0, 0, 0));
 }
 
-ISceneNode* Powerup::GetPowerup()
+ISceneNode* Powerup::GetNode()
 {
 	return powerup;
 }
@@ -27,6 +27,23 @@ ISceneNode* Powerup::GetPowerup()
 void Powerup::SetPowerup(ISceneNode* newPowerup)
 {
 	powerup = newPowerup;
+}
+
+void Powerup::SetPowerupType(s32 powType)
+{
+	switch (powType)
+	{
+	case 0:
+		Powerup::type = Powerup::PowerupType::base;
+		break;
+	case 1:
+		Powerup::type = Powerup::PowerupType::firerate;
+		break;
+	case 2:
+		Powerup::type = Powerup::PowerupType::splitshot;
+		break;
+	}
+	
 }
 
 s32 Powerup::GetPowerupType()
@@ -37,5 +54,5 @@ s32 Powerup::GetPowerupType()
 Powerup::Powerup()
 {
 	powerup = 0;
-	type = 0;
+	type = PowerupType::base;
 }

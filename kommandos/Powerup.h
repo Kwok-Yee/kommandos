@@ -4,16 +4,22 @@ class Powerup
 {
 public:
 
+	enum PowerupType
+	{
+		base, firerate, splitshot
+	};
+
 	void Reset();
-	irr::scene::ISceneNode* GetPowerup();
+	irr::scene::ISceneNode* GetNode();
 	void SetPowerup(irr::scene::ISceneNode* newPowerup);
 	irr::s32 GetPowerupType();
 	Powerup();
+	void SetPowerupType(irr::s32 powType);
 
 private:
 
 	irr::scene::ISceneNode* powerup;
-	irr::s32 type; //0 = default, 1 = splitshot, 2 = firerate
+	PowerupType type;
 
 };
 

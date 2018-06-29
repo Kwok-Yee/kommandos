@@ -31,14 +31,17 @@ void Bullet::SetBulletMode(BulletMode mode)
 	case BulletMode::basic:
 		speed = 250.f;
 		damage = 25.f;
+		bulletLifeTimer = 150;
 		bulletTimer = 25;
 		return;
 	case BulletMode::rapidFire:
 		speed = 300.f;
+		bulletLifeTimer = 150;
 		bulletTimer = 10;
 		return;
 	case BulletMode::splitFire:
 		speed = 250.f;
+		bulletLifeTimer = 150;
 		bulletTimer = 17;
 		return;
 	}
@@ -88,20 +91,22 @@ float Bullet::GetDamage()
 ///-------------------------------------------------------------------------------------------------
 void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDeltaTime)
 {
+	if (bulletLifeTimer > 0)
+	{
+		bulletLifeTimer -= frameDeltaTime;
+	}
 	if (setOnce)
 	{
+		velocity = playerPos;
 		if (bulletMode == BulletMode::basic || bulletMode == Bullet::rapidFire)
 		{
-			velocity = playerPos;
 			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
-			delta.normalize();
 		}
 		if (bulletMode == BulletMode::splitFire)
 		{
-			velocity = playerPos;
 			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z + offset);
-			delta.normalize();
 		}
+		delta.normalize();
 		setOnce = false;
 	}
 
@@ -121,6 +126,11 @@ void Bullet::SetSpeed(float s)
 s32 Bullet::GetBulletTimer()
 {
 	return bulletTimer;
+}
+
+s32 Bullet::GetBulletLifeTimer()
+{
+	return bulletLifeTimer;
 }
 
 void Bullet::SetBulletOffset(float o)

@@ -13,7 +13,7 @@ using namespace gui;
 #pragma comment(linker, "/subsystem:windows /ENTRY:mainCRTStartup")
 #endif	
 
-irr::core::array<ISceneNode*> wallList, staticList, dynamicList;
+irr::core::array<ISceneNode*> wallList, staticList, dynamicList, pickupList;
 
 bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene::ISceneNode* tBox2)
 {
@@ -23,6 +23,7 @@ bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene
 void Collision::AddWallToList(ISceneNode* wall) { wallList.push_back(wall); }
 void Collision::AddStaticToList(ISceneNode* staticObject) { staticList.push_back(staticObject); }
 void Collision::AddDynamicToList(ISceneNode* dynamicObject) { dynamicList.push_back(dynamicObject); }
+void Collision::AddPickupToList(ISceneNode* playerNode) { pickupList.push_back(playerNode); }
 
 void Collision::RemoveDynamicFromList(ISceneNode* dynamicObject)
 {
@@ -39,6 +40,19 @@ bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
 	for (u32 i = 0; i < staticList.size(); i++)
 		if (SceneNodeWithSceneNode(dynamicObject, staticList[i]))
 			return true;
+	return false;
+}
+
+
+bool Collision::CollidesWithPickupAble(irr::scene::ISceneNode* playerNode)
+{
+	for (u32 i = 0; i < pickupList.size(); i++)
+		if (SceneNodeWithSceneNode(playerNode, pickupList[i]))
+		{
+			return true;
+			pickupList.erase(i);
+		}
+			
 	return false;
 }
 

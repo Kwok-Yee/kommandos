@@ -8,6 +8,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "Game.h"
+#include <new>  
 
 using namespace irr;
 using namespace core;
@@ -58,6 +59,23 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 
 	Spawn();
 }
+//Struct for wavedata for each enemy in wave
+struct WaveData
+{
+	 WaveData(int _waveNumber, int _maxRegularEnem, int _maxFastEnem, int _maxTankEnem)
+	{
+		waveNumber = _waveNumber;
+		maxRegularEnem = _maxRegularEnem;
+		maxFastEnem = _maxFastEnem;
+		maxTankEnem = _maxTankEnem;
+		
+	}
+	int waveNumber;
+	int maxRegularEnem;
+	int maxFastEnem;
+	int maxTankEnem;
+};
+WaveData waveData[2];
 
 void EnemySpawner::UpdateEnemies()
 {
@@ -98,6 +116,24 @@ void EnemySpawner::UpdateEnemies()
 		Spawn();
 		currentWave++;
 	}
+}
+
+
+void EnemySpawner::InitialiseWaveData()
+{
+										//Amount of enemies:
+	waveData[0] = WaveData(1, 5, 0, 0); //5
+	waveData[1] = WaveData(2, 10, 0, 0);//10
+	waveData[2] = WaveData(3, 8, 3, 0);//11
+	waveData[3] = WaveData(4, 12, 5, 0);//17
+	waveData[4] = WaveData(5, 15, 2, 2);//19
+	waveData[5] = WaveData(6, 10, 0, 7);//17
+	waveData[6] = WaveData(7, 10, 0, 0);//Too lazy for rest
+	waveData[7] = WaveData(8, 10, 0, 0);
+	waveData[8] = WaveData(9, 10, 0, 0);
+	waveData[9] = WaveData(10, 10, 0, 0);
+	waveData[10] = WaveData(11, 10, 0, 0);
+
 }
 
 void EnemySpawner::Spawn()

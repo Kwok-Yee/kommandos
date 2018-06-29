@@ -16,4 +16,5 @@ public:
 private:
 	//Spawns a enemy at a random spaw position
 	void Spawn();
+	void InitialiseWaveData();
 };

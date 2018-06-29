@@ -71,8 +71,8 @@ Powerup::Powerup(IrrlichtDevice* device)
 		powerup->setMaterialFlag(video::EMF_LIGHTING, false);
 
 		powerup->setScale(vector3df(2, 1, 2));
-		powerup->setMaterialTexture(0, powerupDriver->getTexture(FireRate));
-		powerup->setVisible(false);
+		//powerup->setMaterialTexture(0, powerupDriver->getTexture(FireRate));
+		powerup->setVisible(true);
 	}
 	SetPowerupType(PowerupType::base);
 }

@@ -128,10 +128,10 @@ void EnemySpawner::InitialiseWaveData()
 	waveData[3] = WaveData(4, 12, 5, 0);//17
 	waveData[4] = WaveData(5, 15, 2, 2);//19
 	waveData[5] = WaveData(6, 10, 0, 7);//17
-	waveData[6] = WaveData(7, 10, 0, 0);//Too lazy for rest
+	waveData[6] = WaveData(7, 10, 0, 0);//Rest will change depending on yet to be added enemy types
 	waveData[7] = WaveData(8, 10, 0, 0);
 	waveData[8] = WaveData(9, 10, 0, 0);
-	waveData[9] = WaveData(10, 10, 0, 0);
+	waveData[9] = WaveData(10, 30, 0, 0);
 	waveData[10] = WaveData(11, 10, 0, 0);
 
 }

@@ -83,7 +83,7 @@ private:
 	/// <summary>	True to set once. </summary>
 	bool setOnce = true;
 	/// <summary>	The velocity. </summary>
-	irr::core::vector3df velocity;
+	irr::core::vector3df position;
 	/// <summary>	The delta. </summary>
 	irr::core::vector3df delta;
 	/// <summary>	The speed. </summary>
@@ -95,5 +95,8 @@ private:
 	/// <summary>	The bullet life timer. </summary>
 	irr::s32 bulletLifeTimer;
 	/// <summary>	The bullet offset. </summary>
-	float offset;
+	float spread;
+	irr::f32 length;
+	irr::core::vector3df perpendicular;
+	irr::core::vector3df offPos;
 };

@@ -97,22 +97,26 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 	}
 	if (setOnce)
 	{
-		velocity = playerPos;
-		if (bulletMode == BulletMode::basic || bulletMode == Bullet::rapidFire)
+		position = playerPos;
+		delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
+		length = delta.getLength();
+		delta = delta.normalize();
+
+		if (bulletMode == BulletMode::splitFire && spread > 0 || spread < 0)
 		{
-			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
+				perpendicular = vector3df(delta.Z, delta.Y, delta.X);
+				offPos = mousePos + (perpendicular * spread * length);
+				//recalculate delta based on offset position
+				delta = vector3df(offPos.X - playerPos.X, 1.f, offPos.Z - playerPos.Z);
+				delta.normalize();
 		}
-		if (bulletMode == BulletMode::splitFire)
-		{
-			delta = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z + offset);
-		}
-		delta.normalize();
+
 		setOnce = false;
 	}
 
-	velocity += delta * frameDeltaTime * speed;
-	velocity.Y = 1.f;
-	bullet->setPosition(velocity);
+	position += delta * frameDeltaTime * speed;
+	position.Y = 1.f;
+	bullet->setPosition(position);
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -135,7 +139,7 @@ s32 Bullet::GetBulletLifeTimer()
 
 void Bullet::SetBulletOffset(float o)
 {
-	offset = o;
+	spread = o;
 }
 
 ///-------------------------------------------------------------------------------------------------

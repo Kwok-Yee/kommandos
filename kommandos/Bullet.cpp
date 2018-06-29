@@ -102,15 +102,14 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 		length = delta.getLength();
 		delta = delta.normalize();
 
-		if (bulletMode == BulletMode::splitFire && spread > 0 || spread < 0)
+		if (bulletMode == BulletMode::splitFire && (spread > 0 || spread < 0))
 		{
-				perpendicular = vector3df(delta.Z, delta.Y, delta.X);
-				offPos = mousePos + (perpendicular * spread * length);
-				//recalculate delta based on offset position
-				delta = vector3df(offPos.X - playerPos.X, 1.f, offPos.Z - playerPos.Z);
-				delta.normalize();
+			perpendicular = vector3df(delta.Z, delta.Y, delta.X);
+			offPos = mousePos + (perpendicular * spread * length);
+			//recalculate delta based on offset position
+			delta = vector3df(offPos.X - playerPos.X, 1.f, offPos.Z - playerPos.Z);
+			delta.normalize();
 		}
-
 		setOnce = false;
 	}
 
@@ -137,9 +136,9 @@ s32 Bullet::GetBulletLifeTimer()
 	return bulletLifeTimer;
 }
 
-void Bullet::SetBulletOffset(float o)
+void Bullet::SetBulletSpread(float s)
 {
-	spread = o;
+	spread = s;
 }
 
 ///-------------------------------------------------------------------------------------------------

@@ -72,7 +72,7 @@ public:
 
 	irr::s32 GetBulletLifeTimer();
 	
-	void SetBulletOffset(float o);
+	void SetBulletSpread(float s);
 
 	Bullet();
 private:

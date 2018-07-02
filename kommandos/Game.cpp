@@ -69,6 +69,7 @@ bool Game::GetIsGameOver() {
 
 bool Game::SetIsGameOver(bool state)
 {
+	camera->state = camera->gameover;
 	return isGameOver = state;
 }
 

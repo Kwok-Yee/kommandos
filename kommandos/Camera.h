@@ -18,6 +18,14 @@ using namespace scene;
 class Camera
 {
 public:
+	enum CameraState
+	{
+		normal,
+		shaking,
+		gameover
+	};
+
+	CameraState state;
 
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Constructor. </summary>

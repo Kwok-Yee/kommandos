@@ -70,6 +70,7 @@ void Camera::CameraInit()
 	}
 	shakeTimer = maxTime;
 	srand(time(0));
+	state = normal;
 }
 
 void Camera::ScreenShake(f32 frameDeltaTime)
@@ -106,7 +107,7 @@ void Camera::ScreenShake(f32 frameDeltaTime)
 	else 
 	{
 		shakeTimer = maxTime;
-		shaking = false;
+		state = normal;
 	}
 }
 
@@ -117,27 +118,25 @@ void Camera::ScreenShake(f32 frameDeltaTime)
 
 void Camera::CameraUpdate(f32 frameDeltaTime)
 {
-	if (game_->GetIsGameOver() == true)
+
+	switch (state)
 	{
+	case normal:
+		if (camera)
+		{
+			newCameraPosition.X = player_->getPlayerObject()->getPosition().X;
+			newCameraPosition.Z = player_->getPlayerObject()->getPosition().Z;
+			camera->setPosition(newCameraPosition);
+			camera->setTarget(player_->getPlayerObject()->getPosition());
+		}
+		break;
+	case shaking:
+		ScreenShake(frameDeltaTime);
+		break;
+	case gameover:
 		camera->setPosition(cameraStartPosition);
 		camera->setTarget(cameraStartTarget);
-	}
-	else
-	{
-		if (shaking)
-		{
-			ScreenShake(frameDeltaTime);
-		}
-		else 
-		{
-			if (camera) 
-			{
-				newCameraPosition.X = player_->getPlayerObject()->getPosition().X;
-				newCameraPosition.Z = player_->getPlayerObject()->getPosition().Z;
-				camera->setPosition(newCameraPosition);
-				camera->setTarget(player_->getPlayerObject()->getPosition());
-			}	
-		}
+		break;
 	}
 }
 

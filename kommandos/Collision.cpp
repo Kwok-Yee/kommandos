@@ -39,8 +39,15 @@ void Collision::RemoveDynamicFromList(ISceneNode* dynamicObject)
 bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
 {
 	for (u32 i = 0; i < staticList.size(); i++)
-		if (SceneNodeWithSceneNode(dynamicObject, staticList[i]))
-			return true;
+	{
+		for (u32 j = 0; j < wallList.size(); j++)
+		{
+			if (SceneNodeWithSceneNode(dynamicObject, staticList[i]) || SceneNodeWithSceneNode(dynamicObject, wallList[j]))
+			{
+				return true;
+			}
+		}
+	}
 	return false;
 }
 

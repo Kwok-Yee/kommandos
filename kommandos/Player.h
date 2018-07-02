@@ -85,11 +85,21 @@ public:
 
 	irr::core::vector3df GetMousePosition();
 
+	void SetRapidFireTimer(s32 timer);
+
+	void SetSplitFireTimer(s32 timer);
+
 private:
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Initializes this object. </summary>
 	///-------------------------------------------------------------------------------------------------
 
 	void Init();
+	/// <summary>	The bullet timer. </summary>
+	irr::s32 bulletTimer;
+	/// <summary>	The rapid fire power up timer. </summary>
+	irr::s32 rapidFireTimer;
+	/// <summary>	The split fire power up timer. </summary>
+	irr::s32 splitFireTimer;
 };
 

@@ -189,18 +189,22 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	f32 size = level->getTransformedBoundingBox().getExtent().X / 18;
 	switch (zone)
 	{
-	case 1:
-		cloudPosition.X = -size;
-		cloudPosition.Z = -size;
-	case 2:
-		cloudPosition.X = -size;
-		cloudPosition.Z = size;
-	case 3:
-		cloudPosition.X = size;
-		cloudPosition.Z = -size;
-	case 4:
+	case Zone1:
 		cloudPosition.X = size;
 		cloudPosition.Z = size;
+		break;
+	case Zone2:
+		cloudPosition.X = size;
+		cloudPosition.Z = -size;
+		break;
+	case Zone3:
+		cloudPosition.X = -size;
+		cloudPosition.Z = size;
+		break;
+	case Zone4:
+		cloudPosition.X = -size;
+		cloudPosition.Z = -size;
+		break;
 	default:
 		break;
 	}

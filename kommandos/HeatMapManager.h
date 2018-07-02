@@ -2,7 +2,8 @@
 #include <irrlicht.h>
 
 #define MAX_WEIGHT 100
-#define MAX_SECONDS 5
+#define MAX_COUNTDOWN_SECONDS 5
+#define MAX_POISONCLOUS_SECONDS 20
 class HeatMapManager
 {
 public:

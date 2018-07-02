@@ -82,7 +82,7 @@ void EnemySpawner::UpdateEnemies()
 
 		if (enemyHealthValues[i] <= 0)
 		{
-			heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 10.0f);
+			heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 5.0f);
 			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			collision.RemoveDynamicFromList(enemies[i]);

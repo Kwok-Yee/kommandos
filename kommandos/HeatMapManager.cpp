@@ -136,7 +136,7 @@ void HeatMapManager::Update()
 {
 	if (countdown)
 	{
-		seconds -= 0.016;
+		seconds -= 0.016; //we use vsync, so it's always 60fps, 0.016 is the framedeltatime
 
 		stringw newText("There will be gas in Zone ");
 		newText += activeZone;
@@ -178,7 +178,7 @@ void HeatMapManager::CreateCountdown(Zone zone)
 	countdownText->setMinSize(dimension2du(100, 40));
 	countdownText->setMaxSize(dimension2du(100, 40));
 
-	seconds = MAX_SECONDS;
+	seconds = MAX_COUNTDOWN_SECONDS;
 }
 
 void HeatMapManager::CreatePoisonCloud(Zone zone)
@@ -226,7 +226,7 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 		}
 	}
 	isPoisonCloudActive = true;
-	seconds = MAX_SECONDS * 5;
+	seconds = MAX_POISONCLOUS_SECONDS;
 }
 
 ISceneNode* HeatMapManager::GetPoisonCloud() {

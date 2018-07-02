@@ -37,7 +37,7 @@ using namespace irrklang;
 // Correction for rotating the Y Axis on the player object
 #define Y_AXIS_CORRECTION -90.f
 
-#define PLAYER_MODEL "../media/Models/player/PlayerModel.3ds"
+#define PLAYER_MODEL "../media/Models/player/player.3ds"
 #define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
 #define GUN_SHOT_SOUND "../media/Sounds/gunshot02.mp3"
@@ -124,6 +124,9 @@ void Player::Init()
 	if (playerObject)
 	{
 		playerObject->setPosition(vector3df(266, 0, 266));
+		playerObject->setScale(vector3df(4, 4, 4));
+		playerObject->setMaterialFlag(EMF_LIGHTING, true);
+		//playerObject->setMaterialTexture(0, playerDriver->getTexture(GUN_MODEL));
 	}
 	currentPosition = playerObject->getPosition();
 

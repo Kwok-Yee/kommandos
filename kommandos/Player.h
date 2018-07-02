@@ -1,3 +1,9 @@
+///-------------------------------------------------------------------------------------------------
+// file:	Player.h
+//
+// summary:	Declares the player class
+///-------------------------------------------------------------------------------------------------
+
 #pragma once
 #include <irrlicht.h>
 #include "InputReceiver.h"
@@ -7,30 +13,93 @@ using namespace irr;
 using namespace core;
 using namespace scene;
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	A player. </summary>
+///-------------------------------------------------------------------------------------------------
+
 class Player
 {
 public:
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Constructor. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	Player(irr::IrrlichtDevice* device);
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Take damage. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void TakeDamage(irr::f32 damage, irr::f32 frameDeltaTime);
 	//Draws the healtbar in the top-left corner
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Draw health bar. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void DrawHealthBar();
 	//Moves player with WASD keys
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Moves the given input receiver. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void Move(InputReceiver inputReceiver);
 	//Shoots a bullet with right mouse clcik
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Shoots. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void Shoot(InputReceiver inputReceiver, EnemySpawner* enemies);
 	//Retruns the player object
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Gets player object. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	irr::scene::ISceneNode* getPlayerObject();
-	// Raycast from screen with a start to end position and the laserline.
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Raycasts. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void Raycast(irr::core::vector3df endPosition, irr::scene::ICameraSceneNode* camera);
-	// gets the ray start and it's vector to the end position which is the mousePosition
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Executes the line intersect action. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	bool OnLineIntersect(irr::core::plane3df &plane, irr::core::line3df &ray);
-	// Get player vulnerability
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Gets vulnerable timer. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	irr::s32 getVulnerableTimer();
-	// Get mouse position in 3d world space
+
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Gets mouse position. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	irr::core::vector3df GetMousePosition();
 
+	void SetRapidFireTimer(s32 timer);
+
+	void SetSplitFireTimer(s32 timer);
+
 private:
-	//Initializes all variables and objects
+	///-------------------------------------------------------------------------------------------------
+	/// <summary>	Initializes this object. </summary>
+	///-------------------------------------------------------------------------------------------------
+
 	void Init();
+	/// <summary>	The bullet timer. </summary>
+	irr::s32 bulletTimer;
+	/// <summary>	The rapid fire power up timer. </summary>
+	irr::s32 rapidFireTimer;
+	/// <summary>	The split fire power up timer. </summary>
+	irr::s32 splitFireTimer;
 };
 

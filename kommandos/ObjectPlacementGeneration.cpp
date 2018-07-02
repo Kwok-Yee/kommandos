@@ -1,3 +1,15 @@
+///-------------------------------------------------------------------------------------------------
+// file:	ObjectPlacementGeneration.cpp
+//
+// summary: Object placement generation class. In this class multiple objects are defined.
+// The class was used for an object placement technique, but was later turned into a general object placement class.
+// Default objects are created and placed in this script. The box objects are placed randomly but according to two rules.
+// For placing objects PCG style Poisson Disk Sampling was referenced but not fully used.
+// This class has 5 methods for the obstacle generation part, 1 default object method and 1 method to create every object.
+//
+// author:	Nino Thijs
+///-------------------------------------------------------------------------------------------------
+
 #include <irrlicht.h>
 #include "ObjectPlacementGeneration.h"
 #include <iostream>
@@ -15,10 +27,12 @@ using namespace video;
 using namespace io;
 using namespace std;
 
-Collision coll; // object for collision
+/// <summary> Collision object. </summary>
+Collision coll;
 
-// Method for placing objects which uses multiple arrays to create objects and put these in random positions
-// The method uses one rule to stop objects from spawning on top of each other.
+///-------------------------------------------------------------------------------------------------
+/// <summary> Method for placing objects which uses multiple arrays to create objects and put these in random positions. </summary>
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 {
 	CreateDefaultObjects(device); // Creates playing field objects.
@@ -30,7 +44,10 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 	CreateObjects(device, zone3Obstacles); // Adds objects with texture to the obstacles array.
 	CreateObjects(device, zone4Obstacles); // Adds objects with texture to the obstacles array.
 
-	usedPositions = new vector3df[AMOUNT_OF_OBSTACLES]; // initialize the used position array with the amount of objects.
+	usedZone1Positions = new vector3df[AMOUNT_OF_OBSTACLES/4]; // initialize the used position array with the amount of objects.
+	usedZone2Positions = new vector3df[AMOUNT_OF_OBSTACLES/4]; // initialize the used position array with the amount of objects.
+	usedZone3Positions = new vector3df[AMOUNT_OF_OBSTACLES/4]; // initialize the used position array with the amount of objects.
+	usedZone4Positions = new vector3df[AMOUNT_OF_OBSTACLES/4]; // initialize the used position array with the amount of objects.
 
 	GenerateNewObjects(HeatMapManager::Zone1);
 	GenerateNewObjects(HeatMapManager::Zone2);
@@ -48,7 +65,9 @@ void ObjectPlacementGeneration::PlaceObjects(IrrlichtDevice* device)
 
 }
 
-//Method for creating the objects with the correct material.
+	///-------------------------------------------------------------------------------------------------
+	///<summary>  Method for creating the objects with the correct material. </summary>
+	///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode* obstacles[])
 {
 	//Scene manager and driver for creating obstacles
@@ -61,7 +80,7 @@ void ObjectPlacementGeneration::CreateObjects(IrrlichtDevice* device, ISceneNode
 
 
 	//Create obstacles defined by size, add textures and collision.
-	for (int i = 0; i < AMOUNT_OF_OBSTACLES; i++)
+	for (int i = 0; i < AMOUNT_OF_OBSTACLES/4; i++)
 	{
 		obstacles[i] = smgr->addCubeSceneNode();
 		obstacles[i]->setMaterialTexture(0, driver->getTexture(crateDiffuse));
@@ -82,47 +101,47 @@ void ObjectPlacementGeneration::GenerateNewObjects(HeatMapManager::Zone zone)
 		for (int i = 0; i < AMOUNT_OF_OBSTACLES/4; i++)
 		{
 			//set used position to a random position on the grid and set the position of the obstacles to these positions.
-			usedPositions[i] = zone1Grid[RandomPosition()];
-			zone1Obstacles[i]->setPosition(usedPositions[i]);
+			usedZone1Positions[i] = zone1Grid[RandomPosition()];
+			zone1Obstacles[i]->setPosition(usedZone1Positions[i]);
 		}
 		//Check if obstacles behave to the rule of not spawning on-top of each other.
-		CheckObstaclePosition(zone1Obstacles, usedPositions, zone1Grid, AMOUNT_OF_OBSTACLES);
+		CheckObstaclePosition(zone1Obstacles, usedZone1Positions, usedZone1Positions, AMOUNT_OF_OBSTACLES);
 		break;
 
 	case HeatMapManager::Zone2:
 		//generate new objects
-		for (int i = AMOUNT_OF_OBSTACLES / 4; i < AMOUNT_OF_OBSTACLES / 2; i++)
+		for (int i = 0; i < AMOUNT_OF_OBSTACLES / 4; i++)
 		{
 			//set used position to a random position on the grid and set the position of the obstacles to these positions.
-			usedPositions[i] = zone2Grid[RandomPosition()];
-			zone2Obstacles[i]->setPosition(usedPositions[i]);
+			usedZone2Positions[i] = zone2Grid[RandomPosition()];
+			zone2Obstacles[i]->setPosition(usedZone2Positions[i]);
 		}
 		//Check if obstacles behave to the rule of not spawning on-top of each other.
-		CheckObstaclePosition(zone2Obstacles, usedPositions, zone2Grid, AMOUNT_OF_OBSTACLES);
+		CheckObstaclePosition(zone2Obstacles, usedZone2Positions, zone2Grid, AMOUNT_OF_OBSTACLES);
 		break;
 
 	case HeatMapManager::Zone3:
 		//generate new objects
-		for (int i = AMOUNT_OF_OBSTACLES / 2; i < AMOUNT_OF_OBSTACLES / 2 + AMOUNT_OF_OBSTACLES / 4; i++)
+		for (int i = 0; i < AMOUNT_OF_OBSTACLES / 4; i++)
 		{
 			//set used position to a random position on the grid and set the position of the obstacles to these positions.
-			usedPositions[i] = zone3Grid[RandomPosition()];
-			zone3Obstacles[i]->setPosition(usedPositions[i]);
+			usedZone3Positions[i] = zone3Grid[RandomPosition()];
+			zone3Obstacles[i]->setPosition(usedZone3Positions[i]);
 		}
 		//Check if obstacles behave to the rule of not spawning on-top of each other.
-		CheckObstaclePosition(zone3Obstacles, usedPositions, zone3Grid, AMOUNT_OF_OBSTACLES);
+		CheckObstaclePosition(zone3Obstacles, usedZone3Positions, zone3Grid, AMOUNT_OF_OBSTACLES);
 		break;
 
 	case HeatMapManager::Zone4:
 		//generate new objects
-		for (int i = AMOUNT_OF_OBSTACLES / 2 + AMOUNT_OF_OBSTACLES / 4; i < AMOUNT_OF_OBSTACLES; i++)
+		for (int i = 0; i < AMOUNT_OF_OBSTACLES/4; i++)
 		{
 			//set used position to a random position on the grid and set the position of the obstacles to these positions.
-			usedPositions[i] = zone4Grid[RandomPosition()];
-			zone4Obstacles[i]->setPosition(usedPositions[i]);
+			usedZone4Positions[i] = zone4Grid[RandomPosition()];
+			zone4Obstacles[i]->setPosition(usedZone4Positions[i]);
 		}
 		//Check if obstacles behave to the rule of not spawning on-top of each other.
-		CheckObstaclePosition(zone4Obstacles, usedPositions, zone4Grid, AMOUNT_OF_OBSTACLES);
+		CheckObstaclePosition(zone4Obstacles, usedZone4Positions, zone4Grid, AMOUNT_OF_OBSTACLES);
 		break;
 
 	default:
@@ -130,11 +149,13 @@ void ObjectPlacementGeneration::GenerateNewObjects(HeatMapManager::Zone zone)
 	}
 }
 
-// Create a grid on the arena which is based on step size and the amount of rows and columns.
-// Reason for using a normal array instead of a 2d array is because of memory use.
+///-------------------------------------------------------------------------------------------------
+/// <summary> Create a grid on the arena which is based on step size and the amount of rows and columns.  </summary>
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateGrid()
 {
-	
+	///Reason for using a normal array instead of a 2d array is because of memory use.
+
 	int xStep = 10; //X step for changing position
 	int zStep = 10; //Z step for changing position
 	const int startY = 0; // Y never changes.
@@ -156,7 +177,9 @@ void ObjectPlacementGeneration::CreateGrid()
 	}
 }
 
-//Method for getting a random position
+///-------------------------------------------------------------------------------------------------
+/// <summary> Method for getting a random position.  </summary>
+///-------------------------------------------------------------------------------------------------
 int ObjectPlacementGeneration::RandomPosition()
 {
 	// random int for choosing a position from the grid array.
@@ -164,13 +187,13 @@ int ObjectPlacementGeneration::RandomPosition()
 	return r;
 }
 
-
-/*Method for finding the right grid size, the arena size is divided by the obstacle size.
-Rows and columns are scaled the so the grid is a bit smaller and the grid is made
-by multiplying the rows and columns
-*/
+///-------------------------------------------------------------------------------------------------
+///  <summary> Method for finding the right grid size, the arena size is divided by the obstacle size. </summary>
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 {
+	///Rows and columns are scaled the so the grid is a bit smaller and the grid is made by multiplying the rows and columns 
+
 	int resize = 4;
 	vector3df arenaSize = arena->getTransformedBoundingBox().getExtent(); // get size of the arena.
 	vector3df obstacleSize = vector3df(10,10,10); // set the obstacle size.
@@ -184,7 +207,7 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 	startX = ((arenaSize.X * resize) * scale) / 2;// -obstacleSize.X;
 	startZ = ((arenaSize.Z * resize) * scale) / 2;// -obstacleSize.Z;
 
-	//Because we work with four zones, dived the rows and columns by 4
+	//Because we work with four zones, dived the rows and columns by 2
 	rows /= 2;
 	columns /= 2;
 	zone1Grid = new vector3df[rows * columns]; // initialize grid based on rows times columns.
@@ -193,7 +216,9 @@ void ObjectPlacementGeneration::CalculateGrid(ISceneNode* arena)
 	zone4Grid = new vector3df[rows * columns]; // initialize grid based on rows times columns.
 }
 
-//Method for spawning default objects like walls and the arena floor.
+///-------------------------------------------------------------------------------------------------
+/// <summary> Method for spawning default objects like walls and the arena floor. </summary>
+///-------------------------------------------------------------------------------------------------
 void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 
 	ISceneManager* smgr = device->getSceneManager();
@@ -281,26 +306,31 @@ void ObjectPlacementGeneration::CreateDefaultObjects(IrrlichtDevice* device) {
 	coll.AddWallToList(shortWallNodeDown);
 }
 
-//Method for checking if an obstacle position is unique.
-void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode * obstacles[], vector3df* usedPositions, vector3df* grid, int size)
+///-------------------------------------------------------------------------------------------------
+/// <summary>  Method for checking if an obstacle position is unique. </summary> 
+///-------------------------------------------------------------------------------------------------
+void ObjectPlacementGeneration::CheckObstaclePosition(ISceneNode* obstacles[], vector3df* usedPositions, vector3df* grid, int size)
 {
+	///First rule is that objects can't spawn on-top of each other. 
+	///Second rule is that objects can't spawn on the default position. 
+
 	vector3df defaultPosition = vector3df(266, 0, 266);
 
-	for (int i = 0; i < size/2 - 1; i++)
+	for (int i = 0; i < size/4 - 1; i++)
 	{
-		for (int j = i + 1; j < size/2; j++)
+		for (int j = i + 1; j < size/4; j++)
 		{
 			//Check if there are any positions that are the same.
 			if (usedPositions[i] == usedPositions[j] || usedPositions[i] == defaultPosition) {
 				// if there are positions the same unqiue equals false.
 				usedPositions[i] = grid[RandomPosition()];
+				obstacles[i]->setPosition(usedPositions[i]);
 				CheckObstaclePosition(obstacles, usedPositions, grid, size);
 			}
-			else
+			/*else
 			{
 				//set obstacle to unique position.
-				obstacles[i]->setPosition(usedPositions[i]);
-			}
+			}*/
 		}
 	}
 }

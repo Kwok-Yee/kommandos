@@ -1,6 +1,8 @@
-/*
-	InputReceiver is used for listening to user input, mouse clicks and positions.
-*/
+///-------------------------------------------------------------------------------------------------
+// file:	InputReceiver.cpp
+//
+// summary: InputReceiver is used for listening to user input, mouse clicks and positions.
+///-------------------------------------------------------------------------------------------------
 
 #include <irrlicht.h>
 #include "InputReceiver.h"

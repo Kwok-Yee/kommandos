@@ -1,3 +1,9 @@
+///-------------------------------------------------------------------------------------------------
+// file:	Player.cpp
+//
+// summary:	Implements the player class
+///-------------------------------------------------------------------------------------------------
+
 #include <irrlicht.h>
 #include <irrKlang.h>
 #include "Player.h"
@@ -19,7 +25,8 @@ using namespace video;
 using namespace std;
 using namespace irrklang;
 
-// Healthbar
+
+/// <summary>	Healthbar. </summary>
 #define X1BAR 10
 #define X2BAR 10
 #define Y1BAR 10
@@ -40,35 +47,58 @@ using namespace irrklang;
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
 
+/// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
+/// <summary>	The player driver. </summary>
 IVideoDriver* playerDriver;
+/// <summary>	The player smgr. </summary>
 ISceneManager* playerSmgr;
+/// <summary>	Manager for sound. </summary>
 SoundManager* soundManager;
+/// <summary>	State of the game over. </summary>
 GameOverState gameOverState;
+/// <summary>	The player col. </summary>
 Collision playerCol;
 HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
+/// <summary>	The player scores. </summary>
 Score playerScores;
+/// <summary>	The game. </summary>
 Game* game;
 
+/// <summary>	The player object. </summary>
 ISceneNode* playerObject;
+/// <summary>	The gun node. </summary>
 ISceneNode* gunNode;
+/// <summary>	The health. </summary>
 f32 health;
+/// <summary>	The time. </summary>
 u32 time;
+/// <summary>	The current position. </summary>
 vector3df currentPosition;
 
+/// <summary>	The mouse position. </summary>
 vector3df mousePosition;
+/// <summary>	to mouse position. </summary>
 vector3df toMousePos;
 
+/// <summary>	The vulnerable timer. </summary>
 s32 vulnerableTimer = 0;
 
+/// <summary>	The pool. </summary>
 BulletPool* pool;
+/// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
-s32 bulletTimer = 0;
 
 // FRAMEDELTATIME
+/// <summary>	The frame delta time. </summary>
 f32 frameDeltaTime;
+/// <summary>	True if has shot, false if not. </summary>
 bool hasShot = false;
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Constructor. </summary>
+///-------------------------------------------------------------------------------------------------
 
 Player::Player(IrrlichtDevice* device)
 {
@@ -83,6 +113,10 @@ Player::Player(IrrlichtDevice* device)
 	// how long it was since the last frame
 	time = playerIDevice->getTimer()->getTime();
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Initializes this object. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Init()
 {
@@ -110,9 +144,14 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Moves the given input receiver. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Move(InputReceiver inputReceiver)
 {
@@ -171,18 +210,57 @@ void Player::Move(InputReceiver inputReceiver)
 	}
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Shoots. </summary>
+///-------------------------------------------------------------------------------------------------
+
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	Raycast(inputReceiver.GetMousePosition(), playerSmgr->getActiveCamera());
+
 	if (bulletTimer > 0)
 	{
 		bulletTimer -= frameDeltaTime;
 	}
+	if (rapidFireTimer > 0)
+	{
+		rapidFireTimer -= frameDeltaTime;
+	}
+	if (splitFireTimer > 0)
+	{
+		splitFireTimer -= frameDeltaTime;
+	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
 		soundManager->PlaySound(GUN_SHOT_SOUND, false);
+
+		// Bullet instances
 		Bullet* bullet = pool->GetResource();
+		Bullet* leftBullet = pool->GetResource();
+		Bullet* rightBullet = pool->GetResource();
+
+		// Rapid fire active
+		if (rapidFireTimer > 0)
+		{
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+		}
+
+		// Split fire active
+		if (splitFireTimer > 0)
+		{
+			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
+			// Push bullets to active bullets list
+			activeBullets.push_back(leftBullet);
+			activeBullets.push_back(rightBullet);
+		}
+
+		// Push bullets to active bullets list
 		activeBullets.push_back(bullet);
+
+		// Main bullet
 		bullet->SetBullet(playerSmgr->addSphereSceneNode());
 		if (bullet->GetBullet())
 		{
@@ -190,9 +268,40 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
 			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
 		}
+
+		// Left bullet for split fire
+		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		if (leftBullet->GetBullet())
+		{
+			leftBullet->GetBullet()->setVisible(false);
+			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		}
+
+		// Right bullet for split fire
+		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		if (rightBullet->GetBullet())
+		{
+			rightBullet->GetBullet()->setVisible(false);
+			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+		}
+
 		hasShot = true;
+
+		// Bullet visibility
 		bullet->GetBullet()->setVisible(true);
-		bulletTimer = BULLET_BASE_TIMER;
+
+		// Split fire active
+		if (splitFireTimer > 0)
+		{
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+		}
+
+		// Timer reset
+		bulletTimer = bullet->GetBulletTimer();
 	}
 	if (hasShot)
 	{
@@ -213,7 +322,9 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 						return;
 					}
 				}
-				if (activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet()))
+				// Check collision with static walls or the life time of the bullet
+				if ((activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet())) ||
+					(activeBullets[i] && activeBullets[i]->GetBulletLifeTimer() == 0))
 				{
 					pool->ReturnResource(activeBullets[i]);
 					activeBullets.erase(i);
@@ -227,6 +338,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Take damage. </summary>
+///-------------------------------------------------------------------------------------------------
+
 void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 {
 	if (health > 0 && vulnerableTimer <= 0)
@@ -234,7 +349,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-		
+
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);
@@ -242,6 +357,10 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 		}
 	}
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Draw health bar. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::DrawHealthBar()
 {
@@ -260,10 +379,18 @@ void Player::DrawHealthBar()
 	}
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets player object. </summary>
+///-------------------------------------------------------------------------------------------------
+
 ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Raycasts. </summary>
+///-------------------------------------------------------------------------------------------------
 
 void Player::Raycast(vector3df endPosition, ICameraSceneNode* camera)
 {
@@ -280,17 +407,40 @@ void Player::Raycast(vector3df endPosition, ICameraSceneNode* camera)
 }
 
 // intersect the ray with a plane around the node facing towards the mouse.
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Executes the line intersect action. </summary>
+///-------------------------------------------------------------------------------------------------
+
 bool Player::OnLineIntersect(irr::core::plane3df &plane, irr::core::line3df &ray)
 {
 	return plane.getIntersectionWithLine(ray.start, ray.getVector(), mousePosition);
 }
+
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets vulnerable timer. </summary>
+///-------------------------------------------------------------------------------------------------
 
 s32 Player::getVulnerableTimer()
 {
 	return vulnerableTimer;
 }
 
+///-------------------------------------------------------------------------------------------------
+/// <summary>	Gets mouse position. </summary>
+///-------------------------------------------------------------------------------------------------
+
 vector3df Player::GetMousePosition()
 {
 	return mousePosition;
+}
+
+void Player::SetRapidFireTimer(s32 timer)
+{
+	rapidFireTimer = timer;
+}
+
+void Player::SetSplitFireTimer(s32 timer)
+{
+	splitFireTimer = timer;
 }

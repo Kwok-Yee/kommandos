@@ -29,7 +29,7 @@ public:
 	/// <summary>	Updates the camera position and target </summary>
 	///-------------------------------------------------------------------------------------------------
 
-	void CameraUpdate();
+	void CameraUpdate(f32 frameDeltaTime);
 
 private:
 
@@ -38,5 +38,6 @@ private:
 	 ///-------------------------------------------------------------------------------------------------
 
 	 void CameraInit();
-
+	 vector3df Lerp(vector3df a, vector3df b, f32 t);
+	 void ScreenShake(f32 frameDeltaTime);
 };

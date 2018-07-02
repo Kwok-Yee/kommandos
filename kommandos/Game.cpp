@@ -110,7 +110,7 @@ void Game::Update()
 	const u32 currentFrame = device->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
-	camera->CameraUpdate();
+	camera->CameraUpdate(frameDeltaTime);
 	if (!isGameOver)
 	{
 		tutorial.Update(frameDeltaTime);

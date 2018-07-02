@@ -66,6 +66,7 @@ Game* game;
 
 /// <summary>	The player object. </summary>
 ISceneNode* playerObject;
+ISceneNode* camFollowObject;
 /// <summary>	The gun node. </summary>
 ISceneNode* gunNode;
 /// <summary>	The health. </summary>
@@ -121,9 +122,15 @@ void Player::Init()
 	health = MAX_HEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh(PLAYER_MODEL);
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
+	camFollowObject = playerSmgr->addCubeSceneNode();
 	if (playerObject)
 	{
 		playerObject->setPosition(vector3df(266, 0, 266));
+	}
+	if (camFollowObject) 
+	{
+		camFollowObject->setParent(playerObject);
+		camFollowObject->setScale(vector3df(0,0,0));
 	}
 	currentPosition = playerObject->getPosition();
 
@@ -379,6 +386,11 @@ void Player::DrawHealthBar()
 ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
+}
+
+irr::scene::ISceneNode * Player::getCamFollowObject()
+{
+	return camFollowObject;
 }
 
 ///-------------------------------------------------------------------------------------------------

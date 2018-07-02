@@ -70,7 +70,7 @@ void Camera::CameraInit()
 	}
 	shakeTimer = maxTime;
 	srand(time(0));
-	state = normal;
+	state = shaking;
 }
 
 void Camera::ScreenShake(f32 frameDeltaTime)
@@ -79,25 +79,26 @@ void Camera::ScreenShake(f32 frameDeltaTime)
 	{
 		shakeTimer -= frameDeltaTime;
 		resetTime += frameDeltaTime;
-		camera->setTarget(player_->getPlayerObject()->getPosition());
-		newCameraPosition.X = player_->getPlayerObject()->getPosition().X;
-		newCameraPosition.Z = player_->getPlayerObject()->getPosition().Z;
+		camera->setTarget(player_->getCamFollowObject()->getPosition());
+		newCameraPosition.X = player_->getCamFollowObject()->getPosition().X;
+		newCameraPosition.Z = player_->getCamFollowObject()->getPosition().Z;
 		camera->setPosition(newCameraPosition);
 
 		const f32 dur = 0.6;
 		const f32 intensity = 1.5;
 		
-		vector3df randomVec = vector3df(rand() % 2 * intensity, player_->getPlayerObject()->getPosition().Y, rand() % 2 * intensity);
+		vector3df playerPos = player_->getPlayerObject()->getPosition();
+		vector3df randomVec = vector3df(playerPos.X + rand() % 2 * intensity, playerPos.Y, playerPos.Z + rand() % 2 * intensity);
 
 		std::cout << resetTime << std::endl;
 		
 		if (resetTime <= dur) 
 		{
-			player_->getPlayerObject()->setPosition(randomVec);
+			player_->getCamFollowObject()->setPosition(randomVec);
 		}
 		if (resetTime > dur) 
 		{
-			player_->getPlayerObject()->setPosition(randomVec);
+			player_->getCamFollowObject()->setPosition(randomVec);
 		}
 		if (resetTime > dur * 2)
 		{

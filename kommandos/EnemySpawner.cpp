@@ -87,7 +87,7 @@ void EnemySpawner::UpdateEnemies()
 			particle->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
 
 			killedEnemies++;
-			powerUpSpawner->PowerUpSpawn(enemySpawnerIDevice, enemies[i]->getPosition());
+			powerUpSpawner->PowerUpSpawn(enemies[i]->getPosition());
 
 			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
 			collision.RemoveDynamicFromList(enemies[i]);

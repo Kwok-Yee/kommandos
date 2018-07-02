@@ -14,6 +14,8 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "PowerupPool.h"
+#include "Powerup.h"
 #include "SoundManager.h"
 #include "iostream"
 
@@ -90,6 +92,8 @@ core::array<Bullet*> activeBullets;
 /// <summary>	The bullet timer. </summary>
 s32 bulletTimer = 0;
 
+PowerupPool* powPool;
+
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
 f32 frameDeltaTime;
@@ -144,6 +148,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	powPool = powPool->GetInstance(playerIDevice);
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
@@ -201,6 +206,24 @@ void Player::Move(InputReceiver inputReceiver)
 	if (vulnerableTimer > 0)
 	{
 		vulnerableTimer -= frameDeltaTime;
+	}
+
+	Powerup* pow = playerCol.CollidesWithPowerup(playerObject);
+	if (pow)
+	{
+		switch (pow->GetPowerupType())
+		{
+		case 0:
+			break;
+		case 1:
+			//fireratePowerup
+			break;
+		case 2:
+			//splitShot
+			break;
+		}
+		powPool->ReturnResource(pow);
+		
 	}
 }
 
@@ -275,7 +298,7 @@ void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
 		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-		
+
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);

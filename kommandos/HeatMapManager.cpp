@@ -183,7 +183,7 @@ void HeatMapManager::CreateCountdown(Zone zone)
 
 void HeatMapManager::CreatePoisonCloud(Zone zone)
 {
-	const path textPath = "../media/Textures/PoisonCloud.jpg";
+	const path texturePath = "../media/Textures/PoisonCloud.jpg";
 	vector3df cloudPosition;
 	cloudPosition.Y = -0.5;
 	f32 size = level->getTransformedBoundingBox().getExtent().X / 18;
@@ -214,20 +214,11 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	if (poisonCloud) {
 		poisonCloud->setPosition(cloudPosition);
 		poisonCloud->setScale(vector3df(size, 1.0, size));
-		ITexture* texture = hGame->device->getVideoDriver()->getTexture(textPath);
-		poisonCloud->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-		poisonCloud->setMaterialTexture(0, texture);
-		//making the cloud a bit transparent
-		for (int i = 0; i < poisonCloud->getMaterialCount(); i++)
-		{
-			SMaterial mat = poisonCloud->getMaterial(i);
-			mat.BackfaceCulling = false;
-			mat.Wireframe = false;
-			mat.Lighting = false;
-			mat.MaterialType = irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL_REF;
-			mat.DiffuseColor.setAlpha(20);
-
-		}
+		
+		poisonCloud->setMaterialFlag(video::EMF_LIGHTING, false);
+		poisonCloud->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
+		poisonCloud->setMaterialTexture(0, hGame->device->getVideoDriver()->getTexture(texturePath));
+		poisonCloud->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
 	}
 	isPoisonCloudActive = true;
 	seconds = MAX_POISONCLOUS_SECONDS;

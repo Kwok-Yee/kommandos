@@ -82,7 +82,7 @@ void Game::Start()
 	soundManager->PlaySound("../media/Sounds/blood_harvest.mp3", true);
 
 	// Create instances of classes
-	camera = new Camera(device);
+	camera = camera->GetInstance(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 	score.Scoring(device);

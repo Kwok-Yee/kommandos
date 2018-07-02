@@ -26,6 +26,7 @@ public:
 	};
 
 	CameraState state;
+	static Camera* GetInstance(IrrlichtDevice* device);
 
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Constructor. </summary>
@@ -44,7 +45,7 @@ private:
 	 ///-------------------------------------------------------------------------------------------------
 	 /// <summary>	Initializes the camera  </summary>
 	 ///-------------------------------------------------------------------------------------------------
-
+	 static Camera* instance;
 	 void CameraInit();
 	 void ScreenShake(f32 frameDeltaTime);
 };

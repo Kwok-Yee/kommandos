@@ -47,6 +47,17 @@ bool shaking = true;
 /// <summary>	Constructor. </summary>
 ///-------------------------------------------------------------------------------------------------
 
+Camera* Camera::instance = 0;
+
+Camera * Camera::GetInstance(IrrlichtDevice* device)
+{
+	if (!instance)
+	{
+		instance = new Camera(device);
+	}
+	return instance;
+}
+
 Camera::Camera(IrrlichtDevice* device)
 {
 	cameraIDevice = device;

@@ -38,6 +38,5 @@ private:
 	 ///-------------------------------------------------------------------------------------------------
 
 	 void CameraInit();
-	 vector3df Lerp(vector3df a, vector3df b, f32 t);
 	 void ScreenShake(f32 frameDeltaTime);
 };

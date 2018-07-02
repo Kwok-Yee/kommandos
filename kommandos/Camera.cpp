@@ -7,6 +7,9 @@
 #include <irrlicht.h>
 #include "Camera.h"
 #include <iostream>
+#include <stdlib.h>
+#include <ctime>
+#include <algorithm>
 #include "Player.h"
 #include "GameOverState.h" //For future game over implementation
 #include "Game.h"
@@ -34,9 +37,9 @@ Game* game_;
 /// <summary>	The new camera position. </summary>
 vector3df newCameraPosition;
 
-int shakeTimer = 600;
-f32 lerpTime = 600;
-f32 currentLerptime = 0;
+
+int maxTime = 100;
+int shakeTimer;
 f32 resetTime = 0;
 bool shaking = true;
 
@@ -65,49 +68,43 @@ void Camera::CameraInit()
 		camera->setTarget(cameraStartTarget);
 		newCameraPosition.Y = 80; 
 	}
+	shakeTimer = maxTime;
+	srand(time(0));
 }
-vector3df Camera::Lerp(vector3df a, vector3df b, f32 t)
-{
-	return (1 - t)*a + t*b;
-}
+
 void Camera::ScreenShake(f32 frameDeltaTime)
 {
 	if (shakeTimer > 0)
 	{
 		shakeTimer -= frameDeltaTime;
-		currentLerptime += frameDeltaTime;
 		resetTime += frameDeltaTime;
-		//camera->setTarget(player_->getPlayerObject()->getPosition());
+		camera->setTarget(player_->getPlayerObject()->getPosition());
 		newCameraPosition.X = player_->getPlayerObject()->getPosition().X;
 		newCameraPosition.Z = player_->getPlayerObject()->getPosition().Z;
 		camera->setPosition(newCameraPosition);
-		if (currentLerptime >= lerpTime) 
-		{
-			currentLerptime = lerpTime;
-		}
-		f32 percentage = currentLerptime / lerpTime;
+
+		f32 dur = 0.6;
+		
+		vector3df randomVec = vector3df(rand() % 2, player_->getPlayerObject()->getPosition().Y, rand() % 2);
 
 		std::cout << resetTime << std::endl;
-
-		if (resetTime <= 0.6) 
+		
+		if (resetTime <= dur) 
 		{
-			//camera->setPosition(lerp(player_->getPlayerObject()->getPosition() + vector3df(0, 0, 0), player_->getPlayerObject()->getPosition() + vector3df(0, 0, 10), percentage * 100));
-			camera->setTarget(lerp(player_->getPlayerObject()->getPosition(), player_->getPlayerObject()->getPosition() + vector3df(1, 0, 0), percentage * 1000));
+			player_->getPlayerObject()->setPosition(randomVec);
 		}
-		if (resetTime > 0.6) 
+		if (resetTime > dur) 
 		{
-			//camera->setPosition(lerp(player_->getPlayerObject()->getPosition() + vector3df(0, 80, 10), player_->getPlayerObject()->getPosition() + vector3df(0, 80, 0), percentage * 100));
-			camera->setTarget(lerp(player_->getPlayerObject()->getPosition(), player_->getPlayerObject()->getPosition() + vector3df(1, 0, 0), percentage * 1000));
+			player_->getPlayerObject()->setPosition(randomVec);
 		}
-		if (resetTime > 1.2)
+		if (resetTime > dur * 2)
 		{
 			resetTime = 0;
 		}
-
 	}
 	else 
 	{
-		shakeTimer = 600;
+		shakeTimer = maxTime;
 		shaking = false;
 	}
 }

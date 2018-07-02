@@ -29,7 +29,7 @@ core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
 ParticleSystem *particleSystem;
-const path bloodSplatter = "../media/Textures/bloodNew.bmp";
+const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 u32 prevFrameTime;
 
 

@@ -83,9 +83,10 @@ void Camera::ScreenShake(f32 frameDeltaTime)
 		newCameraPosition.Z = player_->getPlayerObject()->getPosition().Z;
 		camera->setPosition(newCameraPosition);
 
-		f32 dur = 0.6;
+		const f32 dur = 0.6;
+		const f32 intensity = 1.5;
 		
-		vector3df randomVec = vector3df(rand() % 2, player_->getPlayerObject()->getPosition().Y, rand() % 2);
+		vector3df randomVec = vector3df(rand() % 2 * intensity, player_->getPlayerObject()->getPosition().Y, rand() % 2 * intensity);
 
 		std::cout << resetTime << std::endl;
 		

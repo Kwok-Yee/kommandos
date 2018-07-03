@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "Game.h"
+#include "Camera.h" 
 #include <new>  
 
 using namespace irr;
@@ -25,6 +26,7 @@ Player* _player;
 Game* game_EnemySpawner;
 EnemyPool* enemyPool;
 Collision collision;
+Camera* _cam;
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
@@ -43,7 +45,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	_player = Player;
 	game_EnemySpawner = game_EnemySpawner->GetInstance();
 	enemyPool = EnemyPool::GetInstance(device);
-
+	_cam = _cam->GetInstance(NULL);
 	resize = 2;
 	//setting spawnpositions in the corners.
 	spawnPositions.push_back(vector3df(-82, 0, -78) * resize);
@@ -107,6 +109,14 @@ void EnemySpawner::UpdateEnemies()
 	{
 		currentWave++;
 		Spawn();
+		if (currentWave % 3 == 0) 
+		{
+			_cam->state = _cam->bigWaveShaking;
+		}
+		else 
+		{
+			_cam->state = _cam->waveShaking;
+		}
 		//Insert pause/UI between waves here
 		printf("wave changed");
 	}

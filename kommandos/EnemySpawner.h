@@ -22,7 +22,7 @@ public:
 	//extern u32 currentWave;
 private:
 	//Spawns a enemy at a random spaw position
-	void NextWave(float);
+	void NextWave();
 	void Spawn();
 	void InitialiseWaveData();
 };

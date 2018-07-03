@@ -116,19 +116,17 @@ void EnemySpawner::UpdateEnemies()
 	{
 		if (waveTimerSet == false)
 		{
-			NextWave(frameDeltaTime);
+			NextWave();
 		}
 	}
 }
 
-void EnemySpawner::NextWave(float waveFrameDeltaTime)
+void EnemySpawner::NextWave()
 {
 	const u32 now_ = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameTime = (f32)(now_ - currentTime) / 1000.f; // Time in seconds
 	currentTime = now_;
 	cout << waveCooldown;
-	//waveFrameDeltaTime--;
-
 	//Divide wavecooldown by % 60 for UI
 
 	if (waveTimerSet == false && waveCooldown > 0)

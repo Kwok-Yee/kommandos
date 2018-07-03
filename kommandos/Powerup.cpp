@@ -64,16 +64,6 @@ Powerup::Powerup(IrrlichtDevice* device)
 	powerupSmgr = powerupIDevice->getSceneManager();
 
 	powerup = 0;
-
-	powerup = powerupSmgr->addMeshSceneNode(powerupSmgr->getMesh("../media/powerup.3ds"));
-	if (powerup)
-	{
-		powerup->setMaterialFlag(video::EMF_LIGHTING, false);
-
-		powerup->setScale(vector3df(2, 1, 2));
-		//powerup->setMaterialTexture(0, powerupDriver->getTexture(FireRate));
-		powerup->setVisible(true);
-	}
 	SetPowerupType(PowerupType::base);
 }
 

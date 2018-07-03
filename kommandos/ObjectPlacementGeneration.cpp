@@ -105,7 +105,7 @@ void ObjectPlacementGeneration::GenerateNewObjects(HeatMapManager::Zone zone)
 			zone1Obstacles[i]->setPosition(usedZone1Positions[i]);
 		}
 		//Check if obstacles behave to the rule of not spawning on-top of each other.
-		CheckObstaclePosition(zone1Obstacles, usedZone1Positions, usedZone1Positions, AMOUNT_OF_OBSTACLES);
+		CheckObstaclePosition(zone1Obstacles, usedZone1Positions, zone1Grid, AMOUNT_OF_OBSTACLES);
 		break;
 
 	case HeatMapManager::Zone2:

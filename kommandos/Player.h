@@ -31,7 +31,7 @@ public:
 	/// <summary>	Take damage. </summary>
 	///-------------------------------------------------------------------------------------------------
 
-	void TakeDamage(irr::f32 damage, irr::f32 frameDeltaTime);
+	void TakeDamage(irr::f32 damage);
 	//Draws the healtbar in the top-left corner
 
 	///-------------------------------------------------------------------------------------------------

@@ -46,6 +46,8 @@ using namespace irrklang;
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
 
+const vector3df bulletSize = vector3df(0.03f, 0.125f, 0.25f);
+
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
 /// <summary>	The player driver. </summary>
@@ -254,30 +256,33 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		activeBullets.push_back(bullet);
 
 		// Main bullet
-		bullet->SetBullet(playerSmgr->addSphereSceneNode());
+		bullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (bullet->GetBullet())
 		{
 			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			bullet->GetBullet()->setScale(bulletSize);
 			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			bullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		leftBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (leftBullet->GetBullet())
 		{
 			leftBullet->GetBullet()->setVisible(false);
-			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			leftBullet->GetBullet()->setScale(bulletSize);
 			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			leftBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		rightBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (rightBullet->GetBullet())
 		{
 			rightBullet->GetBullet()->setVisible(false);
-			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			rightBullet->GetBullet()->setScale(bulletSize);
 			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			rightBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		hasShot = true;

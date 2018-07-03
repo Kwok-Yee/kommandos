@@ -28,7 +28,6 @@ InputReceiver inputReceiver;
 
 Score score;
 Collision _collision;
-ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;

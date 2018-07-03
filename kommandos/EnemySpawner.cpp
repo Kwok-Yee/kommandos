@@ -5,11 +5,13 @@
 #include <time.h>
 #include <iostream>
 #include "ParticleSystem.h"
-#include "EnemyBehaviour.h"
+#include "Enemy.h"
+#include "EnemyPool.h"
 #include "Player.h"
 #include "Collision.h"
 #include "PowerUpSpawner.h"
 #include "Game.h"
+#include "HeatMapManager.h"
 
 using namespace irr;
 using namespace core;
@@ -21,33 +23,34 @@ int killedEnemies = 0;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
-EnemyBehaviour* enemyBehaviour;
+Enemy* enemy;
 Player* _player;
 Game* game_EnemySpawner;
 PowerUpSpawner* powerUpSpawner;
+EnemyPool* enemyPool;
 Collision collision;
+HeatMapManager* heatMapMngr = heatMapMngr->GetInstance();
 
-core::array<vector3df> spawnPositions;
+core::array<Enemy*> activeEnemies;
+irr::core::array<vector3df> spawnPositions;
 u32 amountOfEnemies, resize;
-core::array<IMeshSceneNode*> enemies;
 u32 currentWave = 0;
 
-ParticleSystem *particleSystem;
-const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
+ParticleSystem *particle;
+const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
-
-
+EnemySpawner* spawner;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
-	particleSystem = new ParticleSystem(device);
+	particle = new ParticleSystem(device);
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
-	enemyBehaviour = new EnemyBehaviour(enemySpawnerIDevice);
 	_player = Player;
 	game_EnemySpawner = game_EnemySpawner->GetInstance();
+	enemyPool = EnemyPool::GetInstance(device);
 
-	amountOfEnemies = 6;
+	amountOfEnemies = 12;
 	resize = 2;
 	//setting spawnpositions in the corners.
 	spawnPositions.push_back(vector3df(-82, 0, -78) * resize);
@@ -60,66 +63,92 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
 
+	spawner = this;
+
 	Spawn();
 }
 
 void EnemySpawner::UpdateEnemies()
 {
-
 	// Work out a frame delta time.
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particleSystem->Update(frameDeltaTime);
+	particle->Update(frameDeltaTime);
 	// Update all enemies
-	for (int i = 0; i < enemies.size(); i++)
+	for (int i = 0; i < activeEnemies.size(); i++)
 	{
-		if (enemyBehaviour->Update(enemies[i], _player->getPlayerObject()->getPosition(), frameDeltaTime))
+		activeEnemies[i]->Update(frameDeltaTime);
+
+		if (activeEnemies[i]->IsDead())
 		{
-			if (!(_player->getVulnerableTimer() > 0))
-			{
-				_player->TakeDamage(10, frameDeltaTime);
-			}
+      heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 5.0f);
+			particle->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
+      killedEnemies++;
+      powerUpSpawner->PowerUpSpawn(enemies[i]->getPosition());
+			enemyPool->ReturnResource(activeEnemies[i]);
+			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
+			activeEnemies.erase(i);
 		}
 
-		if (enemyHealthValues[i] <= 0)
+		if (game_EnemySpawner->GetIsGameOver())
 		{
-
-			particleSystem->CreateParticles(enemies[i]->getPosition(), bloodSplatter);// for creating blood on enemies
-			killedEnemies++;
-			powerUpSpawner->PowerUpSpawn(enemies[i]->getPosition());
-			
-			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-			collision.RemoveDynamicFromList(enemies[i]);
-			enemies.erase(i);
-			enemyHealthValues.erase(i);
-		}
-		if (game_EnemySpawner->GetIsGameOver() == true)
-		{
-			enemySpawnerSmgr->addToDeletionQueue(enemies[i]);
-			enemies.erase(i);
+			enemySpawnerSmgr->addToDeletionQueue(activeEnemies[i]->GetEnemySceneNode());
+			activeEnemies.erase(i);
 		}
 	}
 
-	if (enemies.size() <= 0 && currentWave < maxWaves)
+	if (activeEnemies.size() <= 0 && currentWave < maxWaves)
 	{
 		Spawn();
 		currentWave++;
 	}
 }
+core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }
+Enemy* EnemySpawner::GetEnemy(int id) { return activeEnemies[id]; }
+EnemySpawner* EnemySpawner::GetSpawner() { return spawner; }
+
+void EnemySpawner::SpawnEnemy(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
+{
+	enemy = enemyPool->GetResource();
+	enemy->SetPlayer(_player);
+	enemy->SetEnemyType(enemyType, nestAmount);
+	enemy->GetEnemySceneNode()->setPosition(spawnPos);
+	collision.AddDynamicToList(enemy->GetEnemySceneNode());
+	activeEnemies.push_back(enemy);
+}
 
 void EnemySpawner::Spawn()
 {
-
 	for (int i = 0; i < amountOfEnemies; i++)
 	{
 		srand(time(NULL) * i);
 		u32 randomPos = rand() % 4;
-		enemyHealthValues.push_back(100);
-		enemies.push_back(enemyBehaviour->Spawn(spawnPositions[randomPos]));
-		collision.AddDynamicToList(enemies.getLast());
+		u32 enemyType = rand() % 4;
+
+		enemy = enemyPool->GetResource();
+		enemy->SetPlayer(_player);
+		switch (enemyType) {
+		case 0:
+			enemy->SetEnemyType(Enemy::EnemyType::basic);
+			break;
+		case 1:
+			enemy->SetEnemyType(Enemy::EnemyType::fast);
+			break;
+		case 2:
+			enemy->SetEnemyType(Enemy::EnemyType::tanky);
+			break;
+		case 3:
+			enemy->SetEnemyType(Enemy::EnemyType::matroshka, 2);
+			break;
+		default:
+			enemy->SetEnemyType(Enemy::EnemyType::basic);
+			break;
+		}
+
+		enemy->GetEnemySceneNode()->setPosition(spawnPositions[randomPos]);
+		collision.AddDynamicToList(enemy->GetEnemySceneNode());
+		activeEnemies.push_back(enemy);
 	}
 }
 
-core::array<IMeshSceneNode*> EnemySpawner::getEnemies() { return enemies; }
-EnemyBehaviour* EnemySpawner::getEnemyBehaviour() { return enemyBehaviour; }

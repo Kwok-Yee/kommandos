@@ -4,7 +4,6 @@
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
-#include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
 #include "ParticleSystem.h"
 #include "Score.h"
@@ -29,7 +28,6 @@ InputReceiver inputReceiver;
 
 Score score;
 Collision _collision;
-ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;

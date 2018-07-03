@@ -17,6 +17,7 @@
 #include "PowerupPool.h"
 #include "Powerup.h"
 #include "SoundManager.h"
+#include "HeatMapManager.h"
 #include "iostream"
 
 using namespace irr;
@@ -48,6 +49,8 @@ using namespace irrklang;
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
 
+const vector3df bulletSize = vector3df(0.03f, 0.125f, 0.25f);
+
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
 /// <summary>	The player driver. </summary>
@@ -60,6 +63,7 @@ SoundManager* soundManager;
 GameOverState gameOverState;
 /// <summary>	The player col. </summary>
 Collision playerCol;
+HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
 /// <summary>	The player scores. </summary>
 Score playerScores;
@@ -189,6 +193,11 @@ void Player::Move(InputReceiver inputReceiver)
 
 	playerObject->setPosition(newPosition);
 
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*2);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone && heatMapManager->isPoisonCloudActive) {
+		TakeDamage(1, frameDeltaTime);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);
@@ -277,30 +286,33 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		activeBullets.push_back(bullet);
 
 		// Main bullet
-		bullet->SetBullet(playerSmgr->addSphereSceneNode());
+		bullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (bullet->GetBullet())
 		{
 			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			bullet->GetBullet()->setScale(bulletSize);
 			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			bullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		leftBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (leftBullet->GetBullet())
 		{
 			leftBullet->GetBullet()->setVisible(false);
-			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			leftBullet->GetBullet()->setScale(bulletSize);
 			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			leftBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		rightBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (rightBullet->GetBullet())
 		{
 			rightBullet->GetBullet()->setVisible(false);
-			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			rightBullet->GetBullet()->setScale(bulletSize);
 			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			rightBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		hasShot = true;
@@ -326,11 +338,11 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			for (int i = 0; i < activeBullets.size(); i++)
 			{
 				activeBullets[i]->UpdateBullet(mousePosition, playerObject->getPosition(), frameDeltaTime);
-				for (int j = 0; j < enemies->getEnemies().size(); j++)
+				for (int j = 0; j < enemies->getActiveEnemies().size(); j++)
 				{
-					if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[j], activeBullets[i]->GetBullet()))
+					if (playerCol.SceneNodeWithSceneNode(enemies->getActiveEnemies()[j]->GetEnemySceneNode(), activeBullets[i]->GetBullet()))
 					{
-						enemies->enemyHealthValues[j] = enemies->getEnemyBehaviour()->TakeDamage(activeBullets[i]->GetDamage(), enemies->enemyHealthValues[j]);
+						enemies->GetEnemy(j)->TakeDamage(activeBullets[i]->GetDamage());
 						playerScores.DisplayScore(10);
 						pool->ReturnResource(activeBullets[i]);
 						activeBullets.erase(i);
@@ -358,7 +370,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 /// <summary>	Take damage. </summary>
 ///-------------------------------------------------------------------------------------------------
 
-void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
+void Player::TakeDamage(f32 damage)
 {
 	if (health > 0 && vulnerableTimer <= 0)
 	{

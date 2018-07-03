@@ -33,6 +33,7 @@ u32 currentWave = 0;
 ParticleSystem *particle;
 const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
+EnemySpawner* spawner;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
@@ -55,6 +56,8 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
+
+	spawner = this;
 
 	Spawn();
 }
@@ -92,6 +95,19 @@ void EnemySpawner::UpdateEnemies()
 		currentWave++;
 	}
 }
+core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }
+Enemy* EnemySpawner::GetEnemy(int id) { return activeEnemies[id]; }
+EnemySpawner* EnemySpawner::GetSpawner() { return spawner; }
+
+void EnemySpawner::SpawnEnemy(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
+{
+	enemy = enemyPool->GetResource();
+	enemy->SetPlayer(_player);
+	enemy->SetEnemyType(enemyType, nestAmount);
+	enemy->GetEnemySceneNode()->setPosition(spawnPos);
+	collision.AddDynamicToList(enemy->GetEnemySceneNode());
+	activeEnemies.push_back(enemy);
+}
 
 void EnemySpawner::Spawn()
 {
@@ -99,7 +115,7 @@ void EnemySpawner::Spawn()
 	{
 		srand(time(NULL) * i);
 		u32 randomPos = rand() % 4;
-		u32 enemyType = rand() % 3;
+		u32 enemyType = rand() % 4;
 
 		enemy = enemyPool->GetResource();
 		enemy->SetPlayer(_player);
@@ -113,6 +129,12 @@ void EnemySpawner::Spawn()
 		case 2:
 			enemy->SetEnemyType(Enemy::EnemyType::tanky);
 			break;
+		case 3:
+			enemy->SetEnemyType(Enemy::EnemyType::matroshka, 2);
+			break;
+		default:
+			enemy->SetEnemyType(Enemy::EnemyType::basic);
+			break;
 		}
 
 		enemy->GetEnemySceneNode()->setPosition(spawnPositions[randomPos]);
@@ -121,5 +143,3 @@ void EnemySpawner::Spawn()
 	}
 }
 
-core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }
-Enemy* EnemySpawner::GetEnemy(int id) { return activeEnemies[id]; }

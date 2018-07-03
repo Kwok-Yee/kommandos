@@ -6,14 +6,15 @@ public:
 	enum EnemyType {
 		basic,
 		fast,
-		tanky
+		tanky,
+		matroshka
 	};
 	void Reset();
 
 	irr::scene::ISceneNode* GetEnemySceneNode();
 	bool IsDead();
 
-	void SetEnemyType(EnemyType type);
+	void SetEnemyType(EnemyType type, int nestAmount = 0);
 	void SetEnemy(irr::scene::ISceneNode* newEnemy);
 	void SetPlayer(Player* _player);
 
@@ -32,5 +33,6 @@ private:
 	float health;
 	float speed;
 	float damage;
+	int nestingLvl;
 };
 

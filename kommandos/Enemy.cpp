@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "SoundManager.h"
 #include "Collision.h"
+#include "EnemySpawner.h"
+#include "EnemyPool.h"
 #include <iostream>
 
 using namespace std;
@@ -36,7 +38,7 @@ void Enemy::Reset()
 ISceneNode* Enemy::GetEnemySceneNode() { return enemy; }
 bool Enemy::IsDead() { return dead; }
 
-void Enemy::SetEnemyType(EnemyType type)
+void Enemy::SetEnemyType(EnemyType type, int nestAmount)
 {
 	enemyType = type;
 	switch (type)
@@ -52,12 +54,43 @@ void Enemy::SetEnemyType(EnemyType type)
 		health = 70;
 		speed = 45.f;
 		damage = 10.f;
+		enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/fastskin.png"));
 		return;
 	case EnemyType::tanky:
 		enemy->setScale(vector3df(3.0f, 3.0f, 3.0f));
 		health = 200;
-		speed = 20.f;
+		speed = 15.f;
 		damage = 30.f;
+		enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/tankyskin.png"));
+		return;
+	case EnemyType::matroshka:
+		nestingLvl = nestAmount;
+		switch (nestAmount)
+		{
+		case 2:
+			enemy->setScale(vector3df(2.5f, 2.5f, 2.5f));
+			health = 160;
+			speed = 15.f;
+			damage = 20.f;
+			enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/matroshkaskin.png"));
+			break;
+		case 1:
+			enemy->setScale(vector3df(2.0f, 2.0f, 2.0f));
+			health = 80;
+			speed = 20.f;
+			damage = 15.f;
+			enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/tankyskin.png"));
+			break;
+		case 0:
+			enemy->setScale(vector3df(1.5f, 1.5f, 1.5f));
+			health = 40;
+			speed = 25.f;
+			damage = 10.f;
+			enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/fastskin.png"));
+			break;
+		default:
+			break;
+		}
 		return;
 	}
 }
@@ -105,6 +138,15 @@ void Enemy::TakeDamage(f32 damage)
 	{
 		health = 0;
 		dead = true;
+		if (enemyType == EnemyType::matroshka && nestingLvl > 0) 
+		{
+			cout << "i died with nestlvl: " + nestingLvl;
+			EnemySpawner* espawner = espawner->GetSpawner();
+			for (int i = 0; i < 2; i++) 
+			{
+				espawner->SpawnEnemy(GetEnemySceneNode()->getPosition(), EnemyType::matroshka,nestingLvl-1);
+			}
+		}
 	}
 }
 

@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "Game.h"
+#include "Camera.h" 
 #include <new>  
 
 using namespace irr;
@@ -18,7 +19,7 @@ using namespace std;
 
 const u32 maxWaves = 11;
 //60 = 1 second
-const u32 maxWaveCooldown = 600;
+const u32 maxWaveCooldown = 180;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
@@ -27,14 +28,15 @@ Player* _player;
 Game* game_EnemySpawner;
 EnemyPool* enemyPool;
 Collision collision;
+Camera* _cam;
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
 u32 resize;
 
 
-ParticleSystem *particle;
-const path bloodSplatter = "../media/Textures/blood.bmp";
+ParticleSystem *particleSystem;
+const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 u32 prevFrameTime;
 
 s32 currentTime;
@@ -44,13 +46,13 @@ bool waveTimerSet = false;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
-	particle = new ParticleSystem(device);
+	particleSystem = new ParticleSystem(device);
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	_player = Player;
 	game_EnemySpawner = game_EnemySpawner->GetInstance();
 	enemyPool = EnemyPool::GetInstance(device);
-
+	_cam = _cam->GetInstance(NULL);
 	resize = 2;
 	//setting spawnpositions in the corners.
 	spawnPositions.push_back(vector3df(-82, 0, -78) * resize);
@@ -91,7 +93,7 @@ void EnemySpawner::UpdateEnemies()
 	//enemySpawnerIDevice->getTimer()->start();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particle->Update();
+	particleSystem->Update(frameDeltaTime);
 	// Update all enemies
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{
@@ -99,7 +101,7 @@ void EnemySpawner::UpdateEnemies()
 
 		if (activeEnemies[i]->IsDead())
 		{
-			particle->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
+			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);
@@ -139,18 +141,21 @@ void EnemySpawner::NextWave()
 		{
 			currentWave++;
 			Spawn();
+			if (currentWave % 3 == 0)
+			{
+				_cam->state = _cam->bigWaveShaking;
+			}
+			else
+			{
+				_cam->state = _cam->waveShaking;
+			}
 			//Insert pause/UI between waves here
 			printf("wave changed");
 			waveTimerSet = true;
 			waveCooldown = maxWaveCooldown;
+			waveTimerSet = false;
 		}
 	}
-
-	//cout << waveFrameDeltaTime;
-	//if (waveFrameDeltaTime <= 0) {
-	//	cout << waveFrameDeltaTime;
-
-	//}
 }
 
 
@@ -211,7 +216,6 @@ void EnemySpawner::Spawn()
 		activeEnemies.push_back(enemy);
 	}
 }
-
 
 core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }
 Enemy* EnemySpawner::GetEnemy(int id) { return activeEnemies[id]; }

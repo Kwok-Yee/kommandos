@@ -29,7 +29,6 @@ InputReceiver inputReceiver;
 UISystem uISystem;
 Score score;
 Collision _collision;
-ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;
@@ -70,6 +69,7 @@ bool Game::GetIsGameOver() {
 
 bool Game::SetIsGameOver(bool state)
 {
+	camera->state = camera->gameover;
 	return isGameOver = state;
 }
 
@@ -82,7 +82,7 @@ void Game::Start()
 	soundManager->PlaySound("../media/Sounds/blood_harvest.mp3", true);
 
 	// Create instances of classes
-	camera = new Camera(device);
+	camera = camera->GetInstance(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
 
@@ -113,7 +113,7 @@ void Game::Update()
 	const u32 currentFrame = device->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
-	camera->CameraUpdate();
+	camera->CameraUpdate(frameDeltaTime);
 	if (!isGameOver)
 	{
 		tutorial.Update(frameDeltaTime);

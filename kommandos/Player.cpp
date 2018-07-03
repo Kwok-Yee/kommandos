@@ -15,6 +15,7 @@
 #include "BulletPool.h"
 #include "Bullet.h"
 #include "SoundManager.h"
+#include "HeatMapManager.h"
 #include "iostream"
 
 using namespace irr;
@@ -58,6 +59,7 @@ SoundManager* soundManager;
 GameOverState gameOverState;
 /// <summary>	The player col. </summary>
 Collision playerCol;
+HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
 /// <summary>	The player scores. </summary>
 Score playerScores;
@@ -66,6 +68,7 @@ Game* game;
 
 /// <summary>	The player object. </summary>
 ISceneNode* playerObject;
+ISceneNode* camFollowObject;
 /// <summary>	The gun node. </summary>
 ISceneNode* gunNode;
 /// <summary>	The health. </summary>
@@ -121,9 +124,15 @@ void Player::Init()
 	health = MAX_HEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh(PLAYER_MODEL);
 	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
+	camFollowObject = playerSmgr->addCubeSceneNode();
 	if (playerObject)
 	{
 		playerObject->setPosition(vector3df(266, 0, 266));
+	}
+	if (camFollowObject) 
+	{
+		camFollowObject->setParent(playerObject);
+		camFollowObject->setScale(vector3df(0,0,0));
 	}
 	currentPosition = playerObject->getPosition();
 
@@ -184,6 +193,11 @@ void Player::Move(InputReceiver inputReceiver)
 
 	playerObject->setPosition(newPosition);
 
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*2);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone && heatMapManager->isPoisonCloudActive) {
+		TakeDamage(1);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);
@@ -243,8 +257,8 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		{
 			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
-			leftBullet->SetBulletOffset(-15.f);
-			rightBullet->SetBulletOffset(15.f);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);
@@ -379,6 +393,11 @@ void Player::DrawHealthBar()
 ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
+}
+
+irr::scene::ISceneNode * Player::getCamFollowObject()
+{
+	return camFollowObject;
 }
 
 ///-------------------------------------------------------------------------------------------------

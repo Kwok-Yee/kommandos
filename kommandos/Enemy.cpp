@@ -48,6 +48,7 @@ void Enemy::SetEnemyType(EnemyType type, int nestAmount)
 		health = 120;
 		speed = 30.f;
 		damage = 20.f;
+		enemy->setMaterialTexture(0, enemyDriver->getTexture("../media/Textures/zombieskin.png"));
 		return;
 	case EnemyType::fast:
 		enemy->setScale(vector3df(1.7f, 1.7f, 1.7f));

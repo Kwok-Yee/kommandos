@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "PowerUpSpawner.h"
+#include "HeatMapManager.h"
 #include "Game.h"
 #include "Camera.h" 
 #include <new>  
@@ -31,13 +32,14 @@ PowerUpSpawner* powerUpSpawner;
 EnemyPool* enemyPool;
 Collision collision;
 Camera* _cam;
+HeatMapManager* heatMapMngr;
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
 u32 amountOfEnemies, resize;
 u32 currentWave = 0;
 
-ParticleSystem *particle;
+ParticleSystem *particleSystem;
 const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
 EnemySpawner* spawner;
@@ -49,6 +51,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	_player = Player;
 	game_EnemySpawner = game_EnemySpawner->GetInstance();
+	heatMapMngr = heatMapMngr->GetInstance();
 	enemyPool = EnemyPool::GetInstance(device);
 	_cam = _cam->GetInstance(NULL);
 	amountOfEnemies = 12;
@@ -58,7 +61,6 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	spawnPositions.push_back(vector3df(78, 0, -78) * resize);
 	spawnPositions.push_back(vector3df(78, 0, 78) * resize);
 	spawnPositions.push_back(vector3df(-82, 0, 78) * resize);
-
 
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
@@ -93,7 +95,7 @@ void EnemySpawner::UpdateEnemies()
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particle->Update(frameDeltaTime);
+	particleSystem->Update(frameDeltaTime);
 	// Update all enemies
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{
@@ -102,9 +104,9 @@ void EnemySpawner::UpdateEnemies()
 		if (activeEnemies[i]->IsDead())
 		{
 			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
-      heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 5.0f);
-      killedEnemies++;
-      powerUpSpawner->PowerUpSpawn(enemies[i]->getPosition());
+			heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(activeEnemies[i]->GetEnemySceneNode()->getAbsolutePosition()), 5.0f);
+			killedEnemies++;
+			powerUpSpawner->PowerUpSpawn(activeEnemies[i]->GetEnemySceneNode()->getPosition());
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);
@@ -121,11 +123,11 @@ void EnemySpawner::UpdateEnemies()
 	{
 		currentWave++;
 		Spawn();
-		if (currentWave % 3 == 0) 
+		if (currentWave % 3 == 0)
 		{
 			_cam->state = _cam->bigWaveShaking;
 		}
-		else 
+		else
 		{
 			_cam->state = _cam->waveShaking;
 		}
@@ -139,7 +141,7 @@ EnemySpawner* EnemySpawner::GetSpawner() { return spawner; }
 
 void EnemySpawner::InitialiseWaveData()
 {
-				        //Amount of enemies:
+	//Amount of enemies:
 	waveData[0] = new WaveData(1, 5, 0, 0, 0);//5
 	waveData[1] = new WaveData(2, 10, 0, 0, 0);//10
 	waveData[2] = new WaveData(3, 8, 3, 0, 0);//11
@@ -151,7 +153,7 @@ void EnemySpawner::InitialiseWaveData()
 	waveData[8] = new WaveData(9, 0, 0, 15, 7); //22
 	waveData[9] = new WaveData(10, 10, 10, 10, 8); //38
 	waveData[10] = new WaveData(11, 0, 15, 15, 10); //40
-  
+}
 void EnemySpawner::SpawnEnemy(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
 {
 	enemy = enemyPool->GetResource();
@@ -198,12 +200,12 @@ void EnemySpawner::Spawn()
 		enemy = enemyPool->GetResource();
 		enemy->SetPlayer(_player);
 		enemy->SetEnemyType(Enemy::EnemyType::tanky);
-    enemy->GetEnemySceneNode()->setPosition(spawnPositions[randomPos]);
+		enemy->GetEnemySceneNode()->setPosition(spawnPositions[randomPos]);
 		collision.AddDynamicToList(enemy->GetEnemySceneNode());
 		activeEnemies.push_back(enemy);
 	}
-    
-    for (int k = 0; k < waveData[currentWave]->maxMatroEnem; k++)
+
+	for (int k = 0; k < waveData[currentWave]->maxMatroEnem; k++)
 	{
 		srand(time(NULL) * k);
 		u32 randomPos = rand() % 4;

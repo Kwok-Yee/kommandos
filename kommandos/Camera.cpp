@@ -88,10 +88,7 @@ void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
 	{
 		shakeTimer -= frameDeltaTime;
 		resetTime += frameDeltaTime;
-		camera->setTarget(player_->getCamFollowObject()->getPosition());
-		newCameraPosition.X = player_->getCamFollowObject()->getPosition().X;
-		newCameraPosition.Z = player_->getCamFollowObject()->getPosition().Z;
-		camera->setPosition(newCameraPosition);
+		
 
 		const f32 dur = 0.6;
 		
@@ -101,10 +98,18 @@ void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
 		if (resetTime <= dur) 
 		{
 			player_->getCamFollowObject()->setPosition(randomVec);
+			camera->setTarget(player_->getCamFollowObject()->getPosition());
+			newCameraPosition.X = player_->getCamFollowObject()->getPosition().X;
+			newCameraPosition.Z = player_->getCamFollowObject()->getPosition().Z;
+			camera->setPosition(newCameraPosition);
 		}
 		if (resetTime > dur) 
 		{
 			player_->getCamFollowObject()->setPosition(randomVec);
+			camera->setTarget(player_->getCamFollowObject()->getPosition());
+			newCameraPosition.X = player_->getCamFollowObject()->getPosition().X;
+			newCameraPosition.Z = player_->getCamFollowObject()->getPosition().Z;
+			camera->setPosition(newCameraPosition);
 		}
 		if (resetTime > dur * 2)
 		{

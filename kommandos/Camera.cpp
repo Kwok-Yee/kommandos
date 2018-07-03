@@ -13,16 +13,20 @@
 #include "Player.h"
 #include "GameOverState.h" //For future game over implementation
 #include "Game.h"
+#include "SoundManager.h"
 
 using namespace irr;
 using namespace core;
 using namespace scene;
+
+#define EARTHQUAKE_SOUND "../media/Sounds/equake4.mp3"
 
 /// <summary>	The camera start position. </summary>
 const vector3df cameraStartPosition = vector3df(0, 150, 0);
 /// <summary>	The camera start target. </summary>
 const vector3df cameraStartTarget = vector3df(0, 0, 0);
 
+SoundManager* _soundManager;
 /// <summary>	The camera i device. </summary>
 IrrlichtDevice* cameraIDevice;
 /// <summary>	The camera scenemanager. </summary>
@@ -40,6 +44,7 @@ vector3df newCameraPosition;
 const int maxTime = 100;
 int shakeTimer;
 f32 resetTime = 0;
+bool soundPlaying = false;
 
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Constructor. </summary>
@@ -62,6 +67,7 @@ Camera::Camera(IrrlichtDevice* device)
 	cameraSmgr = cameraIDevice->getSceneManager();
 	game_ = game_->GetInstance();
 	CameraInit();
+	_soundManager = _soundManager->GetInstance();
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -141,12 +147,18 @@ void Camera::CameraUpdate(f32 frameDeltaTime)
 			camera->setPosition(newCameraPosition);
 			camera->setTarget(player_->getPlayerObject()->getPosition());
 		}
+		soundPlaying = false;
 		break;
 	case waveShaking:
 		ScreenShake(frameDeltaTime, 0.4);
 		break;
 	case bigWaveShaking:
 		ScreenShake(frameDeltaTime, 1.5);
+		if (!soundPlaying)
+		{
+			soundPlaying = true;
+			_soundManager->PlaySound(EARTHQUAKE_SOUND, false);
+		}
 		break;
 	case gameover:
 		camera->setPosition(cameraStartPosition);

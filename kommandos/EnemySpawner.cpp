@@ -181,6 +181,5 @@ void EnemySpawner::Spawn()
 	}
 }
 
-
 core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }
 Enemy* EnemySpawner::GetEnemy(int id) { return activeEnemies[id]; }

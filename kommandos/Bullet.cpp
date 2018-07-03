@@ -59,7 +59,7 @@ void Bullet::Reset()
 {
 	SetBulletMode(BulletMode::basic);
 	bullet->setVisible(false);
-	bullet->setPosition(vector3df(0, 50, 0));
+	bullet->setPosition(vector3df(0, 0, 0));
 	setOnce = true;
 }
 

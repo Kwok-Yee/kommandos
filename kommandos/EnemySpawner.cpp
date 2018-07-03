@@ -33,13 +33,13 @@ irr::core::array<vector3df> spawnPositions;
 u32 resize;
 u32 currentWave = 0;
 
-ParticleSystem *particle;
-const path bloodSplatter = "../media/Textures/blood.bmp";
+ParticleSystem *particleSystem;
+const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 u32 prevFrameTime;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
-	particle = new ParticleSystem(device);
+	particleSystem = new ParticleSystem(device);
 	enemySpawnerIDevice = device;
 	enemySpawnerSmgr = enemySpawnerIDevice->getSceneManager();
 	_player = Player;
@@ -84,7 +84,7 @@ void EnemySpawner::UpdateEnemies()
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particle->Update();
+	particleSystem->Update(frameDeltaTime);
 	// Update all enemies
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{
@@ -92,7 +92,7 @@ void EnemySpawner::UpdateEnemies()
 
 		if (activeEnemies[i]->IsDead())
 		{
-			particle->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
+			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);

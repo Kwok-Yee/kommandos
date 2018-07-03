@@ -15,6 +15,7 @@
 #include "BulletPool.h"
 #include "Bullet.h"
 #include "SoundManager.h"
+#include "HeatMapManager.h"
 #include "iostream"
 
 using namespace irr;
@@ -58,6 +59,7 @@ SoundManager* soundManager;
 GameOverState gameOverState;
 /// <summary>	The player col. </summary>
 Collision playerCol;
+HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
 /// <summary>	The player scores. </summary>
 Score playerScores;
@@ -191,6 +193,11 @@ void Player::Move(InputReceiver inputReceiver)
 
 	playerObject->setPosition(newPosition);
 
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*2);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone && heatMapManager->isPoisonCloudActive) {
+		TakeDamage(1);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);
@@ -250,8 +257,8 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		{
 			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
-			leftBullet->SetBulletOffset(-15.f);
-			rightBullet->SetBulletOffset(15.f);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);

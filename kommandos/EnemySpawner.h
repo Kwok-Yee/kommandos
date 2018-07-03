@@ -9,6 +9,9 @@ using namespace scene;
 using namespace std;
 
 extern u32 currentWave;
+extern u32 waveCooldown;
+extern bool waveChangeUI;
+
 class Player;
 class EnemySpawner
 {
@@ -19,9 +22,8 @@ public:
 	irr::core::array<Enemy*> getActiveEnemies();
 	//returns the enemyBehaviour script
 	Enemy* GetEnemy(int id);
-	//extern u32 currentWave;
+	
 private:
-	//Spawns a enemy at a random spaw position
 	void NextWave();
 	void Spawn();
 	void InitialiseWaveData();

@@ -33,15 +33,14 @@ Camera* _cam;
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
 u32 resize;
-
-
 ParticleSystem *particleSystem;
 const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 u32 prevFrameTime;
 
 s32 currentTime;
 u32 currentWave = 1;
-s32 waveCooldown;
+u32 waveCooldown = maxWaveCooldown;
+bool waveChangeUI;
 bool waveTimerSet = false;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
@@ -63,7 +62,6 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
-	waveCooldown = maxWaveCooldown;
 	InitialiseWaveData();
 	Spawn();
 }
@@ -76,7 +74,6 @@ struct WaveData
 		maxRegularEnem = _maxRegularEnem;
 		maxFastEnem = _maxFastEnem;
 		maxTankEnem = _maxTankEnem;
-
 	};
 	int waveNumber;
 	int maxRegularEnem;
@@ -98,7 +95,6 @@ void EnemySpawner::UpdateEnemies()
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{
 		activeEnemies[i]->Update(frameDeltaTime);
-
 		if (activeEnemies[i]->IsDead())
 		{
 			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
@@ -106,7 +102,6 @@ void EnemySpawner::UpdateEnemies()
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);
 		}
-
 		if (game_EnemySpawner->GetIsGameOver())
 		{
 			enemySpawnerSmgr->addToDeletionQueue(activeEnemies[i]->GetEnemySceneNode());
@@ -128,15 +123,11 @@ void EnemySpawner::NextWave()
 	const u32 now_ = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameTime = (f32)(now_ - currentTime) / 1000.f; // Time in seconds
 	currentTime = now_;
-	cout << waveCooldown;
-	//Divide wavecooldown by % 60 for UI
 
 	if (waveTimerSet == false && waveCooldown > 0)
 	{
-	cout << waveCooldown;
-	printf("_");
+		waveChangeUI = true;
 		waveCooldown -= frameTime;
-
 		if (waveCooldown <= 0)
 		{
 			currentWave++;
@@ -150,9 +141,9 @@ void EnemySpawner::NextWave()
 				_cam->state = _cam->waveShaking;
 			}
 			//Insert pause/UI between waves here
-			printf("wave changed");
 			waveTimerSet = true;
 			waveCooldown = maxWaveCooldown;
+			waveChangeUI = false;
 			waveTimerSet = false;
 		}
 	}
@@ -162,7 +153,7 @@ void EnemySpawner::NextWave()
 void EnemySpawner::InitialiseWaveData()
 {
 	//Amount of enemies:
-	waveData[1] = new WaveData(1, 1, 0, 0);//5
+	waveData[1] = new WaveData(1, 5, 0, 0);//5
 	waveData[2] = new WaveData(2, 10, 0, 0);//10
 	waveData[3] = new WaveData(3, 8, 3, 0);//11
 	waveData[4] = new WaveData(4, 12, 5, 0);//17

@@ -160,8 +160,8 @@ void ObjectPlacementGeneration::CreateGrid()
 	int zStep = 10; //Z step for changing position
 	const int startY = 0; // Y never changes.
 	vector3df startZone1Vector = vector3df(startX, startY, startZ); //Start Vector where the grid for zone 1 begins.
-	vector3df startZone2Vector = vector3df(0, startY, startZ); //Start Vector where the grid for zone 2 begins.
-	vector3df startZone3Vector = vector3df(startX, startY, 0); //Start Vector where the grid for zone 3 begins.
+	vector3df startZone2Vector = vector3df(startX, startY, 0); //Start Vector where the grid for zone 2 begins.
+	vector3df startZone3Vector = vector3df(0, startY, startZ); //Start Vector where the grid for zone 3 begins.
 	vector3df startZone4Vector = vector3df(0, startY, 0); //Start Vector where the grid for zone 4 begins.
 
 	for (int i = 0; i < rows; i++)

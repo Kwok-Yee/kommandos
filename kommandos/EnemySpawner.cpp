@@ -3,11 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
 #include "ParticleSystem.h"
 #include "Enemy.h"
 #include "EnemyPool.h"
 #include "Player.h"
 #include "Collision.h"
+#include "PowerUpSpawner.h"
 #include "Game.h"
 #include "HeatMapManager.h"
 
@@ -17,12 +19,14 @@ using namespace scene;
 using namespace std;
 
 const u32 maxWaves = 10;
+int killedEnemies = 0;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
 Enemy* enemy;
 Player* _player;
 Game* game_EnemySpawner;
+PowerUpSpawner* powerUpSpawner;
 EnemyPool* enemyPool;
 Collision collision;
 HeatMapManager* heatMapMngr = heatMapMngr->GetInstance();
@@ -80,6 +84,8 @@ void EnemySpawner::UpdateEnemies()
 		{
       heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 5.0f);
 			particle->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
+      killedEnemies++;
+      powerUpSpawner->PowerUpSpawn(enemies[i]->getPosition());
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);

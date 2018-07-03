@@ -14,6 +14,7 @@ using namespace gui;
 #endif	
 
 irr::core::array<ISceneNode*> wallList, staticList, dynamicList;
+irr::core::array<Powerup*> powerupList;
 
 bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene::ISceneNode* tBox2)
 {
@@ -23,6 +24,7 @@ bool Collision::SceneNodeWithSceneNode(irr::scene::ISceneNode* tBox1, irr::scene
 void Collision::AddWallToList(ISceneNode* wall) { wallList.push_back(wall); }
 void Collision::AddStaticToList(ISceneNode* staticObject) { staticList.push_back(staticObject); }
 void Collision::AddDynamicToList(ISceneNode* dynamicObject) { dynamicList.push_back(dynamicObject); }
+void Collision::AddPowerupToList(Powerup* powerup){ powerupList.push_back(powerup); }
 
 void Collision::RemoveDynamicFromList(ISceneNode* dynamicObject)
 {
@@ -46,6 +48,19 @@ bool Collision::CollidesWithStaticObjects(irr::scene::ISceneNode* dynamicObject)
 			}
 		}
 	}
+	return false;
+}
+
+Powerup *Collision::CollidesWithPowerup(irr::scene::ISceneNode* player) 
+{
+	for (u32 i = 0; i < powerupList.size(); i++)
+		if (SceneNodeWithSceneNode(player, powerupList[i]->GetNode()))
+		{
+			Powerup* pow = powerupList[i];
+			powerupList.erase(i);
+			return pow;
+		}
+			
 	return false;
 }
 

@@ -79,10 +79,10 @@ void Camera::CameraInit()
 	}
 	shakeTimer = maxTime;
 	srand(time(0));
-	state = shaking;
+	state = waveShaking;
 }
 
-void Camera::ScreenShake(f32 frameDeltaTime)
+void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
 {
 	if (shakeTimer > 0)
 	{
@@ -94,7 +94,7 @@ void Camera::ScreenShake(f32 frameDeltaTime)
 		camera->setPosition(newCameraPosition);
 
 		const f32 dur = 0.6;
-		const f32 intensity = 1.5;
+		//const f32 intensity = 1.5;
 		
 		vector3df playerPos = player_->getPlayerObject()->getPosition();
 		vector3df randomVec = vector3df(playerPos.X + rand() % 2 * intensity, playerPos.Y, playerPos.Z + rand() % 2 * intensity);
@@ -138,8 +138,11 @@ void Camera::CameraUpdate(f32 frameDeltaTime)
 			camera->setTarget(player_->getPlayerObject()->getPosition());
 		}
 		break;
-	case shaking:
-		ScreenShake(frameDeltaTime);
+	case waveShaking:
+		ScreenShake(frameDeltaTime, 0.4);
+		break;
+	case bigWaveShaking:
+		ScreenShake(frameDeltaTime, 1.5);
 		break;
 	case gameover:
 		camera->setPosition(cameraStartPosition);

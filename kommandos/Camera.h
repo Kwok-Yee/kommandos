@@ -21,7 +21,8 @@ public:
 	enum CameraState
 	{
 		normal,
-		shaking,
+		waveShaking,
+		bigWaveShaking,
 		gameover
 	};
 
@@ -47,5 +48,5 @@ private:
 	 ///-------------------------------------------------------------------------------------------------
 	 static Camera* instance;
 	 void CameraInit();
-	 void ScreenShake(f32 frameDeltaTime);
+	 void ScreenShake(f32 frameDeltaTim, f32 intensity);
 };

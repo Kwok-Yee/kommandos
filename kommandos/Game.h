@@ -1,11 +1,13 @@
 #pragma once
 #include <irrlicht.h>
+#include"ObjectPlacementGeneration.h"
 #include "Player.h"
 
 class Game
 {
 public:
 	irr::IrrlichtDevice * device;
+	ObjectPlacementGeneration objectPlacementGen;
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;
 	//Returns the Game instance

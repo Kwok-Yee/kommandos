@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Collision.h"
 #include "Game.h"
+#include "HeatMapManager.h"
 
 using namespace irr;
 using namespace core;
@@ -24,6 +25,7 @@ Player* _player;
 Game* game_EnemySpawner;
 EnemyPool* enemyPool;
 Collision collision;
+HeatMapManager* heatMapMngr = heatMapMngr->GetInstance();
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
@@ -76,6 +78,7 @@ void EnemySpawner::UpdateEnemies()
 
 		if (activeEnemies[i]->IsDead())
 		{
+      heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(enemies[i]->getAbsolutePosition()), 5.0f);
 			particle->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());

@@ -6,7 +6,7 @@ public:
 
 	enum PowerupType
 	{
-		base, firerate, splitshot
+		health, firerate, splitshot, base
 	};
 
 	void Reset();

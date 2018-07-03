@@ -105,7 +105,6 @@ void EnemySpawner::UpdateEnemies()
 		{
 			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
 			heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(activeEnemies[i]->GetEnemySceneNode()->getAbsolutePosition()), 5.0f);
-			killedEnemies++;
 			powerUpSpawner->PowerUpSpawn(activeEnemies[i]->GetEnemySceneNode()->getPosition());
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
@@ -131,8 +130,6 @@ void EnemySpawner::UpdateEnemies()
 		{
 			_cam->state = _cam->waveShaking;
 		}
-		//Insert pause/UI between waves here
-		printf("wave changed");
 	}
 }
 core::array<Enemy*> EnemySpawner::getActiveEnemies() { return activeEnemies; }

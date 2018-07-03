@@ -40,10 +40,11 @@ void PowerUpSpawner::PowerUpDevice(IrrlichtDevice* device)
 void PowerUpSpawner::PowerUpSpawn(vector3df powerUpPosition)
 {
 	powerUpChance = rand() % 100;
-	if (powerUpChance >= 90)
+	if (powerUpChance >= 80)
 	{
+		int powTyp = rand() % 3;
 		powerup = pool->GetResource();
-		powerup->SetPowerupType(1);
+		powerup->SetPowerupType(powTyp);
 		powCol.AddPowerupToList(powerup);
 
 		IMeshSceneNode* powerupNode = powerUpSmgr->addMeshSceneNode(powerUpSmgr->getMesh("../media/powerup.3ds"));
@@ -52,33 +53,9 @@ void PowerUpSpawner::PowerUpSpawn(vector3df powerUpPosition)
 			powerupNode->setMaterialFlag(video::EMF_LIGHTING, false);
 
 			powerupNode->setScale(vector3df(2, 1, 2));
-			//powerup->setMaterialTexture(0, powerupDriver->getTexture(FireRate));
 			powerupNode->setVisible(true);
 			powerupNode->setPosition(powerUpPosition);
 		}
 		powerup->SetPowerup(powerupNode);
 	}
-	if (killedEnemies % 25 == 0)
-	{
-		if (powerUpChance < 90 && powerUpChance >= 40)
-		{
-			powerup = pool->GetResource();
-			powerup->SetPowerupType(2);
-			powCol.AddPowerupToList(powerup);
-
-			IMeshSceneNode* powerupNode = powerUpSmgr->addMeshSceneNode(powerUpSmgr->getMesh("../media/powerup.3ds"));
-			if (powerupNode)
-			{
-				powerupNode->setMaterialFlag(video::EMF_LIGHTING, false);
-
-				powerupNode->setScale(vector3df(2, 1, 2));
-				//powerup->setMaterialTexture(0, powerupDriver->getTexture(Spread));
-				powerupNode->setVisible(true);
-				powerupNode->setPosition(powerUpPosition);
-			}
-			powerup->SetPowerup(powerupNode);
-		}
-	}
-	//To check the chance of power up drop
-	cout << powerUpChance;
 }

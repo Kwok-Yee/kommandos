@@ -41,13 +41,16 @@ void Powerup::SetPowerupType(s32 powType)
 	switch (powType)
 	{
 	case 0:
-		Powerup::type = Powerup::PowerupType::base;
+		Powerup::type = Powerup::PowerupType::health;
 		break;
 	case 1:
 		Powerup::type = Powerup::PowerupType::firerate;
 		break;
 	case 2:
 		Powerup::type = Powerup::PowerupType::splitshot;
+		break;
+	default:
+		Powerup::type = Powerup::PowerupType::base;
 		break;
 	}
 }

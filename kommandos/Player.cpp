@@ -229,6 +229,9 @@ void Player::Move(InputReceiver inputReceiver)
 		switch (pow->GetPowerupType())
 		{
 		case 0:
+			health += 25;
+			if (health > 100)
+				health = 100;
 			break;
 		case 1:
 			rapidFireTimer = 1000;

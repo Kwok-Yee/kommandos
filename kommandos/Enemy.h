@@ -13,7 +13,6 @@ public:
 
 	irr::scene::ISceneNode* GetEnemySceneNode();
 	bool IsDead();
-
 	void SetEnemyType(EnemyType type, int nestAmount = 0);
 	void SetEnemy(irr::scene::ISceneNode* newEnemy);
 	void SetPlayer(Player* _player);

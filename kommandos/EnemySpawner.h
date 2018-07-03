@@ -19,4 +19,5 @@ public:
 private:
 	//Spawns alot of enemies at random predefined spawn positions
 	void Spawn();
+	void InitialiseWaveData();
 };

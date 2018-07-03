@@ -140,7 +140,6 @@ void Enemy::TakeDamage(f32 damage)
 		dead = true;
 		if (enemyType == EnemyType::matroshka && nestingLvl > 0) 
 		{
-			cout << "i died with nestlvl: " + nestingLvl;
 			EnemySpawner* espawner = espawner->GetSpawner();
 			for (int i = 0; i < 2; i++) 
 			{

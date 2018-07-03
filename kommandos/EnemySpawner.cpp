@@ -68,7 +68,7 @@ void EnemySpawner::UpdateEnemies()
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
-	particle->Update();
+	particle->Update(frameDeltaTime);
 	// Update all enemies
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{

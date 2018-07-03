@@ -263,33 +263,24 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		activeBullets.push_back(bullet);
 
 		// Main bullet
-		bullet->SetBullet(playerSmgr->addCubeSceneNode());
+		bullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
 		if (bullet->GetBullet())
 		{
 			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(bulletSize);
-			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-			bullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addCubeSceneNode());
+		leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
 		if (leftBullet->GetBullet())
 		{
 			leftBullet->GetBullet()->setVisible(false);
-			leftBullet->GetBullet()->setScale(bulletSize);
-			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-			leftBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addCubeSceneNode());
+		rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
 		if (rightBullet->GetBullet())
 		{
 			rightBullet->GetBullet()->setVisible(false);
-			rightBullet->GetBullet()->setScale(bulletSize);
-			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-			rightBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		hasShot = true;

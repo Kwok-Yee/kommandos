@@ -19,7 +19,8 @@ public:
 	enum BulletMode {
 		basic,
 		rapidFire,
-		splitFire
+		splitFire,
+		rapidSplitFire
 	};
 
 	///-------------------------------------------------------------------------------------------------

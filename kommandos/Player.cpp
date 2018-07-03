@@ -236,10 +236,15 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		soundManager->PlaySound(GUN_SHOT_SOUND, false);
 
-		// Bullet instances
+		// Bullet instance
 		Bullet* bullet = pool->GetResource();
-		Bullet* leftBullet = pool->GetResource();
-		Bullet* rightBullet = pool->GetResource();
+
+		// Main bullet
+		bullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+		if (bullet->GetBullet())
+		{
+			bullet->GetBullet()->setVisible(false);
+		}
 
 		// Rapid fire active
 		if (rapidFireTimer > 0)
@@ -250,10 +255,33 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		// Split fire active
 		if (splitFireTimer > 0)
 		{
+			// Bullet left/right instances
+			Bullet* leftBullet = pool->GetResource();
+			Bullet* rightBullet = pool->GetResource();
+
 			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			leftBullet->SetBulletSpread(-0.1f);
 			rightBullet->SetBulletSpread(0.1f);
+
+			// Left bullet for split fire
+			leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (leftBullet->GetBullet())
+			{
+				leftBullet->GetBullet()->setVisible(false);
+			}
+
+			// Right bullet for split fire
+			rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (rightBullet->GetBullet())
+			{
+				rightBullet->GetBullet()->setVisible(false);
+			}
+
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);
@@ -262,39 +290,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		// Push bullets to active bullets list
 		activeBullets.push_back(bullet);
 
-		// Main bullet
-		bullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
-		if (bullet->GetBullet())
-		{
-			bullet->GetBullet()->setVisible(false);
-		}
-
-		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
-		if (leftBullet->GetBullet())
-		{
-			leftBullet->GetBullet()->setVisible(false);
-		}
-
-		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
-		if (rightBullet->GetBullet())
-		{
-			rightBullet->GetBullet()->setVisible(false);
-		}
-
 		hasShot = true;
 
 		// Bullet visibility
 		bullet->GetBullet()->setVisible(true);
-
-		// Split fire active
-		if (splitFireTimer > 0)
-		{
-			// Bullet visibility
-			leftBullet->GetBullet()->setVisible(true);
-			rightBullet->GetBullet()->setVisible(true);
-		}
 
 		// Timer reset
 		bulletTimer = bullet->GetBulletTimer();

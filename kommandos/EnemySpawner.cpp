@@ -40,7 +40,7 @@ u32 amountOfEnemies, resize;
 u32 currentWave = 0;
 
 ParticleSystem *particleSystem;
-const path bloodSplatter = "../media/Textures/blood.bmp";
+const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 u32 prevFrameTime;
 EnemySpawner* spawner;
 

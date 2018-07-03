@@ -14,6 +14,8 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "PowerupPool.h"
+#include "Powerup.h"
 #include "SoundManager.h"
 #include "HeatMapManager.h"
 #include "iostream"
@@ -46,6 +48,8 @@ using namespace irrklang;
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
+
+const vector3df bulletSize = vector3df(0.03f, 0.125f, 0.25f);
 
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
@@ -90,6 +94,8 @@ s32 vulnerableTimer = 0;
 BulletPool* pool;
 /// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
+
+PowerupPool* powPool;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -151,6 +157,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	powPool = powPool->GetInstance(playerIDevice);
 
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
@@ -215,6 +222,24 @@ void Player::Move(InputReceiver inputReceiver)
 	{
 		vulnerableTimer -= frameDeltaTime;
 	}
+
+	Powerup* pow = playerCol.CollidesWithPowerup(playerObject);
+	if (pow)
+	{
+		switch (pow->GetPowerupType())
+		{
+		case 0:
+			break;
+		case 1:
+			//fireratePowerup
+			break;
+		case 2:
+			//splitShot
+			break;
+		}
+		powPool->ReturnResource(pow);
+		
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -268,30 +293,33 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		activeBullets.push_back(bullet);
 
 		// Main bullet
-		bullet->SetBullet(playerSmgr->addSphereSceneNode());
+		bullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (bullet->GetBullet())
 		{
 			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			bullet->GetBullet()->setScale(bulletSize);
 			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			bullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		leftBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (leftBullet->GetBullet())
 		{
 			leftBullet->GetBullet()->setVisible(false);
-			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			leftBullet->GetBullet()->setScale(bulletSize);
 			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			leftBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
+		rightBullet->SetBullet(playerSmgr->addCubeSceneNode());
 		if (rightBullet->GetBullet())
 		{
 			rightBullet->GetBullet()->setVisible(false);
-			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
+			rightBullet->GetBullet()->setScale(bulletSize);
 			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
+			rightBullet->GetBullet()->setRotation(vector3df(playerObject->getRotation()));
 		}
 
 		hasShot = true;

@@ -17,6 +17,8 @@ using namespace scene;
 using namespace std;
 
 const u32 maxWaves = 11;
+//60 = 1 second
+const u32 maxWaveCooldown = 600;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
@@ -26,18 +28,18 @@ Game* game_EnemySpawner;
 EnemyPool* enemyPool;
 Collision collision;
 
-//Built in Irrlicht Timer
-//ITimer* iTimer;
-
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
 u32 resize;
-u32 currentWave = 1;
+
 
 ParticleSystem *particle;
 const path bloodSplatter = "../media/Textures/blood.bmp";
 u32 prevFrameTime;
 
+s32 currentTime;
+u32 currentWave = 1;
+s32 waveCooldown;
 bool waveTimerSet = false;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
@@ -59,6 +61,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
 	prevFrameTime = enemySpawnerIDevice->getTimer()->getTime();
+	waveCooldown = maxWaveCooldown;
 	InitialiseWaveData();
 	Spawn();
 }
@@ -111,26 +114,44 @@ void EnemySpawner::UpdateEnemies()
 
 	if (activeEnemies.size() <= 0 && currentWave < maxWaves)
 	{
-		//if (waveTimerSet == false)
-		//{
+		if (waveTimerSet == false)
+		{
 			NextWave(frameDeltaTime);
-		//}
+		}
 	}
 }
 
 void EnemySpawner::NextWave(float waveFrameDeltaTime)
 {
-	//waveTimerSet = true;
-	//waveFrameDeltaTime = 10;
-	//cout << waveFrameDeltaTime;
+	const u32 now_ = enemySpawnerIDevice->getTimer()->getTime();
+	const f32 frameTime = (f32)(now_ - currentTime) / 1000.f; // Time in seconds
+	currentTime = now_;
+	cout << waveCooldown;
 	//waveFrameDeltaTime--;
+
+	//Divide wavecooldown by % 60 for UI
+
+	if (waveTimerSet == false && waveCooldown > 0)
+	{
+	cout << waveCooldown;
+	printf("_");
+		waveCooldown -= frameTime;
+
+		if (waveCooldown <= 0)
+		{
+			currentWave++;
+			Spawn();
+			//Insert pause/UI between waves here
+			printf("wave changed");
+			waveTimerSet = true;
+			waveCooldown = maxWaveCooldown;
+		}
+	}
+
 	//cout << waveFrameDeltaTime;
 	//if (waveFrameDeltaTime <= 0) {
 	//	cout << waveFrameDeltaTime;
-		currentWave++;
-		Spawn();
-		//Insert pause/UI between waves here
-		printf("wave changed");
+
 	//}
 }
 
@@ -138,7 +159,7 @@ void EnemySpawner::NextWave(float waveFrameDeltaTime)
 void EnemySpawner::InitialiseWaveData()
 {
 	//Amount of enemies:
-	waveData[1] = new WaveData(1, 5, 0, 0);//5
+	waveData[1] = new WaveData(1, 1, 0, 0);//5
 	waveData[2] = new WaveData(2, 10, 0, 0);//10
 	waveData[3] = new WaveData(3, 8, 3, 0);//11
 	waveData[4] = new WaveData(4, 12, 5, 0);//17

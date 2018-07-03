@@ -5,6 +5,6 @@ class UISystem
 {
 public:
 
-	void UI(irr::IrrlichtDevice* device);
+	void WaveUI(irr::IrrlichtDevice* device);
 	void DisplayWaves();
 };

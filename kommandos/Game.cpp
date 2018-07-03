@@ -131,7 +131,7 @@ void Game::Draw()
 	guienv->drawAll();
 	player->DrawHealthBar();
 	score.Scoring(device);
-	uISystem.UI(device);
+	uISystem.WaveUI(device);
 	driver->endScene();
 
 	int fps = driver->getFPS();

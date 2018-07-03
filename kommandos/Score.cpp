@@ -1,6 +1,7 @@
 #include "Score.h"
 #include <irrlicht.h>
 
+
 using namespace irr;
 using namespace gui;
 using namespace core;
@@ -9,12 +10,11 @@ using namespace video;
 
 IGUIEnvironment* scoreGui;
 IGUIFont* font2;
-u32 timer;
+IGUIStaticText* scoreText;
 
 EGUI_ALIGNMENT upperleft,upperright;
-
 s32 score = 0;
-IGUIStaticText* scoreText;
+u32 timer;
 
 //method for displaying score
 void Score::Scoring(IrrlichtDevice* device) 
@@ -23,10 +23,12 @@ void Score::Scoring(IrrlichtDevice* device)
 	timer = device->getTimer()->getTime();
 
 	font2 = device->getGUIEnvironment()->getFont("../media/Fonts/fontlucida.png");
-	font2->draw(stringw(score).c_str(),
+	core::stringw scoreString = L"Score: ";
+	scoreString += score;
+	font2->draw(stringw(scoreString).c_str(),
 		core::rect<s32>(80, 40, 200, 100),
 		video::SColor(255, 255, 255, 255));
-	
+
 	DisplayScore(0);
 }
 

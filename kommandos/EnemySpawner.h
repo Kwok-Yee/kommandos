@@ -3,6 +3,12 @@
 #include "Enemy.h"
 #include <iostream>
 
+using namespace irr;
+using namespace core;
+using namespace scene;
+using namespace std;
+
+extern u32 currentWave;
 class Player;
 class EnemySpawner
 {
@@ -13,8 +19,10 @@ public:
 	irr::core::array<Enemy*> getActiveEnemies();
 	//returns the enemyBehaviour script
 	Enemy* GetEnemy(int id);
+	//extern u32 currentWave;
 private:
 	//Spawns a enemy at a random spaw position
+	void NextWave(float);
 	void Spawn();
 	void InitialiseWaveData();
 };

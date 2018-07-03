@@ -79,7 +79,7 @@ void Camera::CameraInit()
 	}
 	shakeTimer = maxTime;
 	srand(time(0));
-	state = waveShaking;
+	state = normal;
 }
 
 void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
@@ -94,7 +94,6 @@ void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
 		camera->setPosition(newCameraPosition);
 
 		const f32 dur = 0.6;
-		//const f32 intensity = 1.5;
 		
 		vector3df playerPos = player_->getPlayerObject()->getPosition();
 		vector3df randomVec = vector3df(playerPos.X + rand() % 2 * intensity, playerPos.Y, playerPos.Z + rand() % 2 * intensity);

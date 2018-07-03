@@ -37,11 +37,9 @@ Game* game_;
 /// <summary>	The new camera position. </summary>
 vector3df newCameraPosition;
 
-
-int maxTime = 100;
+const int maxTime = 100;
 int shakeTimer;
 f32 resetTime = 0;
-bool shaking = true;
 
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Constructor. </summary>

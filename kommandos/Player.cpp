@@ -315,11 +315,11 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			for (int i = 0; i < activeBullets.size(); i++)
 			{
 				activeBullets[i]->UpdateBullet(mousePosition, playerObject->getPosition(), frameDeltaTime);
-				for (int j = 0; j < enemies->getEnemies().size(); j++)
+				for (int j = 0; j < enemies->getActiveEnemies().size(); j++)
 				{
-					if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[j], activeBullets[i]->GetBullet()))
+					if (playerCol.SceneNodeWithSceneNode(enemies->getActiveEnemies()[j]->GetEnemySceneNode(), activeBullets[i]->GetBullet()))
 					{
-						enemies->enemyHealthValues[j] = enemies->getEnemyBehaviour()->TakeDamage(activeBullets[i]->GetDamage(), enemies->enemyHealthValues[j]);
+						enemies->GetEnemy(j)->TakeDamage(activeBullets[i]->GetDamage());
 						playerScores.DisplayScore(10);
 						pool->ReturnResource(activeBullets[i]);
 						activeBullets.erase(i);
@@ -347,7 +347,7 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 /// <summary>	Take damage. </summary>
 ///-------------------------------------------------------------------------------------------------
 
-void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
+void Player::TakeDamage(f32 damage)
 {
 	if (health > 0 && vulnerableTimer <= 0)
 	{

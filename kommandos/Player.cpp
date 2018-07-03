@@ -231,10 +231,10 @@ void Player::Move(InputReceiver inputReceiver)
 		case 0:
 			break;
 		case 1:
-			//fireratePowerup
+			rapidFireTimer = 1000;
 			break;
 		case 2:
-			//splitShot
+			splitFireTimer = 1000;
 			break;
 		}
 		powPool->ReturnResource(pow);
@@ -249,7 +249,6 @@ void Player::Move(InputReceiver inputReceiver)
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	Raycast(inputReceiver.GetMousePosition(), playerSmgr->getActiveCamera());
-	cout << rapidFireTimer << " , " << splitFireTimer << endl;
 	if (bulletTimer > 0)
 	{
 		bulletTimer -= frameDeltaTime;

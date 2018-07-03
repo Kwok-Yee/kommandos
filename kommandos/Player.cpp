@@ -243,8 +243,8 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		{
 			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
-			leftBullet->SetBulletOffset(-15.f);
-			rightBullet->SetBulletOffset(15.f);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);

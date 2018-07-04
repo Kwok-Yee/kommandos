@@ -49,6 +49,7 @@ using namespace irrklang;
 #define RAPID_FIRE_SOUND "../media/Sounds/heavy_machine_gun.mp3"
 #define SPLIT_FIRE_SOUND "../media/Sounds/shotgun.mp3"
 #define RAPID_SPLIT_FIRE_SOUND "../media/Sounds/armor_piercer.mp3"
+#define HEALTH_SOUND "../media/Sounds/healthpickup.mp3"
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
@@ -237,6 +238,7 @@ void Player::Move(InputReceiver inputReceiver)
 		{
 		case 0:
 			health += 25;
+			soundManager->PlaySound(HEALTH_PICKUP, false);
 			if (health > 100)
 				health = 100;
 			break;

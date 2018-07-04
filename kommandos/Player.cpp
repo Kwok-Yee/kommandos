@@ -502,12 +502,12 @@ vector3df Player::GetMousePosition()
 	return mousePosition;
 }
 
-void Player::SetRapidFireTimer(s32 timer)
+s32 Player::GetRapidFireTimer()
 {
-	rapidFireTimer = timer;
+	return rapidFireTimer;
 }
 
-void Player::SetSplitFireTimer(s32 timer)
+s32 Player::GetSplitFireTimer()
 {
-	splitFireTimer = timer;
+	return splitFireTimer;
 }

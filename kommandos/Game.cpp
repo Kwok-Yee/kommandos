@@ -101,6 +101,8 @@ void Game::Start()
 	objectPlacementGen.PlaceObjects(device);
 	powerSpawn->PowerUpDevice(device);
 
+	uISystem->InitUISystem(device);
+
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
 	SLight & lightData = directionalLight->getLightData();

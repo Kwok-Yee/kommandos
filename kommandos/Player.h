@@ -86,9 +86,9 @@ public:
 
 	irr::core::vector3df GetMousePosition();
 
-	void SetRapidFireTimer(s32 timer);
+	s32 GetRapidFireTimer();
 
-	void SetSplitFireTimer(s32 timer);
+	s32 GetSplitFireTimer();
 
 private:
 	///-------------------------------------------------------------------------------------------------

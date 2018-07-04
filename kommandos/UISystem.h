@@ -5,7 +5,12 @@ class UISystem
 {
 public:
 
+	irr::video::SColor inActiveRapidColor;
+	irr::video::SColor activeRapidColor;
+
 	void WaveUI(irr::IrrlichtDevice* device);
-//private:
-//	UISystem();
+	void InitUISystem(irr::IrrlichtDevice* device);
+	void SetRapidUIColor(irr::video::SColor color);
+private:
+	irr::video::SColor rapidUIColor;
 };

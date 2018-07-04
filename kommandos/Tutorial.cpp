@@ -61,7 +61,6 @@ void Tutorial::RemoveTutorial()
 ///-------------------------------------------------------------------------------------------------
 void Tutorial::Update(irr::f32 frameDeltaTime)
 {
-	cout << timer << endl;
 	if (img)
 	{
 		if (timer > 0)
@@ -73,6 +72,5 @@ void Tutorial::Update(irr::f32 frameDeltaTime)
 			RemoveTutorial();
 		}
 	}
-	
 }
 

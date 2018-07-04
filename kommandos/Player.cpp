@@ -46,6 +46,9 @@ using namespace irrklang;
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
 #define GUN_SHOT_SOUND "../media/Sounds/PlayerGunShot.wav"
 #define TAKE_DAMAGE_SOUND "../media/Sounds/takedamage.mp3"
+#define RAPID_FIRE_SOUND "../media/Sounds/heavy_machine_gun.mp3"
+#define SPLIT_FIRE_SOUND "../media/Sounds/shotgun.mp3"
+#define RAPID_SPLIT_FIRE_SOUND "../media/Sounds/armor_piercer.mp3"
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
@@ -239,9 +242,26 @@ void Player::Move(InputReceiver inputReceiver)
 			break;
 		case 1:
 			rapidFireTimer = 1000;
+			if (splitFireTimer > 0) 
+			{
+				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
+			}
+			else
+			{
+				soundManager->PlaySound(RAPID_FIRE_SOUND, false);
+			}
 			break;
 		case 2:
 			splitFireTimer = 1000;
+			if (rapidFireTimer > 0)
+			{
+				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
+			}
+			else
+			{
+				soundManager->PlaySound(SPLIT_FIRE_SOUND, false);
+			}
+			
 			break;
 		}
 		powPool->ReturnResource(pow);

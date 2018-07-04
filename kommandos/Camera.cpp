@@ -159,6 +159,11 @@ void Camera::CameraUpdate(f32 frameDeltaTime)
 			shakeTimer = maxTimeNormalShake;
 		}
 		ScreenShake(frameDeltaTime, 0.4);
+		if (!soundPlaying)
+		{
+			soundPlaying = true;
+			_soundManager->PlaySound(EARTHQUAKE_SOUND, false);
+		}
 		break;
 	case bigWaveShaking:
 		if (!isShaking)

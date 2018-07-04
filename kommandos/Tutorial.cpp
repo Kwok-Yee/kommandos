@@ -51,8 +51,11 @@ void Tutorial::ShowTutorial(IrrlichtDevice* device)
 ///-------------------------------------------------------------------------------------------------
 void Tutorial::RemoveTutorial()
 {
-	img->remove();
-	img = NULL;
+	if(img) 
+	{
+		img->remove();
+		img = NULL;
+	}
 }
 
 

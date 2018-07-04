@@ -72,6 +72,7 @@ void Tutorial::Update(irr::f32 frameDeltaTime)
 		}
 		else
 		{
+			isTutorialActive = false;
 			RemoveTutorial();
 		}
 	}

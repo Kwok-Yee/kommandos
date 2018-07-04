@@ -121,12 +121,15 @@ void Game::Update()
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
 	camera->CameraUpdate(frameDeltaTime);
-	if (!isGameOver)
-	{
+	if (tutorial.isTutorialActive) {
 		tutorial.Update(frameDeltaTime);
+	}
+	if (!isGameOver )
+	{
 		player->Move(inputReceiver);
 		player->Shoot(inputReceiver, enemySpawner);
-		enemySpawner->UpdateEnemies();
+		if(!tutorial.isTutorialActive)
+			enemySpawner->UpdateEnemies();
 		collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 	}
 }

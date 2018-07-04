@@ -43,7 +43,7 @@ using namespace irrklang;
 #define PLAYER_MODEL "../media/Models/player/PlayerModel.3ds"
 #define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
-#define GUN_SHOT_SOUND "../media/Sounds/gunshot02.mp3"
+#define GUN_SHOT_SOUND "../media/Sounds/PlayerGunShot.wav"
 #define TAKE_DAMAGE_SOUND "../media/Sounds/takedamage.mp3"
 
 #define VULNERABLE_BASE_TIMER 75

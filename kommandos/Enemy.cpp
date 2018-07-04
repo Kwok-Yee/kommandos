@@ -15,6 +15,7 @@ using namespace core;
 
 // variables
 #define ZOMBIE_TAKE_DAMAGE_SOUND "../media/Sounds/zombiehurt.mp3"
+#define ZOMBIE_DEATH_SOUND "../media/Sounds/zombiedeath.mp3"
 
 const f32 meleeRange = vector3df(6, 6, 6).getLength();
 
@@ -139,6 +140,7 @@ void Enemy::TakeDamage(f32 damage)
 	{
 		health = 0;
 		dead = true;
+		enemySoundManager->PlaySound(ZOMBIE_DEATH_SOUND, false);
 		if (enemyType == EnemyType::matroshka && nestingLvl > 0) 
 		{
 			EnemySpawner* espawner = espawner->GetSpawner();
@@ -159,7 +161,6 @@ Enemy::Enemy(IrrlichtDevice* device)
 
 	dead = false;
 	enemy = 0;
-
 	enemy = enemySmgr->addMeshSceneNode(enemySmgr->getMesh("../media/Models/enemy/zombie.3ds"));
 	if (enemy)
 	{

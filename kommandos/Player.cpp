@@ -238,7 +238,7 @@ void Player::Move(InputReceiver inputReceiver)
 		{
 		case 0:
 			health += 25;
-			soundManager->PlaySound(HEALTH_PICKUP, false);
+			soundManager->PlaySound(HEALTH_SOUND, false);
 			if (health > 100)
 				health = 100;
 			break;

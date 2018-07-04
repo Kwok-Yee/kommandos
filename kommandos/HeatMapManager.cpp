@@ -148,7 +148,7 @@ void HeatMapManager::Update()
 		{
 			countdown = false;
 			CreatePoisonCloud(activeZone);
-			ui->clear();
+			countdownText->remove();
 		}
 	}
 	if (isPoisonCloudActive) 

@@ -18,8 +18,10 @@ IVideoDriver* UIdriver;
 
 IGUIFont* font2_UI;
 IGUIImage* rapidImg;
+IGUIImage* splitImg;
 ITexture* rapidFireTexture;
-SColor inActiveColor, activeColor, UIColor;
+ITexture* splitFireTexture;
+SColor inActiveColor, activeColor, rapidUIColor, splitUIColor;
 
 EGUI_ALIGNMENT upperleft_UI, upperight_UI;
 
@@ -41,7 +43,15 @@ void UISystem::InitUISystem(irr::IrrlichtDevice * device)
 	rapidImg->setScaleImage(true);
 	rapidImg->bringToFront(rapidImg);
 	rapidImg->setMaxSize(dimension2du(50, 50));
-	UIColor = inActiveColor;
+
+	splitFireTexture = UIdriver->getTexture("../media/Textures/split.png");
+	splitImg = GUI_UISystem->addImage(splitFireTexture, position2d<int>(700, 400));
+	splitImg->setScaleImage(true);
+	splitImg->bringToFront(rapidImg);
+	splitImg->setMaxSize(dimension2du(50, 50));
+
+	rapidUIColor = inActiveColor;
+	splitUIColor = inActiveColor;
 }
 
 void UISystem::WaveUI(IrrlichtDevice* device)
@@ -61,13 +71,22 @@ void UISystem::WaveUI(IrrlichtDevice* device)
 
 	if (_Player->GetRapidFireTimer() > 0) 
 	{
-		UIColor = activeColor;
+		rapidUIColor = activeColor;
 	}
 	else
 	{
-		UIColor = inActiveColor;
+		rapidUIColor = inActiveColor;
 	}
-	rapidImg->setColor(UIColor);
+	if (_Player->GetSplitFireTimer() > 0)
+	{
+		splitUIColor = activeColor;
+	}
+	else
+	{
+		splitUIColor = inActiveColor;
+	}
+	rapidImg->setColor(rapidUIColor);
+	splitImg->setColor(splitUIColor);
 
 	//Drawing the strings:
 	font2_UI->draw(stringw(waveNumberString),

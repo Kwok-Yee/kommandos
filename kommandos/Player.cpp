@@ -129,11 +129,10 @@ void Player::Init()
 {
 	health = MAX_HEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh(PLAYER_MODEL);
-	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
+	playerObject = playerSmgr->addMeshSceneNode(playerMesh, 0, -1, vector3df(266, 0, 266), vector3df(0, 0, 0));
 	camFollowObject = playerSmgr->addCubeSceneNode();
 	if (playerObject)
 	{
-		playerObject->setPosition(vector3df(266, 0, 266));
 		playerObject->setMaterialFlag(EMF_LIGHTING, true);
 	}
 	if (camFollowObject) 

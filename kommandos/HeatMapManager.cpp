@@ -213,7 +213,7 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	poisonCloud = hsmgr->addCubeSceneNode();
 	if (poisonCloud) {
 		poisonCloud->setPosition(cloudPosition);
-		poisonCloud->setScale(vector3df(size, 1.0, size));
+		poisonCloud->setScale(vector3df(size, 4.0, size));
 		
 		poisonCloud->setMaterialFlag(video::EMF_LIGHTING, false);
 		poisonCloud->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);

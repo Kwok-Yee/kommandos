@@ -166,7 +166,7 @@ void Camera::CameraUpdate(f32 frameDeltaTime)
 			isShaking = true;
 			shakeTimer = maxTimeNormalShake;
 		}
-		ScreenShake(frameDeltaTime, 0.3);
+		ScreenShake(frameDeltaTime, 0.5);
 		if (!soundPlaying)
 		{
 			soundPlaying = true;

@@ -14,29 +14,35 @@ Game* _Game;
 Player* _Player;
 
 IGUIEnvironment* GUI_UISystem;
+IVideoDriver* UIdriver;
+
 IGUIFont* font2_UI;
 IGUIImage* rapidImg;
 ITexture* rapidFireTexture;
-IVideoDriver* UIdriver;
+SColor inActiveColor, activeColor, UIColor;
 
 EGUI_ALIGNMENT upperleft_UI, upperight_UI;
+
+bool setTexture = true;
 
 void UISystem::InitUISystem(irr::IrrlichtDevice * device)
 {
 	_Game = _Game->GetInstance();
 	_Player = _Game->GetPlayer();
+	hMapManager = hMapManager->GetInstance();
 
 	UIdriver = _Game->device->getVideoDriver();
 	GUI_UISystem = _Game->device->getGUIEnvironment();
 
-	inActiveRapidColor = SColor((u32)50, (u32)255, (u32)0, (u32)0);
-	activeRapidColor = SColor((u32)255, (u32)255, (u32)255, (u32)255);
+	inActiveColor = SColor((u32)50, (u32)255, (u32)0, (u32)0);
+	activeColor = SColor((u32)255, (u32)255, (u32)255, (u32)255);
 
 	rapidFireTexture = UIdriver->getTexture("../media/Textures/rapid.png");
 	rapidImg = GUI_UISystem->addImage(rapidFireTexture, position2d<int>(700, 500));
 	rapidImg->setScaleImage(true);
+	rapidImg->bringToFront(rapidImg);
 	rapidImg->setMaxSize(dimension2du(50, 50));
-	rapidUIColor = inActiveRapidColor;
+	UIColor = inActiveColor;
 }
 
 void UISystem::WaveUI(IrrlichtDevice* device)
@@ -56,14 +62,13 @@ void UISystem::WaveUI(IrrlichtDevice* device)
 
 	if (_Player->GetRapidFireTimer() > 0) 
 	{
-		rapidUIColor = activeRapidColor;
+		UIColor = activeColor;
 	}
 	else
 	{
-		rapidUIColor = inActiveRapidColor;
+		UIColor = inActiveColor;
 	}
-
-	rapidImg->setColor(rapidUIColor);
+	rapidImg->setColor(UIColor);
 
 	//Drawing the strings:
 	font2_UI->draw(stringw(waveNumberString),
@@ -85,9 +90,3 @@ void UISystem::WaveUI(IrrlichtDevice* device)
 	}
 
 }
-
-void UISystem::SetRapidUIColor(SColor color)
-{
-	rapidUIColor = color;
-}
-

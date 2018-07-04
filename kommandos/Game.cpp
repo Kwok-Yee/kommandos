@@ -82,7 +82,7 @@ void Game::Start()
 	//Get the sound engine
 	SoundManager* soundManager = soundManager->GetInstance();
 	//Start Game Background song	
-	soundManager->PlaySound("../media/Sounds/blood_harvest.mp3", true);
+	soundManager->PlaySound("../media/Sounds/bgsound.mp3", true);
 
 	// Create instances of classes
 	camera = camera->GetInstance(device);

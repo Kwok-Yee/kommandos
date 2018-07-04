@@ -2,6 +2,7 @@
 #include "HeatMapManager.h"
 #include <iostream>
 #include "Game.h"
+#include "SoundManager.h"
 
 using namespace irr;
 using namespace core;
@@ -14,6 +15,7 @@ using namespace std;
 Game* hGame = hGame->GetInstance();
 ISceneManager* hsmgr = hGame->device->getSceneManager();
 IGUIEnvironment* ui = hGame->device->getGUIEnvironment();
+SoundManager* hSoundManager;
 
 HeatMapManager::HeatMapManager()
 {
@@ -21,6 +23,7 @@ HeatMapManager::HeatMapManager()
 	zone2Weight = 0;
 	zone3Weight = 0;
 	zone4Weight = 0;
+	hSoundManager = hSoundManager->GetInstance();
 }
 
 // Set instance to 0 (NULL)
@@ -222,6 +225,7 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	}
 	isPoisonCloudActive = true;
 	seconds = MAX_POISONCLOUS_SECONDS;
+	hSoundManager->PlaySound(GAS_SOUND, false);
 }
 
 ISceneNode* HeatMapManager::GetPoisonCloud() {

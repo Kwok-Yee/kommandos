@@ -63,13 +63,14 @@ void Tutorial::Update(irr::f32 frameDeltaTime)
 {
 	if (img)
 	{
-		if (timer > 0) {
+		if (timer > 0)
+		{
 			timer -= frameDeltaTime;
 		}
-	}
-	else
-	{
-		RemoveTutorial();
+		else
+		{
+			RemoveTutorial();
+		}
 	}
 }
 

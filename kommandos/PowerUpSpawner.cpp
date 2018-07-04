@@ -44,18 +44,19 @@ void PowerUpSpawner::PowerUpSpawn(vector3df powerUpPosition)
 	{
 		int powTyp = rand() % 3;
 		powerup = pool->GetResource();
-		powerup->SetPowerupType(powTyp);
 		powCol.AddPowerupToList(powerup);
 
-		IMeshSceneNode* powerupNode = powerUpSmgr->addMeshSceneNode(powerUpSmgr->getMesh("../media/powerup.3ds"));
+		IMeshSceneNode* powerupNode = powerUpSmgr->addCubeSceneNode(10.0f,0,-1, 
+			powerUpPosition,
+			vector3df(0,0,0),
+			vector3df(0.4f,0.4f,0.4f));
 		if (powerupNode)
 		{
 			powerupNode->setMaterialFlag(video::EMF_LIGHTING, false);
-
-			powerupNode->setScale(vector3df(2, 1, 2));
+			//powerupNode->setMaterialTexture(0, powerUpDriver->getTexture("../media/Textures/powerup_firerate.png"));
 			powerupNode->setVisible(true);
-			powerupNode->setPosition(powerUpPosition);
 		}
 		powerup->SetPowerup(powerupNode);
+		powerup->SetPowerupType(powTyp);
 	}
 }

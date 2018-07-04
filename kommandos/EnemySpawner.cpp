@@ -45,7 +45,7 @@ u32 amountOfEnemies, resize;
 u32 prevFrameTime;
 
 s32 currentTime;
-u32 currentWave = 1;
+u32 currentWave = 0;
 u32 waveCooldown = maxWaveCooldown;
 
 bool waveChangeUI;
@@ -173,6 +173,7 @@ EnemySpawner* EnemySpawner::GetSpawner() { return spawner; }
 void EnemySpawner::InitialiseWaveData()
 {
 	//Amount of enemies:
+	waveData[0] = new WaveData(0, 0, 0, 0, 0);//5
 	waveData[1] = new WaveData(1, 5, 0, 0, 0);//5
 	waveData[2] = new WaveData(2, 10, 0, 0, 0);//10
 	waveData[3] = new WaveData(3, 8, 3, 0, 0);//11

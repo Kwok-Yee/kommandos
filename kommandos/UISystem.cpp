@@ -10,9 +10,6 @@ using namespace core;
 using namespace scene;
 using namespace video;
 
-Game* _Game;
-Player* _Player;
-
 IGUIEnvironment* GUI_UISystem;
 IVideoDriver* UIdriver;
 
@@ -23,17 +20,24 @@ ITexture* rapidFireTexture;
 ITexture* splitFireTexture;
 SColor inActiveColor, activeColor, rapidUIColor, splitUIColor;
 
+Game* game_UI;
+Player* _Player;
+
 EGUI_ALIGNMENT upperleft_UI, upperight_UI;
 
-bool setTexture = true;
+UISystem::UISystem(IrrlichtDevice* device)
+{
+	game_UI = game_UI->GetInstance();
+}
+
 
 void UISystem::InitUISystem(irr::IrrlichtDevice * device)
 {
-	_Game = _Game->GetInstance();
-	_Player = _Game->GetPlayer();
+	game_UI = game_UI->GetInstance();
+	_Player = game_UI->GetPlayer();
 
-	UIdriver = _Game->device->getVideoDriver();
-	GUI_UISystem = _Game->device->getGUIEnvironment();
+	UIdriver = game_UI->device->getVideoDriver();
+	GUI_UISystem = game_UI->device->getGUIEnvironment();
 
 	inActiveColor = SColor((u32)50, (u32)255, (u32)0, (u32)0);
 	activeColor = SColor((u32)255, (u32)255, (u32)255, (u32)255);
@@ -69,41 +73,52 @@ void UISystem::WaveUI(IrrlichtDevice* device)
 	//Big wave incoming string
 	core::stringw bigWaveString = L"BIG WAVE INCOMING!!";	
 
-	if (_Player->GetRapidFireTimer() > 0) 
+	if(game_UI->GetIsGameOver() == false)
 	{
-		rapidUIColor = activeColor;
-	}
-	else
-	{
-		rapidUIColor = inActiveColor;
-	}
-	if (_Player->GetSplitFireTimer() > 0)
-	{
-		splitUIColor = activeColor;
-	}
-	else
-	{
-		splitUIColor = inActiveColor;
-	}
-	rapidImg->setColor(rapidUIColor);
-	splitImg->setColor(splitUIColor);
+		if (_Player->GetRapidFireTimer() > 0)
+		{
+			rapidUIColor = activeColor;
+		}
+		else
+		{
+			rapidUIColor = inActiveColor;
+		}
+		if (_Player->GetSplitFireTimer() > 0)
+		{
+			splitUIColor = activeColor;
+		}
+		else
+		{
+			splitUIColor = inActiveColor;
+		}
 
-	//Drawing the strings:
-	font2_UI->draw(stringw(waveNumberString),
-		core::rect<s32>(600, 40, 200, 100),
-		video::SColor(255, 255, 255, 255));
-
-	if (waveChangeUI == true)
+		rapidImg->setColor(rapidUIColor);
+		splitImg->setColor(splitUIColor);
+	}
+	else 
 	{
-		font2_UI->draw(stringw(waveCountDownString),
-			core::rect<s32>(300, 40, 200, 100),
+		GUI_UISystem->clear();
+	}
+
+	if (!game_UI->GetIsGameOver())
+	{
+		//Drawing the strings:
+		font2_UI->draw(stringw(waveNumberString),
+			core::rect<s32>(600, 40, 200, 100),
 			video::SColor(255, 255, 255, 255));
 
-		if ((currentWave + 1) % 5 == 0)
+		if (waveChangeUI == true)
 		{
-			font2_UI->draw(stringw(bigWaveString),
-				core::rect<s32>(325, 120, 200, 100),
+			font2_UI->draw(stringw(waveCountDownString),
+				core::rect<s32>(300, 40, 200, 100),
 				video::SColor(255, 255, 255, 255));
+
+			if ((currentWave + 1) % 5 == 0)
+			{
+				font2_UI->draw(stringw(bigWaveString),
+					core::rect<s32>(325, 120, 200, 100),
+					video::SColor(255, 255, 255, 255));
+			}
 		}
 	}
 

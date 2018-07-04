@@ -42,12 +42,15 @@ void Powerup::SetPowerupType(s32 powType)
 	{
 	case 0:
 		Powerup::type = Powerup::PowerupType::health;
+		powerup->setMaterialTexture(0, powerupDriver->getTexture("../media/Textures/powerup_health.png"));
 		break;
 	case 1:
 		Powerup::type = Powerup::PowerupType::firerate;
+		powerup->setMaterialTexture(0, powerupDriver->getTexture("../media/Textures/powerup_firerate.png"));
 		break;
 	case 2:
 		Powerup::type = Powerup::PowerupType::splitshot;
+		powerup->setMaterialTexture(0, powerupDriver->getTexture("../media/Textures/powerup_splitshot.png"));
 		break;
 	default:
 		Powerup::type = Powerup::PowerupType::base;

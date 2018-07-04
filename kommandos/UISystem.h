@@ -4,7 +4,7 @@
 class UISystem
 {
 public:
-	void WaveUI(irr::IrrlichtDevice* device);
+	UISystem(irr::IrrlichtDevice* device);
 	void InitUISystem(irr::IrrlichtDevice* device);
-//private:
+	void WaveUI(irr::IrrlichtDevice* device);
 };

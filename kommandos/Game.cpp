@@ -27,7 +27,7 @@ ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
-UISystem uISystem;
+UISystem* uISystem;
 Score score;
 Collision _collision;
 EnemySpawner* enemySpawner;
@@ -71,6 +71,7 @@ bool Game::GetIsGameOver() {
 
 bool Game::SetIsGameOver(bool state)
 {
+	tutorial.RemoveTutorial();
 	camera->state = camera->gameover;
 	return isGameOver = state;
 }
@@ -87,6 +88,7 @@ void Game::Start()
 	camera = camera->GetInstance(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
+	uISystem = new UISystem(device);
 
 	//score.Scoring is unneeded duplicate code
 	score.Scoring(device);
@@ -99,7 +101,7 @@ void Game::Start()
 	objectPlacementGen.PlaceObjects(device);
 	powerSpawn->PowerUpDevice(device);
 
-	uISystem.InitUISystem(device);
+	uISystem->InitUISystem(device);
 
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -136,7 +138,7 @@ void Game::Draw()
 	guienv->drawAll();
 	player->DrawHealthBar();
 	score.Scoring(device);
-	uISystem.WaveUI(device);
+	uISystem->WaveUI(device);
 	driver->endScene();
 
 	int fps = driver->getFPS();

@@ -8,6 +8,7 @@
 
 #include <irrlicht.h>
 #include "Tutorial.h"
+#include "Game.h"
 
 using namespace irr;
 using namespace gui;
@@ -23,6 +24,7 @@ IGUIImage* img;
 
 /// <summary> Timer for keeping tutorial on screen (600/ 60 frames = 10 seconds) </summary>
 int timer = 600;
+
 
 
 ///-------------------------------------------------------------------------------------------------
@@ -59,9 +61,11 @@ void Tutorial::RemoveTutorial()
 ///-------------------------------------------------------------------------------------------------
 void Tutorial::Update(irr::f32 frameDeltaTime)
 {
-	if (img) 
+	cout << timer << endl;
+	if (img)
 	{
-		if (timer > 0) {
+		if (timer > 0)
+		{
 			timer -= frameDeltaTime;
 		}
 		else
@@ -69,4 +73,6 @@ void Tutorial::Update(irr::f32 frameDeltaTime)
 			RemoveTutorial();
 		}
 	}
+	
 }
+

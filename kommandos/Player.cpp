@@ -14,6 +14,8 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "PowerupPool.h"
+#include "Powerup.h"
 #include "SoundManager.h"
 #include "HeatMapManager.h"
 #include "iostream"
@@ -46,6 +48,8 @@ using namespace irrklang;
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
+
+const vector3df bulletSize = vector3df(0.03f, 0.125f, 0.25f);
 
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
@@ -90,6 +94,8 @@ s32 vulnerableTimer = 0;
 BulletPool* pool;
 /// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
+
+PowerupPool* powPool;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -151,6 +157,7 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	powPool = powPool->GetInstance(playerIDevice);
 
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
@@ -215,6 +222,27 @@ void Player::Move(InputReceiver inputReceiver)
 	{
 		vulnerableTimer -= frameDeltaTime;
 	}
+
+	Powerup* pow = playerCol.CollidesWithPowerup(playerObject);
+	if (pow)
+	{
+		switch (pow->GetPowerupType())
+		{
+		case 0:
+			health += 25;
+			if (health > 100)
+				health = 100;
+			break;
+		case 1:
+			rapidFireTimer = 1000;
+			break;
+		case 2:
+			splitFireTimer = 1000;
+			break;
+		}
+		powPool->ReturnResource(pow);
+		
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -224,7 +252,6 @@ void Player::Move(InputReceiver inputReceiver)
 void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 {
 	Raycast(inputReceiver.GetMousePosition(), playerSmgr->getActiveCamera());
-
 	if (bulletTimer > 0)
 	{
 		bulletTimer -= frameDeltaTime;
@@ -241,24 +268,87 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		soundManager->PlaySound(GUN_SHOT_SOUND, false);
 
-		// Bullet instances
+		// Bullet instance
 		Bullet* bullet = pool->GetResource();
-		Bullet* leftBullet = pool->GetResource();
-		Bullet* rightBullet = pool->GetResource();
+
+		// Main bullet
+		bullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+		if (bullet->GetBullet())
+		{
+			bullet->GetBullet()->setVisible(false);
+		}
 
 		// Rapid fire active
-		if (rapidFireTimer > 0)
+		if (rapidFireTimer > 0 && splitFireTimer <= 0)
 		{
 			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
 		}
 
 		// Split fire active
-		if (splitFireTimer > 0)
+		if (splitFireTimer > 0 && rapidFireTimer <= 0)
 		{
+			// Bullet left/right instances
+			Bullet* leftBullet = pool->GetResource();
+			Bullet* rightBullet = pool->GetResource();
+
 			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
 			leftBullet->SetBulletSpread(-0.1f);
 			rightBullet->SetBulletSpread(0.1f);
+
+			// Left bullet for split fire
+			leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (leftBullet->GetBullet())
+			{
+				leftBullet->GetBullet()->setVisible(false);
+			}
+
+			// Right bullet for split fire
+			rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (rightBullet->GetBullet())
+			{
+				rightBullet->GetBullet()->setVisible(false);
+			}
+
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+
+			// Push bullets to active bullets list
+			activeBullets.push_back(leftBullet);
+			activeBullets.push_back(rightBullet);
+		}
+
+		if (rapidFireTimer > 0 && splitFireTimer > 0)
+		{
+			Bullet* leftBullet = pool->GetResource();
+			Bullet* rightBullet = pool->GetResource();
+
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+
+			leftBullet->SetBulletMode(Bullet::BulletMode::rapidSplitFire);
+			rightBullet->SetBulletMode(Bullet::BulletMode::rapidSplitFire);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
+			
+			// Left bullet for split fire
+			leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (leftBullet->GetBullet())
+			{
+				leftBullet->GetBullet()->setVisible(false);
+			}
+
+			// Right bullet for split fire
+			rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (rightBullet->GetBullet())
+			{
+				rightBullet->GetBullet()->setVisible(false);
+			}
+
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);
@@ -267,45 +357,10 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 		// Push bullets to active bullets list
 		activeBullets.push_back(bullet);
 
-		// Main bullet
-		bullet->SetBullet(playerSmgr->addSphereSceneNode());
-		if (bullet->GetBullet())
-		{
-			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
-			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-		}
-
-		// Left bullet for split fire
-		leftBullet->SetBullet(playerSmgr->addSphereSceneNode());
-		if (leftBullet->GetBullet())
-		{
-			leftBullet->GetBullet()->setVisible(false);
-			leftBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
-			leftBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-		}
-
-		// Right bullet for split fire
-		rightBullet->SetBullet(playerSmgr->addSphereSceneNode());
-		if (rightBullet->GetBullet())
-		{
-			rightBullet->GetBullet()->setVisible(false);
-			rightBullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
-			rightBullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
-		}
-
 		hasShot = true;
 
 		// Bullet visibility
 		bullet->GetBullet()->setVisible(true);
-
-		// Split fire active
-		if (splitFireTimer > 0)
-		{
-			// Bullet visibility
-			leftBullet->GetBullet()->setVisible(true);
-			rightBullet->GetBullet()->setVisible(true);
-		}
 
 		// Timer reset
 		bulletTimer = bullet->GetBulletTimer();

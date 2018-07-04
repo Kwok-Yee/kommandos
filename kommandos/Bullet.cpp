@@ -29,21 +29,25 @@ void Bullet::SetBulletMode(BulletMode mode)
 	switch (mode)
 	{
 	case BulletMode::basic:
-		speed = 250.f;
+		speed = 300.f;
 		damage = 25.f;
 		bulletLifeTimer = 150;
-		bulletTimer = 25;
+		bulletTimer = 15;
 		return;
 	case BulletMode::rapidFire:
-		speed = 300.f;
+		speed = 350.f;
 		bulletLifeTimer = 150;
-		bulletTimer = 10;
+		bulletTimer = 9;
 		return;
 	case BulletMode::splitFire:
-		speed = 250.f;
+		speed = 300.f;
 		bulletLifeTimer = 150;
-		bulletTimer = 17;
+		bulletTimer = 13;
 		return;
+	case BulletMode::rapidSplitFire:
+		speed = 300.f;
+		bulletLifeTimer = 150;
+		bulletTimer = 9;
 	}
 }
 
@@ -102,7 +106,7 @@ void Bullet::UpdateBullet(vector3df mousePos, vector3df playerPos, float frameDe
 		length = delta.getLength();
 		delta = delta.normalize();
 
-		if (bulletMode == BulletMode::splitFire && (spread > 0 || spread < 0))
+		if ((bulletMode == BulletMode::rapidSplitFire || bulletMode == BulletMode::splitFire) && (spread > 0 || spread < 0))
 		{
 			perpendicular = vector3df(delta.Z, delta.Y, delta.X);
 			offPos = mousePos + (perpendicular * spread * length);

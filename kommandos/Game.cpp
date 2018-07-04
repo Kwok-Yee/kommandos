@@ -12,6 +12,7 @@
 #include "ObjectPlacementGeneration.h"
 #include "SoundManager.h"
 #include "Tutorial.h"
+#include "PowerupSpawner.h"
 
 using namespace irr;
 using namespace core;
@@ -33,6 +34,7 @@ EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;
 Tutorial tutorial;
+PowerUpSpawner* powerSpawn;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -95,6 +97,7 @@ void Game::Start()
 	guienv = device->getGUIEnvironment();
 
 	objectPlacementGen.PlaceObjects(device);
+	powerSpawn->PowerUpDevice(device);
 
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();

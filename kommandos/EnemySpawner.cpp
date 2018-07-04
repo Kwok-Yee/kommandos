@@ -24,7 +24,7 @@ const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 const u32 maxWaves = 10;
 //60 = 1 second
 const u32 maxWaveCooldown = 180;
-const vector3df powerUpPositionAdjust = vector3df(0,-0.5f,0);
+const vector3df powerUpPositionAdjust = vector3df(0,1,0);
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;

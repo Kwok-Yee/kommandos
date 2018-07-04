@@ -18,6 +18,7 @@
 #include "Powerup.h"
 #include "SoundManager.h"
 #include "HeatMapManager.h"
+#include "Camera.h"
 #include "iostream"
 
 using namespace irr;
@@ -96,6 +97,7 @@ BulletPool* pool;
 core::array<Bullet*> activeBullets;
 
 PowerupPool* powPool;
+Camera* _Cam;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -159,6 +161,8 @@ void Player::Init()
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
 	powPool = powPool->GetInstance(playerIDevice);
+
+	_Cam = _Cam->GetInstance(NULL);
 
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
@@ -353,6 +357,8 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			// Push bullets to active bullets list
 			activeBullets.push_back(leftBullet);
 			activeBullets.push_back(rightBullet);
+
+			_Cam->state = _Cam->shootShaking;
 		}
 
 		// Push bullets to active bullets list

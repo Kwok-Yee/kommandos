@@ -41,10 +41,12 @@ Game* game_;
 /// <summary>	The new camera position. </summary>
 vector3df newCameraPosition;
 
-const int maxTime = 100;
+const int maxTimeNormalShake = 100;
+const int shotTimeShake = 10;
 int shakeTimer;
 f32 resetTime = 0;
 bool soundPlaying = false;
+bool isShaking = false;
 
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Constructor. </summary>
@@ -83,7 +85,7 @@ void Camera::CameraInit()
 		camera->setTarget(cameraStartTarget);
 		newCameraPosition.Y = 80; 
 	}
-	shakeTimer = maxTime;
+	//shakeTimer = maxTime;
 	srand(time(0));
 	state = normal;
 }
@@ -124,7 +126,7 @@ void Camera::ScreenShake(f32 frameDeltaTime, f32 intensity)
 	}
 	else 
 	{
-		shakeTimer = maxTime;
+		//shakeTimer = maxTime;
 		state = normal;
 	}
 }
@@ -148,17 +150,36 @@ void Camera::CameraUpdate(f32 frameDeltaTime)
 			camera->setTarget(player_->getPlayerObject()->getPosition());
 		}
 		soundPlaying = false;
+		isShaking = false;
 		break;
 	case waveShaking:
+		if (!isShaking) 
+		{
+			isShaking = true;
+			shakeTimer = maxTimeNormalShake;
+		}
 		ScreenShake(frameDeltaTime, 0.4);
 		break;
 	case bigWaveShaking:
-		ScreenShake(frameDeltaTime, 1.5);
+		if (!isShaking)
+		{
+			isShaking = true;
+			shakeTimer = maxTimeNormalShake;
+		}
+		ScreenShake(frameDeltaTime, 0.3);
 		if (!soundPlaying)
 		{
 			soundPlaying = true;
 			_soundManager->PlaySound(EARTHQUAKE_SOUND, false);
 		}
+		break;
+	case shootShaking:
+		if (!isShaking)
+		{
+			isShaking = true;
+			shakeTimer = shotTimeShake;
+		}
+		ScreenShake(frameDeltaTime, 2);
 		break;
 	case gameover:
 		camera->setPosition(cameraStartPosition);

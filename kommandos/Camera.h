@@ -23,6 +23,7 @@ public:
 		normal,
 		waveShaking,
 		bigWaveShaking,
+		shootShaking,
 		gameover
 	};
 

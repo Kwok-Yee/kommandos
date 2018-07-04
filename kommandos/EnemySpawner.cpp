@@ -24,6 +24,7 @@ const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 const u32 maxWaves = 10;
 //60 = 1 second
 const u32 maxWaveCooldown = 180;
+const vector3df powerUpPositionAdjust = vector3df(0,-0.5f,0);
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
@@ -114,7 +115,7 @@ void EnemySpawner::UpdateEnemies()
 		{
 			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
 			heatMapMngr->AddWeight(heatMapMngr->CheckZoneFromPosition(activeEnemies[i]->GetEnemySceneNode()->getAbsolutePosition()), 5.0f);
-			powerUpSpawner->PowerUpSpawn(activeEnemies[i]->GetEnemySceneNode()->getPosition());
+			powerUpSpawner->PowerUpSpawn(activeEnemies[i]->GetEnemySceneNode()->getPosition() - powerUpPositionAdjust); //to lower the powerup position
 			enemyPool->ReturnResource(activeEnemies[i]);
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);

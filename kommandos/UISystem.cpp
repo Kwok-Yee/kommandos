@@ -1,6 +1,7 @@
 #include "UISystem.h"
 #include <irrlicht.h>
 #include "EnemySpawner.h"
+#include "Game.h"
 
 using namespace irr;
 using namespace gui;
@@ -11,8 +12,14 @@ using namespace video;
 IGUIEnvironment* GUI_UISystem;
 IGUIFont* font2_UI;
 
+Game* game_UI;
+
 EGUI_ALIGNMENT upperleft_UI, upperight_UI;
 
+UISystem::UISystem(IrrlichtDevice* device)
+{
+	game_UI = game_UI->GetInstance();
+}
 
 void UISystem::WaveUI(IrrlichtDevice* device)
 {
@@ -31,22 +38,25 @@ void UISystem::WaveUI(IrrlichtDevice* device)
 	//Big wave incoming string
 	core::stringw bigWaveString = L"BIG WAVE INCOMING!!";
 
-	//Drawing the strings:
-	font2_UI->draw(stringw(waveNumberString),
-		core::rect<s32>(600, 40, 200, 100),
-		video::SColor(255, 255, 255, 255));
-
-	if (waveChangeUI == true)
+	if (game_UI->GetIsGameOver() != true)
 	{
-		font2_UI->draw(stringw(waveCountDownString),
-			core::rect<s32>(300, 40, 200, 100),
+		//Drawing the strings:
+		font2_UI->draw(stringw(waveNumberString),
+			core::rect<s32>(600, 40, 200, 100),
 			video::SColor(255, 255, 255, 255));
 
-		if ((currentWave + 1) % 5 == 0)
+		if (waveChangeUI == true)
 		{
-			font2_UI->draw(stringw(bigWaveString),
-				core::rect<s32>(325, 120, 200, 100),
+			font2_UI->draw(stringw(waveCountDownString),
+				core::rect<s32>(300, 40, 200, 100),
 				video::SColor(255, 255, 255, 255));
+
+			if ((currentWave + 1) % 5 == 0)
+			{
+				font2_UI->draw(stringw(bigWaveString),
+					core::rect<s32>(325, 120, 200, 100),
+					video::SColor(255, 255, 255, 255));
+			}
 		}
 	}
 

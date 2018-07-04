@@ -7,6 +7,7 @@
 #include "EnemySpawner.h"
 #include "ParticleSystem.h"
 #include "Score.h"
+#include "UISystem.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
 #include "SoundManager.h"
@@ -26,6 +27,7 @@ ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
+UISystem uISystem;
 Score score;
 Collision _collision;
 EnemySpawner* enemySpawner;
@@ -85,6 +87,8 @@ void Game::Start()
 	camera = camera->GetInstance(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
+
+	//score.Scoring is unneeded duplicate code
 	score.Scoring(device);
 	tutorial.ShowTutorial(device);
 
@@ -130,6 +134,7 @@ void Game::Draw()
 	guienv->drawAll();
 	player->DrawHealthBar();
 	score.Scoring(device);
+	uISystem.WaveUI(device);
 	driver->endScene();
 
 	int fps = driver->getFPS();

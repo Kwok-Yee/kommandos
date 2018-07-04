@@ -20,8 +20,10 @@ using namespace core;
 using namespace scene;
 using namespace std;
 
+const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
 const u32 maxWaves = 10;
-int killedEnemies = 0;
+//60 = 1 second
+const u32 maxWaveCooldown = 180;
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
@@ -33,16 +35,21 @@ EnemyPool* enemyPool;
 Collision collision;
 Camera* _cam;
 HeatMapManager* heatMapMngr;
+ParticleSystem *particleSystem;
+EnemySpawner* spawner;
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
-u32 amountOfEnemies, resize;
-u32 currentWave = 0;
 
-ParticleSystem *particleSystem;
-const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
+u32 amountOfEnemies, resize;
 u32 prevFrameTime;
-EnemySpawner* spawner;
+
+s32 currentTime;
+u32 currentWave = 1;
+u32 waveCooldown = maxWaveCooldown;
+
+bool waveChangeUI;
+bool waveTimerSet = false;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
@@ -79,20 +86,23 @@ struct WaveData
 		maxRegularEnem = _maxRegularEnem;
 		maxFastEnem = _maxFastEnem;
 		maxTankEnem = _maxTankEnem;
-		maxTankEnem = _maxMatroEnem;
+		maxMatroEnem = _maxMatroEnem;
 	};
+
 	int waveNumber;
 	int maxRegularEnem;
 	int maxFastEnem;
 	int maxTankEnem;
 	int maxMatroEnem;
 };
+//Amount of waves possible
 WaveData* waveData[15];
 
 void EnemySpawner::UpdateEnemies()
 {
 	// Work out a frame delta time.
 	const u32 now = enemySpawnerIDevice->getTimer()->getTime();
+	//enemySpawnerIDevice->getTimer()->start();
 	const f32 frameDeltaTime = (f32)(now - prevFrameTime) / 1000.f; // Time in seconds
 	prevFrameTime = now;
 	particleSystem->Update(frameDeltaTime);
@@ -100,7 +110,6 @@ void EnemySpawner::UpdateEnemies()
 	for (int i = 0; i < activeEnemies.size(); i++)
 	{
 		activeEnemies[i]->Update(frameDeltaTime);
-
 		if (activeEnemies[i]->IsDead())
 		{
 			particleSystem->CreateParticles(activeEnemies[i]->GetEnemySceneNode()->getPosition(), bloodSplatter);// for creating blood on enemies
@@ -110,7 +119,6 @@ void EnemySpawner::UpdateEnemies()
 			collision.RemoveDynamicFromList(activeEnemies[i]->GetEnemySceneNode());
 			activeEnemies.erase(i);
 		}
-
 		if (game_EnemySpawner->GetIsGameOver())
 		{
 			enemySpawnerSmgr->addToDeletionQueue(activeEnemies[i]->GetEnemySceneNode());
@@ -120,15 +128,41 @@ void EnemySpawner::UpdateEnemies()
 
 	if (activeEnemies.size() <= 0 && currentWave < maxWaves)
 	{
-		currentWave++;
-		Spawn();
-		if (currentWave % 3 == 0)
+		if (waveTimerSet == false)
+
 		{
-			_cam->state = _cam->bigWaveShaking;
+			NextWave();
 		}
-		else
+	}
+}
+
+void EnemySpawner::NextWave()
+{
+	const u32 now_ = enemySpawnerIDevice->getTimer()->getTime();
+	const f32 frameTime = (f32)(now_ - currentTime) / 1000.f; // Time in seconds
+	currentTime = now_;
+
+	if (waveTimerSet == false && waveCooldown > 0)
+	{
+		waveChangeUI = true;
+		waveCooldown -= frameTime;
+		if (waveCooldown <= 0)
 		{
-			_cam->state = _cam->waveShaking;
+			currentWave++;
+			Spawn();
+			if (currentWave % 5 == 0)
+			{
+				_cam->state = _cam->bigWaveShaking;
+			}
+			else
+			{
+				_cam->state = _cam->waveShaking;
+			}
+			//Insert pause/UI between waves here
+			waveTimerSet = true;
+			waveCooldown = maxWaveCooldown;
+			waveChangeUI = false;
+			waveTimerSet = false;
 		}
 	}
 }
@@ -139,19 +173,19 @@ EnemySpawner* EnemySpawner::GetSpawner() { return spawner; }
 void EnemySpawner::InitialiseWaveData()
 {
 	//Amount of enemies:
-	waveData[0] = new WaveData(1, 5, 0, 0, 0);//5
-	waveData[1] = new WaveData(2, 10, 0, 0, 0);//10
-	waveData[2] = new WaveData(3, 8, 3, 0, 0);//11
-	waveData[3] = new WaveData(4, 12, 5, 0, 0);//17
-	waveData[4] = new WaveData(5, 15, 2, 2, 1);//20
-	waveData[5] = new WaveData(6, 10, 0, 7, 1);//18
-	waveData[6] = new WaveData(7, 7, 7, 4, 2); //20
-	waveData[7] = new WaveData(8, 0, 15, 0, 5); //20
-	waveData[8] = new WaveData(9, 0, 0, 15, 7); //22
-	waveData[9] = new WaveData(10, 10, 10, 10, 8); //38
-	waveData[10] = new WaveData(11, 0, 15, 15, 10); //40
+	waveData[1] = new WaveData(1, 5, 0, 0, 0);//5
+	waveData[2] = new WaveData(2, 10, 0, 0, 0);//10
+	waveData[3] = new WaveData(3, 8, 3, 0, 0);//11
+	waveData[4] = new WaveData(4, 12, 5, 0, 0);//17
+	waveData[5] = new WaveData(5, 15, 2, 2, 1);//20
+	waveData[6] = new WaveData(6, 10, 0, 7, 1);//18
+	waveData[7] = new WaveData(7, 7, 7, 4, 2); //20
+	waveData[8] = new WaveData(8, 0, 15, 0, 5); //20
+	waveData[9] = new WaveData(9, 0, 0, 15, 7); //22
+	waveData[10] = new WaveData(10, 10, 10, 10, 8); //38
+	waveData[11] = new WaveData(11, 0, 15, 15, 10); //40
 }
-void EnemySpawner::SpawnEnemy(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
+void EnemySpawner::SpawnMathroskaMinion(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
 {
 	enemy = enemyPool->GetResource();
 	enemy->SetPlayer(_player);

@@ -144,7 +144,7 @@ void Enemy::TakeDamage(f32 damage)
 			EnemySpawner* espawner = espawner->GetSpawner();
 			for (int i = 0; i < 2; i++) 
 			{
-				espawner->SpawnEnemy(GetEnemySceneNode()->getPosition(), EnemyType::matroshka,nestingLvl-1);
+				espawner->SpawnMathroskaMinion(GetEnemySceneNode()->getPosition(), EnemyType::matroshka,nestingLvl-1);
 			}
 		}
 	}

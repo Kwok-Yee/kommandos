@@ -3,6 +3,15 @@
 #include "Enemy.h"
 #include <iostream>
 
+using namespace irr;
+using namespace core;
+using namespace scene;
+using namespace std;
+
+extern u32 currentWave;
+extern u32 waveCooldown;
+extern bool waveChangeUI;
+
 class Player;
 class EnemySpawner
 {
@@ -15,8 +24,10 @@ public:
 	Enemy* GetEnemy(int id);
 	static EnemySpawner* GetSpawner();
 	//Spawns a specific enemy at the designated spawn position
-	void SpawnEnemy(irr::core::vector3df spawnPos, Enemy::EnemyType enemyType, irr::s32 nestAmount = 0);
+	void SpawnMathroskaMinion(irr::core::vector3df spawnPos, Enemy::EnemyType enemyType, irr::s32 nestAmount = 0);
+	
 private:
+	void NextWave();
 	//Spawns alot of enemies at random predefined spawn positions
 	void Spawn();
 	void InitialiseWaveData();

@@ -29,7 +29,6 @@ void UISystem::InitUISystem(irr::IrrlichtDevice * device)
 {
 	_Game = _Game->GetInstance();
 	_Player = _Game->GetPlayer();
-	hMapManager = hMapManager->GetInstance();
 
 	UIdriver = _Game->device->getVideoDriver();
 	GUI_UISystem = _Game->device->getGUIEnvironment();

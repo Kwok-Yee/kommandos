@@ -150,7 +150,7 @@ void EnemySpawner::NextWave()
 		{
 			currentWave++;
 			Spawn();
-			if (currentWave % 3 == 0)
+			if (currentWave % 5 == 0)
 			{
 				_cam->state = _cam->bigWaveShaking;
 			}

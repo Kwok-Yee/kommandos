@@ -15,7 +15,7 @@ using namespace core;
 
 // variables
 #define ZOMBIE_TAKE_DAMAGE_SOUND "../media/Sounds/zombiehurt.mp3"
-#define ZOMBIE_DEATH_SOUND "../media/Sounds/zombiedeath.mp3"
+#define ZOMBIE_DEATH_SOUND "../media/Sounds/enemy_dmg.mp3"
 
 const f32 meleeRange = vector3df(6, 6, 6).getLength();
 

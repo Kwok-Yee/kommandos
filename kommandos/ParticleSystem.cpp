@@ -37,17 +37,17 @@ void ParticleSystem::CreateParticles(vector3df Position, path texture)
 {
 
 	IParticleSystemSceneNode* ps = particleSmgr->addParticleSystemSceneNode(false);
-	f32 particleTimer = 5;
+	f32 particleTimer = 0.6f;
 
 	scene::IParticleEmitter * em = ps->createBoxEmitter(
-		core::aabbox3d<f32>(-7, 0, -7, 7, 1, 7), // emitter size
-		core::vector3df(0.0f, 0.0f, 0.0f),   // initial direction
-		10, 20,                            // min and max particles per sec
+		core::aabbox3d<f32>(-3, 0, -3, 3, 1, 3), // emitter size
+		core::vector3df(0.0f, 0.03f, 0.0f),   // initial direction
+		200, 300,                            // min and max particles per sec
 		video::SColor(0, 255, 255, 255),       // darkest color
 		video::SColor(0, 255, 255, 255),       // brightest color
-		800, 1500, 0,                         // min and max age, angle
-		core::dimension2df(0.5f, 0.5f),         // min size texture
-		core::dimension2df(1.f, 1.f));        // max size texture
+		450, 500, 90,                         // min and max age, angle
+		core::dimension2df(1.0f, 1.0f),         // min size texture
+		core::dimension2df(1.3f, 1.3f));        // max size texture
 
 	ps->setEmitter(em); // this grabs the emitter, if "0" then it stop creating particles
 	em->drop(); // so we can drop it here without deleting it

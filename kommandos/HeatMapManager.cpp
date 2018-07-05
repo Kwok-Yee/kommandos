@@ -166,7 +166,7 @@ void HeatMapManager::Update()
 		if (isDangerZoneActive)
 		{
 			isDangerZoneActive = false;
-			dangerZoneSpawned == false;
+			dangerZoneSpawned = false;
 			//dangerZone->remove();
 			hsmgr->addToDeletionQueue(GetDangerZone());
 		}
@@ -230,7 +230,7 @@ void HeatMapManager::CreateDangerZone(Zone zone)
 	dangerZone = hsmgr->addCubeSceneNode();
 	if (dangerZone) {
 		dangerZone->setPosition(dangerZonePosition);
-		dangerZone->setScale(vector3df(size, 4.0, size));
+		dangerZone->setScale(vector3df(size, 0.4f, size));
 
 		dangerZone->setMaterialFlag(video::EMF_LIGHTING, false);
 		dangerZone->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);

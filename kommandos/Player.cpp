@@ -14,7 +14,11 @@
 #include "Score.h"
 #include "BulletPool.h"
 #include "Bullet.h"
+#include "PowerupPool.h"
+#include "Powerup.h"
 #include "SoundManager.h"
+#include "HeatMapManager.h"
+#include "Camera.h"
 #include "iostream"
 
 using namespace irr;
@@ -33,18 +37,32 @@ using namespace irrklang;
 #define MAX_HEALTH 100
 
 // This is the movement speed in units per second.
-#define MOVEMENT_SPEED 50.f
+#define MOVEMENT_SPEED 46.f
 // Correction for rotating the Y Axis on the player object
 #define Y_AXIS_CORRECTION -90.f
 
-#define PLAYER_MODEL "../media/Models/player/PlayerModel.3ds"
+#define PLAYER_MODEL "../media/Models/player/player2.3ds"
 #define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
-#define GUN_SHOT_SOUND "../media/Sounds/gunshot02.mp3"
-#define TAKE_DAMAGE_SOUND "../media/Sounds/takedamage.mp3"
+#define GUN_SHOT_SOUND "../media/Sounds/PlayerGunShot.wav"
+#define TAKE_DAMAGE_SOUND1 "../media/Sounds/player_dmg1.mp3"
+#define TAKE_DAMAGE_SOUND2 "../media/Sounds/player_dmg2.mp3"
+#define TAKE_DAMAGE_SOUND3 "../media/Sounds/player_dmg3.mp3"
+#define TAKE_DAMAGE_SOUND4 "../media/Sounds/player_dmg4.mp3"
+#define RAPID_FIRE_SOUND "../media/Sounds/heavy_machine_gun.mp3"
+#define SPLIT_FIRE_SOUND "../media/Sounds/shotgun.mp3"
+#define RAPID_SPLIT_FIRE_SOUND "../media/Sounds/armor_piercer.mp3"
+
+#define RAPID_FIRING_SOUND "../media/Sounds/RapidFire.mp3"
+#define SPLIT_FIRING_SOUND "../media/Sounds/SplitFire.mp3"
+#define RAPID_SPLIT_FIRING_SOUND "../media/Sounds/ArmorPenetration.mp3"
+
+#define HEALTH_SOUND "../media/Sounds/healthpickup.mp3"
 
 #define VULNERABLE_BASE_TIMER 75
 #define BULLET_BASE_TIMER 30
+
+const vector3df bulletSize = vector3df(0.03f, 0.125f, 0.25f);
 
 /// <summary>	The player i device. </summary>
 IrrlichtDevice* playerIDevice;
@@ -58,6 +76,7 @@ SoundManager* soundManager;
 GameOverState gameOverState;
 /// <summary>	The player col. </summary>
 Collision playerCol;
+HeatMapManager* heatMapManager = heatMapManager->GetInstance();
 
 /// <summary>	The player scores. </summary>
 Score playerScores;
@@ -66,6 +85,7 @@ Game* game;
 
 /// <summary>	The player object. </summary>
 ISceneNode* playerObject;
+ISceneNode* camFollowObject;
 /// <summary>	The gun node. </summary>
 ISceneNode* gunNode;
 /// <summary>	The health. </summary>
@@ -87,8 +107,9 @@ s32 vulnerableTimer = 0;
 BulletPool* pool;
 /// <summary>	The active bullets. </summary>
 core::array<Bullet*> activeBullets;
-/// <summary>	The bullet timer. </summary>
-s32 bulletTimer = 0;
+
+PowerupPool* powPool;
+Camera* _Cam;
 
 // FRAMEDELTATIME
 /// <summary>	The frame delta time. </summary>
@@ -122,10 +143,16 @@ void Player::Init()
 {
 	health = MAX_HEALTH;
 	IMesh* playerMesh = playerSmgr->getMesh(PLAYER_MODEL);
-	playerObject = playerSmgr->addMeshSceneNode(playerMesh);
+	playerObject = playerSmgr->addMeshSceneNode(playerMesh, 0, -1, vector3df(266, 0, 266), vector3df(0, 0, 0));
+	camFollowObject = playerSmgr->addCubeSceneNode();
 	if (playerObject)
 	{
-		playerObject->setPosition(vector3df(266, 0, 266));
+		playerObject->setMaterialFlag(EMF_LIGHTING, true);
+	}
+	if (camFollowObject) 
+	{
+		camFollowObject->setParent(playerObject);
+		camFollowObject->setScale(vector3df(0,0,0));
 	}
 	currentPosition = playerObject->getPosition();
 
@@ -144,6 +171,10 @@ void Player::Init()
 
 	// Get the instance of BulletPool
 	pool = pool->GetInstance();
+	powPool = powPool->GetInstance(playerIDevice);
+
+	_Cam = _Cam->GetInstance(NULL);
+
 	// Set the timer to the bullet base time
 	bulletTimer = BULLET_BASE_TIMER;
 }
@@ -185,6 +216,11 @@ void Player::Move(InputReceiver inputReceiver)
 
 	playerObject->setPosition(newPosition);
 
+	heatMapManager->AddWeight(heatMapManager->CheckZoneFromPosition(newPosition), frameDeltaTime*2);
+	if (heatMapManager->CheckZoneFromPosition(newPosition) == heatMapManager->activeZone && heatMapManager->isPoisonCloudActive) {
+		TakeDamage(1);
+	}
+	heatMapManager->Update();
 	// Calculate the angle using atan2 using the mouse position and the player object
 	float angle = atan2(mousePosition.Z - playerObject->getPosition().Z,
 		mousePosition.X - playerObject->getPosition().X);
@@ -202,6 +238,40 @@ void Player::Move(InputReceiver inputReceiver)
 	{
 		vulnerableTimer -= frameDeltaTime;
 	}
+
+	Powerup* pow = playerCol.CollidesWithPowerup(playerObject);
+	if (pow)
+	{
+		switch (pow->GetPowerupType())
+		{
+		case 0:
+			health += 25;
+			soundManager->PlaySound(HEALTH_SOUND, false);
+			if (health > 100)
+				health = 100;
+			break;
+		case 1:
+			rapidFireTimer = 1000;
+
+			if (splitFireTimer > 0) 
+				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
+			else
+				soundManager->PlaySound(RAPID_FIRE_SOUND, false);
+
+			break;
+		case 2:
+			splitFireTimer = 1000;
+
+			if (rapidFireTimer > 0)
+				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
+			else
+				soundManager->PlaySound(SPLIT_FIRE_SOUND, false);
+			
+			break;
+		}
+		powPool->ReturnResource(pow);
+		
+	}
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -215,21 +285,128 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	{
 		bulletTimer -= frameDeltaTime;
 	}
+	if (rapidFireTimer > 0)
+	{
+		rapidFireTimer -= frameDeltaTime;
+	}
+	if (splitFireTimer > 0)
+	{
+		splitFireTimer -= frameDeltaTime;
+	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
-		soundManager->PlaySound(GUN_SHOT_SOUND, false);
+		if (rapidFireTimer > 0 && splitFireTimer > 0)
+			soundManager->PlaySound(RAPID_SPLIT_FIRING_SOUND, false);
+		else 
+		{
+			if (rapidFireTimer > 0)
+				soundManager->PlaySound(RAPID_FIRING_SOUND, false);
+			else if (splitFireTimer > 0)
+				soundManager->PlaySound(SPLIT_FIRING_SOUND, false);
+			else
+				soundManager->PlaySound(GUN_SHOT_SOUND, false);
+		}
+			
+		
+
+		// Bullet instance
 		Bullet* bullet = pool->GetResource();
-		activeBullets.push_back(bullet);
-		bullet->SetBullet(playerSmgr->addSphereSceneNode());
+
+		// Main bullet
+		bullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
 		if (bullet->GetBullet())
 		{
 			bullet->GetBullet()->setVisible(false);
-			bullet->GetBullet()->setScale(vector3df(0.125f, 0.125f, 0.125f));
-			bullet->GetBullet()->setPosition(vector3df(playerObject->getPosition()));
 		}
+
+		// Rapid fire active
+		if (rapidFireTimer > 0 && splitFireTimer <= 0)
+		{
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+		}
+
+		// Split fire active
+		if (splitFireTimer > 0 && rapidFireTimer <= 0)
+		{
+			// Bullet left/right instances
+			Bullet* leftBullet = pool->GetResource();
+			Bullet* rightBullet = pool->GetResource();
+
+			leftBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			rightBullet->SetBulletMode(Bullet::BulletMode::splitFire);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
+
+			// Left bullet for split fire
+			leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (leftBullet->GetBullet())
+			{
+				leftBullet->GetBullet()->setVisible(false);
+			}
+
+			// Right bullet for split fire
+			rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (rightBullet->GetBullet())
+			{
+				rightBullet->GetBullet()->setVisible(false);
+			}
+
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+
+			// Push bullets to active bullets list
+			activeBullets.push_back(leftBullet);
+			activeBullets.push_back(rightBullet);
+		}
+
+		if (rapidFireTimer > 0 && splitFireTimer > 0)
+		{
+			Bullet* leftBullet = pool->GetResource();
+			Bullet* rightBullet = pool->GetResource();
+
+			bullet->SetBulletMode(Bullet::BulletMode::rapidFire);
+
+			leftBullet->SetBulletMode(Bullet::BulletMode::rapidSplitFire);
+			rightBullet->SetBulletMode(Bullet::BulletMode::rapidSplitFire);
+			leftBullet->SetBulletSpread(-0.1f);
+			rightBullet->SetBulletSpread(0.1f);
+			
+			// Left bullet for split fire
+			leftBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (leftBullet->GetBullet())
+			{
+				leftBullet->GetBullet()->setVisible(false);
+			}
+
+			// Right bullet for split fire
+			rightBullet->SetBullet(playerSmgr->addCubeSceneNode(10.f, 0, -1, playerObject->getPosition(), playerObject->getRotation(), bulletSize));
+			if (rightBullet->GetBullet())
+			{
+				rightBullet->GetBullet()->setVisible(false);
+			}
+
+			// Bullet visibility
+			leftBullet->GetBullet()->setVisible(true);
+			rightBullet->GetBullet()->setVisible(true);
+
+			// Push bullets to active bullets list
+			activeBullets.push_back(leftBullet);
+			activeBullets.push_back(rightBullet);
+
+			_Cam->state = _Cam->shootShaking;
+		}
+
+		// Push bullets to active bullets list
+		activeBullets.push_back(bullet);
+
 		hasShot = true;
+
+		// Bullet visibility
 		bullet->GetBullet()->setVisible(true);
-		bulletTimer = BULLET_BASE_TIMER;
+
+		// Timer reset
+		bulletTimer = bullet->GetBulletTimer();
 	}
 	if (hasShot)
 	{
@@ -238,11 +415,11 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 			for (int i = 0; i < activeBullets.size(); i++)
 			{
 				activeBullets[i]->UpdateBullet(mousePosition, playerObject->getPosition(), frameDeltaTime);
-				for (int j = 0; j < enemies->getEnemies().size(); j++)
+				for (int j = 0; j < enemies->getActiveEnemies().size(); j++)
 				{
-					if (playerCol.SceneNodeWithSceneNode(enemies->getEnemies()[j], activeBullets[i]->GetBullet()))
+					if (playerCol.SceneNodeWithSceneNode(enemies->getActiveEnemies()[j]->GetEnemySceneNode(), activeBullets[i]->GetBullet()))
 					{
-						enemies->enemyHealthValues[j] = enemies->getEnemyBehaviour()->TakeDamage(activeBullets[i]->GetDamage(), enemies->enemyHealthValues[j]);
+						enemies->GetEnemy(j)->TakeDamage(activeBullets[i]->GetDamage());
 						playerScores.DisplayScore(10);
 						pool->ReturnResource(activeBullets[i]);
 						activeBullets.erase(i);
@@ -250,7 +427,9 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 						return;
 					}
 				}
-				if (activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet()))
+				// Check collision with static walls or the life time of the bullet
+				if ((activeBullets[i] && playerCol.CollidesWithStaticObjects(activeBullets[i]->GetBullet())) ||
+					(activeBullets[i] && activeBullets[i]->GetBulletLifeTimer() == 0))
 				{
 					pool->ReturnResource(activeBullets[i]);
 					activeBullets.erase(i);
@@ -268,14 +447,28 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 /// <summary>	Take damage. </summary>
 ///-------------------------------------------------------------------------------------------------
 
-void Player::TakeDamage(f32 damage, f32 frameDeltaTime)
+void Player::TakeDamage(f32 damage)
 {
 	if (health > 0 && vulnerableTimer <= 0)
 	{
-		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
+		switch (rand() % 4) 
+		{
+		case 0:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND1, false);
+			break;
+		case 1:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND2, false);
+			break;
+		case 2:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND3, false);
+			break;
+		case 3:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND4, false);
+			break;
+		}
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
-		
+
 		if (health <= 0)
 		{
 			gameOverState.ShowGameOver(playerIDevice);
@@ -312,6 +505,11 @@ void Player::DrawHealthBar()
 ISceneNode* Player::getPlayerObject()
 {
 	return playerObject;
+}
+
+irr::scene::ISceneNode * Player::getCamFollowObject()
+{
+	return camFollowObject;
 }
 
 ///-------------------------------------------------------------------------------------------------
@@ -359,4 +557,14 @@ s32 Player::getVulnerableTimer()
 vector3df Player::GetMousePosition()
 {
 	return mousePosition;
+}
+
+s32 Player::GetRapidFireTimer()
+{
+	return rapidFireTimer;
+}
+
+s32 Player::GetSplitFireTimer()
+{
+	return splitFireTimer;
 }

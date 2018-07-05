@@ -10,56 +10,44 @@ using namespace std;
 
 IrrlichtDevice* particleIDevice;
 ISceneManager* particleSmgr;
-IParticleSystemSceneNode* ps;
 IVideoDriver* particleDriver;
+core::array<Particle*> particles;
 
-s32 particleTimer = 0;
-s32 time;
 
 ParticleSystem::ParticleSystem(IrrlichtDevice* device)
 {
 	particleIDevice = device;
 	particleSmgr = device->getSceneManager();
-	ps = particleSmgr->addParticleSystemSceneNode(false);
 	particleDriver = device->getVideoDriver();
 }
 
-
-void ParticleSystem::Update()
+void ParticleSystem::Update(f32 frameDeltaTime)
 {
-
-	// Work out a frame delta time.
-	const u32 now = particleIDevice->getTimer()->getTime();
-	const f32 frameTime = (f32)(now - time) / 1000.f; // Time in seconds
-	time = now;
-
-	//for removing particle on position
-	if (activePs && particleTimer > 0)
+	for (int i = 0; i < particles.size(); i++)
 	{
-		particleTimer -= frameTime;
-		
-		if (particleTimer <= 0)
-		{
-			activePs = false;
-			ps->setEmitter(0);
+		particles[i]->Update(frameDeltaTime);
+		if (particles[i]->lifetime <= 0) {
+			particles.erase(i);
 		}
 	}
 }
-//creates particles on the object position if "activePs" is true
+
+//creates particles on the object position
 void ParticleSystem::CreateParticles(vector3df Position, path texture)
 {
-	activePs = true;
-	particleTimer = 1000;
+
+	IParticleSystemSceneNode* ps = particleSmgr->addParticleSystemSceneNode(false);
+	f32 particleTimer = 0.6f;
 
 	scene::IParticleEmitter * em = ps->createBoxEmitter(
-		core::aabbox3d<f32>(-7, 0, -7, 7, 1, 7), // emitter size
-		core::vector3df(0.0f, 0.06f, 0.0f),   // initial direction
-		1, 10,                            // min and max particles per sec
+		core::aabbox3d<f32>(-3, 0, -3, 3, 1, 3), // emitter size
+		core::vector3df(0.0f, 0.03f, 0.0f),   // initial direction
+		200, 300,                            // min and max particles per sec
 		video::SColor(0, 255, 255, 255),       // darkest color
 		video::SColor(0, 255, 255, 255),       // brightest color
-		800, 2000, 0,                         // min and max age, angle
-		core::dimension2df(0.5f, 0.5f),         // min size texture
-		core::dimension2df(1.f, 1.f));        // max size texture
+		450, 500, 90,                         // min and max age, angle
+		core::dimension2df(1.0f, 1.0f),         // min size texture
+		core::dimension2df(1.3f, 1.3f));        // max size texture
 
 	ps->setEmitter(em); // this grabs the emitter, if "0" then it stop creating particles
 	em->drop(); // so we can drop it here without deleting it
@@ -75,5 +63,5 @@ void ParticleSystem::CreateParticles(vector3df Position, path texture)
 	ps->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
 	ps->setMaterialTexture(0, particleDriver->getTexture(texture));
 	ps->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
-
+	particles.push_front(new Particle(ps, particleTimer));
 }

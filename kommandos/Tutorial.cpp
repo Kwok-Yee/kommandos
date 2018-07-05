@@ -8,6 +8,7 @@
 
 #include <irrlicht.h>
 #include "Tutorial.h"
+#include "Game.h"
 
 using namespace irr;
 using namespace gui;
@@ -25,6 +26,7 @@ IGUIImage* img;
 int timer = 600;
 
 
+
 ///-------------------------------------------------------------------------------------------------
 /// <summary>	Shows the tutorial GUI. </summary>
 ///-------------------------------------------------------------------------------------------------
@@ -33,14 +35,8 @@ void Tutorial::ShowTutorial(IrrlichtDevice* device)
 	ISceneManager* smgr = device->getSceneManager();
 	IVideoDriver* driver = device->getVideoDriver();
 
-	stringw tempHeader = "Objective";
-	stringw tempObjectiveText = "Survive and get points by killing enemies";
-	const wchar_t* objectiveHeader = tempHeader.c_str();
-	const wchar_t* objectiveText = tempObjectiveText.c_str();
-
 	tutorialGUI = device->getGUIEnvironment();
 	ITexture* tutorialImage = driver->getTexture("../media/Textures/Tutorial_Resize.png");
-	tutorialGUI->addMessageBox(objectiveHeader, objectiveText);
 	img = tutorialGUI->addImage(tutorialImage, position2d<int>(250, 90));
 }
 
@@ -49,8 +45,11 @@ void Tutorial::ShowTutorial(IrrlichtDevice* device)
 ///-------------------------------------------------------------------------------------------------
 void Tutorial::RemoveTutorial()
 {
-	img->remove();
-	img = NULL;
+	if(img) 
+	{
+		img->remove();
+		img = NULL;
+	}
 }
 
 
@@ -59,14 +58,17 @@ void Tutorial::RemoveTutorial()
 ///-------------------------------------------------------------------------------------------------
 void Tutorial::Update(irr::f32 frameDeltaTime)
 {
-	if (img) 
+	if (img)
 	{
-		if (timer > 0) {
+		if (timer > 0)
+		{
 			timer -= frameDeltaTime;
 		}
 		else
 		{
+			isTutorialActive = false;
 			RemoveTutorial();
 		}
 	}
 }
+

@@ -31,7 +31,7 @@ public:
 	/// <summary>	Take damage. </summary>
 	///-------------------------------------------------------------------------------------------------
 
-	void TakeDamage(irr::f32 damage, irr::f32 frameDeltaTime);
+	void TakeDamage(irr::f32 damage);
 	//Draws the healtbar in the top-left corner
 
 	///-------------------------------------------------------------------------------------------------
@@ -60,6 +60,7 @@ public:
 	///-------------------------------------------------------------------------------------------------
 
 	irr::scene::ISceneNode* getPlayerObject();
+	irr::scene::ISceneNode* getCamFollowObject();
 
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Raycasts. </summary>
@@ -85,11 +86,21 @@ public:
 
 	irr::core::vector3df GetMousePosition();
 
+	s32 GetRapidFireTimer();
+
+	s32 GetSplitFireTimer();
+
 private:
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Initializes this object. </summary>
 	///-------------------------------------------------------------------------------------------------
 
 	void Init();
+	/// <summary>	The bullet timer. </summary>
+	irr::s32 bulletTimer;
+	/// <summary>	The rapid fire power up timer. </summary>
+	irr::s32 rapidFireTimer;
+	/// <summary>	The split fire power up timer. </summary>
+	irr::s32 splitFireTimer;
 };
 

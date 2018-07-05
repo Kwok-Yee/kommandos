@@ -4,15 +4,15 @@
 #include "driverChoice.h"
 #include "Collision.h"
 #include "InputReceiver.h"
-#include "EnemyBehaviour.h"
 #include "EnemySpawner.h"
-#include "Player.h"
 #include "ParticleSystem.h"
 #include "Score.h"
+#include "UISystem.h"
 #include "Camera.h"
 #include "ObjectPlacementGeneration.h"
 #include "SoundManager.h"
 #include "Tutorial.h"
+#include "PowerupSpawner.h"
 
 using namespace irr;
 using namespace core;
@@ -27,14 +27,14 @@ ISceneManager* smgr;
 IGUIEnvironment* guienv;
 InputReceiver inputReceiver;
 
-Player* player;
+UISystem* uISystem;
 Score score;
 Collision _collision;
-ObjectPlacementGeneration objectPlacementGen;
 EnemySpawner* enemySpawner;
 Camera* camera;
 Collision collisionManager;
 Tutorial tutorial;
+PowerUpSpawner* powerSpawn;
 
 int lastFPS = -1;
 // In order to do framerate independent movement, we have to know
@@ -71,6 +71,8 @@ bool Game::GetIsGameOver() {
 
 bool Game::SetIsGameOver(bool state)
 {
+	tutorial.RemoveTutorial();
+	camera->state = camera->gameover;
 	return isGameOver = state;
 }
 
@@ -80,12 +82,15 @@ void Game::Start()
 	//Get the sound engine
 	SoundManager* soundManager = soundManager->GetInstance();
 	//Start Game Background song	
-	soundManager->PlaySound("../media/Sounds/blood_harvest.mp3", true);
+	soundManager->PlaySound("../media/Sounds/bgsound.mp3", true);
 
 	// Create instances of classes
-	camera = new Camera(device);
+	camera = camera->GetInstance(device);
 	player = new Player(device);
 	enemySpawner = new EnemySpawner(device, player);
+	uISystem = new UISystem(device);
+
+	//score.Scoring is unneeded duplicate code
 	score.Scoring(device);
 	tutorial.ShowTutorial(device);
 
@@ -94,6 +99,9 @@ void Game::Start()
 	guienv = device->getGUIEnvironment();
 
 	objectPlacementGen.PlaceObjects(device);
+	powerSpawn->PowerUpDevice(device);
+
+	uISystem->InitUISystem(device);
 
 	//Create Light
 	ILightSceneNode*  directionalLight = device->getSceneManager()->addLightSceneNode();
@@ -112,13 +120,16 @@ void Game::Update()
 	const u32 currentFrame = device->getTimer()->getTime();
 	const f32 frameDeltaTime = (f32)(currentFrame - prevFrame) / 1000.f; // Time in seconds
 	prevFrame = currentFrame;
-	camera->CameraUpdate();
-	if (!isGameOver)
-	{
+	camera->CameraUpdate(frameDeltaTime);
+	if (tutorial.isTutorialActive) {
 		tutorial.Update(frameDeltaTime);
+	}
+	if (!isGameOver )
+	{
 		player->Move(inputReceiver);
 		player->Shoot(inputReceiver, enemySpawner);
-		enemySpawner->UpdateEnemies();
+		if(!tutorial.isTutorialActive)
+			enemySpawner->UpdateEnemies();
 		collisionManager.DiscreteCollisionUpdate(frameDeltaTime);
 	}
 }
@@ -130,6 +141,7 @@ void Game::Draw()
 	guienv->drawAll();
 	player->DrawHealthBar();
 	score.Scoring(device);
+	uISystem->WaveUI(device);
 	driver->endScene();
 
 	int fps = driver->getFPS();
@@ -144,4 +156,9 @@ void Game::Draw()
 		device->setWindowCaption(tmp.c_str());
 		lastFPS = fps;
 	}
+}
+
+Player* Game::GetPlayer()
+{
+	return player;
 }

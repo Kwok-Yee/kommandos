@@ -9,9 +9,23 @@ class ParticleSystem
 {
 public:
 	ParticleSystem(irr::IrrlichtDevice* device);
-	void Update();
+	void Update(f32 frameDeltaTime);
 	void CreateParticles(vector3df Position, path);
 
-	bool activePs = false;// activePs = Active ParticleSystem
+};
+struct Particle
+{
+	scene::IParticleSystemSceneNode* system;
+	f32 lifetime;
+	Particle(scene::IParticleSystemSceneNode* _System, f32 _Lifetime) {
+		this->system = _System;
+		this->lifetime = _Lifetime;
+	}
+	void Update(f32 frameDeltaTime) {
+		this->lifetime -= frameDeltaTime;
+		if (lifetime <= 0) {
+			system->remove();
+		}
+	}
 };
 

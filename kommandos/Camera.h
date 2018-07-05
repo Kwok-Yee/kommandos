@@ -18,6 +18,17 @@ using namespace scene;
 class Camera
 {
 public:
+	enum CameraState
+	{
+		normal,
+		waveShaking,
+		bigWaveShaking,
+		shootShaking,
+		gameover
+	};
+
+	CameraState state;
+	static Camera* GetInstance(IrrlichtDevice* device);
 
 	///-------------------------------------------------------------------------------------------------
 	/// <summary>	Constructor. </summary>
@@ -29,14 +40,14 @@ public:
 	/// <summary>	Updates the camera position and target </summary>
 	///-------------------------------------------------------------------------------------------------
 
-	void CameraUpdate();
+	void CameraUpdate(f32 frameDeltaTime);
 
 private:
 
 	 ///-------------------------------------------------------------------------------------------------
 	 /// <summary>	Initializes the camera  </summary>
 	 ///-------------------------------------------------------------------------------------------------
-
+	 static Camera* instance;
 	 void CameraInit();
-
+	 void ScreenShake(f32 frameDeltaTim, f32 intensity);
 };

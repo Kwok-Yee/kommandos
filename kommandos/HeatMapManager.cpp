@@ -29,7 +29,7 @@ HeatMapManager::HeatMapManager()
 // Set instance to 0 (NULL)
 HeatMapManager* HeatMapManager::instance = 0;
 
-HeatMapManager* HeatMapManager::GetInstance() 
+HeatMapManager* HeatMapManager::GetInstance()
 {
 	if (!instance)
 	{
@@ -66,18 +66,18 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 	switch (zone)
 	{
 	case Zone1:
-		if (zone1Weight < MAX_WEIGHT) 
+		if (zone1Weight < MAX_WEIGHT)
 		{
 			zone1Weight += weight;
 		}
-		else 
+		else
 		{
 			CreateCountdown(Zone1);
 			zone1Weight = 0;
 		}
 		break;
 	case Zone2:
-		if (zone2Weight < MAX_WEIGHT) 
+		if (zone2Weight < MAX_WEIGHT)
 		{
 			zone2Weight += weight;
 		}
@@ -88,7 +88,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		}
 		break;
 	case Zone3:
-		if (zone3Weight < MAX_WEIGHT) 
+		if (zone3Weight < MAX_WEIGHT)
 		{
 			zone3Weight += weight;
 		}
@@ -99,7 +99,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 		}
 		break;
 	case Zone4:
-		if (zone4Weight < MAX_WEIGHT) 
+		if (zone4Weight < MAX_WEIGHT)
 		{
 			zone4Weight += weight;
 		}
@@ -114,7 +114,7 @@ void HeatMapManager::AddWeight(Zone zone, float weight)
 	}
 }
 
-int HeatMapManager::GetWeight(Zone zone) 
+int HeatMapManager::GetWeight(Zone zone)
 {
 	switch (zone)
 	{
@@ -135,11 +135,12 @@ int HeatMapManager::GetWeight(Zone zone)
 	}
 }
 
-void HeatMapManager::Update() 
+void HeatMapManager::Update()
 {
 	if (countdown)
 	{
 		seconds -= 0.016; //we use vsync, so it's always 60fps, 0.016 is the framedeltatime
+		isDangerZoneActive = true;
 
 		stringw newText("There will be gas in Zone ");
 		newText += activeZone;
@@ -147,6 +148,7 @@ void HeatMapManager::Update()
 		newText += seconds;
 		newText += " seconds";
 		countdownText->setText(newText.c_str());
+
 		if (seconds < 0)
 		{
 			countdown = false;
@@ -154,10 +156,18 @@ void HeatMapManager::Update()
 			countdownText->remove();
 		}
 	}
-	if (isPoisonCloudActive) 
+	if (isDangerZoneActive && dangerZoneSpawned == false)
 	{
+		CreateDangerZone(activeZone);
+		dangerZoneSpawned = true;
+		//isDangerZoneActive = false;
+	}
+	if (isPoisonCloudActive)
+	{
+		isDangerZoneActive = false;
+		//hsmgr->addToDeletionQueue(GetDangerZone());  <--- HERE's THE ERROR 
 		seconds -= 0.016;
-		if (seconds < 0) 
+		if (seconds < 0)
 		{
 			hGame->objectPlacementGen.GenerateNewObjects(activeZone);
 			hsmgr->addToDeletionQueue(GetPoisonCloud());
@@ -169,7 +179,7 @@ void HeatMapManager::Update()
 	}
 }
 
-void HeatMapManager::CreateCountdown(Zone zone) 
+void HeatMapManager::CreateCountdown(Zone zone)
 {
 	isZoneActive = true;
 	countdown = true;
@@ -183,9 +193,52 @@ void HeatMapManager::CreateCountdown(Zone zone)
 
 	seconds = MAX_COUNTDOWN_SECONDS;
 }
+void HeatMapManager::CreateDangerZone(Zone zone)
+{
+	const path texturePathDangerZone = "../media/Textures/danger_texture.png";
+	vector3df dangerZonePosition;
+	dangerZonePosition.Y = -0.5;
+	f32 size = level->getTransformedBoundingBox().getExtent().X / 18;
+	switch (zone)
+	{
+	case Zone1:
+		dangerZonePosition.X = size;
+		dangerZonePosition.Z = size;
+		break;
+	case Zone2:
+		dangerZonePosition.X = size;
+		dangerZonePosition.Z = -size;
+		break;
+	case Zone3:
+		dangerZonePosition.X = -size;
+		dangerZonePosition.Z = size;
+		break;
+	case Zone4:
+		dangerZonePosition.X = -size;
+		dangerZonePosition.Z = -size;
+		break;
+	default:
+		break;
+	}
+	dangerZonePosition.X *= 5;
+	dangerZonePosition.Z *= 5;
+	dangerZone = hsmgr->addCubeSceneNode();
+	if (dangerZone) {
+		dangerZone->setPosition(dangerZonePosition);
+		dangerZone->setScale(vector3df(size, 4.0, size));
+
+		dangerZone->setMaterialFlag(video::EMF_LIGHTING, false);
+		dangerZone->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
+		dangerZone->setMaterialTexture(0, hGame->device->getVideoDriver()->getTexture(texturePathDangerZone));
+		dangerZone->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+
+	}
+	//isDangerZoneActive = true;
+}
 
 void HeatMapManager::CreatePoisonCloud(Zone zone)
 {
+	//const path texturePathDangerZone = "../media/Textures/danger_texture.png";
 	const path texturePath = "../media/Textures/PoisonCloud.jpg";
 	vector3df cloudPosition;
 	cloudPosition.Y = -0.5;
@@ -217,7 +270,7 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	if (poisonCloud) {
 		poisonCloud->setPosition(cloudPosition);
 		poisonCloud->setScale(vector3df(size, 4.0, size));
-		
+
 		poisonCloud->setMaterialFlag(video::EMF_LIGHTING, false);
 		poisonCloud->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
 		poisonCloud->setMaterialTexture(0, hGame->device->getVideoDriver()->getTexture(texturePath));
@@ -226,6 +279,10 @@ void HeatMapManager::CreatePoisonCloud(Zone zone)
 	isPoisonCloudActive = true;
 	seconds = MAX_POISONCLOUS_SECONDS;
 	hSoundManager->PlaySound(GAS_SOUND, false);
+}
+
+ISceneNode* HeatMapManager::GetDangerZone() {
+	return dangerZone;
 }
 
 ISceneNode* HeatMapManager::GetPoisonCloud() {

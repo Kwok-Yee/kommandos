@@ -37,7 +37,7 @@ using namespace irrklang;
 #define MAX_HEALTH 100
 
 // This is the movement speed in units per second.
-#define MOVEMENT_SPEED 50.f
+#define MOVEMENT_SPEED 46.f
 // Correction for rotating the Y Axis on the player object
 #define Y_AXIS_CORRECTION -90.f
 

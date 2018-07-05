@@ -7,6 +7,7 @@
 #include "ParticleSystem.h"
 #include "Enemy.h"
 #include "EnemyPool.h"
+#include "SoundManager.h"
 #include "Player.h"
 #include "Collision.h"
 #include "PowerUpSpawner.h"
@@ -20,11 +21,14 @@ using namespace core;
 using namespace scene;
 using namespace std;
 
+#define WAVE_INCOMING_SOUND "../media/Sounds/incoming.mp3"
+#define BIG_WAVE_INCOMING_SOUND "../media/Sounds/incoming_big.mp3"
+
 const path bloodSplatter = "../media/Textures/bloodNew2.bmp";
-const u32 maxWaves = 10;
+const u32 maxWaves = 16;
 //60 = 1 second
 const u32 maxWaveCooldown = 180;
-const vector3df powerUpPositionAdjust = vector3df(0,1,0);
+const vector3df powerUpPositionAdjust = vector3df(0, 1, 0);
 
 IrrlichtDevice* enemySpawnerIDevice;
 ISceneManager* enemySpawnerSmgr;
@@ -38,6 +42,7 @@ Camera* _cam;
 HeatMapManager* heatMapMngr;
 ParticleSystem *particleSystem;
 EnemySpawner* spawner;
+SoundManager* enemSpawnSoundManager;
 
 core::array<Enemy*> activeEnemies;
 irr::core::array<vector3df> spawnPositions;
@@ -51,6 +56,7 @@ u32 waveCooldown = maxWaveCooldown;
 
 bool waveChangeUI;
 bool waveTimerSet = false;
+bool newWave = true;
 
 EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 {
@@ -64,6 +70,7 @@ EnemySpawner::EnemySpawner(IrrlichtDevice* device, Player* Player)
 	_cam = _cam->GetInstance(NULL);
 	amountOfEnemies = 12;
 	resize = 2;
+	enemSpawnSoundManager = enemSpawnSoundManager->GetInstance();
 	//setting spawnpositions in the corners.
 	spawnPositions.push_back(vector3df(-82, 0, -78) * resize);
 	spawnPositions.push_back(vector3df(78, 0, -78) * resize);
@@ -130,7 +137,6 @@ void EnemySpawner::UpdateEnemies()
 	if (activeEnemies.size() <= 0 && currentWave < maxWaves)
 	{
 		if (waveTimerSet == false)
-
 		{
 			NextWave();
 		}
@@ -145,6 +151,15 @@ void EnemySpawner::NextWave()
 
 	if (waveTimerSet == false && waveCooldown > 0)
 	{
+		if (newWave) 
+		{
+			if ((currentWave + 1) % 5 == 0)
+				enemSpawnSoundManager->PlaySound(BIG_WAVE_INCOMING_SOUND, false);
+			else
+				enemSpawnSoundManager->PlaySound(WAVE_INCOMING_SOUND, false);
+
+			newWave = false;
+		}
 		waveChangeUI = true;
 		waveCooldown -= frameTime;
 		if (waveCooldown <= 0)
@@ -154,10 +169,12 @@ void EnemySpawner::NextWave()
 			if (currentWave % 5 == 0)
 			{
 				_cam->state = _cam->bigWaveShaking;
+				newWave = true;
 			}
 			else
 			{
 				_cam->state = _cam->waveShaking;
+				newWave = true;
 			}
 			//Insert pause/UI between waves here
 			waveTimerSet = true;
@@ -179,13 +196,16 @@ void EnemySpawner::InitialiseWaveData()
 	waveData[2] = new WaveData(2, 10, 0, 0, 0);//10
 	waveData[3] = new WaveData(3, 8, 3, 0, 0);//11
 	waveData[4] = new WaveData(4, 12, 5, 0, 0);//17
-	waveData[5] = new WaveData(5, 15, 2, 2, 1);//20
-	waveData[6] = new WaveData(6, 10, 0, 7, 1);//18
+	waveData[5] = new WaveData(5, 15, 2, 2, 2);//20
+	waveData[6] = new WaveData(6, 10, 0, 7, 2);//18
 	waveData[7] = new WaveData(7, 7, 7, 4, 2); //20
 	waveData[8] = new WaveData(8, 0, 15, 0, 5); //20
 	waveData[9] = new WaveData(9, 0, 0, 15, 7); //22
 	waveData[10] = new WaveData(10, 10, 10, 10, 8); //38
 	waveData[11] = new WaveData(11, 0, 15, 15, 10); //40
+	waveData[12] = new WaveData(12, 10, 10, 10, 10); //40
+	waveData[13] = new WaveData(13, 15, 15, 15, 15); //40
+	waveData[14] = new WaveData(14, 20, 20, 20, 20); //40
 }
 void EnemySpawner::SpawnMathroskaMinion(vector3df spawnPos, Enemy::EnemyType enemyType, s32 nestAmount)
 {

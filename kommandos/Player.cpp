@@ -45,10 +45,18 @@ using namespace irrklang;
 #define GUN_MODEL "../media/Models/weapons/LowPoly_Irrlicht.3ds"
 #define GUN_COLOR "../media/Textures/Gun_Color.png"
 #define GUN_SHOT_SOUND "../media/Sounds/PlayerGunShot.wav"
-#define TAKE_DAMAGE_SOUND "../media/Sounds/takedamage.mp3"
+#define TAKE_DAMAGE_SOUND1 "../media/Sounds/player_dmg1.mp3"
+#define TAKE_DAMAGE_SOUND2 "../media/Sounds/player_dmg2.mp3"
+#define TAKE_DAMAGE_SOUND3 "../media/Sounds/player_dmg3.mp3"
+#define TAKE_DAMAGE_SOUND4 "../media/Sounds/player_dmg4.mp3"
 #define RAPID_FIRE_SOUND "../media/Sounds/heavy_machine_gun.mp3"
 #define SPLIT_FIRE_SOUND "../media/Sounds/shotgun.mp3"
 #define RAPID_SPLIT_FIRE_SOUND "../media/Sounds/armor_piercer.mp3"
+
+#define RAPID_FIRING_SOUND "../media/Sounds/RapidFire.mp3"
+#define SPLIT_FIRING_SOUND "../media/Sounds/SplitFire.mp3"
+#define RAPID_SPLIT_FIRING_SOUND "../media/Sounds/ArmorPenetration.mp3"
+
 #define HEALTH_SOUND "../media/Sounds/healthpickup.mp3"
 
 #define VULNERABLE_BASE_TIMER 75
@@ -244,25 +252,20 @@ void Player::Move(InputReceiver inputReceiver)
 			break;
 		case 1:
 			rapidFireTimer = 1000;
+
 			if (splitFireTimer > 0) 
-			{
 				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
-			}
 			else
-			{
 				soundManager->PlaySound(RAPID_FIRE_SOUND, false);
-			}
+
 			break;
 		case 2:
 			splitFireTimer = 1000;
+
 			if (rapidFireTimer > 0)
-			{
 				soundManager->PlaySound(RAPID_SPLIT_FIRE_SOUND, false);
-			}
 			else
-			{
 				soundManager->PlaySound(SPLIT_FIRE_SOUND, false);
-			}
 			
 			break;
 		}
@@ -292,7 +295,19 @@ void Player::Shoot(InputReceiver inputReceiver, EnemySpawner* enemies)
 	}
 	if (inputReceiver.GetIsLeftMouseButtonPressed() && bulletTimer <= 0)
 	{
-		soundManager->PlaySound(GUN_SHOT_SOUND, false);
+		if (rapidFireTimer > 0 && splitFireTimer > 0)
+			soundManager->PlaySound(RAPID_SPLIT_FIRING_SOUND, false);
+		else 
+		{
+			if (rapidFireTimer > 0)
+				soundManager->PlaySound(RAPID_FIRING_SOUND, false);
+			else if (splitFireTimer > 0)
+				soundManager->PlaySound(SPLIT_FIRING_SOUND, false);
+			else
+				soundManager->PlaySound(GUN_SHOT_SOUND, false);
+		}
+			
+		
 
 		// Bullet instance
 		Bullet* bullet = pool->GetResource();
@@ -436,7 +451,21 @@ void Player::TakeDamage(f32 damage)
 {
 	if (health > 0 && vulnerableTimer <= 0)
 	{
-		soundManager->PlaySound(TAKE_DAMAGE_SOUND, false);
+		switch (rand() % 4) 
+		{
+		case 0:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND1, false);
+			break;
+		case 1:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND2, false);
+			break;
+		case 2:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND3, false);
+			break;
+		case 3:
+			soundManager->PlaySound(TAKE_DAMAGE_SOUND4, false);
+			break;
+		}
 		vulnerableTimer = VULNERABLE_BASE_TIMER;
 		health -= damage;
 

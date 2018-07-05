@@ -1,0 +1,134 @@
+\hypertarget{class_particle_system}{\section{Particle\-System Class Reference}
+\label{class_particle_system}\index{Particle\-System@{Particle\-System}}
+}
+
+
+{\ttfamily \#include $<$Particle\-System.\-h$>$}
+
+
+
+Collaboration diagram for Particle\-System\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{class_particle_system__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_particle_system_a4b72fecb8b092dd62007f99f989b449f}{Particle\-System} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_particle_system_ac60759503968e32b9cc25222995dd7d9}{Update} (f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\item 
+void \hyperlink{class_particle_system_a3f614e2d232b8ecbc7431c1302165bbf}{Create\-Particles} (vector3df Position, path)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_particle_system_a4b72fecb8b092dd62007f99f989b449f}{\index{Particle\-System@{Particle\-System}!Particle\-System@{Particle\-System}}
+\index{Particle\-System@{Particle\-System}!ParticleSystem@{Particle\-System}}
+\subsubsection[{Particle\-System}]{\setlength{\rightskip}{0pt plus 5cm}Particle\-System\-::\-Particle\-System (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_particle_system_a4b72fecb8b092dd62007f99f989b449f}
+
+
+References particle\-Driver, particle\-I\-Device, and particle\-Smgr.
+
+
+\begin{DoxyCode}
+18 \{
+19     \hyperlink{_particle_system_8cpp_a4975bd1b2386251063662d2fa8d3cd77}{particleIDevice} = device;
+20     \hyperlink{_particle_system_8cpp_ae0a90e02d0f5b89818ca6f3b86ac8be5}{particleSmgr} = device->getSceneManager();
+21     \hyperlink{_particle_system_8cpp_ab96920572d207abe4ce28b614c69be83}{particleDriver} = device->getVideoDriver();
+22 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_particle_system_a3f614e2d232b8ecbc7431c1302165bbf}{\index{Particle\-System@{Particle\-System}!Create\-Particles@{Create\-Particles}}
+\index{Create\-Particles@{Create\-Particles}!ParticleSystem@{Particle\-System}}
+\subsubsection[{Create\-Particles}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-System\-::\-Create\-Particles (
+\begin{DoxyParamCaption}
+\item[{vector3df}]{Position, }
+\item[{path}]{texture}
+\end{DoxyParamCaption}
+)}}\label{class_particle_system_a3f614e2d232b8ecbc7431c1302165bbf}
+
+
+References particle\-Driver, particles, and particle\-Smgr.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+37 \{
+38 
+39     IParticleSystemSceneNode* ps = \hyperlink{_particle_system_8cpp_ae0a90e02d0f5b89818ca6f3b86ac8be5}{particleSmgr}->addParticleSystemSceneNode(\textcolor{keyword}{false});
+40     f32 particleTimer = 0.6f;
+41 
+42     scene::IParticleEmitter * em = ps->createBoxEmitter(
+43         core::aabbox3d<f32>(-3, 0, -3, 3, 1, 3), \textcolor{comment}{// emitter size}
+44         core::vector3df(0.0f, 0.03f, 0.0f),   \textcolor{comment}{// initial direction}
+45         200, 300,                            \textcolor{comment}{// min and max particles per sec}
+46         video::SColor(0, 255, 255, 255),       \textcolor{comment}{// darkest color}
+47         video::SColor(0, 255, 255, 255),       \textcolor{comment}{// brightest color}
+48         450, 500, 90,                         \textcolor{comment}{// min and max age, angle}
+49         core::dimension2df(1.0f, 1.0f),         \textcolor{comment}{// min size texture}
+50         core::dimension2df(1.3f, 1.3f));        \textcolor{comment}{// max size texture}
+51 
+52     ps->setEmitter(em); \textcolor{comment}{// this grabs the emitter, if "0" then it stop creating particles}
+53     em->drop(); \textcolor{comment}{// so we can drop it here without deleting it}
+54 
+55     scene::IParticleAffector* paf = ps->createFadeOutParticleAffector();
+56 
+57     ps->addAffector(paf); \textcolor{comment}{// same goes for the affector}
+58     paf->drop();
+59 
+60     ps->setPosition(Position);
+61     ps->setScale(core::vector3df(1, 1, 1));
+62     ps->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+63     ps->setMaterialFlag(video::EMF\_ZWRITE\_ENABLE, \textcolor{keyword}{false});
+64     ps->setMaterialTexture(0, \hyperlink{_particle_system_8cpp_ab96920572d207abe4ce28b614c69be83}{particleDriver}->getTexture(texture));
+65     ps->setMaterialType(video::EMT\_TRANSPARENT\_ADD\_COLOR);
+66     \hyperlink{_particle_system_8cpp_afa9585a41fcc4d82bbbeb34189aca376}{particles}.push\_front(\textcolor{keyword}{new} \hyperlink{struct_particle}{Particle}(ps, particleTimer));
+67 \}
+\end{DoxyCode}
+\hypertarget{class_particle_system_ac60759503968e32b9cc25222995dd7d9}{\index{Particle\-System@{Particle\-System}!Update@{Update}}
+\index{Update@{Update}!ParticleSystem@{Particle\-System}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-System\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{f32}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_particle_system_ac60759503968e32b9cc25222995dd7d9}
+
+
+References particles.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+25 \{
+26     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_particle_system_8cpp_afa9585a41fcc4d82bbbeb34189aca376}{particles}.size(); i++)
+27     \{
+28         \hyperlink{_particle_system_8cpp_afa9585a41fcc4d82bbbeb34189aca376}{particles}[i]->Update(\hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime});
+29         \textcolor{keywordflow}{if} (\hyperlink{_particle_system_8cpp_afa9585a41fcc4d82bbbeb34189aca376}{particles}[i]->lifetime <= 0) \{
+30             \hyperlink{_particle_system_8cpp_afa9585a41fcc4d82bbbeb34189aca376}{particles}.erase(i);
+31         \}
+32     \}
+33 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_particle_system_8h}{Particle\-System.\-h}\item 
+\hyperlink{_particle_system_8cpp}{Particle\-System.\-cpp}\end{DoxyCompactItemize}

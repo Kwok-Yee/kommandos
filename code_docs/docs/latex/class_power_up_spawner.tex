@@ -1,0 +1,115 @@
+\hypertarget{class_power_up_spawner}{\section{Power\-Up\-Spawner Class Reference}
+\label{class_power_up_spawner}\index{Power\-Up\-Spawner@{Power\-Up\-Spawner}}
+}
+
+
+{\ttfamily \#include $<$Power\-Up\-Spawner.\-h$>$}
+
+
+
+Collaboration diagram for Power\-Up\-Spawner\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=273pt]{class_power_up_spawner__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_power_up_spawner_ad95f01d926ce8438046b4c8f7aa99d9e}{Power\-Up\-Device} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_power_up_spawner_a7d10daa2eedceafdf8ceb352f6436db2}{Power\-Up\-Spawn} (vector3df position)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_power_up_spawner_afa1bc4eb2e260ef8a3ca62664867ad75}{pick\-Up\-Power} = false
+\item 
+I\-Mesh\-Scene\-Node $\ast$ \hyperlink{class_power_up_spawner_a0bf84727961b4a9239408026f8b392e6}{powerup\-Node}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_power_up_spawner_ad95f01d926ce8438046b4c8f7aa99d9e}{\index{Power\-Up\-Spawner@{Power\-Up\-Spawner}!Power\-Up\-Device@{Power\-Up\-Device}}
+\index{Power\-Up\-Device@{Power\-Up\-Device}!PowerUpSpawner@{Power\-Up\-Spawner}}
+\subsubsection[{Power\-Up\-Device}]{\setlength{\rightskip}{0pt plus 5cm}void Power\-Up\-Spawner\-::\-Power\-Up\-Device (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_power_up_spawner_ad95f01d926ce8438046b4c8f7aa99d9e}
+
+
+References Powerup\-Pool\-::\-Get\-Instance(), pool, power\-Up\-Driver, power\-Up\-I\-Device, and power\-Up\-Smgr.
+
+
+
+Referenced by Game\-::\-Start().
+
+
+\begin{DoxyCode}
+32 \{
+33     \hyperlink{_power_up_spawner_8cpp_a81f9440a46c355dea79394b845bd5188}{powerUpIDevice} = device;
+34     \hyperlink{_power_up_spawner_8cpp_a21e35e3a83aa777a110cbdbab41c2a5f}{powerUpSmgr} = device->getSceneManager();
+35     \hyperlink{_power_up_spawner_8cpp_a72e7275e57444c56f5bf7ec2255d06ce}{powerUpDriver} = device->getVideoDriver();
+36 
+37     \hyperlink{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}{pool} = \hyperlink{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}{pool}->\hyperlink{class_powerup_pool_a9d7ae900750b765773de9ed95a5619f0}{GetInstance}(\hyperlink{_power_up_spawner_8cpp_a81f9440a46c355dea79394b845bd5188}{powerUpIDevice});
+38 \}
+\end{DoxyCode}
+\hypertarget{class_power_up_spawner_a7d10daa2eedceafdf8ceb352f6436db2}{\index{Power\-Up\-Spawner@{Power\-Up\-Spawner}!Power\-Up\-Spawn@{Power\-Up\-Spawn}}
+\index{Power\-Up\-Spawn@{Power\-Up\-Spawn}!PowerUpSpawner@{Power\-Up\-Spawner}}
+\subsubsection[{Power\-Up\-Spawn}]{\setlength{\rightskip}{0pt plus 5cm}void Power\-Up\-Spawner\-::\-Power\-Up\-Spawn (
+\begin{DoxyParamCaption}
+\item[{vector3df}]{position}
+\end{DoxyParamCaption}
+)}}\label{class_power_up_spawner_a7d10daa2eedceafdf8ceb352f6436db2}
+
+
+References Collision\-::\-Add\-Powerup\-To\-List(), Powerup\-Pool\-::\-Get\-Resource(), pool, pow\-Col, powerup, power\-Up\-Chance, power\-Up\-Smgr, Powerup\-::\-Set\-Powerup(), and Powerup\-::\-Set\-Powerup\-Type().
+
+
+
+Referenced by Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+41 \{
+42     \hyperlink{_power_up_spawner_8cpp_aff9d41f803525ecf420cd66107f0787f}{powerUpChance} = rand() % 100;
+43     \textcolor{keywordflow}{if} (\hyperlink{_power_up_spawner_8cpp_aff9d41f803525ecf420cd66107f0787f}{powerUpChance} >= 80)
+44     \{
+45         \textcolor{keywordtype}{int} powTyp = rand() % 3;
+46         \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup} = \hyperlink{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}{pool}->\hyperlink{class_powerup_pool_a4b223578b11932dc8e82edc48d06d65f}{GetResource}();
+47         \hyperlink{_power_up_spawner_8cpp_a8e8ac5767573483d8e9e3dfc198a8df8}{powCol}.\hyperlink{class_collision_affd296ad667fec8f353265488e4de292}{AddPowerupToList}(\hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup});
+48 
+49         IMeshSceneNode* \hyperlink{class_power_up_spawner_a0bf84727961b4a9239408026f8b392e6}{powerupNode} = \hyperlink{_power_up_spawner_8cpp_a21e35e3a83aa777a110cbdbab41c2a5f}{powerUpSmgr}->addCubeSceneNode(10.0f,0,-1, 
+50             powerUpPosition,
+51             vector3df(0,0,0),
+52             vector3df(0.4f,0.4f,0.4f));
+53         \textcolor{keywordflow}{if} (powerupNode)
+54         \{
+55             powerupNode->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+56             \textcolor{comment}{//powerupNode->setMaterialTexture(0,
+       powerUpDriver->getTexture("../media/Textures/powerup\_firerate.png"));}
+57             powerupNode->setVisible(\textcolor{keyword}{true});
+58         \}
+59         \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup}->\hyperlink{class_powerup_a83662c82e6c9c2192713f37e93da7867}{SetPowerup}(powerupNode);
+60         \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup}->\hyperlink{class_powerup_ad37083facb3025fa933d851ea8ecd549}{SetPowerupType}(powTyp);
+61     \}
+62 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_power_up_spawner_afa1bc4eb2e260ef8a3ca62664867ad75}{\index{Power\-Up\-Spawner@{Power\-Up\-Spawner}!pick\-Up\-Power@{pick\-Up\-Power}}
+\index{pick\-Up\-Power@{pick\-Up\-Power}!PowerUpSpawner@{Power\-Up\-Spawner}}
+\subsubsection[{pick\-Up\-Power}]{\setlength{\rightskip}{0pt plus 5cm}bool Power\-Up\-Spawner\-::pick\-Up\-Power = false}}\label{class_power_up_spawner_afa1bc4eb2e260ef8a3ca62664867ad75}
+\hypertarget{class_power_up_spawner_a0bf84727961b4a9239408026f8b392e6}{\index{Power\-Up\-Spawner@{Power\-Up\-Spawner}!powerup\-Node@{powerup\-Node}}
+\index{powerup\-Node@{powerup\-Node}!PowerUpSpawner@{Power\-Up\-Spawner}}
+\subsubsection[{powerup\-Node}]{\setlength{\rightskip}{0pt plus 5cm}I\-Mesh\-Scene\-Node$\ast$ Power\-Up\-Spawner\-::powerup\-Node}}\label{class_power_up_spawner_a0bf84727961b4a9239408026f8b392e6}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_power_up_spawner_8h}{Power\-Up\-Spawner.\-h}\item 
+\hyperlink{_power_up_spawner_8cpp}{Power\-Up\-Spawner.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,132 @@
+\hypertarget{class_sound_manager}{\section{Sound\-Manager Class Reference}
+\label{class_sound_manager}\index{Sound\-Manager@{Sound\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Sound\-Manager.\-h$>$}
+
+
+
+Collaboration diagram for Sound\-Manager\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{class_sound_manager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sound_manager_aac4b48cfc4d394c547f5efec7d451165}{Sound\-Manager} (const \hyperlink{class_sound_manager}{Sound\-Manager} \&)=delete
+\item 
+\hyperlink{class_sound_manager}{Sound\-Manager} \& \hyperlink{class_sound_manager_ae5e6042f633424541acd84b144ac80af}{operator=} (const \hyperlink{class_sound_manager}{Sound\-Manager} \&)=delete
+\item 
+void \hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{Play\-Sound} (const char $\ast$sound, bool loop)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_sound_manager}{Sound\-Manager} $\ast$ \hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{Get\-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irrklang\-::\-I\-Sound\-Engine $\ast$ \hyperlink{class_sound_manager_ad4ffe937e2b5ed08e75156cfd847580f}{engine}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_sound_manager_abcc1fbf3488be5788a42c9a4fe56df35}{Sound\-Manager} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_sound_manager}{Sound\-Manager} $\ast$ \hyperlink{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}{instance} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_sound_manager_aac4b48cfc4d394c547f5efec7d451165}{\index{Sound\-Manager@{Sound\-Manager}!Sound\-Manager@{Sound\-Manager}}
+\index{Sound\-Manager@{Sound\-Manager}!SoundManager@{Sound\-Manager}}
+\subsubsection[{Sound\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Sound\-Manager\-::\-Sound\-Manager (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sound\-Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_sound_manager_aac4b48cfc4d394c547f5efec7d451165}
+\hypertarget{class_sound_manager_abcc1fbf3488be5788a42c9a4fe56df35}{\index{Sound\-Manager@{Sound\-Manager}!Sound\-Manager@{Sound\-Manager}}
+\index{Sound\-Manager@{Sound\-Manager}!SoundManager@{Sound\-Manager}}
+\subsubsection[{Sound\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Sound\-Manager\-::\-Sound\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_sound_manager_abcc1fbf3488be5788a42c9a4fe56df35}
+
+\begin{DoxyCode}
+8 \{
+9     \hyperlink{class_sound_manager_ad4ffe937e2b5ed08e75156cfd847580f}{engine} = createIrrKlangDevice();
+10 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{\index{Sound\-Manager@{Sound\-Manager}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!SoundManager@{Sound\-Manager}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager} $\ast$ Sound\-Manager\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_sound_manager_a887480b38c9380c9fba23a2337df63be}
+
+
+Referenced by Camera\-::\-Camera(), Enemy\-::\-Enemy(), Enemy\-Spawner\-::\-Enemy\-Spawner(), Heat\-Map\-Manager\-::\-Heat\-Map\-Manager(), Player\-::\-Player(), and Game\-::\-Start().
+
+
+\begin{DoxyCode}
+15 \{
+16     \textcolor{keywordflow}{if} (!\hyperlink{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}{instance})
+17     \{
+18         \hyperlink{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}{instance} = \textcolor{keyword}{new} \hyperlink{class_sound_manager_abcc1fbf3488be5788a42c9a4fe56df35}{SoundManager}();
+19     \}
+20     \textcolor{keywordflow}{return} \hyperlink{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}{instance};
+21 \}
+\end{DoxyCode}
+\hypertarget{class_sound_manager_ae5e6042f633424541acd84b144ac80af}{\index{Sound\-Manager@{Sound\-Manager}!operator=@{operator=}}
+\index{operator=@{operator=}!SoundManager@{Sound\-Manager}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager}\& Sound\-Manager\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Sound\-Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_sound_manager_ae5e6042f633424541acd84b144ac80af}
+\hypertarget{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{\index{Sound\-Manager@{Sound\-Manager}!Play\-Sound@{Play\-Sound}}
+\index{Play\-Sound@{Play\-Sound}!SoundManager@{Sound\-Manager}}
+\subsubsection[{Play\-Sound}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\-Manager\-::\-Play\-Sound (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{sound, }
+\item[{bool}]{loop}
+\end{DoxyParamCaption}
+)}}\label{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}
+
+
+Referenced by Camera\-::\-Camera\-Update(), Heat\-Map\-Manager\-::\-Create\-Poison\-Cloud(), Player\-::\-Move(), Enemy\-Spawner\-::\-Next\-Wave(), Player\-::\-Shoot(), Game\-::\-Start(), Enemy\-::\-Take\-Damage(), and Player\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+24 \{
+25     \hyperlink{class_sound_manager_ad4ffe937e2b5ed08e75156cfd847580f}{engine}->play2D(sound, loop);
+26 \}\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_sound_manager_ad4ffe937e2b5ed08e75156cfd847580f}{\index{Sound\-Manager@{Sound\-Manager}!engine@{engine}}
+\index{engine@{engine}!SoundManager@{Sound\-Manager}}
+\subsubsection[{engine}]{\setlength{\rightskip}{0pt plus 5cm}irrklang\-::\-I\-Sound\-Engine$\ast$ Sound\-Manager\-::engine}}\label{class_sound_manager_ad4ffe937e2b5ed08e75156cfd847580f}
+\hypertarget{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}{\index{Sound\-Manager@{Sound\-Manager}!instance@{instance}}
+\index{instance@{instance}!SoundManager@{Sound\-Manager}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager} $\ast$ Sound\-Manager\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_sound_manager_a14c7698bbced59a1774a3f95e0affc61}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_sound_manager_8h}{Sound\-Manager.\-h}\item 
+\hyperlink{_sound_manager_8cpp}{Sound\-Manager.\-cpp}\end{DoxyCompactItemize}

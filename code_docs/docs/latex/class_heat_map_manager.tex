@@ -1,0 +1,634 @@
+\hypertarget{class_heat_map_manager}{\section{Heat\-Map\-Manager Class Reference}
+\label{class_heat_map_manager}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}}
+}
+
+
+{\ttfamily \#include $<$Heat\-Map\-Manager.\-h$>$}
+
+
+
+Collaboration diagram for Heat\-Map\-Manager\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_heat_map_manager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} \{ \\*
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac37611b7d855043c25ffc9866b2145fc}{Zone0}, 
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}, 
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}, 
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}, 
+\\*
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_heat_map_manager_a572c22efd1da42802d59bd5fad291d2f}{Heat\-Map\-Manager} (const \hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} \&)=delete
+\item 
+\hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} \& \hyperlink{class_heat_map_manager_a9444c0c491587928574da5f4c2079d8c}{operator=} (const \hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} \&)=delete
+\item 
+void \hyperlink{class_heat_map_manager_aaf3b56067a76a49a9685b221d63c87b9}{Add\-Weight} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} zone, float weight)
+\item 
+int \hyperlink{class_heat_map_manager_a72fbb89ab0dd5fb8b9e760f199696b16}{Get\-Weight} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} zone)
+\item 
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} \hyperlink{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}{Check\-Zone\-From\-Position} (irr\-::core\-::vector3df pos)
+\item 
+void \hyperlink{class_heat_map_manager_ac11943d3f92891670ddf9e613d7c06dd}{Update} ()
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_heat_map_manager_a326372f900540856c890eb311b04876b}{Get\-Poison\-Cloud} ()
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_heat_map_manager_a45ef95be18d764cedf5095ace6d87204}{Get\-Danger\-Zone} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} $\ast$ \hyperlink{class_heat_map_manager_acc2cf6cbce0774a997ef1c408f07fb87}{Get\-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::scene\-::\-I\-Mesh\-Scene\-Node $\ast$ \hyperlink{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}{level}
+\item 
+\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} \hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{active\-Zone}
+\item 
+bool \hyperlink{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{is\-Poison\-Cloud\-Active} = false
+\item 
+bool \hyperlink{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{is\-Danger\-Zone\-Active} = false
+\item 
+bool \hyperlink{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}{danger\-Zone\-Spawned} = false
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_heat_map_manager_adc7803f7074083d06bf7f2780a8943ef}{Heat\-Map\-Manager} ()
+\item 
+void \hyperlink{class_heat_map_manager_a5e270576638ad384789c184b0893c54d}{Create\-Danger\-Zone} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} zone)
+\item 
+void \hyperlink{class_heat_map_manager_a7c87473222fd1fa2acf6672a23f303a2}{Create\-Poison\-Cloud} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} zone)
+\item 
+void \hyperlink{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{Create\-Countdown} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Zone} zone)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1\-Weight}
+\item 
+float \hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2\-Weight}
+\item 
+float \hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3\-Weight}
+\item 
+float \hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4\-Weight}
+\item 
+bool \hyperlink{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}{is\-Zone\-Active} = false
+\item 
+bool \hyperlink{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}{countdown} = false
+\item 
+float \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poison\-Cloud}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{danger\-Zone}
+\item 
+irr\-::gui\-::\-I\-G\-U\-I\-Static\-Text $\ast$ \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdown\-Text}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} $\ast$ \hyperlink{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}{instance} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone@{Zone}}
+\index{Zone@{Zone}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Zone}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Heat\-Map\-Manager\-::\-Zone}}}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{Zone0@{Zone0}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone0@{Zone0}}\item[{\em 
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac37611b7d855043c25ffc9866b2145fc}{Zone0}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac37611b7d855043c25ffc9866b2145fc}
+}]\index{Zone1@{Zone1}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone1@{Zone1}}\item[{\em 
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}
+}]\index{Zone2@{Zone2}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone2@{Zone2}}\item[{\em 
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}
+}]\index{Zone3@{Zone3}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone3@{Zone3}}\item[{\em 
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}
+}]\index{Zone4@{Zone4}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Zone4@{Zone4}}\item[{\em 
+\hypertarget{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}\label{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}
+}]\end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+12     \{
+13         \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac37611b7d855043c25ffc9866b2145fc}{Zone0},\textcolor{comment}{//No Zone}
+14         \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1},\textcolor{comment}{//Left-Top}
+15         \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2},\textcolor{comment}{//Right-Top}
+16         \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3},\textcolor{comment}{//Left-Bot}
+17         \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}\textcolor{comment}{//Right-Bot}
+18     \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_heat_map_manager_a572c22efd1da42802d59bd5fad291d2f}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}
+\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Heat\-Map\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Heat\-Map\-Manager\-::\-Heat\-Map\-Manager (
+\begin{DoxyParamCaption}
+\item[{const {\bf Heat\-Map\-Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_heat_map_manager_a572c22efd1da42802d59bd5fad291d2f}
+\hypertarget{class_heat_map_manager_adc7803f7074083d06bf7f2780a8943ef}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Heat\-Map\-Manager@{Heat\-Map\-Manager}}
+\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Heat\-Map\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}Heat\-Map\-Manager\-::\-Heat\-Map\-Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_adc7803f7074083d06bf7f2780a8943ef}
+
+
+References Sound\-Manager\-::\-Get\-Instance(), and h\-Sound\-Manager.
+
+
+\begin{DoxyCode}
+21 \{
+22     \hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1Weight} = 0;
+23     \hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2Weight} = 0;
+24     \hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3Weight} = 0;
+25     \hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4Weight} = 0;
+26     \hyperlink{_heat_map_manager_8cpp_af8a1b0ce0c25e6712750f21039b8b869}{hSoundManager} = \hyperlink{_heat_map_manager_8cpp_af8a1b0ce0c25e6712750f21039b8b869}{hSoundManager}->\hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+27 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_heat_map_manager_aaf3b56067a76a49a9685b221d63c87b9}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Add\-Weight@{Add\-Weight}}
+\index{Add\-Weight@{Add\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Add\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}void Heat\-Map\-Manager\-::\-Add\-Weight (
+\begin{DoxyParamCaption}
+\item[{{\bf Zone}}]{zone, }
+\item[{float}]{weight}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_aaf3b56067a76a49a9685b221d63c87b9}
+
+
+References M\-A\-X\-\_\-\-W\-E\-I\-G\-H\-T.
+
+
+
+Referenced by Player\-::\-Move(), and Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+62 \{
+63     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}{isZoneActive}) \{
+64         \textcolor{keywordflow}{return};
+65     \}
+66     \textcolor{keywordflow}{switch} (zone)
+67     \{
+68     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}:
+69         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1Weight} < \hyperlink{_heat_map_manager_8h_a943995a7bf30da3587664920856533ab}{MAX\_WEIGHT})
+70         \{
+71             \hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1Weight} += weight;
+72         \}
+73         \textcolor{keywordflow}{else}
+74         \{
+75             \hyperlink{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{CreateCountdown}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1});
+76             \hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1Weight} = 0;
+77         \}
+78         \textcolor{keywordflow}{break};
+79     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}:
+80         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2Weight} < \hyperlink{_heat_map_manager_8h_a943995a7bf30da3587664920856533ab}{MAX\_WEIGHT})
+81         \{
+82             \hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2Weight} += weight;
+83         \}
+84         \textcolor{keywordflow}{else}
+85         \{
+86             \hyperlink{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{CreateCountdown}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2});
+87             \hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2Weight} = 0;
+88         \}
+89         \textcolor{keywordflow}{break};
+90     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}:
+91         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3Weight} < \hyperlink{_heat_map_manager_8h_a943995a7bf30da3587664920856533ab}{MAX\_WEIGHT})
+92         \{
+93             \hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3Weight} += weight;
+94         \}
+95         \textcolor{keywordflow}{else}
+96         \{
+97             \hyperlink{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{CreateCountdown}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3});
+98             \hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3Weight} = 0;
+99         \}
+100         \textcolor{keywordflow}{break};
+101     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}:
+102         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4Weight} < \hyperlink{_heat_map_manager_8h_a943995a7bf30da3587664920856533ab}{MAX\_WEIGHT})
+103         \{
+104             \hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4Weight} += weight;
+105         \}
+106         \textcolor{keywordflow}{else}
+107         \{
+108             \hyperlink{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{CreateCountdown}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4});
+109             \hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4Weight} = 0;
+110         \}
+111         \textcolor{keywordflow}{break};
+112     \textcolor{keywordflow}{default}:
+113         \textcolor{keywordflow}{break};
+114     \}
+115 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Check\-Zone\-From\-Position@{Check\-Zone\-From\-Position}}
+\index{Check\-Zone\-From\-Position@{Check\-Zone\-From\-Position}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Check\-Zone\-From\-Position}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Heat\-Map\-Manager\-::\-Zone} Heat\-Map\-Manager\-::\-Check\-Zone\-From\-Position (
+\begin{DoxyParamCaption}
+\item[{irr\-::core\-::vector3df}]{pos}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}
+
+
+Referenced by Player\-::\-Move(), and Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+42 \{
+43     \textcolor{keywordflow}{if} (pos.X > 0 && pos.Z > 0)
+44     \{
+45         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1};
+46     \}
+47     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pos.X > 0 && pos.Z < 0)
+48     \{
+49         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2};
+50     \}
+51     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pos.X < 0 && pos.Z > 0)
+52     \{
+53         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3};
+54     \}
+55     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (pos.X < 0 && pos.Z < 0)
+56     \{
+57         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4};
+58     \}
+59 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Create\-Countdown@{Create\-Countdown}}
+\index{Create\-Countdown@{Create\-Countdown}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Create\-Countdown}]{\setlength{\rightskip}{0pt plus 5cm}void Heat\-Map\-Manager\-::\-Create\-Countdown (
+\begin{DoxyParamCaption}
+\item[{{\bf Zone}}]{zone}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a9c8819753979c50a6370edbd4fa6f25f}
+
+
+References M\-A\-X\-\_\-\-C\-O\-U\-N\-T\-D\-O\-W\-N\-\_\-\-S\-E\-C\-O\-N\-D\-S, and ui.
+
+
+\begin{DoxyCode}
+188 \{
+189     \hyperlink{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}{isZoneActive} = \textcolor{keyword}{true};
+190     \hyperlink{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}{countdown} = \textcolor{keyword}{true};
+191     \hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone} = zone;
+192     stringw text(\textcolor{stringliteral}{"There will be gas in Zone "});
+193     text += zone;
+194     text += \textcolor{stringliteral}{" in 5 seconds"};
+195     \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdownText} = \hyperlink{_heat_map_manager_8cpp_aba421c4a07fe59ce15705794f2fa8eaf}{ui}->addStaticText(text.c\_str(), rect<int>(350, 80, 450, 120), \textcolor{keyword}{true}, \textcolor{keyword}{true}
+      , 0, -1, \textcolor{keyword}{true});
+196     \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdownText}->setMinSize(dimension2du(100, 40));
+197     \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdownText}->setMaxSize(dimension2du(100, 40));
+198 
+199     \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} = \hyperlink{_heat_map_manager_8h_ab0e3989937f8f286cd67309cf671a477}{MAX\_COUNTDOWN\_SECONDS};
+200 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a5e270576638ad384789c184b0893c54d}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Create\-Danger\-Zone@{Create\-Danger\-Zone}}
+\index{Create\-Danger\-Zone@{Create\-Danger\-Zone}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Create\-Danger\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}void Heat\-Map\-Manager\-::\-Create\-Danger\-Zone (
+\begin{DoxyParamCaption}
+\item[{{\bf Zone}}]{zone}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a5e270576638ad384789c184b0893c54d}
+
+
+References Game\-::device, h\-Game, and hsmgr.
+
+
+\begin{DoxyCode}
+202 \{
+203     \textcolor{keyword}{const} path texturePathDangerZone = \textcolor{stringliteral}{"../media/Textures/danger\_texture.png"};
+204     vector3df dangerZonePosition;
+205     dangerZonePosition.Y = -1.5;
+206     f32 size = \hyperlink{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}{level}->getTransformedBoundingBox().getExtent().X / 18;
+207     \textcolor{keywordflow}{switch} (zone)
+208     \{
+209     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}:
+210         dangerZonePosition.X = size;
+211         dangerZonePosition.Z = size;
+212         \textcolor{keywordflow}{break};
+213     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}:
+214         dangerZonePosition.X = size;
+215         dangerZonePosition.Z = -size;
+216         \textcolor{keywordflow}{break};
+217     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}:
+218         dangerZonePosition.X = -size;
+219         dangerZonePosition.Z = size;
+220         \textcolor{keywordflow}{break};
+221     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}:
+222         dangerZonePosition.X = -size;
+223         dangerZonePosition.Z = -size;
+224         \textcolor{keywordflow}{break};
+225     \textcolor{keywordflow}{default}:
+226         \textcolor{keywordflow}{break};
+227     \}
+228     dangerZonePosition.X *= 5;
+229     dangerZonePosition.Z *= 5;
+230     \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone} = \hyperlink{_heat_map_manager_8cpp_afce8176d06e37bb8d8bf11f5947b4181}{hsmgr}->addCubeSceneNode();
+231     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}) \{
+232         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setPosition(dangerZonePosition);
+233         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setScale(vector3df(size, 0.4f, size));
+234 
+235         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+236         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setMaterialFlag(video::EMF\_ZWRITE\_ENABLE, \textcolor{keyword}{false});
+237         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setMaterialTexture(0, \hyperlink{_heat_map_manager_8cpp_ac34ec415c121b1595d2b5d4b545ae96b}{hGame}->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getVideoDriver()->getTexture(
+      texturePathDangerZone));
+238         \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone}->setMaterialType(video::EMT\_TRANSPARENT\_ADD\_COLOR);
+239     \}
+240     \textcolor{comment}{//isDangerZoneActive = true;}
+241 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a7c87473222fd1fa2acf6672a23f303a2}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Create\-Poison\-Cloud@{Create\-Poison\-Cloud}}
+\index{Create\-Poison\-Cloud@{Create\-Poison\-Cloud}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Create\-Poison\-Cloud}]{\setlength{\rightskip}{0pt plus 5cm}void Heat\-Map\-Manager\-::\-Create\-Poison\-Cloud (
+\begin{DoxyParamCaption}
+\item[{{\bf Zone}}]{zone}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a7c87473222fd1fa2acf6672a23f303a2}
+
+
+References Game\-::device, G\-A\-S\-\_\-\-S\-O\-U\-N\-D, h\-Game, hsmgr, h\-Sound\-Manager, M\-A\-X\-\_\-\-P\-O\-I\-S\-O\-N\-C\-L\-O\-U\-S\-\_\-\-S\-E\-C\-O\-N\-D\-S, and Sound\-Manager\-::\-Play\-Sound().
+
+
+\begin{DoxyCode}
+244 \{
+245     \textcolor{comment}{//const path texturePathDangerZone = "../media/Textures/danger\_texture.png";}
+246     \textcolor{keyword}{const} path texturePath = \textcolor{stringliteral}{"../media/Textures/PoisonCloud.jpg"};
+247     vector3df cloudPosition;
+248     cloudPosition.Y = -0.5;
+249     f32 size = \hyperlink{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}{level}->getTransformedBoundingBox().getExtent().X / 18;
+250     \textcolor{keywordflow}{switch} (zone)
+251     \{
+252     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}:
+253         cloudPosition.X = size;
+254         cloudPosition.Z = size;
+255         \textcolor{keywordflow}{break};
+256     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}:
+257         cloudPosition.X = size;
+258         cloudPosition.Z = -size;
+259         \textcolor{keywordflow}{break};
+260     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}:
+261         cloudPosition.X = -size;
+262         cloudPosition.Z = size;
+263         \textcolor{keywordflow}{break};
+264     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}:
+265         cloudPosition.X = -size;
+266         cloudPosition.Z = -size;
+267         \textcolor{keywordflow}{break};
+268     \textcolor{keywordflow}{default}:
+269         \textcolor{keywordflow}{break};
+270     \}
+271     cloudPosition.X *= 5;
+272     cloudPosition.Z *= 5;
+273     \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud} = \hyperlink{_heat_map_manager_8cpp_afce8176d06e37bb8d8bf11f5947b4181}{hsmgr}->addCubeSceneNode();
+274     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}) \{
+275         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setPosition(cloudPosition);
+276         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setScale(vector3df(size, 4.0, size));
+277 
+278         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+279         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setMaterialFlag(video::EMF\_ZWRITE\_ENABLE, \textcolor{keyword}{false});
+280         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setMaterialTexture(0, \hyperlink{_heat_map_manager_8cpp_ac34ec415c121b1595d2b5d4b545ae96b}{hGame}->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getVideoDriver()->
+      getTexture(texturePath));
+281         \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud}->setMaterialType(video::EMT\_TRANSPARENT\_ADD\_COLOR);
+282     \}
+283     \hyperlink{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{isPoisonCloudActive} = \textcolor{keyword}{true};
+284     \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} = \hyperlink{_heat_map_manager_8h_a2060785d16be1e99ba8c9a508799c641}{MAX\_POISONCLOUS\_SECONDS};
+285     \hyperlink{_heat_map_manager_8cpp_af8a1b0ce0c25e6712750f21039b8b869}{hSoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_heat_map_manager_8h_aac873f74ed04299cc7b7f1f4a6f61100}{GAS\_SOUND}, \textcolor{keyword}{false});
+286 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a45ef95be18d764cedf5095ace6d87204}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Get\-Danger\-Zone@{Get\-Danger\-Zone}}
+\index{Get\-Danger\-Zone@{Get\-Danger\-Zone}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Get\-Danger\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Heat\-Map\-Manager\-::\-Get\-Danger\-Zone (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_a45ef95be18d764cedf5095ace6d87204}
+
+\begin{DoxyCode}
+288                                           \{
+289     \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{dangerZone};
+290 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_acc2cf6cbce0774a997ef1c408f07fb87}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Heat\-Map\-Manager} $\ast$ Heat\-Map\-Manager\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_heat_map_manager_acc2cf6cbce0774a997ef1c408f07fb87}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Default\-Objects(), and Enemy\-Spawner\-::\-Enemy\-Spawner().
+
+
+\begin{DoxyCode}
+33 \{
+34     \textcolor{keywordflow}{if} (!\hyperlink{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}{instance})
+35     \{
+36         \hyperlink{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}{instance} = \textcolor{keyword}{new} \hyperlink{class_heat_map_manager_adc7803f7074083d06bf7f2780a8943ef}{HeatMapManager}();
+37     \}
+38     \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}{instance};
+39 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a326372f900540856c890eb311b04876b}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Get\-Poison\-Cloud@{Get\-Poison\-Cloud}}
+\index{Get\-Poison\-Cloud@{Get\-Poison\-Cloud}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Get\-Poison\-Cloud}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Heat\-Map\-Manager\-::\-Get\-Poison\-Cloud (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_a326372f900540856c890eb311b04876b}
+
+\begin{DoxyCode}
+292                                            \{
+293     \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{poisonCloud};
+294 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a72fbb89ab0dd5fb8b9e760f199696b16}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Get\-Weight@{Get\-Weight}}
+\index{Get\-Weight@{Get\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Get\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}int Heat\-Map\-Manager\-::\-Get\-Weight (
+\begin{DoxyParamCaption}
+\item[{{\bf Zone}}]{zone}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_a72fbb89ab0dd5fb8b9e760f199696b16}
+
+\begin{DoxyCode}
+118 \{
+119     \textcolor{keywordflow}{switch} (zone)
+120     \{
+121     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{Zone1}:
+122         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{zone1Weight};
+123         \textcolor{keywordflow}{break};
+124     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{Zone2}:
+125         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{zone2Weight};
+126         \textcolor{keywordflow}{break};
+127     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{Zone3}:
+128         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{zone3Weight};
+129         \textcolor{keywordflow}{break};
+130     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{Zone4}:
+131         \textcolor{keywordflow}{return} \hyperlink{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{zone4Weight};
+132         \textcolor{keywordflow}{break};
+133     \textcolor{keywordflow}{default}:
+134         \textcolor{keywordflow}{break};
+135     \}
+136 \}
+\end{DoxyCode}
+\hypertarget{class_heat_map_manager_a9444c0c491587928574da5f4c2079d8c}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!operator=@{operator=}}
+\index{operator=@{operator=}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Heat\-Map\-Manager}\& Heat\-Map\-Manager\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Heat\-Map\-Manager} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_heat_map_manager_a9444c0c491587928574da5f4c2079d8c}
+\hypertarget{class_heat_map_manager_ac11943d3f92891670ddf9e613d7c06dd}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!Update@{Update}}
+\index{Update@{Update}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Heat\-Map\-Manager\-::\-Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_heat_map_manager_ac11943d3f92891670ddf9e613d7c06dd}
+
+
+References Object\-Placement\-Generation\-::\-Generate\-New\-Objects(), h\-Game, hsmgr, and Game\-::object\-Placement\-Gen.
+
+
+
+Referenced by Player\-::\-Move().
+
+
+\begin{DoxyCode}
+139 \{
+140     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}{countdown})
+141     \{
+142         \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} -= 0.016; \textcolor{comment}{//we use vsync, so it's always 60fps, 0.016 is the framedeltatime}
+143         stringw newText(\textcolor{stringliteral}{"There will be gas in Zone "});
+144         newText += \hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone};
+145         newText += \textcolor{stringliteral}{" in "};
+146         newText += \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds};
+147         newText += \textcolor{stringliteral}{" seconds"};
+148         \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdownText}->setText(newText.c\_str());
+149 
+150         \hyperlink{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{isDangerZoneActive} = \textcolor{keyword}{true};
+151         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} < 0)
+152         \{
+153             \hyperlink{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}{countdown} = \textcolor{keyword}{false};
+154             \hyperlink{class_heat_map_manager_a7c87473222fd1fa2acf6672a23f303a2}{CreatePoisonCloud}(\hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone});
+155             \hyperlink{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{countdownText}->remove();
+156         \}
+157     \}
+158     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{isDangerZoneActive} && \hyperlink{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}{dangerZoneSpawned} == \textcolor{keyword}{false})
+159     \{
+160         \hyperlink{class_heat_map_manager_a5e270576638ad384789c184b0893c54d}{CreateDangerZone}(\hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone});
+161         \hyperlink{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}{dangerZoneSpawned} = \textcolor{keyword}{true};
+162         \textcolor{comment}{//isDangerZoneActive = false;}
+163     \}
+164     \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{isPoisonCloudActive})
+165     \{
+166         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{isDangerZoneActive})
+167         \{
+168             \hyperlink{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{isDangerZoneActive} = \textcolor{keyword}{false};
+169             \hyperlink{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}{dangerZoneSpawned} = \textcolor{keyword}{false};
+170             \textcolor{comment}{//dangerZone->remove();}
+171             \hyperlink{_heat_map_manager_8cpp_afce8176d06e37bb8d8bf11f5947b4181}{hsmgr}->addToDeletionQueue(\hyperlink{class_heat_map_manager_a45ef95be18d764cedf5095ace6d87204}{GetDangerZone}());
+172         \}
+173         \textcolor{comment}{//hsmgr->addToDeletionQueue(GetDangerZone());  <--- HERE's THE ERROR }
+174         \hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} -= 0.016;
+175         \textcolor{keywordflow}{if} (\hyperlink{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{seconds} < 0)
+176         \{
+177             \hyperlink{_heat_map_manager_8cpp_ac34ec415c121b1595d2b5d4b545ae96b}{hGame}->\hyperlink{class_game_a582b0adfa98534d79ec9511919827029}{objectPlacementGen}.\hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{GenerateNewObjects}(
+      \hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone});
+178             \hyperlink{_heat_map_manager_8cpp_afce8176d06e37bb8d8bf11f5947b4181}{hsmgr}->addToDeletionQueue(\hyperlink{class_heat_map_manager_a326372f900540856c890eb311b04876b}{GetPoisonCloud}());
+179             \textcolor{comment}{//poisonCloud->setVisible(false);}
+180             \hyperlink{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}{isZoneActive} = \textcolor{keyword}{false};
+181             \hyperlink{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{isPoisonCloudActive} = \textcolor{keyword}{false};
+182             \hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone} = \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac37611b7d855043c25ffc9866b2145fc}{Zone0};
+183         \}
+184     \}
+185 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!active\-Zone@{active\-Zone}}
+\index{active\-Zone@{active\-Zone}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{active\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Zone} Heat\-Map\-Manager\-::active\-Zone}}\label{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!countdown@{countdown}}
+\index{countdown@{countdown}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{countdown}]{\setlength{\rightskip}{0pt plus 5cm}bool Heat\-Map\-Manager\-::countdown = false\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a659cbc23eff012306ca58bb794d9a9c1}
+\hypertarget{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!countdown\-Text@{countdown\-Text}}
+\index{countdown\-Text@{countdown\-Text}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{countdown\-Text}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::gui\-::\-I\-G\-U\-I\-Static\-Text$\ast$ Heat\-Map\-Manager\-::countdown\-Text\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a6cbba801f3d09c86fa63a05180cd181e}
+\hypertarget{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!danger\-Zone@{danger\-Zone}}
+\index{danger\-Zone@{danger\-Zone}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{danger\-Zone}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Heat\-Map\-Manager\-::danger\-Zone\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_ad5ca224ccce646f0c6fdfce6d48d1c13}
+\hypertarget{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!danger\-Zone\-Spawned@{danger\-Zone\-Spawned}}
+\index{danger\-Zone\-Spawned@{danger\-Zone\-Spawned}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{danger\-Zone\-Spawned}]{\setlength{\rightskip}{0pt plus 5cm}bool Heat\-Map\-Manager\-::danger\-Zone\-Spawned = false}}\label{class_heat_map_manager_a9a257b4ffed8cf8c2eaa8c71bf0fa75b}
+\hypertarget{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!instance@{instance}}
+\index{instance@{instance}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Heat\-Map\-Manager} $\ast$ Heat\-Map\-Manager\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_heat_map_manager_a11d267fe86b6494e623674c2a8a8801a}
+\hypertarget{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!is\-Danger\-Zone\-Active@{is\-Danger\-Zone\-Active}}
+\index{is\-Danger\-Zone\-Active@{is\-Danger\-Zone\-Active}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{is\-Danger\-Zone\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool Heat\-Map\-Manager\-::is\-Danger\-Zone\-Active = false}}\label{class_heat_map_manager_aa8c35fb977284623b8399a7150f68cc9}
+\hypertarget{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!is\-Poison\-Cloud\-Active@{is\-Poison\-Cloud\-Active}}
+\index{is\-Poison\-Cloud\-Active@{is\-Poison\-Cloud\-Active}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{is\-Poison\-Cloud\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool Heat\-Map\-Manager\-::is\-Poison\-Cloud\-Active = false}}\label{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!is\-Zone\-Active@{is\-Zone\-Active}}
+\index{is\-Zone\-Active@{is\-Zone\-Active}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{is\-Zone\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool Heat\-Map\-Manager\-::is\-Zone\-Active = false\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_af53f13b64f955d297dd1d6a489ac2053}
+\hypertarget{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!level@{level}}
+\index{level@{level}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{level}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Mesh\-Scene\-Node$\ast$ Heat\-Map\-Manager\-::level}}\label{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Default\-Objects().
+
+\hypertarget{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!poison\-Cloud@{poison\-Cloud}}
+\index{poison\-Cloud@{poison\-Cloud}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{poison\-Cloud}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Heat\-Map\-Manager\-::poison\-Cloud\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a506da7726ec2f7d989ad407edd7b365d}
+\hypertarget{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!seconds@{seconds}}
+\index{seconds@{seconds}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{seconds}]{\setlength{\rightskip}{0pt plus 5cm}float Heat\-Map\-Manager\-::seconds\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a506cd0b3cef22e132ae74b5b8d264ed4}
+\hypertarget{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!zone1\-Weight@{zone1\-Weight}}
+\index{zone1\-Weight@{zone1\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{zone1\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}float Heat\-Map\-Manager\-::zone1\-Weight\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a428c9124cfc0e4667e5d935fce050e3f}
+\hypertarget{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!zone2\-Weight@{zone2\-Weight}}
+\index{zone2\-Weight@{zone2\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{zone2\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}float Heat\-Map\-Manager\-::zone2\-Weight\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a82299e638dd3f8e4c6e7cbf4706c0d0b}
+\hypertarget{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!zone3\-Weight@{zone3\-Weight}}
+\index{zone3\-Weight@{zone3\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{zone3\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}float Heat\-Map\-Manager\-::zone3\-Weight\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_aefbd0636746ab18ae5d305e4b3268ace}
+\hypertarget{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}{\index{Heat\-Map\-Manager@{Heat\-Map\-Manager}!zone4\-Weight@{zone4\-Weight}}
+\index{zone4\-Weight@{zone4\-Weight}!HeatMapManager@{Heat\-Map\-Manager}}
+\subsubsection[{zone4\-Weight}]{\setlength{\rightskip}{0pt plus 5cm}float Heat\-Map\-Manager\-::zone4\-Weight\hspace{0.3cm}{\ttfamily [private]}}}\label{class_heat_map_manager_a627d9bb3ce50a7473fdf84d9a048da9d}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_heat_map_manager_8h}{Heat\-Map\-Manager.\-h}\item 
+\hyperlink{_heat_map_manager_8cpp}{Heat\-Map\-Manager.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+\hypertarget{class_game_over_state}{\section{Game\-Over\-State Class Reference}
+\label{class_game_over_state}\index{Game\-Over\-State@{Game\-Over\-State}}
+}
+
+
+{\ttfamily \#include $<$Game\-Over\-State.\-h$>$}
+
+
+
+Collaboration diagram for Game\-Over\-State\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{class_game_over_state__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_game_over_state_a144dcad5d29cee7c76be7194407044d6}{Show\-Game\-Over} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_over_state_a144dcad5d29cee7c76be7194407044d6}{\index{Game\-Over\-State@{Game\-Over\-State}!Show\-Game\-Over@{Show\-Game\-Over}}
+\index{Show\-Game\-Over@{Show\-Game\-Over}!GameOverState@{Game\-Over\-State}}
+\subsubsection[{Show\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-Over\-State\-::\-Show\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_game_over_state_a144dcad5d29cee7c76be7194407044d6}
+
+
+References driver, game\-Over, obj\-Position(), obj\-Rotate(), obj\-Scale(), and smgr.
+
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+17 \{
+18     ISceneManager* \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = device->getSceneManager();
+19     IVideoDriver* \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver} = device->getVideoDriver();
+20     IMesh* gameover = smgr->getMesh(\hyperlink{_game_over_state_8cpp_aabad4636da8523fe67bd2fd70fed4021}{gameOver});
+21     IMeshSceneNode* gameOverNode = smgr->addMeshSceneNode(gameover);
+22     \textcolor{keywordflow}{if} (gameOverNode) \{
+23 
+24         gameOverNode->setScale(\hyperlink{_game_over_state_8cpp_abdb0d8cc9203bffba5b918ea503b74b3}{objScale});
+25         gameOverNode->setPosition(\hyperlink{_game_over_state_8cpp_a95ace4ba7bfe975cffbaee29643c4582}{objPosition});
+26         gameOverNode->setMaterialTexture(0, driver->getTexture(\textcolor{stringliteral}{"../media/Textures/Game\_Over\_Screen.jpg"}));
+27         gameOverNode->setRotation(\hyperlink{_game_over_state_8cpp_a15211b85543f06a861f27593015a3c38}{objRotate});
+28         gameOverNode->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+29     \}
+30 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_game_over_state_8h}{Game\-Over\-State.\-h}\item 
+\hyperlink{_game_over_state_8cpp}{Game\-Over\-State.\-cpp}\end{DoxyCompactItemize}

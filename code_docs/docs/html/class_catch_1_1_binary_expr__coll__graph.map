@@ -1,0 +1,4 @@
+<map id="Catch::BinaryExpr&lt; LhsT, RhsT &gt;" name="Catch::BinaryExpr&lt; LhsT, RhsT &gt;">
+<area shape="rect" id="node2" href="$struct_catch_1_1_i_transient_expression.html" title="{Catch::ITransientExpression\n||+ isBinaryExpression()\l+ getResult()\l+ streamReconstructedExpression()\l+ ITransientExpression()\l+ ~ITransientExpression()\l}" alt="" coords="5,301,237,437"/>
+<area shape="rect" id="node4" href="$class_catch_1_1_string_ref.html" title="{Catch::StringRef\n||+ StringRef()\l+ StringRef()\l+ StringRef()\l+ StringRef()\l+ StringRef()\l+ StringRef()\l+ ~StringRef()\l+ operator=()\l+ operator std::string()\l+ swap()\l+ operator==()\l+ operator!=()\l+ operator[]()\l+ empty()\l+ size()\l+ numberOfCharacters()\l+ c_str()\l+ substr()\l+ currentData()\l&#45; takeOwnership()\l&#45; isOwned()\l&#45; isSubstring()\l}" alt="" coords="309,177,472,562"/>
+</map>

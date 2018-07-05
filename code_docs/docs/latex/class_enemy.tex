@@ -1,0 +1,448 @@
+\hypertarget{class_enemy}{\section{Enemy Class Reference}
+\label{class_enemy}\index{Enemy@{Enemy}}
+}
+
+
+{\ttfamily \#include $<$Enemy.\-h$>$}
+
+
+
+Collaboration diagram for Enemy\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_enemy__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\-Type} \{ \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fae39ca3e105330b4913cf2d7496d2e49f}{basic}, 
+\hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa227c1851ffd53fcbc3b04e09be3426f7}{fast}, 
+\hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa46f876a597075a60b04ee647a34dfad9}{tanky}, 
+\hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fabed20a625942a91cdb7b85a000d8bde8}{matroshka}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_enemy_af6c878494349e5158e9e2f5ccbebe22d}{Reset} ()
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{Get\-Enemy\-Scene\-Node} ()
+\item 
+bool \hyperlink{class_enemy_a019dd82194ff8415b0439cc375a88545}{Is\-Dead} ()
+\item 
+void \hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{Set\-Enemy\-Type} (\hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\-Type} type, int nest\-Amount=0)
+\item 
+void \hyperlink{class_enemy_a927846998a0a936374a5734fb832b151}{Set\-Enemy} (irr\-::scene\-::\-I\-Scene\-Node $\ast$new\-Enemy)
+\item 
+void \hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{Set\-Player} (\hyperlink{class_player}{Player} $\ast$\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\-\_\-player})
+\item 
+void \hyperlink{class_enemy_a2429c6f39d0b763f899bef2c035fa9c8}{Update} (float \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\item 
+void \hyperlink{class_enemy_a9d077112e9af9e0bf92aa73ec20ea6ae}{Attack} ()
+\item 
+void \hyperlink{class_enemy_ab3567fe4213734615d7f3fed6c48a9c8}{Take\-Damage} (irr\-::f32 \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage})
+\item 
+\hyperlink{class_enemy_a549b49efc0292397f778ddab5af279de}{Enemy} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}
+\item 
+irr\-::core\-::vector3df \hyperlink{class_enemy_a01b8136e0754f278e48b63f25e2361bc}{velocity}
+\item 
+irr\-::core\-::vector3df \hyperlink{class_enemy_a2aeaae8acd857242e40db8b034566351}{delta}
+\item 
+\hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\-Type} \hyperlink{class_enemy_a36bcaf317708c0ed35835bc0f79c7719}{enemy\-Type}
+\item 
+bool \hyperlink{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{dead}
+\item 
+float \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health}
+\item 
+float \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed}
+\item 
+float \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage}
+\item 
+int \hyperlink{class_enemy_a28a5b00705199ef986435768edb53d48}{nesting\-Lvl}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{\index{Enemy@{Enemy}!Enemy\-Type@{Enemy\-Type}}
+\index{Enemy\-Type@{Enemy\-Type}!Enemy@{Enemy}}
+\subsubsection[{Enemy\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Enemy\-::\-Enemy\-Type}}}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{basic@{basic}!Enemy@{Enemy}}\index{Enemy@{Enemy}!basic@{basic}}\item[{\em 
+\hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fae39ca3e105330b4913cf2d7496d2e49f}{basic}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fae39ca3e105330b4913cf2d7496d2e49f}
+}]\index{fast@{fast}!Enemy@{Enemy}}\index{Enemy@{Enemy}!fast@{fast}}\item[{\em 
+\hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa227c1851ffd53fcbc3b04e09be3426f7}{fast}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa227c1851ffd53fcbc3b04e09be3426f7}
+}]\index{tanky@{tanky}!Enemy@{Enemy}}\index{Enemy@{Enemy}!tanky@{tanky}}\item[{\em 
+\hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa46f876a597075a60b04ee647a34dfad9}{tanky}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa46f876a597075a60b04ee647a34dfad9}
+}]\index{matroshka@{matroshka}!Enemy@{Enemy}}\index{Enemy@{Enemy}!matroshka@{matroshka}}\item[{\em 
+\hypertarget{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fabed20a625942a91cdb7b85a000d8bde8}{matroshka}\label{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fabed20a625942a91cdb7b85a000d8bde8}
+}]\end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+6                    \{
+7         \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fae39ca3e105330b4913cf2d7496d2e49f}{basic},
+8         \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa227c1851ffd53fcbc3b04e09be3426f7}{fast},
+9         \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fa46f876a597075a60b04ee647a34dfad9}{tanky},
+10         \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94fabed20a625942a91cdb7b85a000d8bde8}{matroshka}
+11     \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_enemy_a549b49efc0292397f778ddab5af279de}{\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\index{Enemy@{Enemy}!Enemy@{Enemy}}
+\subsubsection[{Enemy}]{\setlength{\rightskip}{0pt plus 5cm}Enemy\-::\-Enemy (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a549b49efc0292397f778ddab5af279de}
+
+
+References enemy, enemy\-Driver, enemy\-I\-Device, enemy\-Smgr, enemy\-Sound\-Manager, Sound\-Manager\-::\-Get\-Instance(), and scale\-Vect.
+
+
+\begin{DoxyCode}
+166 \{
+167     \hyperlink{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}{enemyIDevice} = device;
+168     \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver} = \hyperlink{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}{enemyIDevice}->getVideoDriver();
+169     \hyperlink{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}{enemySmgr} = \hyperlink{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}{enemyIDevice}->getSceneManager();
+170     \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemySoundManager} = \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemySoundManager}->
+      \hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+171 
+172     \hyperlink{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{dead} = \textcolor{keyword}{false};
+173     \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy} = 0;
+174     \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy} = \hyperlink{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}{enemySmgr}->addMeshSceneNode(\hyperlink{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}{enemySmgr}->getMesh(\textcolor{stringliteral}{"
+      ../media/Models/enemy/zombie.3ds"}));
+175     \textcolor{keywordflow}{if} (\hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy})
+176     \{
+177         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{false});
+178 
+179         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(\hyperlink{_enemy_8cpp_ab0279f77995b6911a30dd96af73c0636}{scaleVect});
+180         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setRotation(vector3df(0, -90, 0));
+181         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/zombieskin.png"}));
+182     \}
+183     \hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(EnemyType::basic);
+184 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_enemy_a9d077112e9af9e0bf92aa73ec20ea6ae}{\index{Enemy@{Enemy}!Attack@{Attack}}
+\index{Attack@{Attack}!Enemy@{Enemy}}
+\subsubsection[{Attack}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Attack (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a9d077112e9af9e0bf92aa73ec20ea6ae}
+
+
+References Player\-::get\-Vulnerable\-Timer(), player, and Player\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+127 \{
+128     \textcolor{keywordflow}{if} (!(\hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}->\hyperlink{class_player_ae790e9e2f8a4f53c11423d25410b5fdf}{getVulnerableTimer}() > 0))
+129     \{
+130         \hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}->\hyperlink{class_player_ae9f5a597f15e29673c47abe47c3f1d79}{TakeDamage}(\hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage});
+131     \}
+132 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{\index{Enemy@{Enemy}!Get\-Enemy\-Scene\-Node@{Get\-Enemy\-Scene\-Node}}
+\index{Get\-Enemy\-Scene\-Node@{Get\-Enemy\-Scene\-Node}!Enemy@{Enemy}}
+\subsubsection[{Get\-Enemy\-Scene\-Node}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Enemy\-::\-Get\-Enemy\-Scene\-Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}
+
+
+References enemy.
+
+
+
+Referenced by Enemy\-Pool\-::\-Get\-Resource(), Enemy\-Spawner\-::\-Spawn(), and Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion().
+
+
+\begin{DoxyCode}
+40 \{ \textcolor{keywordflow}{return} \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a019dd82194ff8415b0439cc375a88545}{\index{Enemy@{Enemy}!Is\-Dead@{Is\-Dead}}
+\index{Is\-Dead@{Is\-Dead}!Enemy@{Enemy}}
+\subsubsection[{Is\-Dead}]{\setlength{\rightskip}{0pt plus 5cm}bool Enemy\-::\-Is\-Dead (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a019dd82194ff8415b0439cc375a88545}
+
+\begin{DoxyCode}
+41 \{ \textcolor{keywordflow}{return} \hyperlink{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{dead}; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_af6c878494349e5158e9e2f5ccbebe22d}{\index{Enemy@{Enemy}!Reset@{Reset}}
+\index{Reset@{Reset}!Enemy@{Enemy}}
+\subsubsection[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_af6c878494349e5158e9e2f5ccbebe22d}
+
+
+References enemy.
+
+
+\begin{DoxyCode}
+33 \{
+34     \hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(EnemyType::basic);
+35     \hyperlink{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{dead} = \textcolor{keyword}{false};
+36     \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setVisible(\textcolor{keyword}{false});
+37     \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setPosition(vector3df(0, 0, 0));
+38 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a927846998a0a936374a5734fb832b151}{\index{Enemy@{Enemy}!Set\-Enemy@{Set\-Enemy}}
+\index{Set\-Enemy@{Set\-Enemy}!Enemy@{Enemy}}
+\subsubsection[{Set\-Enemy}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Set\-Enemy (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{new\-Enemy}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a927846998a0a936374a5734fb832b151}
+
+
+References enemy.
+
+
+\begin{DoxyCode}
+101 \{ \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy} = newEnemy; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a567a82f1d7cb9034509459850f7784fc}{\index{Enemy@{Enemy}!Set\-Enemy\-Type@{Set\-Enemy\-Type}}
+\index{Set\-Enemy\-Type@{Set\-Enemy\-Type}!Enemy@{Enemy}}
+\subsubsection[{Set\-Enemy\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Set\-Enemy\-Type (
+\begin{DoxyParamCaption}
+\item[{{\bf Enemy\-Type}}]{type, }
+\item[{int}]{nest\-Amount = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a567a82f1d7cb9034509459850f7784fc}
+
+
+References enemy, enemy\-Driver, and health.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Spawn(), and Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion().
+
+
+\begin{DoxyCode}
+44 \{
+45     \hyperlink{class_enemy_a36bcaf317708c0ed35835bc0f79c7719}{enemyType} = type;
+46     \textcolor{keywordflow}{switch} (type)
+47     \{
+48     \textcolor{keywordflow}{case} EnemyType::basic:
+49         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(2.0f, 2.0f, 2.0f));
+50         \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 120;
+51         \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 30.f;
+52         \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 20.f;
+53         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/zombieskin.png"}));
+54         \textcolor{keywordflow}{return};
+55     \textcolor{keywordflow}{case} EnemyType::fast:
+56         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(1.7f, 1.7f, 1.7f));
+57         \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 70;
+58         \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 45.f;
+59         \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 10.f;
+60         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/fastskin.png"}));
+61         \textcolor{keywordflow}{return};
+62     \textcolor{keywordflow}{case} EnemyType::tanky:
+63         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(3.0f, 3.0f, 3.0f));
+64         \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 200;
+65         \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 15.f;
+66         \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 30.f;
+67         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/tankyskin.png"}));
+68         \textcolor{keywordflow}{return};
+69     \textcolor{keywordflow}{case} EnemyType::matroshka:
+70         \hyperlink{class_enemy_a28a5b00705199ef986435768edb53d48}{nestingLvl} = nestAmount;
+71         \textcolor{keywordflow}{switch} (nestAmount)
+72         \{
+73         \textcolor{keywordflow}{case} 2:
+74             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(2.5f, 2.5f, 2.5f));
+75             \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 160;
+76             \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 15.f;
+77             \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 20.f;
+78             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/matroshkaskin.png"}));
+79             \textcolor{keywordflow}{break};
+80         \textcolor{keywordflow}{case} 1:
+81             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(2.0f, 2.0f, 2.0f));
+82             \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 80;
+83             \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 20.f;
+84             \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 15.f;
+85             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/tankyskin.png"}));
+86             \textcolor{keywordflow}{break};
+87         \textcolor{keywordflow}{case} 0:
+88             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setScale(vector3df(1.5f, 1.5f, 1.5f));
+89             \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 40;
+90             \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed} = 25.f;
+91             \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage} = 10.f;
+92             \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setMaterialTexture(0, \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemyDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/fastskin.png"}));
+93             \textcolor{keywordflow}{break};
+94         \textcolor{keywordflow}{default}:
+95             \textcolor{keywordflow}{break};
+96         \}
+97         \textcolor{keywordflow}{return};
+98     \}
+99 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a421d67f70801a3399ca22067fcde6dff}{\index{Enemy@{Enemy}!Set\-Player@{Set\-Player}}
+\index{Set\-Player@{Set\-Player}!Enemy@{Enemy}}
+\subsubsection[{Set\-Player}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Set\-Player (
+\begin{DoxyParamCaption}
+\item[{{\bf Player} $\ast$}]{\-\_\-player}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a421d67f70801a3399ca22067fcde6dff}
+
+
+References \-\_\-player, and player.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Spawn(), and Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion().
+
+
+\begin{DoxyCode}
+102 \{ \hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player} = \hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player}; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_ab3567fe4213734615d7f3fed6c48a9c8}{\index{Enemy@{Enemy}!Take\-Damage@{Take\-Damage}}
+\index{Take\-Damage@{Take\-Damage}!Enemy@{Enemy}}
+\subsubsection[{Take\-Damage}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Take\-Damage (
+\begin{DoxyParamCaption}
+\item[{irr\-::f32}]{damage}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_ab3567fe4213734615d7f3fed6c48a9c8}
+
+
+References enemy\-Sound\-Manager, Enemy\-Spawner\-::\-Get\-Spawner(), health, Sound\-Manager\-::\-Play\-Sound(), Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion(), Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1, Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2, and Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+135 \{
+136     \textcolor{keywordflow}{if} (\hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} > 0) \{
+137         \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemySoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_enemy_8cpp_a899ebc1d6c8dfccfd9029fe369c70ef5}{ZOMBIE\_TAKE\_DAMAGE\_SOUND}, \textcolor{keyword}{false});
+138         \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} -= \hyperlink{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{damage};
+139     \}
+140     \textcolor{keywordflow}{else}
+141     \{
+142         \hyperlink{class_enemy_a131756bf793f8d63a3b9a2b728992380}{health} = 0;
+143         \hyperlink{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{dead} = \textcolor{keyword}{true};
+144         \textcolor{keywordflow}{switch} (rand() % 2) 
+145         \{
+146         \textcolor{keywordflow}{case} 0:
+147             \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemySoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_enemy_8cpp_a6c078a5c51c51e4fd77310cef5e2bdd1}{ZOMBIE\_DEATH\_SOUND1}, \textcolor{keyword}{false});
+148             \textcolor{keywordflow}{break};
+149         \textcolor{keywordflow}{case} 1:
+150             \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemySoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_enemy_8cpp_ae29ee972d2df783fd583d30b2d029a34}{ZOMBIE\_DEATH\_SOUND2}, \textcolor{keyword}{false});
+151             \textcolor{keywordflow}{break};
+152         \}
+153 
+154         \textcolor{keywordflow}{if} (\hyperlink{class_enemy_a36bcaf317708c0ed35835bc0f79c7719}{enemyType} == EnemyType::matroshka && \hyperlink{class_enemy_a28a5b00705199ef986435768edb53d48}{nestingLvl} > 0) 
+155         \{
+156             \hyperlink{class_enemy_spawner}{EnemySpawner}* espawner = espawner->\hyperlink{class_enemy_spawner_a9a7a1adc56f040fd2c139a6acdae0d90}{GetSpawner}();
+157             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < 2; i++) 
+158             \{
+159                 espawner->\hyperlink{class_enemy_spawner_ac664064f5f057837fde5c2e81daa2e6e}{SpawnMathroskaMinion}(
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->getPosition(), EnemyType::matroshka,
+      \hyperlink{class_enemy_a28a5b00705199ef986435768edb53d48}{nestingLvl}-1);
+160             \}
+161         \}
+162     \}
+163 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_a2429c6f39d0b763f899bef2c035fa9c8}{\index{Enemy@{Enemy}!Update@{Update}}
+\index{Update@{Update}!Enemy@{Enemy}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{float}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_a2429c6f39d0b763f899bef2c035fa9c8}
+
+
+References enemy, Player\-::get\-Player\-Object(), melee\-Range, and player.
+
+
+\begin{DoxyCode}
+105 \{
+106     \textcolor{comment}{// Get position delta compared to player position}
+107     vector3df enemyPosition = \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->getPosition();
+108     vector3df \hyperlink{class_enemy_a2aeaae8acd857242e40db8b034566351}{delta} = \hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}->\hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{getPlayerObject}()->getPosition() - enemyPosition; \textcolor{comment}{
+      // Save delta}
+109     vector3df deltaNormalized = \hyperlink{class_enemy_a2aeaae8acd857242e40db8b034566351}{delta};
+110     deltaNormalized.normalize(); \textcolor{comment}{// It is done in two lines, so the delta doesnt get normalized}
+111 
+112     \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setRotation(vector3df(0, atan2(deltaNormalized.X, deltaNormalized.Z) * 180 / PI, 0));
+113 
+114     \textcolor{comment}{// Change position based on delta and speed}
+115     \textcolor{keywordflow}{if} (delta.getLength() > \hyperlink{_enemy_8cpp_aeb6b022a3bc50999e6ab66b83fc9cb4d}{meleeRange}) \textcolor{comment}{// If farther than melee attack range,}
+116     \{
+117         \textcolor{comment}{// Move towards player}
+118         enemyPosition += deltaNormalized * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{speed};
+119         vector3df oldPosition = \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->getPosition();
+120         \hyperlink{class_enemy_a4befe0ced393215de590152256bf1ee4}{enemy}->setPosition(enemyPosition);
+121     \}
+122     \textcolor{keywordflow}{else}
+123         \hyperlink{class_enemy_a9d077112e9af9e0bf92aa73ec20ea6ae}{Attack}();
+124 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}{\index{Enemy@{Enemy}!damage@{damage}}
+\index{damage@{damage}!Enemy@{Enemy}}
+\subsubsection[{damage}]{\setlength{\rightskip}{0pt plus 5cm}float Enemy\-::damage\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a5d5917c222119c1d8eb3183c27c7adb7}
+\hypertarget{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}{\index{Enemy@{Enemy}!dead@{dead}}
+\index{dead@{dead}!Enemy@{Enemy}}
+\subsubsection[{dead}]{\setlength{\rightskip}{0pt plus 5cm}bool Enemy\-::dead\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a4b1b61e7bc79aca01f3e4b3ef19cb787}
+\hypertarget{class_enemy_a2aeaae8acd857242e40db8b034566351}{\index{Enemy@{Enemy}!delta@{delta}}
+\index{delta@{delta}!Enemy@{Enemy}}
+\subsubsection[{delta}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Enemy\-::delta\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a2aeaae8acd857242e40db8b034566351}
+\hypertarget{class_enemy_a4befe0ced393215de590152256bf1ee4}{\index{Enemy@{Enemy}!enemy@{enemy}}
+\index{enemy@{enemy}!Enemy@{Enemy}}
+\subsubsection[{enemy}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Enemy\-::enemy\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a4befe0ced393215de590152256bf1ee4}
+\hypertarget{class_enemy_a36bcaf317708c0ed35835bc0f79c7719}{\index{Enemy@{Enemy}!enemy\-Type@{enemy\-Type}}
+\index{enemy\-Type@{enemy\-Type}!Enemy@{Enemy}}
+\subsubsection[{enemy\-Type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Type} Enemy\-::enemy\-Type\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a36bcaf317708c0ed35835bc0f79c7719}
+\hypertarget{class_enemy_a131756bf793f8d63a3b9a2b728992380}{\index{Enemy@{Enemy}!health@{health}}
+\index{health@{health}!Enemy@{Enemy}}
+\subsubsection[{health}]{\setlength{\rightskip}{0pt plus 5cm}float Enemy\-::health\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a131756bf793f8d63a3b9a2b728992380}
+\hypertarget{class_enemy_a28a5b00705199ef986435768edb53d48}{\index{Enemy@{Enemy}!nesting\-Lvl@{nesting\-Lvl}}
+\index{nesting\-Lvl@{nesting\-Lvl}!Enemy@{Enemy}}
+\subsubsection[{nesting\-Lvl}]{\setlength{\rightskip}{0pt plus 5cm}int Enemy\-::nesting\-Lvl\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a28a5b00705199ef986435768edb53d48}
+\hypertarget{class_enemy_a98766d083fc49e746a37d0dc69be09e0}{\index{Enemy@{Enemy}!speed@{speed}}
+\index{speed@{speed}!Enemy@{Enemy}}
+\subsubsection[{speed}]{\setlength{\rightskip}{0pt plus 5cm}float Enemy\-::speed\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a98766d083fc49e746a37d0dc69be09e0}
+\hypertarget{class_enemy_a01b8136e0754f278e48b63f25e2361bc}{\index{Enemy@{Enemy}!velocity@{velocity}}
+\index{velocity@{velocity}!Enemy@{Enemy}}
+\subsubsection[{velocity}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Enemy\-::velocity\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_a01b8136e0754f278e48b63f25e2361bc}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_enemy_8h}{Enemy.\-h}\item 
+\hyperlink{_enemy_8cpp}{Enemy.\-cpp}\end{DoxyCompactItemize}

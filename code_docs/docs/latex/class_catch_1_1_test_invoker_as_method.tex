@@ -1,0 +1,93 @@
+\hypertarget{class_catch_1_1_test_invoker_as_method}{\section{Catch\-:\-:Test\-Invoker\-As\-Method$<$ C $>$ Class Template Reference}
+\label{class_catch_1_1_test_invoker_as_method}\index{Catch\-::\-Test\-Invoker\-As\-Method$<$ C $>$@{Catch\-::\-Test\-Invoker\-As\-Method$<$ C $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Test\-Invoker\-As\-Method$<$ C $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_catch_1_1_test_invoker_as_method__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Test\-Invoker\-As\-Method$<$ C $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=278pt]{class_catch_1_1_test_invoker_as_method__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_test_invoker_as_method_a119c4bdbbdd95c42859c18541987a1a4}{Test\-Invoker\-As\-Method} (void(C\-::$\ast$test\-As\-Method)()) noexcept
+\item 
+void \hyperlink{class_catch_1_1_test_invoker_as_method_a8115a06efe273f4112ec0b5452c1b5f2}{invoke} () const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void(C\-::$\ast$ \hyperlink{class_catch_1_1_test_invoker_as_method_a559d592c99bf7f24f0afe44a74f555bf}{m\-\_\-test\-As\-Method} )()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_test_invoker_as_method_a119c4bdbbdd95c42859c18541987a1a4}{\index{Catch\-::\-Test\-Invoker\-As\-Method@{Catch\-::\-Test\-Invoker\-As\-Method}!Test\-Invoker\-As\-Method@{Test\-Invoker\-As\-Method}}
+\index{Test\-Invoker\-As\-Method@{Test\-Invoker\-As\-Method}!Catch::TestInvokerAsMethod@{Catch\-::\-Test\-Invoker\-As\-Method}}
+\subsubsection[{Test\-Invoker\-As\-Method}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename C $>$ {\bf Catch\-::\-Test\-Invoker\-As\-Method}$<$ C $>$\-::{\bf Test\-Invoker\-As\-Method} (
+\begin{DoxyParamCaption}
+\item[{void(C\-::$\ast$)()}]{test\-As\-Method}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_test_invoker_as_method_a119c4bdbbdd95c42859c18541987a1a4}
+
+\begin{DoxyCode}
+490 : \hyperlink{class_catch_1_1_test_invoker_as_method_a559d592c99bf7f24f0afe44a74f555bf}{m\_testAsMethod}(testAsMethod) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_test_invoker_as_method_a8115a06efe273f4112ec0b5452c1b5f2}{\index{Catch\-::\-Test\-Invoker\-As\-Method@{Catch\-::\-Test\-Invoker\-As\-Method}!invoke@{invoke}}
+\index{invoke@{invoke}!Catch::TestInvokerAsMethod@{Catch\-::\-Test\-Invoker\-As\-Method}}
+\subsubsection[{invoke}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename C $>$ void {\bf Catch\-::\-Test\-Invoker\-As\-Method}$<$ C $>$\-::invoke (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}}\label{class_catch_1_1_test_invoker_as_method_a8115a06efe273f4112ec0b5452c1b5f2}
+
+
+Implements \hyperlink{struct_catch_1_1_i_test_invoker_a6fcd5c5b67d6d5ade6491ff33411ca7f}{Catch\-::\-I\-Test\-Invoker}.
+
+
+
+References Catch\-::\-Test\-Invoker\-As\-Method$<$ C $>$\-::m\-\_\-test\-As\-Method.
+
+
+\begin{DoxyCode}
+492                                      \{
+493             C obj;
+494             (obj.*\hyperlink{class_catch_1_1_test_invoker_as_method_a559d592c99bf7f24f0afe44a74f555bf}{m\_testAsMethod})();
+495         \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_test_invoker_as_method_a559d592c99bf7f24f0afe44a74f555bf}{\index{Catch\-::\-Test\-Invoker\-As\-Method@{Catch\-::\-Test\-Invoker\-As\-Method}!m\-\_\-test\-As\-Method@{m\-\_\-test\-As\-Method}}
+\index{m\-\_\-test\-As\-Method@{m\-\_\-test\-As\-Method}!Catch::TestInvokerAsMethod@{Catch\-::\-Test\-Invoker\-As\-Method}}
+\subsubsection[{m\-\_\-test\-As\-Method}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename C $>$ void(C\-::$\ast$ {\bf Catch\-::\-Test\-Invoker\-As\-Method}$<$ C $>$\-::m\-\_\-test\-As\-Method)()\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_test_invoker_as_method_a559d592c99bf7f24f0afe44a74f555bf}
+
+
+Referenced by Catch\-::\-Test\-Invoker\-As\-Method$<$ C $>$\-::invoke().
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

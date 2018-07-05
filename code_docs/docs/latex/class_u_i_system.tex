@@ -1,0 +1,182 @@
+\hypertarget{class_u_i_system}{\section{U\-I\-System Class Reference}
+\label{class_u_i_system}\index{U\-I\-System@{U\-I\-System}}
+}
+
+
+{\ttfamily \#include $<$U\-I\-System.\-h$>$}
+
+
+
+Collaboration diagram for U\-I\-System\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=168pt]{class_u_i_system__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_u_i_system_a59a481a9079aca03ce43fb582095a378}{U\-I\-System} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_u_i_system_aa614552df8a07d24661719d007ea8baf}{Init\-U\-I\-System} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_u_i_system_a41981a6094a5dcb0fcd180660722138a}{Wave\-U\-I} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_u_i_system_a59a481a9079aca03ce43fb582095a378}{\index{U\-I\-System@{U\-I\-System}!U\-I\-System@{U\-I\-System}}
+\index{U\-I\-System@{U\-I\-System}!UISystem@{U\-I\-System}}
+\subsubsection[{U\-I\-System}]{\setlength{\rightskip}{0pt plus 5cm}U\-I\-System\-::\-U\-I\-System (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_system_a59a481a9079aca03ce43fb582095a378}
+
+
+References game\-\_\-\-U\-I, and Game\-::\-Get\-Instance().
+
+
+\begin{DoxyCode}
+29 \{
+30     \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI} = \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+31 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_u_i_system_aa614552df8a07d24661719d007ea8baf}{\index{U\-I\-System@{U\-I\-System}!Init\-U\-I\-System@{Init\-U\-I\-System}}
+\index{Init\-U\-I\-System@{Init\-U\-I\-System}!UISystem@{U\-I\-System}}
+\subsubsection[{Init\-U\-I\-System}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I\-System\-::\-Init\-U\-I\-System (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_system_aa614552df8a07d24661719d007ea8baf}
+
+
+References \-\_\-\-Player, active\-Color, Game\-::device, game\-\_\-\-U\-I, Game\-::\-Get\-Instance(), Game\-::\-Get\-Player(), G\-U\-I\-\_\-\-U\-I\-System, in\-Active\-Color, rapid\-Fire\-Texture, rapid\-Img, rapid\-U\-I\-Color, split\-Fire\-Texture, split\-Img, split\-U\-I\-Color, and U\-Idriver.
+
+
+
+Referenced by Game\-::\-Start().
+
+
+\begin{DoxyCode}
+35 \{
+36     \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI} = \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+37     \hyperlink{_u_i_system_8cpp_a9c58733c8e7a9eda66d170719b6b0c49}{\_Player} = \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_ae09ac6fe3bf0d17657cd315e639f8fa4}{GetPlayer}();
+38 
+39     \hyperlink{_u_i_system_8cpp_a793f0e275c6d17845e011480e8daccae}{UIdriver} = \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getVideoDriver();
+40     \hyperlink{_u_i_system_8cpp_a0cd3595b157fa82f333e52a18cd05671}{GUI\_UISystem} = \hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getGUIEnvironment();
+41 
+42     \hyperlink{_u_i_system_8cpp_a5a3b6321e5b7bbd239d3917d272f26a1}{inActiveColor} = SColor((u32)50, (u32)255, (u32)0, (u32)0);
+43     \hyperlink{_u_i_system_8cpp_a121d3bbe4a7796e9e7de661df324410e}{activeColor} = SColor((u32)255, (u32)255, (u32)255, (u32)255);
+44 
+45     \hyperlink{_u_i_system_8cpp_a0130297db0856e8333721124351d9f8f}{rapidFireTexture} = \hyperlink{_u_i_system_8cpp_a793f0e275c6d17845e011480e8daccae}{UIdriver}->getTexture(\textcolor{stringliteral}{"../media/Textures/rapid.png"});
+46     \hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg} = \hyperlink{_u_i_system_8cpp_a0cd3595b157fa82f333e52a18cd05671}{GUI\_UISystem}->addImage(\hyperlink{_u_i_system_8cpp_a0130297db0856e8333721124351d9f8f}{rapidFireTexture}, position2d<int>
+      (700, 500));
+47     \hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg}->setScaleImage(\textcolor{keyword}{true});
+48     \hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg}->bringToFront(\hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg});
+49     \hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg}->setMaxSize(dimension2du(50, 50));
+50 
+51     \hyperlink{_u_i_system_8cpp_a688fe4c23b692bc0d37866c064380410}{splitFireTexture} = \hyperlink{_u_i_system_8cpp_a793f0e275c6d17845e011480e8daccae}{UIdriver}->getTexture(\textcolor{stringliteral}{"../media/Textures/split.png"});
+52     \hyperlink{_u_i_system_8cpp_a5953c52bb91b4ee31776cbf91260ccc6}{splitImg} = \hyperlink{_u_i_system_8cpp_a0cd3595b157fa82f333e52a18cd05671}{GUI\_UISystem}->addImage(\hyperlink{_u_i_system_8cpp_a688fe4c23b692bc0d37866c064380410}{splitFireTexture}, position2d<int>
+      (700, 400));
+53     \hyperlink{_u_i_system_8cpp_a5953c52bb91b4ee31776cbf91260ccc6}{splitImg}->setScaleImage(\textcolor{keyword}{true});
+54     \hyperlink{_u_i_system_8cpp_a5953c52bb91b4ee31776cbf91260ccc6}{splitImg}->bringToFront(\hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg});
+55     \hyperlink{_u_i_system_8cpp_a5953c52bb91b4ee31776cbf91260ccc6}{splitImg}->setMaxSize(dimension2du(50, 50));
+56 
+57     \hyperlink{_u_i_system_8cpp_a88a8ca6d36ecd20e691425c3a4d1a258}{rapidUIColor} = \hyperlink{_u_i_system_8cpp_a5a3b6321e5b7bbd239d3917d272f26a1}{inActiveColor};
+58     \hyperlink{_u_i_system_8cpp_ac142a7d664627b15adf335194b223699}{splitUIColor} = \hyperlink{_u_i_system_8cpp_a5a3b6321e5b7bbd239d3917d272f26a1}{inActiveColor};
+59 \}
+\end{DoxyCode}
+\hypertarget{class_u_i_system_a41981a6094a5dcb0fcd180660722138a}{\index{U\-I\-System@{U\-I\-System}!Wave\-U\-I@{Wave\-U\-I}}
+\index{Wave\-U\-I@{Wave\-U\-I}!UISystem@{U\-I\-System}}
+\subsubsection[{Wave\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}void U\-I\-System\-::\-Wave\-U\-I (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_u_i_system_a41981a6094a5dcb0fcd180660722138a}
+
+
+References \-\_\-\-Player, active\-Color, current\-Wave, font2\-\_\-\-U\-I, game\-\_\-\-U\-I, Game\-::\-Get\-Is\-Game\-Over(), Player\-::\-Get\-Rapid\-Fire\-Timer(), Player\-::\-Get\-Split\-Fire\-Timer(), G\-U\-I\-\_\-\-U\-I\-System, in\-Active\-Color, rapid\-Img, rapid\-U\-I\-Color, split\-Img, split\-U\-I\-Color, wave\-Change\-U\-I, and wave\-Cooldown.
+
+
+
+Referenced by Game\-::\-Draw().
+
+
+\begin{DoxyCode}
+62 \{
+63     \textcolor{comment}{//Showing the current wave}
+64     \hyperlink{_u_i_system_8cpp_ada6b9907ce29ba6326347751450d127c}{font2\_UI} = device->getGUIEnvironment()->getFont(\textcolor{stringliteral}{"../media/Fonts/fontlucida.png"});
+65     core::stringw waveNumberString = L\textcolor{stringliteral}{"Current wave: "};
+66     waveNumberString += \hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave};
+67 
+68     \textcolor{comment}{//For drawing the wave timer in seconds}
+69     \textcolor{keywordtype}{int} waveCooldownSeconds = \hyperlink{_enemy_spawner_8cpp_a72775aa668ffb2a0d7e469173cdd5b93}{waveCooldown} / 60;
+70     core::stringw waveCountDownString = L\textcolor{stringliteral}{"Time till wave: "};
+71     waveCountDownString += waveCooldownSeconds;
+72 
+73     \textcolor{comment}{//Big wave incoming string}
+74     core::stringw bigWaveString = L\textcolor{stringliteral}{"BIG WAVE INCOMING!!"};   
+75 
+76     \textcolor{keywordflow}{if}(\hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{GetIsGameOver}() == \textcolor{keyword}{false})
+77     \{
+78         \textcolor{keywordflow}{if} (\hyperlink{_u_i_system_8cpp_a9c58733c8e7a9eda66d170719b6b0c49}{\_Player}->\hyperlink{class_player_ad81495e13d7c65f0ea090a9144e11d61}{GetRapidFireTimer}() > 0)
+79         \{
+80             \hyperlink{_u_i_system_8cpp_a88a8ca6d36ecd20e691425c3a4d1a258}{rapidUIColor} = \hyperlink{_u_i_system_8cpp_a121d3bbe4a7796e9e7de661df324410e}{activeColor};
+81         \}
+82         \textcolor{keywordflow}{else}
+83         \{
+84             \hyperlink{_u_i_system_8cpp_a88a8ca6d36ecd20e691425c3a4d1a258}{rapidUIColor} = \hyperlink{_u_i_system_8cpp_a5a3b6321e5b7bbd239d3917d272f26a1}{inActiveColor};
+85         \}
+86         \textcolor{keywordflow}{if} (\hyperlink{_u_i_system_8cpp_a9c58733c8e7a9eda66d170719b6b0c49}{\_Player}->\hyperlink{class_player_a6b5c6e5353331ab55bfd440ea9f8f9bf}{GetSplitFireTimer}() > 0)
+87         \{
+88             \hyperlink{_u_i_system_8cpp_ac142a7d664627b15adf335194b223699}{splitUIColor} = \hyperlink{_u_i_system_8cpp_a121d3bbe4a7796e9e7de661df324410e}{activeColor};
+89         \}
+90         \textcolor{keywordflow}{else}
+91         \{
+92             \hyperlink{_u_i_system_8cpp_ac142a7d664627b15adf335194b223699}{splitUIColor} = \hyperlink{_u_i_system_8cpp_a5a3b6321e5b7bbd239d3917d272f26a1}{inActiveColor};
+93         \}
+94 
+95         \hyperlink{_u_i_system_8cpp_a92eab4763472751813af170dd4f9fb2f}{rapidImg}->setColor(\hyperlink{_u_i_system_8cpp_a88a8ca6d36ecd20e691425c3a4d1a258}{rapidUIColor});
+96         \hyperlink{_u_i_system_8cpp_a5953c52bb91b4ee31776cbf91260ccc6}{splitImg}->setColor(\hyperlink{_u_i_system_8cpp_ac142a7d664627b15adf335194b223699}{splitUIColor});
+97     \}
+98     \textcolor{keywordflow}{else} 
+99     \{
+100         \hyperlink{_u_i_system_8cpp_a0cd3595b157fa82f333e52a18cd05671}{GUI\_UISystem}->clear();
+101     \}
+102 
+103     \textcolor{keywordflow}{if} (!\hyperlink{_u_i_system_8cpp_abae6af8ee586e9cd14e611834ab165aa}{game\_UI}->\hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{GetIsGameOver}())
+104     \{
+105         \textcolor{comment}{//Drawing the strings:}
+106         \hyperlink{_u_i_system_8cpp_ada6b9907ce29ba6326347751450d127c}{font2\_UI}->draw(stringw(waveNumberString),
+107             core::rect<s32>(600, 40, 200, 100),
+108             video::SColor(255, 255, 255, 255));
+109 
+110         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_a30a29af809eac59191fdd00041d88039}{waveChangeUI} == \textcolor{keyword}{true})
+111         \{
+112             \hyperlink{_u_i_system_8cpp_ada6b9907ce29ba6326347751450d127c}{font2\_UI}->draw(stringw(waveCountDownString),
+113                 core::rect<s32>(300, 40, 200, 100),
+114                 video::SColor(255, 255, 255, 255));
+115 
+116             \textcolor{keywordflow}{if} ((\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave} + 1) % 5 == 0)
+117             \{
+118                 \hyperlink{_u_i_system_8cpp_ada6b9907ce29ba6326347751450d127c}{font2\_UI}->draw(stringw(bigWaveString),
+119                     core::rect<s32>(325, 120, 200, 100),
+120                     video::SColor(255, 255, 255, 255));
+121             \}
+122         \}
+123     \}
+124 
+125 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_u_i_system_8h}{U\-I\-System.\-h}\item 
+\hyperlink{_u_i_system_8cpp}{U\-I\-System.\-cpp}\end{DoxyCompactItemize}

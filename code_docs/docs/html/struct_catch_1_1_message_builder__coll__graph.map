@@ -1,0 +1,6 @@
+<map id="Catch::MessageBuilder" name="Catch::MessageBuilder">
+<area shape="rect" id="node2" href="$struct_catch_1_1_message_stream.html" title="{Catch::MessageStream\n||+ operator\&lt;\&lt;()\l}" alt="" coords="111,433,269,511"/>
+<area shape="rect" id="node3" href="$class_catch_1_1_reusable_string_stream.html" title="{Catch::ReusableStringStream\n||+ ReusableStringStream()\l+ ~ReusableStringStream()\l+ str()\l+ operator\&lt;\&lt;()\l+ get()\l+ cleanup()\l}" alt="" coords="5,169,200,319"/>
+<area shape="rect" id="node7" href="$struct_catch_1_1_source_line_info.html" title="{Catch::SourceLineInfo\n||+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ operator=()\l+ operator=()\l+ empty()\l+ operator==()\l+ operator\&lt;()\l}" alt="" coords="225,147,377,341"/>
+<area shape="rect" id="node6" href="$struct_catch_1_1_message_info.html" title="{Catch::MessageInfo\n||+ MessageInfo()\l+ operator==()\l+ operator\&lt;()\l}" alt="" coords="334,419,473,525"/>
+</map>

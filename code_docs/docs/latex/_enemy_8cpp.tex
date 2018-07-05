@@ -1,0 +1,127 @@
+\hypertarget{_enemy_8cpp}{\section{Enemy.\-cpp File Reference}
+\label{_enemy_8cpp}\index{Enemy.\-cpp@{Enemy.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include $<$irr\-Klang.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Enemy.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Player.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sound\-Manager.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Collision.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Enemy\-Spawner.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Enemy\-Pool.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for Enemy.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_enemy_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_enemy_8cpp_a899ebc1d6c8dfccfd9029fe369c70ef5}{Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/zombiehurt.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_enemy_8cpp_a6c078a5c51c51e4fd77310cef5e2bdd1}{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1}~\char`\"{}../media/Sounds/enemy\-\_\-dmg.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_enemy_8cpp_ae29ee972d2df783fd583d30b2d029a34}{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2}~\char`\"{}../media/Sounds/zombiedeath.\-mp3\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const f32 \hyperlink{_enemy_8cpp_aeb6b022a3bc50999e6ab66b83fc9cb4d}{melee\-Range} = vector3df(6, 6, 6).get\-Length()
+\item 
+vector3df \hyperlink{_enemy_8cpp_ab0279f77995b6911a30dd96af73c0636}{scale\-Vect}
+\item 
+Irrlicht\-Device $\ast$ \hyperlink{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}{enemy\-I\-Device}
+\item 
+I\-Video\-Driver $\ast$ \hyperlink{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{enemy\-Driver}
+\item 
+I\-Scene\-Manager $\ast$ \hyperlink{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}{enemy\-Smgr}
+\item 
+\hyperlink{class_sound_manager}{Sound\-Manager} $\ast$ \hyperlink{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{enemy\-Sound\-Manager}
+\item 
+\hyperlink{class_player}{Player} $\ast$ \hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}
+\item 
+\hyperlink{class_collision}{Collision} \hyperlink{_enemy_8cpp_a50e821416693bc91752c2a6c2cd98a16}{col}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_enemy_8cpp_a6c078a5c51c51e4fd77310cef5e2bdd1}{\index{Enemy.\-cpp@{Enemy.\-cpp}!Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1@{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1}}
+\index{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1@{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1}]{\setlength{\rightskip}{0pt plus 5cm}\#define Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D1~\char`\"{}../media/Sounds/enemy\-\_\-dmg.\-mp3\char`\"{}}}\label{_enemy_8cpp_a6c078a5c51c51e4fd77310cef5e2bdd1}
+
+
+Referenced by Enemy\-::\-Take\-Damage().
+
+\hypertarget{_enemy_8cpp_ae29ee972d2df783fd583d30b2d029a34}{\index{Enemy.\-cpp@{Enemy.\-cpp}!Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2@{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2}}
+\index{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2@{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2}]{\setlength{\rightskip}{0pt plus 5cm}\#define Z\-O\-M\-B\-I\-E\-\_\-\-D\-E\-A\-T\-H\-\_\-\-S\-O\-U\-N\-D2~\char`\"{}../media/Sounds/zombiedeath.\-mp3\char`\"{}}}\label{_enemy_8cpp_ae29ee972d2df783fd583d30b2d029a34}
+
+
+Referenced by Enemy\-::\-Take\-Damage().
+
+\hypertarget{_enemy_8cpp_a899ebc1d6c8dfccfd9029fe369c70ef5}{\index{Enemy.\-cpp@{Enemy.\-cpp}!Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D@{Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D}}
+\index{Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D@{Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define Z\-O\-M\-B\-I\-E\-\_\-\-T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/zombiehurt.\-mp3\char`\"{}}}\label{_enemy_8cpp_a899ebc1d6c8dfccfd9029fe369c70ef5}
+
+
+Referenced by Enemy\-::\-Take\-Damage().
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{_enemy_8cpp_a50e821416693bc91752c2a6c2cd98a16}{\index{Enemy.\-cpp@{Enemy.\-cpp}!col@{col}}
+\index{col@{col}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{col}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision} col}}\label{_enemy_8cpp_a50e821416693bc91752c2a6c2cd98a16}
+\hypertarget{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}{\index{Enemy.\-cpp@{Enemy.\-cpp}!enemy\-Driver@{enemy\-Driver}}
+\index{enemy\-Driver@{enemy\-Driver}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{enemy\-Driver}]{\setlength{\rightskip}{0pt plus 5cm}I\-Video\-Driver$\ast$ enemy\-Driver}}\label{_enemy_8cpp_a5fac82651c00f7467e9f43f7e7ba40d5}
+
+
+Referenced by Enemy\-::\-Enemy(), and Enemy\-::\-Set\-Enemy\-Type().
+
+\hypertarget{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}{\index{Enemy.\-cpp@{Enemy.\-cpp}!enemy\-I\-Device@{enemy\-I\-Device}}
+\index{enemy\-I\-Device@{enemy\-I\-Device}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{enemy\-I\-Device}]{\setlength{\rightskip}{0pt plus 5cm}Irrlicht\-Device$\ast$ enemy\-I\-Device}}\label{_enemy_8cpp_a526cfeb3cb0c155f184072efb5d6e7c7}
+
+
+Referenced by Enemy\-::\-Enemy().
+
+\hypertarget{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}{\index{Enemy.\-cpp@{Enemy.\-cpp}!enemy\-Smgr@{enemy\-Smgr}}
+\index{enemy\-Smgr@{enemy\-Smgr}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{enemy\-Smgr}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Manager$\ast$ enemy\-Smgr}}\label{_enemy_8cpp_abb715ad3738294f66082c4cfe75b9b15}
+
+
+Referenced by Enemy\-::\-Enemy().
+
+\hypertarget{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}{\index{Enemy.\-cpp@{Enemy.\-cpp}!enemy\-Sound\-Manager@{enemy\-Sound\-Manager}}
+\index{enemy\-Sound\-Manager@{enemy\-Sound\-Manager}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{enemy\-Sound\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager}$\ast$ enemy\-Sound\-Manager}}\label{_enemy_8cpp_a16ef9b48ca4235b1a49770b4e62cc551}
+
+
+Referenced by Enemy\-::\-Enemy(), and Enemy\-::\-Take\-Damage().
+
+\hypertarget{_enemy_8cpp_aeb6b022a3bc50999e6ab66b83fc9cb4d}{\index{Enemy.\-cpp@{Enemy.\-cpp}!melee\-Range@{melee\-Range}}
+\index{melee\-Range@{melee\-Range}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{melee\-Range}]{\setlength{\rightskip}{0pt plus 5cm}const f32 melee\-Range = vector3df(6, 6, 6).get\-Length()}}\label{_enemy_8cpp_aeb6b022a3bc50999e6ab66b83fc9cb4d}
+
+
+Referenced by Enemy\-::\-Update().
+
+\hypertarget{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{\index{Enemy.\-cpp@{Enemy.\-cpp}!player@{player}}
+\index{player@{player}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ player}}\label{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}
+
+
+Referenced by Enemy\-::\-Attack(), Game\-::\-Draw(), Game\-::\-Get\-Player(), Enemy\-::\-Set\-Player(), Game\-::\-Start(), Game\-::\-Update(), and Enemy\-::\-Update().
+
+\hypertarget{_enemy_8cpp_ab0279f77995b6911a30dd96af73c0636}{\index{Enemy.\-cpp@{Enemy.\-cpp}!scale\-Vect@{scale\-Vect}}
+\index{scale\-Vect@{scale\-Vect}!Enemy.cpp@{Enemy.\-cpp}}
+\subsubsection[{scale\-Vect}]{\setlength{\rightskip}{0pt plus 5cm}vector3df scale\-Vect}}\label{_enemy_8cpp_ab0279f77995b6911a30dd96af73c0636}
+
+
+Referenced by Enemy\-::\-Enemy().
+

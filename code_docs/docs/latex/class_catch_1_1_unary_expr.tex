@@ -1,0 +1,94 @@
+\hypertarget{class_catch_1_1_unary_expr}{\section{Catch\-:\-:Unary\-Expr$<$ Lhs\-T $>$ Class Template Reference}
+\label{class_catch_1_1_unary_expr}\index{Catch\-::\-Unary\-Expr$<$ Lhs\-T $>$@{Catch\-::\-Unary\-Expr$<$ Lhs\-T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Unary\-Expr$<$ Lhs\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{class_catch_1_1_unary_expr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Unary\-Expr$<$ Lhs\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_catch_1_1_unary_expr__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_unary_expr_ae02f666a1e64da728628aa2033e1d6e7}{Unary\-Expr} (Lhs\-T lhs)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_catch_1_1_unary_expr_aaabf30455a996c80675c0f388a6e4110}{stream\-Reconstructed\-Expression} (std\-::ostream \&os) const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Lhs\-T \hyperlink{class_catch_1_1_unary_expr_a7b6e97e576377dd60c77ab551a180325}{m\-\_\-lhs}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_unary_expr_ae02f666a1e64da728628aa2033e1d6e7}{\index{Catch\-::\-Unary\-Expr@{Catch\-::\-Unary\-Expr}!Unary\-Expr@{Unary\-Expr}}
+\index{Unary\-Expr@{Unary\-Expr}!Catch::UnaryExpr@{Catch\-::\-Unary\-Expr}}
+\subsubsection[{Unary\-Expr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T $>$ {\bf Catch\-::\-Unary\-Expr}$<$ Lhs\-T $>$\-::{\bf Unary\-Expr} (
+\begin{DoxyParamCaption}
+\item[{Lhs\-T}]{lhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{class_catch_1_1_unary_expr_ae02f666a1e64da728628aa2033e1d6e7}
+
+\begin{DoxyCode}
+1352             : \hyperlink{struct_catch_1_1_i_transient_expression_aafe69572b7ed884e63ec81f58d4afd8c}{ITransientExpression}\{ \textcolor{keyword}{false}, lhs ? \textcolor{keyword}{true} : \textcolor{keyword}{false} \},
+1353             \hyperlink{class_catch_1_1_unary_expr_a7b6e97e576377dd60c77ab551a180325}{m\_lhs}(lhs)
+1354         \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_unary_expr_aaabf30455a996c80675c0f388a6e4110}{\index{Catch\-::\-Unary\-Expr@{Catch\-::\-Unary\-Expr}!stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}}
+\index{stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}!Catch::UnaryExpr@{Catch\-::\-Unary\-Expr}}
+\subsubsection[{stream\-Reconstructed\-Expression}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T $>$ void {\bf Catch\-::\-Unary\-Expr}$<$ Lhs\-T $>$\-::stream\-Reconstructed\-Expression (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}}\label{class_catch_1_1_unary_expr_aaabf30455a996c80675c0f388a6e4110}
+
+
+Implements \hyperlink{struct_catch_1_1_i_transient_expression_aabe1889df9c6e639a24afb08d8a0fe9e}{Catch\-::\-I\-Transient\-Expression}.
+
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+\begin{DoxyCode}
+1346                                                                           \{
+1347             os << \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(\hyperlink{class_catch_1_1_unary_expr_a7b6e97e576377dd60c77ab551a180325}{m\_lhs});
+1348         \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_unary_expr_a7b6e97e576377dd60c77ab551a180325}{\index{Catch\-::\-Unary\-Expr@{Catch\-::\-Unary\-Expr}!m\-\_\-lhs@{m\-\_\-lhs}}
+\index{m\-\_\-lhs@{m\-\_\-lhs}!Catch::UnaryExpr@{Catch\-::\-Unary\-Expr}}
+\subsubsection[{m\-\_\-lhs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T $>$ Lhs\-T {\bf Catch\-::\-Unary\-Expr}$<$ Lhs\-T $>$\-::m\-\_\-lhs\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_unary_expr_a7b6e97e576377dd60c77ab551a180325}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

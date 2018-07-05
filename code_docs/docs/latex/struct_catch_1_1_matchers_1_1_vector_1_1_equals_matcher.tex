@@ -1,0 +1,109 @@
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher}{\section{Catch\-:\-:Matchers\-:\-:Vector\-:\-:Equals\-Matcher$<$ T $>$ Struct Template Reference}
+\label{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher}\index{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher$<$ T $>$@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Equals\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Equals\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a3846c47780d1991dcfe87aefded98008}{Equals\-Matcher} (std\-::vector$<$ T $>$ const \&comparator)
+\item 
+bool \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a2d96cca58a44151fddc5257eda3305da}{match} (std\-::vector$<$ T $>$ const \&v) const override
+\item 
+std\-::string \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a36b5f7ecada4081d6c65bebe8ddea6f4}{describe} () const override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ T $>$ const \& \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{m\-\_\-comparator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a3846c47780d1991dcfe87aefded98008}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}!Equals\-Matcher@{Equals\-Matcher}}
+\index{Equals\-Matcher@{Equals\-Matcher}!Catch::Matchers::Vector::EqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}}
+\subsubsection[{Equals\-Matcher}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}$<$ T $>$\-::{\bf Equals\-Matcher} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ T $>$ const \&}]{comparator}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a3846c47780d1991dcfe87aefded98008}
+
+\begin{DoxyCode}
+2607 : \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{m\_comparator}(comparator) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a36b5f7ecada4081d6c65bebe8ddea6f4}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}!describe@{describe}}
+\index{describe@{describe}!Catch::Matchers::Vector::EqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}}
+\subsubsection[{describe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}$<$ T $>$\-::describe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a36b5f7ecada4081d6c65bebe8ddea6f4}
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+\begin{DoxyCode}
+2621                                                     \{
+2622                     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Equals: "} + \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{::Catch::Detail::stringify}(
+      \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{m\_comparator});
+2623                 \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a2d96cca58a44151fddc5257eda3305da}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}!match@{match}}
+\index{match@{match}!Catch::Matchers::Vector::EqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}}
+\subsubsection[{match}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}$<$ T $>$\-::match (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ T $>$ const \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a2d96cca58a44151fddc5257eda3305da}
+
+\begin{DoxyCode}
+2609                                                                  \{
+2610                     \textcolor{comment}{// !TBD: This currently works if all elements can be compared using !=}
+2611                     \textcolor{comment}{// - a more general approach would be via a compare template that defaults}
+2612                     \textcolor{comment}{// to using !=. but could be specialised for, e.g. std::vector<T> etc}
+2613                     \textcolor{comment}{// - then just call that directly}
+2614                     \textcolor{keywordflow}{if} (\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{m\_comparator}.size() != v.size())
+2615                         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2616                     \textcolor{keywordflow}{for} (std::size\_t i = 0; i < v.size(); ++i)
+2617                         \textcolor{keywordflow}{if} (\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{m\_comparator}[i] != v[i])
+2618                             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2619                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+2620                 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}!m\-\_\-comparator@{m\-\_\-comparator}}
+\index{m\-\_\-comparator@{m\-\_\-comparator}!Catch::Matchers::Vector::EqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}}
+\subsubsection[{m\-\_\-comparator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::vector$<$T$>$ const\& {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher}$<$ T $>$\-::m\-\_\-comparator}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_equals_matcher_a56f7aa6f110a12b1b9aeb0cabbc9d755}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

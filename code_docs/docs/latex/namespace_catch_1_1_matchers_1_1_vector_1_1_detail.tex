@@ -1,0 +1,62 @@
+\hypertarget{namespace_catch_1_1_matchers_1_1_vector_1_1_detail}{\section{Catch\-:\-:Matchers\-:\-:Vector\-:\-:Detail Namespace Reference}
+\label{namespace_catch_1_1_matchers_1_1_vector_1_1_detail}\index{Catch\-::\-Matchers\-::\-Vector\-::\-Detail@{Catch\-::\-Matchers\-::\-Vector\-::\-Detail}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Input\-Iterator , typename T $>$ }\\size\-\_\-t \hyperlink{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_abca18680db20c92f848b02a2c2708852}{count} (Input\-Iterator first, Input\-Iterator last, T const \&item)
+\item 
+{\footnotesize template$<$typename Input\-Iterator , typename T $>$ }\\bool \hyperlink{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_a73a425534a3113c590fac55f64338d1e}{contains} (Input\-Iterator first, Input\-Iterator last, T const \&item)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_a73a425534a3113c590fac55f64338d1e}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Detail@{Catch\-::\-Matchers\-::\-Vector\-::\-Detail}!contains@{contains}}
+\index{contains@{contains}!Catch::Matchers::Vector::Detail@{Catch\-::\-Matchers\-::\-Vector\-::\-Detail}}
+\subsubsection[{contains}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Input\-Iterator , typename T $>$ bool Catch\-::\-Matchers\-::\-Vector\-::\-Detail\-::contains (
+\begin{DoxyParamCaption}
+\item[{Input\-Iterator}]{first, }
+\item[{Input\-Iterator}]{last, }
+\item[{T const \&}]{item}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_a73a425534a3113c590fac55f64338d1e}
+
+
+Referenced by Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher$<$ T $>$\-::match().
+
+
+\begin{DoxyCode}
+2543                                                                                       \{
+2544                     \textcolor{keywordflow}{for} (; first != last; ++first) \{
+2545                         \textcolor{keywordflow}{if} (*first == item) \{
+2546                             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+2547                         \}
+2548                     \}
+2549                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2550                 \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_abca18680db20c92f848b02a2c2708852}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Detail@{Catch\-::\-Matchers\-::\-Vector\-::\-Detail}!count@{count}}
+\index{count@{count}!Catch::Matchers::Vector::Detail@{Catch\-::\-Matchers\-::\-Vector\-::\-Detail}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Input\-Iterator , typename T $>$ size\-\_\-t Catch\-::\-Matchers\-::\-Vector\-::\-Detail\-::count (
+\begin{DoxyParamCaption}
+\item[{Input\-Iterator}]{first, }
+\item[{Input\-Iterator}]{last, }
+\item[{T const \&}]{item}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_abca18680db20c92f848b02a2c2708852}
+
+
+Referenced by Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher$<$ T $>$\-::match().
+
+
+\begin{DoxyCode}
+2533                                                                                      \{
+2534                     \textcolor{keywordtype}{size\_t} cnt = 0;
+2535                     \textcolor{keywordflow}{for} (; first != last; ++first) \{
+2536                         \textcolor{keywordflow}{if} (*first == item) \{
+2537                             ++cnt;
+2538                         \}
+2539                     \}
+2540                     \textcolor{keywordflow}{return} cnt;
+2541                 \}
+\end{DoxyCode}

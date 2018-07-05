@@ -1,0 +1,352 @@
+\hypertarget{class_game}{\section{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+}
+
+
+{\ttfamily \#include $<$Game.\-h$>$}
+
+
+
+Collaboration diagram for Game\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_game__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_abb28875d74d25fa9e0dcdbe37c6ad89c}{Game} (const \hyperlink{class_game}{Game} \&)=delete
+\item 
+\hyperlink{class_game}{Game} \& \hyperlink{class_game_a4d0c0503733cc50b0b5cb8d7ef1237ec}{operator=} (const \hyperlink{class_game}{Game} \&)=delete
+\item 
+bool \hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{Get\-Is\-Game\-Over} ()
+\item 
+bool \hyperlink{class_game_acd4aa68f7ef7603ecd61a879fe0286e7}{Set\-Is\-Game\-Over} (bool state)
+\item 
+void \hyperlink{class_game_adb05b20574551a26f8cf1dc664782790}{Start} ()
+\item 
+void \hyperlink{class_game_a1c5373c68261c54aff03e6abe40fee52}{Update} ()
+\item 
+void \hyperlink{class_game_aad2c20e2c5529244095c50c238911e30}{Draw} ()
+\item 
+\hyperlink{class_player}{Player} $\ast$ \hyperlink{class_game_ae09ac6fe3bf0d17657cd315e639f8fa4}{Get\-Player} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_game}{Game} $\ast$ \hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{Get\-Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::\-Irrlicht\-Device $\ast$ \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}
+\item 
+\hyperlink{class_object_placement_generation}{Object\-Placement\-Generation} \hyperlink{class_game_a582b0adfa98534d79ec9511919827029}{object\-Placement\-Gen}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_game_a80544462b0a02a5d30d238cbe7380492}{is\-Game\-Over} = false
+\item 
+\hyperlink{class_player}{Player} $\ast$ \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_game}{Game} $\ast$ \hyperlink{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}{instance} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_game_abb28875d74d25fa9e0dcdbe37c6ad89c}{\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game (
+\begin{DoxyParamCaption}
+\item[{const {\bf Game} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_game_abb28875d74d25fa9e0dcdbe37c6ad89c}
+\hypertarget{class_game_ad59df6562a58a614fda24622d3715b65}{\index{Game@{Game}!Game@{Game}}
+\index{Game@{Game}!Game@{Game}}
+\subsubsection[{Game}]{\setlength{\rightskip}{0pt plus 5cm}Game\-::\-Game (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_game_ad59df6562a58a614fda24622d3715b65}
+
+
+References input\-Receiver.
+
+
+\begin{DoxyCode}
+51 \{
+52     \textcolor{comment}{// Create device}
+53     \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device} = createDevice(EDT\_DIRECT3D9,
+54         dimension2d<u32>(800, 600), 16, \textcolor{keyword}{false}, \textcolor{keyword}{false}, \textcolor{keyword}{true}, &\hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{inputReceiver});
+55 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_game_aad2c20e2c5529244095c50c238911e30}{\index{Game@{Game}!Draw@{Draw}}
+\index{Draw@{Draw}!Game@{Game}}
+\subsubsection[{Draw}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Draw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_aad2c20e2c5529244095c50c238911e30}
+
+
+References Player\-::\-Draw\-Health\-Bar(), driver, guienv, last\-F\-P\-S, player, score, Score\-::\-Scoring(), smgr, u\-I\-System, and U\-I\-System\-::\-Wave\-U\-I().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+138 \{
+139     \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver}->beginScene(\textcolor{keyword}{true}, \textcolor{keyword}{true}, SColor(255, 113, 113, 133));
+140     \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr}->drawAll();
+141     \hyperlink{_game_8cpp_ac1b59d355d5bebba653a1a6a4a6a2e19}{guienv}->drawAll();
+142     \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player}->\hyperlink{class_player_aa6cc636d92ca5ccba15a5af2ef7f224a}{DrawHealthBar}();
+143     \hyperlink{_game_8cpp_a94014506ee2a0c05dcb878c5f6a1ce0f}{score}.\hyperlink{class_score_ae8d4105bea77e4bfcd77c347e0a9dd8c}{Scoring}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+144     \hyperlink{_game_8cpp_a968f4669d04899e10a3f52223cd20811}{uISystem}->\hyperlink{class_u_i_system_a41981a6094a5dcb0fcd180660722138a}{WaveUI}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+145     \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver}->endScene();
+146 
+147     \textcolor{keywordtype}{int} fps = \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver}->getFPS();
+148     \textcolor{keywordflow}{if} (\hyperlink{_game_8cpp_ad465136e518210a5b41ec8546cf4bd9d}{lastFPS} != fps)
+149     \{
+150         stringw tmp(L\textcolor{stringliteral}{"KOMMANDOS - Irrlicht Engine"});
+151 
+152         tmp += \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver}->getName();
+153         tmp += L\textcolor{stringliteral}{"] fps: "};
+154         tmp += fps;
+155 
+156         \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->setWindowCaption(tmp.c\_str());
+157         \hyperlink{_game_8cpp_ad465136e518210a5b41ec8546cf4bd9d}{lastFPS} = fps;
+158     \}
+159 \}
+\end{DoxyCode}
+\hypertarget{class_game_aa989d3cee96d5ae093663bf62dea57e2}{\index{Game@{Game}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!Game@{Game}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game} $\ast$ Game\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_game_aa989d3cee96d5ae093663bf62dea57e2}
+
+
+Referenced by Camera\-::\-Camera(), Enemy\-Spawner\-::\-Enemy\-Spawner(), Object\-Placement\-Generation\-::\-Generate\-New\-Objects(), U\-I\-System\-::\-Init\-U\-I\-System(), main(), Player\-::\-Player(), Score\-::\-Scoring(), and U\-I\-System\-::\-U\-I\-System().
+
+
+\begin{DoxyCode}
+60                         \{
+61     \textcolor{keywordflow}{if} (!\hyperlink{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}{instance})
+62     \{
+63         \hyperlink{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}{instance} = \textcolor{keyword}{new} \hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}();
+64     \}
+65     \textcolor{keywordflow}{return} \hyperlink{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}{instance};
+66 \}
+\end{DoxyCode}
+\hypertarget{class_game_a472e76af50d5275142522f9a5e149ab1}{\index{Game@{Game}!Get\-Is\-Game\-Over@{Get\-Is\-Game\-Over}}
+\index{Get\-Is\-Game\-Over@{Get\-Is\-Game\-Over}!Game@{Game}}
+\subsubsection[{Get\-Is\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Get\-Is\-Game\-Over (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_a472e76af50d5275142522f9a5e149ab1}
+
+
+References is\-Game\-Over.
+
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar(), Score\-::\-Scoring(), Enemy\-Spawner\-::\-Update\-Enemies(), and U\-I\-System\-::\-Wave\-U\-I().
+
+
+\begin{DoxyCode}
+68                          \{
+69     \textcolor{keywordflow}{return} \hyperlink{class_game_a80544462b0a02a5d30d238cbe7380492}{isGameOver};
+70 \}
+\end{DoxyCode}
+\hypertarget{class_game_ae09ac6fe3bf0d17657cd315e639f8fa4}{\index{Game@{Game}!Get\-Player@{Get\-Player}}
+\index{Get\-Player@{Get\-Player}!Game@{Game}}
+\subsubsection[{Get\-Player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player} $\ast$ Game\-::\-Get\-Player (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_ae09ac6fe3bf0d17657cd315e639f8fa4}
+
+
+References player.
+
+
+
+Referenced by U\-I\-System\-::\-Init\-U\-I\-System().
+
+
+\begin{DoxyCode}
+162 \{
+163     \textcolor{keywordflow}{return} \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player};
+164 \}\end{DoxyCode}
+\hypertarget{class_game_a4d0c0503733cc50b0b5cb8d7ef1237ec}{\index{Game@{Game}!operator=@{operator=}}
+\index{operator=@{operator=}!Game@{Game}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game}\& Game\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Game} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_game_a4d0c0503733cc50b0b5cb8d7ef1237ec}
+\hypertarget{class_game_acd4aa68f7ef7603ecd61a879fe0286e7}{\index{Game@{Game}!Set\-Is\-Game\-Over@{Set\-Is\-Game\-Over}}
+\index{Set\-Is\-Game\-Over@{Set\-Is\-Game\-Over}!Game@{Game}}
+\subsubsection[{Set\-Is\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::\-Set\-Is\-Game\-Over (
+\begin{DoxyParamCaption}
+\item[{bool}]{state}
+\end{DoxyParamCaption}
+)}}\label{class_game_acd4aa68f7ef7603ecd61a879fe0286e7}
+
+
+References camera, Camera\-::gameover, is\-Game\-Over, Tutorial\-::\-Remove\-Tutorial(), Camera\-::state, and tutorial.
+
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+73 \{
+74     \hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}.\hyperlink{class_tutorial_a0bef62d9bb8e461bfa119e80bacc1ca5}{RemoveTutorial}();
+75     \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera}->\hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera}->\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}{gameover};
+76     \textcolor{keywordflow}{return} \hyperlink{class_game_a80544462b0a02a5d30d238cbe7380492}{isGameOver} = state;
+77 \}
+\end{DoxyCode}
+\hypertarget{class_game_adb05b20574551a26f8cf1dc664782790}{\index{Game@{Game}!Start@{Start}}
+\index{Start@{Start}!Game@{Game}}
+\subsubsection[{Start}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_adb05b20574551a26f8cf1dc664782790}
+
+
+References camera, driver, enemy\-Spawner, Sound\-Manager\-::\-Get\-Instance(), Camera\-::\-Get\-Instance(), guienv, U\-I\-System\-::\-Init\-U\-I\-System(), player, Sound\-Manager\-::\-Play\-Sound(), power\-Spawn, Power\-Up\-Spawner\-::\-Power\-Up\-Device(), prev\-Frame, score, Score\-::\-Scoring(), Tutorial\-::\-Show\-Tutorial(), smgr, sound\-Manager, tutorial, and u\-I\-System.
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+81 \{
+82     \textcolor{comment}{//Get the sound engine}
+83     \hyperlink{class_sound_manager}{SoundManager}* \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager} = soundManager->
+      \hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+84     \textcolor{comment}{//Start Game Background song    }
+85     soundManager->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\textcolor{stringliteral}{"../media/Sounds/bgsound.mp3"}, \textcolor{keyword}{true});
+86 
+87     \textcolor{comment}{// Create instances of classes}
+88     \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera} = \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera}->\hyperlink{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}{GetInstance}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+89     \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player} = \textcolor{keyword}{new} \hyperlink{class_player}{Player}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+90     \hyperlink{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}{enemySpawner} = \textcolor{keyword}{new} \hyperlink{class_enemy_spawner}{EnemySpawner}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}, \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player});
+91     \hyperlink{_game_8cpp_a968f4669d04899e10a3f52223cd20811}{uISystem} = \textcolor{keyword}{new} \hyperlink{class_u_i_system}{UISystem}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+92 
+93     \textcolor{comment}{//score.Scoring is unneeded duplicate code}
+94     \hyperlink{_game_8cpp_a94014506ee2a0c05dcb878c5f6a1ce0f}{score}.\hyperlink{class_score_ae8d4105bea77e4bfcd77c347e0a9dd8c}{Scoring}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+95     \hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}.\hyperlink{class_tutorial_a2bcccb05a09cfb9cd14fb456a609c50b}{ShowTutorial}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+96 
+97     \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver} = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getVideoDriver();
+98     \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getSceneManager();
+99     \hyperlink{_game_8cpp_ac1b59d355d5bebba653a1a6a4a6a2e19}{guienv} = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getGUIEnvironment();
+100 
+101     \hyperlink{class_game_a582b0adfa98534d79ec9511919827029}{objectPlacementGen}.\hyperlink{class_object_placement_generation_a94bc6a7a4ea7001bff3799cd9da12481}{PlaceObjects}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+102     \hyperlink{_game_8cpp_a8b36d1e84444017dfabce4f05ad6006f}{powerSpawn}->\hyperlink{class_power_up_spawner_ad95f01d926ce8438046b4c8f7aa99d9e}{PowerUpDevice}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+103 
+104     \hyperlink{_game_8cpp_a968f4669d04899e10a3f52223cd20811}{uISystem}->\hyperlink{class_u_i_system_aa614552df8a07d24661719d007ea8baf}{InitUISystem}(\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device});
+105 
+106     \textcolor{comment}{//Create Light}
+107     ILightSceneNode*  directionalLight = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getSceneManager()->addLightSceneNode();
+108     SLight & lightData = directionalLight->getLightData();
+109     lightData.Type = ELT\_DIRECTIONAL;
+110     directionalLight->setRotation(vector3df(90, 0, 0));
+111     \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getCursorControl()->setVisible(\textcolor{keyword}{true});
+112 
+113     \textcolor{comment}{//This is used to calculate frame delta time}
+114     \hyperlink{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}{prevFrame} = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getTimer()->getTime();
+115 \}
+\end{DoxyCode}
+\hypertarget{class_game_a1c5373c68261c54aff03e6abe40fee52}{\index{Game@{Game}!Update@{Update}}
+\index{Update@{Update}!Game@{Game}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Game\-::\-Update (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_game_a1c5373c68261c54aff03e6abe40fee52}
+
+
+References camera, Camera\-::\-Camera\-Update(), collision\-Manager, Collision\-::\-Discrete\-Collision\-Update(), enemy\-Spawner, frame\-Delta\-Time, input\-Receiver, is\-Game\-Over, Tutorial\-::is\-Tutorial\-Active, Player\-::\-Move(), player, prev\-Frame, Player\-::\-Shoot(), tutorial, Tutorial\-::\-Update(), and Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+
+Referenced by main().
+
+
+\begin{DoxyCode}
+118 \{
+119     \textcolor{comment}{// Work out a frame delta time.}
+120     \textcolor{keyword}{const} u32 currentFrame = \hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getTimer()->getTime();
+121     \textcolor{keyword}{const} f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} = (f32)(currentFrame - \hyperlink{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}{prevFrame}) / 1000.f; \textcolor{comment}{// Time in
+       seconds}
+122     \hyperlink{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}{prevFrame} = currentFrame;
+123     \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera}->\hyperlink{class_camera_a76e6167aa081ea6755d0bf588cd8cb73}{CameraUpdate}(frameDeltaTime);
+124     \textcolor{keywordflow}{if} (\hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}.\hyperlink{class_tutorial_a050c9844b3a52de799105883893ca073}{isTutorialActive}) \{
+125         \hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}.\hyperlink{class_tutorial_a3c755730bce8d71fdd9137a048e7c732}{Update}(frameDeltaTime);
+126     \}
+127     \textcolor{keywordflow}{if} (!\hyperlink{class_game_a80544462b0a02a5d30d238cbe7380492}{isGameOver} )
+128     \{
+129         \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player}->\hyperlink{class_player_a436296b5c3aca2e448563594fc3eb234}{Move}(\hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{inputReceiver});
+130         \hyperlink{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{player}->\hyperlink{class_player_a24b813efa1554eeb30cd7e3b508bf8fd}{Shoot}(\hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{inputReceiver}, \hyperlink{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}{enemySpawner});
+131         \textcolor{keywordflow}{if}(!\hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}.\hyperlink{class_tutorial_a050c9844b3a52de799105883893ca073}{isTutorialActive})
+132             \hyperlink{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}{enemySpawner}->\hyperlink{class_enemy_spawner_ab7717d2d42a40b943564629a85f0fabc}{UpdateEnemies}();
+133         \hyperlink{_game_8cpp_abed57b82902b065e35ed4bb9cbef6230}{collisionManager}.\hyperlink{class_collision_a17f9c89abcc19bfb3fe0357158dae55d}{DiscreteCollisionUpdate}(frameDeltaTime);
+134     \}
+135 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_game_a4968552e2ba3037d494596a908eccc00}{\index{Game@{Game}!device@{device}}
+\index{device@{device}!Game@{Game}}
+\subsubsection[{device}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::\-Irrlicht\-Device$\ast$ Game\-::device}}\label{class_game_a4968552e2ba3037d494596a908eccc00}
+
+
+Referenced by Heat\-Map\-Manager\-::\-Create\-Danger\-Zone(), Heat\-Map\-Manager\-::\-Create\-Poison\-Cloud(), Object\-Placement\-Generation\-::\-Generate\-New\-Objects(), U\-I\-System\-::\-Init\-U\-I\-System(), and main().
+
+\hypertarget{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}{\index{Game@{Game}!instance@{instance}}
+\index{instance@{instance}!Game@{Game}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game} $\ast$ Game\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_game_aa469cdc0a30f4fd2d6d99b23f4fbf257}
+\hypertarget{class_game_a80544462b0a02a5d30d238cbe7380492}{\index{Game@{Game}!is\-Game\-Over@{is\-Game\-Over}}
+\index{is\-Game\-Over@{is\-Game\-Over}!Game@{Game}}
+\subsubsection[{is\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}bool Game\-::is\-Game\-Over = false\hspace{0.3cm}{\ttfamily [private]}}}\label{class_game_a80544462b0a02a5d30d238cbe7380492}
+\hypertarget{class_game_a582b0adfa98534d79ec9511919827029}{\index{Game@{Game}!object\-Placement\-Gen@{object\-Placement\-Gen}}
+\index{object\-Placement\-Gen@{object\-Placement\-Gen}!Game@{Game}}
+\subsubsection[{object\-Placement\-Gen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Object\-Placement\-Generation} Game\-::object\-Placement\-Gen}}\label{class_game_a582b0adfa98534d79ec9511919827029}
+
+
+Referenced by Heat\-Map\-Manager\-::\-Update().
+
+\hypertarget{class_game_abec70aa1c0269a9a7e171af4d79e08bf}{\index{Game@{Game}!player@{player}}
+\index{player@{player}!Game@{Game}}
+\subsubsection[{player}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ Game\-::player\hspace{0.3cm}{\ttfamily [private]}}}\label{class_game_abec70aa1c0269a9a7e171af4d79e08bf}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_game_8h}{Game.\-h}\item 
+\hyperlink{_game_8cpp}{Game.\-cpp}\end{DoxyCompactItemize}

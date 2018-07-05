@@ -1,0 +1,86 @@
+\hypertarget{struct_particle}{\section{Particle Struct Reference}
+\label{struct_particle}\index{Particle@{Particle}}
+}
+
+
+{\ttfamily \#include $<$Particle\-System.\-h$>$}
+
+
+
+Collaboration diagram for Particle\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{struct_particle__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_particle_a77f0ba9fd8e6f34eb0d809ad7d7af2ee}{Particle} (scene\-::\-I\-Particle\-System\-Scene\-Node $\ast$\-\_\-\-System, f32 \-\_\-\-Lifetime)
+\item 
+void \hyperlink{struct_particle_ac7ad6a0fd4d54d5f2946654910f75477}{Update} (f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+scene\-::\-I\-Particle\-System\-Scene\-Node $\ast$ \hyperlink{struct_particle_a8bd5f3d60b32730b7987912486c057cb}{system}
+\item 
+f32 \hyperlink{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}{lifetime}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_particle_a77f0ba9fd8e6f34eb0d809ad7d7af2ee}{\index{Particle@{Particle}!Particle@{Particle}}
+\index{Particle@{Particle}!Particle@{Particle}}
+\subsubsection[{Particle}]{\setlength{\rightskip}{0pt plus 5cm}Particle\-::\-Particle (
+\begin{DoxyParamCaption}
+\item[{scene\-::\-I\-Particle\-System\-Scene\-Node $\ast$}]{\-\_\-\-System, }
+\item[{f32}]{\-\_\-\-Lifetime}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_particle_a77f0ba9fd8e6f34eb0d809ad7d7af2ee}
+
+\begin{DoxyCode}
+20                                                                     \{
+21         this->\hyperlink{struct_particle_a8bd5f3d60b32730b7987912486c057cb}{system} = \_System;
+22         this->\hyperlink{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}{lifetime} = \_Lifetime;
+23     \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_particle_ac7ad6a0fd4d54d5f2946654910f75477}{\index{Particle@{Particle}!Update@{Update}}
+\index{Update@{Update}!Particle@{Particle}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Particle\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{f32}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_particle_ac7ad6a0fd4d54d5f2946654910f75477}
+
+
+References frame\-Delta\-Time.
+
+
+\begin{DoxyCode}
+24                                     \{
+25         this->\hyperlink{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}{lifetime} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+26         \textcolor{keywordflow}{if} (\hyperlink{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}{lifetime} <= 0) \{
+27             \hyperlink{struct_particle_a8bd5f3d60b32730b7987912486c057cb}{system}->remove();
+28         \}
+29     \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}{\index{Particle@{Particle}!lifetime@{lifetime}}
+\index{lifetime@{lifetime}!Particle@{Particle}}
+\subsubsection[{lifetime}]{\setlength{\rightskip}{0pt plus 5cm}f32 Particle\-::lifetime}}\label{struct_particle_ae0019d97dab7c2cb37a679edac8b184f}
+\hypertarget{struct_particle_a8bd5f3d60b32730b7987912486c057cb}{\index{Particle@{Particle}!system@{system}}
+\index{system@{system}!Particle@{Particle}}
+\subsubsection[{system}]{\setlength{\rightskip}{0pt plus 5cm}scene\-::\-I\-Particle\-System\-Scene\-Node$\ast$ Particle\-::system}}\label{struct_particle_a8bd5f3d60b32730b7987912486c057cb}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_particle_system_8h}{Particle\-System.\-h}\end{DoxyCompactItemize}

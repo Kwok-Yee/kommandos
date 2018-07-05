@@ -1,0 +1,53 @@
+\hypertarget{class_catch_1_1_exception_translator_registrar}{\section{Catch\-:\-:Exception\-Translator\-Registrar Class Reference}
+\label{class_catch_1_1_exception_translator_registrar}\index{Catch\-::\-Exception\-Translator\-Registrar@{Catch\-::\-Exception\-Translator\-Registrar}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:Exception\-Translator\-Registrar\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{class_catch_1_1_exception_translator_registrar__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator}{Exception\-Translator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\\hyperlink{class_catch_1_1_exception_translator_registrar_aa73229de911f26b1df6c6c87c4d9e04e}{Exception\-Translator\-Registrar} (std\-::string($\ast$translate\-Function)(T \&))
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_exception_translator_registrar_aa73229de911f26b1df6c6c87c4d9e04e}{\index{Catch\-::\-Exception\-Translator\-Registrar@{Catch\-::\-Exception\-Translator\-Registrar}!Exception\-Translator\-Registrar@{Exception\-Translator\-Registrar}}
+\index{Exception\-Translator\-Registrar@{Exception\-Translator\-Registrar}!Catch::ExceptionTranslatorRegistrar@{Catch\-::\-Exception\-Translator\-Registrar}}
+\subsubsection[{Exception\-Translator\-Registrar}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator\-Registrar (
+\begin{DoxyParamCaption}
+\item[{std\-::string($\ast$)(T \&)}]{translate\-Function}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_exception_translator_registrar_aa73229de911f26b1df6c6c87c4d9e04e}
+
+
+References Catch\-::get\-Mutable\-Registry\-Hub(), and Catch\-::\-I\-Mutable\-Registry\-Hub\-::register\-Translator().
+
+
+\begin{DoxyCode}
+2045                                                                         \{
+2046             \hyperlink{namespace_catch_ac9ddcc6d66079add9cb2a3140b8ae51e}{getMutableRegistryHub}().\hyperlink{struct_catch_1_1_i_mutable_registry_hub_ae6825365102693cf7707db022a2c2b49}{registerTranslator}
+2047             (\textcolor{keyword}{new} ExceptionTranslator<T>(translateFunction));
+2048         \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

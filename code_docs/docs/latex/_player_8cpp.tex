@@ -1,0 +1,564 @@
+\hypertarget{_player_8cpp}{\section{Player.\-cpp File Reference}
+\label{_player_8cpp}\index{Player.\-cpp@{Player.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include $<$irr\-Klang.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Player.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Game.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Input\-Receiver.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Gameoverstate.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Collision.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Score.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bullet\-Pool.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bullet.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Powerup\-Pool.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Powerup.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sound\-Manager.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Heat\-Map\-Manager.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Camera.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}iostream\char`\"{}}\\*
+Include dependency graph for Player.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_player_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{X1\-B\-A\-R}~10
+\begin{DoxyCompactList}\small\item\em Healthbar. \end{DoxyCompactList}\item 
+\#define \hyperlink{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{X2\-B\-A\-R}~10
+\item 
+\#define \hyperlink{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{Y1\-B\-A\-R}~10
+\item 
+\#define \hyperlink{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{Y2\-B\-A\-R}~25
+\item 
+\#define \hyperlink{_player_8cpp_a2cf38e1cf676620c959917828e2eac9d}{M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H}~100
+\item 
+\#define \hyperlink{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D}~46.f
+\item 
+\#define \hyperlink{_player_8cpp_a4e50a279e6f32b97d14aa23900330390}{Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N}~-\/90.f
+\item 
+\#define \hyperlink{_player_8cpp_a5a978dc5c1ca28edd5782e9edec2ca5c}{P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L}~\char`\"{}../media/Models/\hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}/player2.\-3ds\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a42671a2a596a686410dc3aee8c093e35}{G\-U\-N\-\_\-\-M\-O\-D\-E\-L}~\char`\"{}../media/Models/weapons/Low\-Poly\-\_\-\-Irrlicht.\-3ds\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a3457fa56513040eac87f46b8b53a2cdf}{G\-U\-N\-\_\-\-C\-O\-L\-O\-R}~\char`\"{}../media/Textures/Gun\-\_\-\-Color.\-png\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_ae889c98c6317ccb8a9bf101c96599189}{G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/Player\-Gun\-Shot.\-wav\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_ac5d072b0acab9406d2c98c1779ea117f}{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1}~\char`\"{}../media/Sounds/player\-\_\-dmg1.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a29b36850eddf785ec49af30087ad662a}{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2}~\char`\"{}../media/Sounds/player\-\_\-dmg2.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_ae0ff94bd607ae4bcc575ca8470301873}{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3}~\char`\"{}../media/Sounds/player\-\_\-dmg3.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_ae04e78447ab78775ae4a7ae88deb8b78}{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4}~\char`\"{}../media/Sounds/player\-\_\-dmg4.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a8c27fdb53d14363de8e278f20ac7ef96}{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/heavy\-\_\-machine\-\_\-gun.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a8e5577e46aee3ed920332c06421c9f29}{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/shotgun.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a50f0220a66174ae7f6cade359da30208}{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/armor\-\_\-piercer.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a7cf631e3bde07ad12168add8df7894f0}{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/Rapid\-Fire.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a920788433235d691429c38d155643cb9}{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/Split\-Fire.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a40156f386bcc9285db6df05a6b685ccc}{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/Armor\-Penetration.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a30788f0ae95ac2d83b41e680ebe8cf44}{H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/healthpickup.\-mp3\char`\"{}
+\item 
+\#define \hyperlink{_player_8cpp_a3b89c5e6b6e4acece886a4065679465c}{V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}~75
+\item 
+\#define \hyperlink{_player_8cpp_ada34ea1c34a3a182a802477140a86146}{B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}~30
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const vector3df \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bullet\-Size} = vector3df(0.\-03f, 0.\-125f, 0.\-25f)
+\item 
+Irrlicht\-Device $\ast$ \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{player\-I\-Device}
+\begin{DoxyCompactList}\small\item\em The player i device. \end{DoxyCompactList}\item 
+I\-Video\-Driver $\ast$ \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{player\-Driver}
+\begin{DoxyCompactList}\small\item\em The player driver. \end{DoxyCompactList}\item 
+I\-Scene\-Manager $\ast$ \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{player\-Smgr}
+\begin{DoxyCompactList}\small\item\em The player smgr. \end{DoxyCompactList}\item 
+\hyperlink{class_sound_manager}{Sound\-Manager} $\ast$ \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{sound\-Manager}
+\begin{DoxyCompactList}\small\item\em Manager for sound. \end{DoxyCompactList}\item 
+\hyperlink{class_game_over_state}{Game\-Over\-State} \hyperlink{_player_8cpp_a76232c769b4e1ad0ce7399a10191a8d6}{game\-Over\-State}
+\begin{DoxyCompactList}\small\item\em State of the game over. \end{DoxyCompactList}\item 
+\hyperlink{class_collision}{Collision} \hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{player\-Col}
+\begin{DoxyCompactList}\small\item\em The player col. \end{DoxyCompactList}\item 
+\hyperlink{class_heat_map_manager}{Heat\-Map\-Manager} $\ast$ \hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heat\-Map\-Manager} = heat\-Map\-Manager-\/$>$Get\-Instance()
+\item 
+\hyperlink{class_score}{Score} \hyperlink{_player_8cpp_af856435115748d9c4c7fdd16f9408f85}{player\-Scores}
+\begin{DoxyCompactList}\small\item\em The player scores. \end{DoxyCompactList}\item 
+\hyperlink{class_game}{Game} $\ast$ \hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game}
+\begin{DoxyCompactList}\small\item\em The game. \end{DoxyCompactList}\item 
+I\-Scene\-Node $\ast$ \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{player\-Object}
+\begin{DoxyCompactList}\small\item\em The player object. \end{DoxyCompactList}\item 
+I\-Scene\-Node $\ast$ \hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{cam\-Follow\-Object}
+\item 
+I\-Scene\-Node $\ast$ \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gun\-Node}
+\begin{DoxyCompactList}\small\item\em The gun node. \end{DoxyCompactList}\item 
+f32 \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health}
+\begin{DoxyCompactList}\small\item\em The health. \end{DoxyCompactList}\item 
+u32 \hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}
+\begin{DoxyCompactList}\small\item\em The time. \end{DoxyCompactList}\item 
+vector3df \hyperlink{_player_8cpp_a03b83ef76d66d83d5eb75ce553ec0ec6}{current\-Position}
+\begin{DoxyCompactList}\small\item\em The current position. \end{DoxyCompactList}\item 
+vector3df \hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mouse\-Position}
+\begin{DoxyCompactList}\small\item\em The mouse position. \end{DoxyCompactList}\item 
+vector3df \hyperlink{_player_8cpp_a3dd0b4a1fe67019913c1d45703f2db42}{to\-Mouse\-Pos}
+\begin{DoxyCompactList}\small\item\em to mouse position. \end{DoxyCompactList}\item 
+s32 \hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerable\-Timer} = 0
+\begin{DoxyCompactList}\small\item\em The vulnerable timer. \end{DoxyCompactList}\item 
+\hyperlink{class_bullet_pool}{Bullet\-Pool} $\ast$ \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}
+\begin{DoxyCompactList}\small\item\em The pool. \end{DoxyCompactList}\item 
+core\-::array$<$ \hyperlink{class_bullet}{Bullet} $\ast$ $>$ \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{active\-Bullets}
+\begin{DoxyCompactList}\small\item\em The active bullets. \end{DoxyCompactList}\item 
+\hyperlink{class_powerup_pool}{Powerup\-Pool} $\ast$ \hyperlink{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}{pow\-Pool}
+\item 
+\hyperlink{class_camera}{Camera} $\ast$ \hyperlink{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\-\_\-\-Cam}
+\item 
+f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time}
+\begin{DoxyCompactList}\small\item\em The frame delta time. \end{DoxyCompactList}\item 
+bool \hyperlink{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}{has\-Shot} = false
+\begin{DoxyCompactList}\small\item\em True if has shot, false if not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_player_8cpp_ada34ea1c34a3a182a802477140a86146}{\index{Player.\-cpp@{Player.\-cpp}!B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R@{B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}}
+\index{B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R@{B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R~30}}\label{_player_8cpp_ada34ea1c34a3a182a802477140a86146}
+
+
+Referenced by Player\-::\-Init().
+
+\hypertarget{_player_8cpp_a3457fa56513040eac87f46b8b53a2cdf}{\index{Player.\-cpp@{Player.\-cpp}!G\-U\-N\-\_\-\-C\-O\-L\-O\-R@{G\-U\-N\-\_\-\-C\-O\-L\-O\-R}}
+\index{G\-U\-N\-\_\-\-C\-O\-L\-O\-R@{G\-U\-N\-\_\-\-C\-O\-L\-O\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{G\-U\-N\-\_\-\-C\-O\-L\-O\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\-U\-N\-\_\-\-C\-O\-L\-O\-R~\char`\"{}../media/Textures/Gun\-\_\-\-Color.\-png\char`\"{}}}\label{_player_8cpp_a3457fa56513040eac87f46b8b53a2cdf}
+
+
+Referenced by Player\-::\-Init().
+
+\hypertarget{_player_8cpp_a42671a2a596a686410dc3aee8c093e35}{\index{Player.\-cpp@{Player.\-cpp}!G\-U\-N\-\_\-\-M\-O\-D\-E\-L@{G\-U\-N\-\_\-\-M\-O\-D\-E\-L}}
+\index{G\-U\-N\-\_\-\-M\-O\-D\-E\-L@{G\-U\-N\-\_\-\-M\-O\-D\-E\-L}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{G\-U\-N\-\_\-\-M\-O\-D\-E\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\-U\-N\-\_\-\-M\-O\-D\-E\-L~\char`\"{}../media/Models/weapons/Low\-Poly\-\_\-\-Irrlicht.\-3ds\char`\"{}}}\label{_player_8cpp_a42671a2a596a686410dc3aee8c093e35}
+
+
+Referenced by Player\-::\-Init().
+
+\hypertarget{_player_8cpp_ae889c98c6317ccb8a9bf101c96599189}{\index{Player.\-cpp@{Player.\-cpp}!G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D@{G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D}}
+\index{G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D@{G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/Player\-Gun\-Shot.\-wav\char`\"{}}}\label{_player_8cpp_ae889c98c6317ccb8a9bf101c96599189}
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a30788f0ae95ac2d83b41e680ebe8cf44}{\index{Player.\-cpp@{Player.\-cpp}!H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D@{H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D}}
+\index{H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D@{H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/healthpickup.\-mp3\char`\"{}}}\label{_player_8cpp_a30788f0ae95ac2d83b41e680ebe8cf44}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_a2cf38e1cf676620c959917828e2eac9d}{\index{Player.\-cpp@{Player.\-cpp}!M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H@{M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H}}
+\index{M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H@{M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H~100}}\label{_player_8cpp_a2cf38e1cf676620c959917828e2eac9d}
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar(), and Player\-::\-Init().
+
+\hypertarget{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{\index{Player.\-cpp@{Player.\-cpp}!M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D@{M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D}}
+\index{M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D@{M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D~46.f}}\label{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_a5a978dc5c1ca28edd5782e9edec2ca5c}{\index{Player.\-cpp@{Player.\-cpp}!P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L@{P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L}}
+\index{P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L@{P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L~\char`\"{}../media/Models/{\bf player}/player2.\-3ds\char`\"{}}}\label{_player_8cpp_a5a978dc5c1ca28edd5782e9edec2ca5c}
+
+
+Referenced by Player\-::\-Init().
+
+\hypertarget{_player_8cpp_a8c27fdb53d14363de8e278f20ac7ef96}{\index{Player.\-cpp@{Player.\-cpp}!R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}}
+\index{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/heavy\-\_\-machine\-\_\-gun.\-mp3\char`\"{}}}\label{_player_8cpp_a8c27fdb53d14363de8e278f20ac7ef96}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_a7cf631e3bde07ad12168add8df7894f0}{\index{Player.\-cpp@{Player.\-cpp}!R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}}
+\index{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/Rapid\-Fire.\-mp3\char`\"{}}}\label{_player_8cpp_a7cf631e3bde07ad12168add8df7894f0}
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a50f0220a66174ae7f6cade359da30208}{\index{Player.\-cpp@{Player.\-cpp}!R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}}
+\index{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/armor\-\_\-piercer.\-mp3\char`\"{}}}\label{_player_8cpp_a50f0220a66174ae7f6cade359da30208}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_a40156f386bcc9285db6df05a6b685ccc}{\index{Player.\-cpp@{Player.\-cpp}!R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}}
+\index{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/Armor\-Penetration.\-mp3\char`\"{}}}\label{_player_8cpp_a40156f386bcc9285db6df05a6b685ccc}
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a8e5577e46aee3ed920332c06421c9f29}{\index{Player.\-cpp@{Player.\-cpp}!S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}}
+\index{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D@{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/shotgun.\-mp3\char`\"{}}}\label{_player_8cpp_a8e5577e46aee3ed920332c06421c9f29}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_a920788433235d691429c38d155643cb9}{\index{Player.\-cpp@{Player.\-cpp}!S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}}
+\index{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D@{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/Split\-Fire.\-mp3\char`\"{}}}\label{_player_8cpp_a920788433235d691429c38d155643cb9}
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_ac5d072b0acab9406d2c98c1779ea117f}{\index{Player.\-cpp@{Player.\-cpp}!T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1}}
+\index{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1~\char`\"{}../media/Sounds/player\-\_\-dmg1.\-mp3\char`\"{}}}\label{_player_8cpp_ac5d072b0acab9406d2c98c1779ea117f}
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a29b36850eddf785ec49af30087ad662a}{\index{Player.\-cpp@{Player.\-cpp}!T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2}}
+\index{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2~\char`\"{}../media/Sounds/player\-\_\-dmg2.\-mp3\char`\"{}}}\label{_player_8cpp_a29b36850eddf785ec49af30087ad662a}
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_ae0ff94bd607ae4bcc575ca8470301873}{\index{Player.\-cpp@{Player.\-cpp}!T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3}}
+\index{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3~\char`\"{}../media/Sounds/player\-\_\-dmg3.\-mp3\char`\"{}}}\label{_player_8cpp_ae0ff94bd607ae4bcc575ca8470301873}
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_ae04e78447ab78775ae4a7ae88deb8b78}{\index{Player.\-cpp@{Player.\-cpp}!T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4}}
+\index{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4@{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4}]{\setlength{\rightskip}{0pt plus 5cm}\#define T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4~\char`\"{}../media/Sounds/player\-\_\-dmg4.\-mp3\char`\"{}}}\label{_player_8cpp_ae04e78447ab78775ae4a7ae88deb8b78}
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a3b89c5e6b6e4acece886a4065679465c}{\index{Player.\-cpp@{Player.\-cpp}!V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R@{V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}}
+\index{V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R@{V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R~75}}\label{_player_8cpp_a3b89c5e6b6e4acece886a4065679465c}
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{\index{Player.\-cpp@{Player.\-cpp}!X1\-B\-A\-R@{X1\-B\-A\-R}}
+\index{X1\-B\-A\-R@{X1\-B\-A\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{X1\-B\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define X1\-B\-A\-R~10}}\label{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}
+
+
+Healthbar. 
+
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar().
+
+\hypertarget{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{\index{Player.\-cpp@{Player.\-cpp}!X2\-B\-A\-R@{X2\-B\-A\-R}}
+\index{X2\-B\-A\-R@{X2\-B\-A\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{X2\-B\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define X2\-B\-A\-R~10}}\label{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar().
+
+\hypertarget{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{\index{Player.\-cpp@{Player.\-cpp}!Y1\-B\-A\-R@{Y1\-B\-A\-R}}
+\index{Y1\-B\-A\-R@{Y1\-B\-A\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{Y1\-B\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y1\-B\-A\-R~10}}\label{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar().
+
+\hypertarget{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{\index{Player.\-cpp@{Player.\-cpp}!Y2\-B\-A\-R@{Y2\-B\-A\-R}}
+\index{Y2\-B\-A\-R@{Y2\-B\-A\-R}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{Y2\-B\-A\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y2\-B\-A\-R~25}}\label{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar().
+
+\hypertarget{_player_8cpp_a4e50a279e6f32b97d14aa23900330390}{\index{Player.\-cpp@{Player.\-cpp}!Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N@{Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N}}
+\index{Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N@{Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N~-\/90.f}}\label{_player_8cpp_a4e50a279e6f32b97d14aa23900330390}
+
+
+Referenced by Player\-::\-Move().
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\index{Player.\-cpp@{Player.\-cpp}!\-\_\-\-Cam@{\-\_\-\-Cam}}
+\index{\-\_\-\-Cam@{\-\_\-\-Cam}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{\-\_\-\-Cam}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera}$\ast$ \-\_\-\-Cam}}\label{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}
+
+
+Referenced by Player\-::\-Init(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{\index{Player.\-cpp@{Player.\-cpp}!active\-Bullets@{active\-Bullets}}
+\index{active\-Bullets@{active\-Bullets}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{active\-Bullets}]{\setlength{\rightskip}{0pt plus 5cm}core\-::array$<${\bf Bullet}$\ast$$>$ active\-Bullets}}\label{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}
+
+
+The active bullets. 
+
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{\index{Player.\-cpp@{Player.\-cpp}!bullet\-Size@{bullet\-Size}}
+\index{bullet\-Size@{bullet\-Size}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{bullet\-Size}]{\setlength{\rightskip}{0pt plus 5cm}const vector3df bullet\-Size = vector3df(0.\-03f, 0.\-125f, 0.\-25f)}}\label{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a017569baead2c823210b5aacb68c3661}{\index{Player.\-cpp@{Player.\-cpp}!cam\-Follow\-Object@{cam\-Follow\-Object}}
+\index{cam\-Follow\-Object@{cam\-Follow\-Object}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{cam\-Follow\-Object}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node$\ast$ cam\-Follow\-Object}}\label{_player_8cpp_a017569baead2c823210b5aacb68c3661}
+
+
+Referenced by Player\-::get\-Cam\-Follow\-Object(), and Player\-::\-Init().
+
+\hypertarget{_player_8cpp_a03b83ef76d66d83d5eb75ce553ec0ec6}{\index{Player.\-cpp@{Player.\-cpp}!current\-Position@{current\-Position}}
+\index{current\-Position@{current\-Position}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{current\-Position}]{\setlength{\rightskip}{0pt plus 5cm}vector3df current\-Position}}\label{_player_8cpp_a03b83ef76d66d83d5eb75ce553ec0ec6}
+
+
+The current position. 
+
+
+
+Referenced by Player\-::\-Init(), and Player\-::\-Move().
+
+\hypertarget{_player_8cpp_adc988571147642cda93afbf89783f9c9}{\index{Player.\-cpp@{Player.\-cpp}!frame\-Delta\-Time@{frame\-Delta\-Time}}
+\index{frame\-Delta\-Time@{frame\-Delta\-Time}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{frame\-Delta\-Time}]{\setlength{\rightskip}{0pt plus 5cm}f32 frame\-Delta\-Time}}\label{_player_8cpp_adc988571147642cda93afbf89783f9c9}
+
+
+The frame delta time. 
+
+
+
+Referenced by Collision\-::\-Discrete\-Collision\-Update(), Player\-::\-Move(), Camera\-::\-Screen\-Shake(), Player\-::\-Shoot(), Game\-::\-Update(), Tutorial\-::\-Update(), Particle\-::\-Update(), Bullet\-::\-Update\-Bullet(), and Enemy\-Spawner\-::\-Update\-Enemies().
+
+\hypertarget{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{\index{Player.\-cpp@{Player.\-cpp}!game@{game}}
+\index{game@{game}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{game}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game}$\ast$ game}}\label{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}
+
+
+The game. 
+
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar(), main(), Player\-::\-Player(), and Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a76232c769b4e1ad0ce7399a10191a8d6}{\index{Player.\-cpp@{Player.\-cpp}!game\-Over\-State@{game\-Over\-State}}
+\index{game\-Over\-State@{game\-Over\-State}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{game\-Over\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game\-Over\-State} game\-Over\-State}}\label{_player_8cpp_a76232c769b4e1ad0ce7399a10191a8d6}
+
+
+State of the game over. 
+
+
+
+Referenced by Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{\index{Player.\-cpp@{Player.\-cpp}!gun\-Node@{gun\-Node}}
+\index{gun\-Node@{gun\-Node}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{gun\-Node}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node$\ast$ gun\-Node}}\label{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}
+
+
+The gun node. 
+
+
+
+Referenced by Player\-::\-Init(), and Player\-::\-Raycast().
+
+\hypertarget{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}{\index{Player.\-cpp@{Player.\-cpp}!has\-Shot@{has\-Shot}}
+\index{has\-Shot@{has\-Shot}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{has\-Shot}]{\setlength{\rightskip}{0pt plus 5cm}bool has\-Shot = false}}\label{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}
+
+
+True if has shot, false if not. 
+
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{\index{Player.\-cpp@{Player.\-cpp}!health@{health}}
+\index{health@{health}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{health}]{\setlength{\rightskip}{0pt plus 5cm}f32 health}}\label{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}
+
+
+The health. 
+
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar(), Player\-::\-Init(), Player\-::\-Move(), Enemy\-::\-Set\-Enemy\-Type(), Powerup\-::\-Set\-Powerup\-Type(), Enemy\-::\-Take\-Damage(), and Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{\index{Player.\-cpp@{Player.\-cpp}!heat\-Map\-Manager@{heat\-Map\-Manager}}
+\index{heat\-Map\-Manager@{heat\-Map\-Manager}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{heat\-Map\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Heat\-Map\-Manager}$\ast$ heat\-Map\-Manager = heat\-Map\-Manager-\/$>$Get\-Instance()}}\label{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}
+
+
+Referenced by Player\-::\-Move().
+
+\hypertarget{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{\index{Player.\-cpp@{Player.\-cpp}!mouse\-Position@{mouse\-Position}}
+\index{mouse\-Position@{mouse\-Position}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{mouse\-Position}]{\setlength{\rightskip}{0pt plus 5cm}vector3df mouse\-Position}}\label{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}
+
+
+The mouse position. 
+
+
+
+Referenced by Input\-Receiver\-::\-Get\-Mouse\-Position(), Player\-::\-Get\-Mouse\-Position(), Player\-::\-Move(), Input\-Receiver\-::\-On\-Event(), Player\-::\-On\-Line\-Intersect(), Player\-::\-Raycast(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{\index{Player.\-cpp@{Player.\-cpp}!player\-Col@{player\-Col}}
+\index{player\-Col@{player\-Col}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-Col}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision} player\-Col}}\label{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}
+
+
+The player col. 
+
+
+
+Referenced by Player\-::\-Init(), Player\-::\-Move(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{\index{Player.\-cpp@{Player.\-cpp}!player\-Driver@{player\-Driver}}
+\index{player\-Driver@{player\-Driver}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-Driver}]{\setlength{\rightskip}{0pt plus 5cm}I\-Video\-Driver$\ast$ player\-Driver}}\label{_player_8cpp_a13cc81ce093ff81a376551471a3de042}
+
+
+The player driver. 
+
+
+
+Referenced by Player\-::\-Draw\-Health\-Bar(), Player\-::\-Init(), and Player\-::\-Player().
+
+\hypertarget{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{\index{Player.\-cpp@{Player.\-cpp}!player\-I\-Device@{player\-I\-Device}}
+\index{player\-I\-Device@{player\-I\-Device}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-I\-Device}]{\setlength{\rightskip}{0pt plus 5cm}Irrlicht\-Device$\ast$ player\-I\-Device}}\label{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}
+
+
+The player i device. 
+
+
+
+Referenced by Player\-::\-Init(), Player\-::\-Move(), Player\-::\-Player(), and Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{\index{Player.\-cpp@{Player.\-cpp}!player\-Object@{player\-Object}}
+\index{player\-Object@{player\-Object}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-Object}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node$\ast$ player\-Object}}\label{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}
+
+
+The player object. 
+
+
+
+Referenced by Player\-::get\-Player\-Object(), Player\-::\-Init(), Player\-::\-Move(), Player\-::\-Raycast(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_af856435115748d9c4c7fdd16f9408f85}{\index{Player.\-cpp@{Player.\-cpp}!player\-Scores@{player\-Scores}}
+\index{player\-Scores@{player\-Scores}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-Scores}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Score} player\-Scores}}\label{_player_8cpp_af856435115748d9c4c7fdd16f9408f85}
+
+
+The player scores. 
+
+
+
+Referenced by Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{\index{Player.\-cpp@{Player.\-cpp}!player\-Smgr@{player\-Smgr}}
+\index{player\-Smgr@{player\-Smgr}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{player\-Smgr}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Manager$\ast$ player\-Smgr}}\label{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}
+
+
+The player smgr. 
+
+
+
+Referenced by Player\-::\-Init(), Player\-::\-Player(), Player\-::\-Raycast(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{\index{Player.\-cpp@{Player.\-cpp}!pool@{pool}}
+\index{pool@{pool}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{pool}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet\-Pool}$\ast$ pool}}\label{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}
+
+
+The pool. 
+
+
+
+Referenced by Player\-::\-Init(), and Player\-::\-Shoot().
+
+\hypertarget{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}{\index{Player.\-cpp@{Player.\-cpp}!pow\-Pool@{pow\-Pool}}
+\index{pow\-Pool@{pow\-Pool}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{pow\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Pool}$\ast$ pow\-Pool}}\label{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}
+
+
+Referenced by Player\-::\-Init(), and Player\-::\-Move().
+
+\hypertarget{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{\index{Player.\-cpp@{Player.\-cpp}!sound\-Manager@{sound\-Manager}}
+\index{sound\-Manager@{sound\-Manager}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{sound\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager}$\ast$ sound\-Manager}}\label{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}
+
+
+Manager for sound. 
+
+
+
+Referenced by Player\-::\-Move(), Player\-::\-Player(), Player\-::\-Shoot(), Game\-::\-Start(), and Player\-::\-Take\-Damage().
+
+\hypertarget{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{\index{Player.\-cpp@{Player.\-cpp}!time@{time}}
+\index{time@{time}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{time}]{\setlength{\rightskip}{0pt plus 5cm}u32 time}}\label{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}
+
+
+The time. 
+
+
+
+Referenced by Camera\-::\-Camera\-Init(), Object\-Placement\-Generation\-::\-Generate\-New\-Objects(), Player\-::\-Move(), Object\-Placement\-Generation\-::\-Place\-Objects(), Player\-::\-Player(), and Enemy\-Spawner\-::\-Spawn().
+
+\hypertarget{_player_8cpp_a3dd0b4a1fe67019913c1d45703f2db42}{\index{Player.\-cpp@{Player.\-cpp}!to\-Mouse\-Pos@{to\-Mouse\-Pos}}
+\index{to\-Mouse\-Pos@{to\-Mouse\-Pos}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{to\-Mouse\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}vector3df to\-Mouse\-Pos}}\label{_player_8cpp_a3dd0b4a1fe67019913c1d45703f2db42}
+
+
+to mouse position. 
+
+
+
+Referenced by Player\-::\-Raycast().
+
+\hypertarget{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{\index{Player.\-cpp@{Player.\-cpp}!vulnerable\-Timer@{vulnerable\-Timer}}
+\index{vulnerable\-Timer@{vulnerable\-Timer}!Player.cpp@{Player.\-cpp}}
+\subsubsection[{vulnerable\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 vulnerable\-Timer = 0}}\label{_player_8cpp_a73659202e903d625e27de1f6278ead6f}
+
+
+The vulnerable timer. 
+
+
+
+Referenced by Player\-::get\-Vulnerable\-Timer(), Player\-::\-Move(), and Player\-::\-Take\-Damage().
+

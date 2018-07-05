@@ -1,0 +1,4 @@
+<map id="Catch::TestCase" name="Catch::TestCase">
+<area shape="rect" id="node2" href="$struct_catch_1_1_test_case_info.html" title="{Catch::TestCaseInfo\n||+ TestCaseInfo()\l+ isHidden()\l+ throws()\l+ okToFail()\l+ expectedToFail()\l+ tagsAsString()\l}" alt="" coords="259,435,403,586"/>
+<area shape="rect" id="node3" href="$struct_catch_1_1_source_line_info.html" title="{Catch::SourceLineInfo\n||+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ operator=()\l+ operator=()\l+ empty()\l+ operator==()\l+ operator\&lt;()\l}" alt="" coords="24,147,176,341"/>
+</map>

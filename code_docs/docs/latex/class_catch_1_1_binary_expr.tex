@@ -1,0 +1,111 @@
+\hypertarget{class_catch_1_1_binary_expr}{\section{Catch\-:\-:Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$ Class Template Reference}
+\label{class_catch_1_1_binary_expr}\index{Catch\-::\-Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$@{Catch\-::\-Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{class_catch_1_1_binary_expr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_catch_1_1_binary_expr__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_binary_expr_a657d66346aef97a760c22776fe6008b6}{Binary\-Expr} (bool comparison\-Result, Lhs\-T lhs, \hyperlink{class_catch_1_1_string_ref}{String\-Ref} op, Rhs\-T rhs)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_catch_1_1_binary_expr_af998022712d4bd3e4fc7ab9b8a38b445}{stream\-Reconstructed\-Expression} (std\-::ostream \&os) const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Lhs\-T \hyperlink{class_catch_1_1_binary_expr_a306b29e77b48f9c538c5031a59adc4ce}{m\-\_\-lhs}
+\item 
+\hyperlink{class_catch_1_1_string_ref}{String\-Ref} \hyperlink{class_catch_1_1_binary_expr_ab21dea40c53fd64d4f7a073dbe93ec95}{m\-\_\-op}
+\item 
+Rhs\-T \hyperlink{class_catch_1_1_binary_expr_a54cb1629bf304ebe0c1560f4cc2bc186}{m\-\_\-rhs}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_binary_expr_a657d66346aef97a760c22776fe6008b6}{\index{Catch\-::\-Binary\-Expr@{Catch\-::\-Binary\-Expr}!Binary\-Expr@{Binary\-Expr}}
+\index{Binary\-Expr@{Binary\-Expr}!Catch::BinaryExpr@{Catch\-::\-Binary\-Expr}}
+\subsubsection[{Binary\-Expr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T , typename Rhs\-T $>$ {\bf Catch\-::\-Binary\-Expr}$<$ Lhs\-T, Rhs\-T $>$\-::{\bf Binary\-Expr} (
+\begin{DoxyParamCaption}
+\item[{bool}]{comparison\-Result, }
+\item[{Lhs\-T}]{lhs, }
+\item[{{\bf String\-Ref}}]{op, }
+\item[{Rhs\-T}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_binary_expr_a657d66346aef97a760c22776fe6008b6}
+
+\begin{DoxyCode}
+1335             : \hyperlink{struct_catch_1_1_i_transient_expression_aafe69572b7ed884e63ec81f58d4afd8c}{ITransientExpression}\{ \textcolor{keyword}{true}, comparisonResult \},
+1336             \hyperlink{class_catch_1_1_binary_expr_a306b29e77b48f9c538c5031a59adc4ce}{m\_lhs}(lhs),
+1337             \hyperlink{class_catch_1_1_binary_expr_ab21dea40c53fd64d4f7a073dbe93ec95}{m\_op}(op),
+1338             \hyperlink{class_catch_1_1_binary_expr_a54cb1629bf304ebe0c1560f4cc2bc186}{m\_rhs}(rhs)
+1339         \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_binary_expr_af998022712d4bd3e4fc7ab9b8a38b445}{\index{Catch\-::\-Binary\-Expr@{Catch\-::\-Binary\-Expr}!stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}}
+\index{stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}!Catch::BinaryExpr@{Catch\-::\-Binary\-Expr}}
+\subsubsection[{stream\-Reconstructed\-Expression}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T , typename Rhs\-T $>$ void {\bf Catch\-::\-Binary\-Expr}$<$ Lhs\-T, Rhs\-T $>$\-::stream\-Reconstructed\-Expression (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [private]}, {\ttfamily [virtual]}}}\label{class_catch_1_1_binary_expr_af998022712d4bd3e4fc7ab9b8a38b445}
+
+
+Implements \hyperlink{struct_catch_1_1_i_transient_expression_aabe1889df9c6e639a24afb08d8a0fe9e}{Catch\-::\-I\-Transient\-Expression}.
+
+
+
+References Catch\-::format\-Reconstructed\-Expression(), and Catch\-::\-Detail\-::stringify().
+
+
+\begin{DoxyCode}
+1328                                                                           \{
+1329             \hyperlink{namespace_catch_a520110c31f26cf9892595772ab814fc0}{formatReconstructedExpression}
+1330             (os, \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(\hyperlink{class_catch_1_1_binary_expr_a306b29e77b48f9c538c5031a59adc4ce}{m\_lhs}), 
+      \hyperlink{class_catch_1_1_binary_expr_ab21dea40c53fd64d4f7a073dbe93ec95}{m\_op}, \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(\hyperlink{class_catch_1_1_binary_expr_a54cb1629bf304ebe0c1560f4cc2bc186}{m\_rhs}));
+1331         \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_binary_expr_a306b29e77b48f9c538c5031a59adc4ce}{\index{Catch\-::\-Binary\-Expr@{Catch\-::\-Binary\-Expr}!m\-\_\-lhs@{m\-\_\-lhs}}
+\index{m\-\_\-lhs@{m\-\_\-lhs}!Catch::BinaryExpr@{Catch\-::\-Binary\-Expr}}
+\subsubsection[{m\-\_\-lhs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T , typename Rhs\-T $>$ Lhs\-T {\bf Catch\-::\-Binary\-Expr}$<$ Lhs\-T, Rhs\-T $>$\-::m\-\_\-lhs\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_binary_expr_a306b29e77b48f9c538c5031a59adc4ce}
+\hypertarget{class_catch_1_1_binary_expr_ab21dea40c53fd64d4f7a073dbe93ec95}{\index{Catch\-::\-Binary\-Expr@{Catch\-::\-Binary\-Expr}!m\-\_\-op@{m\-\_\-op}}
+\index{m\-\_\-op@{m\-\_\-op}!Catch::BinaryExpr@{Catch\-::\-Binary\-Expr}}
+\subsubsection[{m\-\_\-op}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T , typename Rhs\-T $>$ {\bf String\-Ref} {\bf Catch\-::\-Binary\-Expr}$<$ Lhs\-T, Rhs\-T $>$\-::m\-\_\-op\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_binary_expr_ab21dea40c53fd64d4f7a073dbe93ec95}
+\hypertarget{class_catch_1_1_binary_expr_a54cb1629bf304ebe0c1560f4cc2bc186}{\index{Catch\-::\-Binary\-Expr@{Catch\-::\-Binary\-Expr}!m\-\_\-rhs@{m\-\_\-rhs}}
+\index{m\-\_\-rhs@{m\-\_\-rhs}!Catch::BinaryExpr@{Catch\-::\-Binary\-Expr}}
+\subsubsection[{m\-\_\-rhs}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Lhs\-T , typename Rhs\-T $>$ Rhs\-T {\bf Catch\-::\-Binary\-Expr}$<$ Lhs\-T, Rhs\-T $>$\-::m\-\_\-rhs\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_binary_expr_a54cb1629bf304ebe0c1560f4cc2bc186}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

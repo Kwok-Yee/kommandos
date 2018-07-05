@@ -1,0 +1,104 @@
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher}{\section{Catch\-:\-:Matchers\-:\-:Generic\-:\-:Predicate\-Matcher$<$ T $>$ Class Template Reference}
+\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher}\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher$<$ T $>$@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Matchers\-:\-:Generic\-:\-:Predicate\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Matchers\-:\-:Generic\-:\-:Predicate\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a57d53ef028c2f7b92b016f627f91aa76}{Predicate\-Matcher} (std\-::function$<$ bool(T const \&)$>$ const \&elem, std\-::string const \&descr)
+\item 
+bool \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a2ec0e8ec19c4c5e26271d59a06a62b52}{match} (T const \&item) const override
+\item 
+std\-::string \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_af7d59e94892cc09471bbaefac4c889fd}{describe} () const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::function$<$ bool(T const \&)$>$ \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_ab7f09e9f96fb9d794e1fc699497ec3e0}{m\-\_\-predicate}
+\item 
+std\-::string \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a7736732e65a93e4e1f889804d043407e}{m\-\_\-description}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a57d53ef028c2f7b92b016f627f91aa76}{\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}!Predicate\-Matcher@{Predicate\-Matcher}}
+\index{Predicate\-Matcher@{Predicate\-Matcher}!Catch::Matchers::Generic::PredicateMatcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}}
+\subsubsection[{Predicate\-Matcher}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ {\bf Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}$<$ T $>$\-::{\bf Predicate\-Matcher} (
+\begin{DoxyParamCaption}
+\item[{std\-::function$<$ bool(T const \&)$>$ const \&}]{elem, }
+\item[{std\-::string const \&}]{descr}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a57d53ef028c2f7b92b016f627f91aa76}
+
+\begin{DoxyCode}
+2426                     :\hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_ab7f09e9f96fb9d794e1fc699497ec3e0}{m\_predicate}(std::move(elem)),
+2427                     \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a7736732e65a93e4e1f889804d043407e}{m\_description}(\hyperlink{namespace_catch_1_1_matchers_1_1_generic_1_1_detail_a79ef1103073f7a8d31735436d2012835}{Detail::finalizeDescription}(descr
+      ))
+2428                 \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_af7d59e94892cc09471bbaefac4c889fd}{\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}!describe@{describe}}
+\index{describe@{describe}!Catch::Matchers::Generic::PredicateMatcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}}
+\subsubsection[{describe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ std\-::string {\bf Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}$<$ T $>$\-::describe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_af7d59e94892cc09471bbaefac4c889fd}
+
+\begin{DoxyCode}
+2434                                                     \{
+2435                     \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a7736732e65a93e4e1f889804d043407e}{m\_description};
+2436                 \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a2ec0e8ec19c4c5e26271d59a06a62b52}{\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}!match@{match}}
+\index{match@{match}!Catch::Matchers::Generic::PredicateMatcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}}
+\subsubsection[{match}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ bool {\bf Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}$<$ T $>$\-::match (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{item}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a2ec0e8ec19c4c5e26271d59a06a62b52}
+
+\begin{DoxyCode}
+2430                                                          \{
+2431                     \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_ab7f09e9f96fb9d794e1fc699497ec3e0}{m\_predicate}(item);
+2432                 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a7736732e65a93e4e1f889804d043407e}{\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}!m\-\_\-description@{m\-\_\-description}}
+\index{m\-\_\-description@{m\-\_\-description}!Catch::Matchers::Generic::PredicateMatcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}}
+\subsubsection[{m\-\_\-description}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ std\-::string {\bf Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}$<$ T $>$\-::m\-\_\-description\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_a7736732e65a93e4e1f889804d043407e}
+\hypertarget{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_ab7f09e9f96fb9d794e1fc699497ec3e0}{\index{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}!m\-\_\-predicate@{m\-\_\-predicate}}
+\index{m\-\_\-predicate@{m\-\_\-predicate}!Catch::Matchers::Generic::PredicateMatcher@{Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}}
+\subsubsection[{m\-\_\-predicate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T$>$ std\-::function$<$bool(T const\&)$>$ {\bf Catch\-::\-Matchers\-::\-Generic\-::\-Predicate\-Matcher}$<$ T $>$\-::m\-\_\-predicate\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_matchers_1_1_generic_1_1_predicate_matcher_ab7f09e9f96fb9d794e1fc699497ec3e0}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

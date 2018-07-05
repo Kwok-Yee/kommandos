@@ -1,0 +1,5 @@
+<map id="Catch::SectionEndInfo" name="Catch::SectionEndInfo">
+<area shape="rect" id="node2" href="$struct_catch_1_1_section_info.html" title="{Catch::SectionInfo\n||+ SectionInfo()\l}" alt="" coords="183,555,312,632"/>
+<area shape="rect" id="node3" href="$struct_catch_1_1_source_line_info.html" title="{Catch::SourceLineInfo\n||+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ operator=()\l+ operator=()\l+ empty()\l+ operator==()\l+ operator\&lt;()\l}" alt="" coords="189,176,341,371"/>
+<area shape="rect" id="node8" href="$struct_catch_1_1_counts.html" title="{Catch::Counts\n||+ operator&#45;()\l+ operator+=()\l+ total()\l+ allPassed()\l+ allOk()\l}" alt="" coords="5,395,112,531"/>
+</map>

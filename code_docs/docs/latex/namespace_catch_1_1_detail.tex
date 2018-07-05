@@ -1,0 +1,191 @@
+\hypertarget{namespace_catch_1_1_detail}{\section{Catch\-:\-:Detail Namespace Reference}
+\label{namespace_catch_1_1_detail}\index{Catch\-::\-Detail@{Catch\-::\-Detail}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_catch_1_1_detail_1_1_is_stream_insertable}{Is\-Stream\-Insertable}
+\item 
+class \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string \hyperlink{namespace_catch_1_1_detail_ac5d6c510e565ee5bddcc2236194ce29e}{raw\-Memory\-To\-String} (const void $\ast$object, std\-::size\-\_\-t size)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\-::string \hyperlink{namespace_catch_1_1_detail_a371620ed524abfcae5c3772bf49b563a}{raw\-Memory\-To\-String} (const T \&object)
+\item 
+{\footnotesize template$<$typename E $>$ }\\std\-::string \hyperlink{namespace_catch_1_1_detail_a242396de537c5176710d680cc9ca6b93}{convert\-Unknown\-Enum\-To\-String} (E e)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\-::enable\-\_\-if$<$!std\-::is\-\_\-enum\\*
+$<$ T $>$\-::value, std\-::string $>$\\*
+\-::type \hyperlink{namespace_catch_1_1_detail_accc3d481dbb5356a8c2c04338b511ee1}{convert\-Unstreamable} (T const \&value)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\-::enable\-\_\-if$<$ std\-::is\-\_\-enum\\*
+$<$ T $>$\-::value, std\-::string $>$\\*
+\-::type \hyperlink{namespace_catch_1_1_detail_abf38276f70bd8b4d9ffe61c6e042304b}{convert\-Unstreamable} (T const \&value)
+\item 
+{\footnotesize template$<$typename T $>$ }\\std\-::string \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{stringify} (const T \&e)
+\item 
+{\footnotesize template$<$typename Input\-Iterator $>$ }\\std\-::string \hyperlink{namespace_catch_1_1_detail_a6650a1dff325bf29962ff15ae73fd972}{range\-To\-String} (Input\-Iterator first, Input\-Iterator last)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\-::string \hyperlink{namespace_catch_1_1_detail_a466775f4eec29ffef29ab334cd885136}{unprintable\-String}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{namespace_catch_1_1_detail_a242396de537c5176710d680cc9ca6b93}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!convert\-Unknown\-Enum\-To\-String@{convert\-Unknown\-Enum\-To\-String}}
+\index{convert\-Unknown\-Enum\-To\-String@{convert\-Unknown\-Enum\-To\-String}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{convert\-Unknown\-Enum\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename E $>$ std\-::string Catch\-::\-Detail\-::convert\-Unknown\-Enum\-To\-String (
+\begin{DoxyParamCaption}
+\item[{E}]{e}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_a242396de537c5176710d680cc9ca6b93}
+
+
+References stringify().
+
+
+
+Referenced by convert\-Unstreamable().
+
+
+\begin{DoxyCode}
+836                                                   \{
+837             \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{return ::Catch::Detail::stringify}(\textcolor{keyword}{static\_cast<}typename 
+      std::underlying\_type<E>::type\textcolor{keyword}{>}(e));
+838         \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_detail_accc3d481dbb5356a8c2c04338b511ee1}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!convert\-Unstreamable@{convert\-Unstreamable}}
+\index{convert\-Unstreamable@{convert\-Unstreamable}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{convert\-Unstreamable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::enable\-\_\-if$<$!std\-::is\-\_\-enum$<$T$>$\-::value, std\-::string$>$\-::type Catch\-::\-Detail\-::convert\-Unstreamable (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_accc3d481dbb5356a8c2c04338b511ee1}
+
+
+References unprintable\-String.
+
+
+
+Referenced by Catch\-::\-String\-Maker$<$ T, typename $>$\-::convert().
+
+
+\begin{DoxyCode}
+779                                                                                                       \{
+780 \textcolor{preprocessor}{#if !defined(CATCH\_CONFIG\_FALLBACK\_STRINGIFIER)}
+781 \textcolor{preprocessor}{}            (void)value;
+782             \textcolor{keywordflow}{return} \hyperlink{namespace_catch_1_1_detail_a466775f4eec29ffef29ab334cd885136}{Detail::unprintableString};
+783 \textcolor{preprocessor}{#else}
+784 \textcolor{preprocessor}{}            \textcolor{keywordflow}{return} CATCH\_CONFIG\_FALLBACK\_STRINGIFIER(value);
+785 \textcolor{preprocessor}{#endif}
+786 \textcolor{preprocessor}{}        \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_detail_abf38276f70bd8b4d9ffe61c6e042304b}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!convert\-Unstreamable@{convert\-Unstreamable}}
+\index{convert\-Unstreamable@{convert\-Unstreamable}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{convert\-Unstreamable}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::enable\-\_\-if$<$std\-::is\-\_\-enum$<$T$>$\-::value, std\-::string$>$\-::type Catch\-::\-Detail\-::convert\-Unstreamable (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{value}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_abf38276f70bd8b4d9ffe61c6e042304b}
+
+
+References convert\-Unknown\-Enum\-To\-String().
+
+
+\begin{DoxyCode}
+788                                                                                                      \{
+789             \textcolor{keywordflow}{return} \hyperlink{namespace_catch_1_1_detail_a242396de537c5176710d680cc9ca6b93}{convertUnknownEnumToString}(value);
+790         \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_detail_a6650a1dff325bf29962ff15ae73fd972}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!range\-To\-String@{range\-To\-String}}
+\index{range\-To\-String@{range\-To\-String}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{range\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Input\-Iterator $>$ std\-::string Catch\-::\-Detail\-::range\-To\-String (
+\begin{DoxyParamCaption}
+\item[{Input\-Iterator}]{first, }
+\item[{Input\-Iterator}]{last}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_a6650a1dff325bf29962ff15ae73fd972}
+
+
+References Catch\-::\-Reusable\-String\-Stream\-::str(), and stringify().
+
+
+\begin{DoxyCode}
+996                                                                          \{
+997             ReusableStringStream rss;
+998             rss << \textcolor{stringliteral}{"\{ "};
+999             \textcolor{keywordflow}{if} (first != last) \{
+1000                 rss << \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{::Catch::Detail::stringify}(*first);
+1001                 \textcolor{keywordflow}{for} (++first; first != last; ++first)
+1002                     rss << \textcolor{stringliteral}{", "} << ::\hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(*first);
+1003             \}
+1004             rss << \textcolor{stringliteral}{" \}"};
+1005             \textcolor{keywordflow}{return} rss.str();
+1006         \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_detail_ac5d6c510e565ee5bddcc2236194ce29e}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!raw\-Memory\-To\-String@{raw\-Memory\-To\-String}}
+\index{raw\-Memory\-To\-String@{raw\-Memory\-To\-String}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{raw\-Memory\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Catch\-::\-Detail\-::raw\-Memory\-To\-String (
+\begin{DoxyParamCaption}
+\item[{const void $\ast$}]{object, }
+\item[{std\-::size\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_ac5d6c510e565ee5bddcc2236194ce29e}
+
+
+Referenced by raw\-Memory\-To\-String().
+
+\hypertarget{namespace_catch_1_1_detail_a371620ed524abfcae5c3772bf49b563a}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!raw\-Memory\-To\-String@{raw\-Memory\-To\-String}}
+\index{raw\-Memory\-To\-String@{raw\-Memory\-To\-String}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{raw\-Memory\-To\-String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string Catch\-::\-Detail\-::raw\-Memory\-To\-String (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{object}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_a371620ed524abfcae5c3772bf49b563a}
+
+
+References raw\-Memory\-To\-String().
+
+
+
+Referenced by Catch\-::\-String\-Maker$<$ T $\ast$ $>$\-::convert(), and Catch\-::\-String\-Maker$<$ R C\-::$\ast$ $>$\-::convert().
+
+
+\begin{DoxyCode}
+758                                                      \{
+759             \textcolor{keywordflow}{return} \hyperlink{namespace_catch_1_1_detail_a371620ed524abfcae5c3772bf49b563a}{rawMemoryToString}(&\textcolor{keywordtype}{object}, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{object}));
+760         \}
+\end{DoxyCode}
+\hypertarget{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!stringify@{stringify}}
+\index{stringify@{stringify}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{stringify}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string Catch\-::\-Detail\-::stringify (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{e}
+\end{DoxyParamCaption}
+)}}\label{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}
+
+
+Referenced by Catch\-::\-String\-Maker$<$ char\mbox{[}\-S\-Z\mbox{]}$>$\-::convert(), Catch\-::\-String\-Maker$<$ signed char\mbox{[}\-S\-Z\mbox{]}$>$\-::convert(), Catch\-::\-String\-Maker$<$ unsigned char\mbox{[}\-S\-Z\mbox{]}$>$\-::convert(), convert\-Unknown\-Enum\-To\-String(), Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher$<$ T $>$\-::describe(), Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Matcher$<$ T $>$\-::describe(), Catch\-::\-Matchers\-::\-Vector\-::\-Equals\-Matcher$<$ T $>$\-::describe(), Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher$<$ T $>$\-::describe(), Catch\-::\-Detail\-::\-Approx\-::epsilon(), Catch\-::\-Detail\-::\-Approx\-::margin(), range\-To\-String(), Catch\-::range\-To\-String(), Catch\-::\-Binary\-Expr$<$ Lhs\-T, Rhs\-T $>$\-::stream\-Reconstructed\-Expression(), Catch\-::\-Unary\-Expr$<$ Lhs\-T $>$\-::stream\-Reconstructed\-Expression(), and Catch\-::\-Match\-Expr$<$ Arg\-T, Matcher\-T $>$\-::stream\-Reconstructed\-Expression().
+
+
+\begin{DoxyCode}
+831                                         \{
+832             return ::Catch::StringMaker<typename std::remove\_cv<typename std::remove\_reference<T>::type>
+      ::type>::convert(e);
+833         \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\hypertarget{namespace_catch_1_1_detail_a466775f4eec29ffef29ab334cd885136}{\index{Catch\-::\-Detail@{Catch\-::\-Detail}!unprintable\-String@{unprintable\-String}}
+\index{unprintable\-String@{unprintable\-String}!Catch::Detail@{Catch\-::\-Detail}}
+\subsubsection[{unprintable\-String}]{\setlength{\rightskip}{0pt plus 5cm}const std\-::string Catch\-::\-Detail\-::unprintable\-String}}\label{namespace_catch_1_1_detail_a466775f4eec29ffef29ab334cd885136}
+
+
+Referenced by convert\-Unstreamable(), and Catch\-::\-Match\-Expr$<$ Arg\-T, Matcher\-T $>$\-::stream\-Reconstructed\-Expression().
+

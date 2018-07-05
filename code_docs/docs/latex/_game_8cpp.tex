@@ -1,0 +1,181 @@
+\hypertarget{_game_8cpp}{\section{Game.\-cpp File Reference}
+\label{_game_8cpp}\index{Game.\-cpp@{Game.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include $<$irr\-Klang.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Game.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}driver\-Choice.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Collision.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Input\-Receiver.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Enemy\-Spawner.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Particle\-System.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Score.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}U\-I\-System.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Camera.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Object\-Placement\-Generation.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sound\-Manager.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Tutorial.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Powerup\-Spawner.\-h\char`\"{}}\\*
+Include dependency graph for Game.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_game_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+I\-Video\-Driver $\ast$ \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver}
+\item 
+I\-Scene\-Manager $\ast$ \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr}
+\item 
+I\-G\-U\-I\-Environment $\ast$ \hyperlink{_game_8cpp_ac1b59d355d5bebba653a1a6a4a6a2e19}{guienv}
+\item 
+\hyperlink{class_input_receiver}{Input\-Receiver} \hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{input\-Receiver}
+\item 
+\hyperlink{class_u_i_system}{U\-I\-System} $\ast$ \hyperlink{_game_8cpp_a968f4669d04899e10a3f52223cd20811}{u\-I\-System}
+\item 
+\hyperlink{class_score}{Score} \hyperlink{_game_8cpp_a94014506ee2a0c05dcb878c5f6a1ce0f}{score}
+\item 
+\hyperlink{class_collision}{Collision} \hyperlink{_game_8cpp_a30abb5f688cba12278561666d3bf26b9}{\-\_\-collision}
+\item 
+\hyperlink{class_enemy_spawner}{Enemy\-Spawner} $\ast$ \hyperlink{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}{enemy\-Spawner}
+\item 
+\hyperlink{class_camera}{Camera} $\ast$ \hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera}
+\item 
+\hyperlink{class_collision}{Collision} \hyperlink{_game_8cpp_abed57b82902b065e35ed4bb9cbef6230}{collision\-Manager}
+\item 
+\hyperlink{class_tutorial}{Tutorial} \hyperlink{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{tutorial}
+\item 
+\hyperlink{class_power_up_spawner}{Power\-Up\-Spawner} $\ast$ \hyperlink{_game_8cpp_a8b36d1e84444017dfabce4f05ad6006f}{power\-Spawn}
+\item 
+int \hyperlink{_game_8cpp_ad465136e518210a5b41ec8546cf4bd9d}{last\-F\-P\-S} = -\/1
+\item 
+u32 \hyperlink{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}{prev\-Frame}
+\item 
+const path \hyperlink{_game_8cpp_aa6114f38113de74446defa5ca677c013}{crate\-Diffuse} = \char`\"{}../media/crate/crate\-\_\-diffuse.\-png\char`\"{}
+\item 
+const path \hyperlink{_game_8cpp_ab03e7265c137c90450ff5cb00979c588}{crate\-Normal} = \char`\"{}../media/crate/crate\-\_\-normal.\-png\char`\"{}
+\item 
+bool \hyperlink{_game_8cpp_ab03d1c8555afc7bf0c7b6459b7bbb045}{is\-Game\-Over}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_game_8cpp_a30abb5f688cba12278561666d3bf26b9}{\index{Game.\-cpp@{Game.\-cpp}!\-\_\-collision@{\-\_\-collision}}
+\index{\-\_\-collision@{\-\_\-collision}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{\-\_\-collision}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision} \-\_\-collision}}\label{_game_8cpp_a30abb5f688cba12278561666d3bf26b9}
+\hypertarget{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{\index{Game.\-cpp@{Game.\-cpp}!camera@{camera}}
+\index{camera@{camera}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{camera}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera}$\ast$ camera}}\label{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}
+
+
+Referenced by Game\-::\-Set\-Is\-Game\-Over(), Game\-::\-Start(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_abed57b82902b065e35ed4bb9cbef6230}{\index{Game.\-cpp@{Game.\-cpp}!collision\-Manager@{collision\-Manager}}
+\index{collision\-Manager@{collision\-Manager}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{collision\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision} collision\-Manager}}\label{_game_8cpp_abed57b82902b065e35ed4bb9cbef6230}
+
+
+Referenced by Game\-::\-Update().
+
+\hypertarget{_game_8cpp_aa6114f38113de74446defa5ca677c013}{\index{Game.\-cpp@{Game.\-cpp}!crate\-Diffuse@{crate\-Diffuse}}
+\index{crate\-Diffuse@{crate\-Diffuse}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{crate\-Diffuse}]{\setlength{\rightskip}{0pt plus 5cm}const path crate\-Diffuse = \char`\"{}../media/crate/crate\-\_\-diffuse.\-png\char`\"{}}}\label{_game_8cpp_aa6114f38113de74446defa5ca677c013}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Objects().
+
+\hypertarget{_game_8cpp_ab03e7265c137c90450ff5cb00979c588}{\index{Game.\-cpp@{Game.\-cpp}!crate\-Normal@{crate\-Normal}}
+\index{crate\-Normal@{crate\-Normal}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{crate\-Normal}]{\setlength{\rightskip}{0pt plus 5cm}const path crate\-Normal = \char`\"{}../media/crate/crate\-\_\-normal.\-png\char`\"{}}}\label{_game_8cpp_ab03e7265c137c90450ff5cb00979c588}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Objects().
+
+\hypertarget{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{\index{Game.\-cpp@{Game.\-cpp}!driver@{driver}}
+\index{driver@{driver}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{driver}]{\setlength{\rightskip}{0pt plus 5cm}I\-Video\-Driver$\ast$ driver}}\label{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Default\-Objects(), Object\-Placement\-Generation\-::\-Create\-Objects(), Game\-::\-Draw(), Game\-Over\-State\-::\-Show\-Game\-Over(), Tutorial\-::\-Show\-Tutorial(), and Game\-::\-Start().
+
+\hypertarget{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}{\index{Game.\-cpp@{Game.\-cpp}!enemy\-Spawner@{enemy\-Spawner}}
+\index{enemy\-Spawner@{enemy\-Spawner}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{enemy\-Spawner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Spawner}$\ast$ enemy\-Spawner}}\label{_game_8cpp_a78dc0d7de0179cebaebf79df72c6070f}
+
+
+Referenced by Game\-::\-Start(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_ac1b59d355d5bebba653a1a6a4a6a2e19}{\index{Game.\-cpp@{Game.\-cpp}!guienv@{guienv}}
+\index{guienv@{guienv}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{guienv}]{\setlength{\rightskip}{0pt plus 5cm}I\-G\-U\-I\-Environment$\ast$ guienv}}\label{_game_8cpp_ac1b59d355d5bebba653a1a6a4a6a2e19}
+
+
+Referenced by Game\-::\-Draw(), and Game\-::\-Start().
+
+\hypertarget{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{\index{Game.\-cpp@{Game.\-cpp}!input\-Receiver@{input\-Receiver}}
+\index{input\-Receiver@{input\-Receiver}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{input\-Receiver}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Input\-Receiver} input\-Receiver}}\label{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}
+
+
+Referenced by Game\-::\-Game(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_ab03d1c8555afc7bf0c7b6459b7bbb045}{\index{Game.\-cpp@{Game.\-cpp}!is\-Game\-Over@{is\-Game\-Over}}
+\index{is\-Game\-Over@{is\-Game\-Over}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{is\-Game\-Over}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-Game\-Over}}\label{_game_8cpp_ab03d1c8555afc7bf0c7b6459b7bbb045}
+
+
+Referenced by Game\-::\-Get\-Is\-Game\-Over(), Game\-::\-Set\-Is\-Game\-Over(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_ad465136e518210a5b41ec8546cf4bd9d}{\index{Game.\-cpp@{Game.\-cpp}!last\-F\-P\-S@{last\-F\-P\-S}}
+\index{last\-F\-P\-S@{last\-F\-P\-S}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{last\-F\-P\-S}]{\setlength{\rightskip}{0pt plus 5cm}int last\-F\-P\-S = -\/1}}\label{_game_8cpp_ad465136e518210a5b41ec8546cf4bd9d}
+
+
+Referenced by Game\-::\-Draw().
+
+\hypertarget{_game_8cpp_a8b36d1e84444017dfabce4f05ad6006f}{\index{Game.\-cpp@{Game.\-cpp}!power\-Spawn@{power\-Spawn}}
+\index{power\-Spawn@{power\-Spawn}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{power\-Spawn}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Power\-Up\-Spawner}$\ast$ power\-Spawn}}\label{_game_8cpp_a8b36d1e84444017dfabce4f05ad6006f}
+
+
+Referenced by Game\-::\-Start().
+
+\hypertarget{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}{\index{Game.\-cpp@{Game.\-cpp}!prev\-Frame@{prev\-Frame}}
+\index{prev\-Frame@{prev\-Frame}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{prev\-Frame}]{\setlength{\rightskip}{0pt plus 5cm}u32 prev\-Frame}}\label{_game_8cpp_a0ff1af7dce63798c7cd58af0841a0a73}
+
+
+Referenced by Game\-::\-Start(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_a94014506ee2a0c05dcb878c5f6a1ce0f}{\index{Game.\-cpp@{Game.\-cpp}!score@{score}}
+\index{score@{score}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{score}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Score} score}}\label{_game_8cpp_a94014506ee2a0c05dcb878c5f6a1ce0f}
+
+
+Referenced by Game\-::\-Draw(), and Game\-::\-Start().
+
+\hypertarget{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{\index{Game.\-cpp@{Game.\-cpp}!smgr@{smgr}}
+\index{smgr@{smgr}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{smgr}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Manager$\ast$ smgr}}\label{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Default\-Objects(), Object\-Placement\-Generation\-::\-Create\-Objects(), Game\-::\-Draw(), Object\-Placement\-Generation\-::\-Generate\-New\-Objects(), Game\-Over\-State\-::\-Show\-Game\-Over(), Tutorial\-::\-Show\-Tutorial(), and Game\-::\-Start().
+
+\hypertarget{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}{\index{Game.\-cpp@{Game.\-cpp}!tutorial@{tutorial}}
+\index{tutorial@{tutorial}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{tutorial}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tutorial} tutorial}}\label{_game_8cpp_ae2e07e9072887b6ad4c087d948f1a431}
+
+
+Referenced by Game\-::\-Set\-Is\-Game\-Over(), Game\-::\-Start(), and Game\-::\-Update().
+
+\hypertarget{_game_8cpp_a968f4669d04899e10a3f52223cd20811}{\index{Game.\-cpp@{Game.\-cpp}!u\-I\-System@{u\-I\-System}}
+\index{u\-I\-System@{u\-I\-System}!Game.cpp@{Game.\-cpp}}
+\subsubsection[{u\-I\-System}]{\setlength{\rightskip}{0pt plus 5cm}{\bf U\-I\-System}$\ast$ u\-I\-System}}\label{_game_8cpp_a968f4669d04899e10a3f52223cd20811}
+
+
+Referenced by Game\-::\-Draw(), and Game\-::\-Start().
+

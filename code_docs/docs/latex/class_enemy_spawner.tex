@@ -1,0 +1,409 @@
+\hypertarget{class_enemy_spawner}{\section{Enemy\-Spawner Class Reference}
+\label{class_enemy_spawner}\index{Enemy\-Spawner@{Enemy\-Spawner}}
+}
+
+
+{\ttfamily \#include $<$Enemy\-Spawner.\-h$>$}
+
+
+
+Collaboration diagram for Enemy\-Spawner\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{class_enemy_spawner__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_enemy_spawner_a3553ec74e00d89f89f323b36cc9bf3f6}{Enemy\-Spawner} (irr\-::\-Irrlicht\-Device $\ast$device, \hyperlink{class_player}{Player} $\ast$\hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player})
+\item 
+void \hyperlink{class_enemy_spawner_ab7717d2d42a40b943564629a85f0fabc}{Update\-Enemies} ()
+\item 
+irr\-::core\-::array$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_enemy_spawner_ad83b7b7bfe4904e9addcad621d62295d}{get\-Active\-Enemies} ()
+\item 
+\hyperlink{class_enemy}{Enemy} $\ast$ \hyperlink{class_enemy_spawner_a42d5341193911135909c3df1a6271d3f}{Get\-Enemy} (int id)
+\item 
+void \hyperlink{class_enemy_spawner_ac664064f5f057837fde5c2e81daa2e6e}{Spawn\-Mathroska\-Minion} (irr\-::core\-::vector3df spawn\-Pos, \hyperlink{class_enemy_a98c2ee2c2081001de17a4bc9fa8da94f}{Enemy\-::\-Enemy\-Type} enemy\-Type, irr\-::s32 nest\-Amount=0)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_enemy_spawner}{Enemy\-Spawner} $\ast$ \hyperlink{class_enemy_spawner_a9a7a1adc56f040fd2c139a6acdae0d90}{Get\-Spawner} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_enemy_spawner_ad7105663a68f8cb931af64463f0286c8}{Next\-Wave} ()
+\item 
+void \hyperlink{class_enemy_spawner_a047cc9ff180ef6bb4a1cc437b786553b}{Spawn} ()
+\item 
+void \hyperlink{class_enemy_spawner_a42f58b89cfdfd21a19459d850a79876d}{Initialise\-Wave\-Data} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_enemy_spawner_a3553ec74e00d89f89f323b36cc9bf3f6}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Enemy\-Spawner@{Enemy\-Spawner}}
+\index{Enemy\-Spawner@{Enemy\-Spawner}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Enemy\-Spawner}]{\setlength{\rightskip}{0pt plus 5cm}Enemy\-Spawner\-::\-Enemy\-Spawner (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device, }
+\item[{{\bf Player} $\ast$}]{player}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_spawner_a3553ec74e00d89f89f323b36cc9bf3f6}
+
+
+References \-\_\-cam, \-\_\-player, amount\-Of\-Enemies, enem\-Spawn\-Sound\-Manager, enemy\-Pool, enemy\-Spawner\-I\-Device, enemy\-Spawner\-Smgr, game\-\_\-\-Enemy\-Spawner, Enemy\-Pool\-::\-Get\-Instance(), Game\-::\-Get\-Instance(), Sound\-Manager\-::\-Get\-Instance(), Heat\-Map\-Manager\-::\-Get\-Instance(), Camera\-::\-Get\-Instance(), heat\-Map\-Mngr, particle\-System, prev\-Frame\-Time, resize, spawner, and spawn\-Positions.
+
+
+\begin{DoxyCode}
+62 \{
+63     \hyperlink{_enemy_spawner_8cpp_a351bdd6d08cc3965554b639f8e11e360}{particleSystem} = \textcolor{keyword}{new} \hyperlink{class_particle_system}{ParticleSystem}(device);
+64     \hyperlink{_enemy_spawner_8cpp_a6fb6c47d7964fa1186985510e544e686}{enemySpawnerIDevice} = device;
+65     \hyperlink{_enemy_spawner_8cpp_acdc4e203d85a9683181751a7695ee478}{enemySpawnerSmgr} = \hyperlink{_enemy_spawner_8cpp_a6fb6c47d7964fa1186985510e544e686}{enemySpawnerIDevice}->getSceneManager();
+66     \hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player} = \hyperlink{class_player}{Player};
+67     \hyperlink{_enemy_spawner_8cpp_a473330ef228d901a0124176f437f5855}{game\_EnemySpawner} = \hyperlink{_enemy_spawner_8cpp_a473330ef228d901a0124176f437f5855}{game\_EnemySpawner}->
+      \hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+68     \hyperlink{_enemy_spawner_8cpp_a4dcc017b886f43aae8dec561367a6d3c}{heatMapMngr} = \hyperlink{_enemy_spawner_8cpp_a4dcc017b886f43aae8dec561367a6d3c}{heatMapMngr}->\hyperlink{class_heat_map_manager_acc2cf6cbce0774a997ef1c408f07fb87}{GetInstance}();
+69     \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool} = \hyperlink{class_enemy_pool_a9a3e8badcf44d36e36e78d3bf008fd03}{EnemyPool::GetInstance}(device);
+70     \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam} = \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam}->\hyperlink{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}{GetInstance}(NULL);
+71     \hyperlink{_enemy_spawner_8cpp_a8be9978ac9406d024ff2aaf7c719b8cd}{amountOfEnemies} = 12;
+72     \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize} = 2;
+73     \hyperlink{_enemy_spawner_8cpp_a3bdc7599b0df4bac902695a10b091f2f}{enemSpawnSoundManager} = \hyperlink{_enemy_spawner_8cpp_a3bdc7599b0df4bac902695a10b091f2f}{enemSpawnSoundManager}->
+      \hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+74     \textcolor{comment}{//setting spawnpositions in the corners.}
+75     \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}.push\_back(vector3df(-82, 0, -78) * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize});
+76     \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}.push\_back(vector3df(78, 0, -78) * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize});
+77     \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}.push\_back(vector3df(78, 0, 78) * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize});
+78     \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}.push\_back(vector3df(-82, 0, 78) * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize});
+79 
+80     \textcolor{comment}{// In order to do framerate independent movement, we have to know}
+81     \textcolor{comment}{// how long it was since the last frame}
+82     \hyperlink{_enemy_spawner_8cpp_a7f39b7d91ba9b2a31bad8f8558b8a0d9}{prevFrameTime} = \hyperlink{_enemy_spawner_8cpp_a6fb6c47d7964fa1186985510e544e686}{enemySpawnerIDevice}->getTimer()->getTime();
+83     \hyperlink{class_enemy_spawner_a42f58b89cfdfd21a19459d850a79876d}{InitialiseWaveData}();
+84     \hyperlink{_enemy_spawner_8cpp_a665825e12de83fe61e6d661d5ae65c3b}{spawner} = \textcolor{keyword}{this};
+85 
+86     \hyperlink{class_enemy_spawner_a047cc9ff180ef6bb4a1cc437b786553b}{Spawn}();
+87 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_enemy_spawner_ad83b7b7bfe4904e9addcad621d62295d}{\index{Enemy\-Spawner@{Enemy\-Spawner}!get\-Active\-Enemies@{get\-Active\-Enemies}}
+\index{get\-Active\-Enemies@{get\-Active\-Enemies}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{get\-Active\-Enemies}]{\setlength{\rightskip}{0pt plus 5cm}core\-::array$<$ {\bf Enemy} $\ast$ $>$ Enemy\-Spawner\-::get\-Active\-Enemies (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_spawner_ad83b7b7bfe4904e9addcad621d62295d}
+
+
+References active\-Enemies.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+187 \{ \textcolor{keywordflow}{return} \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_a42d5341193911135909c3df1a6271d3f}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Get\-Enemy@{Get\-Enemy}}
+\index{Get\-Enemy@{Get\-Enemy}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Get\-Enemy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy} $\ast$ Enemy\-Spawner\-::\-Get\-Enemy (
+\begin{DoxyParamCaption}
+\item[{int}]{id}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_spawner_a42d5341193911135909c3df1a6271d3f}
+
+
+References active\-Enemies.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+188 \{ \textcolor{keywordflow}{return} \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[id]; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_a9a7a1adc56f040fd2c139a6acdae0d90}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Get\-Spawner@{Get\-Spawner}}
+\index{Get\-Spawner@{Get\-Spawner}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Get\-Spawner}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Spawner} $\ast$ Enemy\-Spawner\-::\-Get\-Spawner (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_enemy_spawner_a9a7a1adc56f040fd2c139a6acdae0d90}
+
+
+References spawner.
+
+
+
+Referenced by Enemy\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+189 \{ \textcolor{keywordflow}{return} \hyperlink{_enemy_spawner_8cpp_a665825e12de83fe61e6d661d5ae65c3b}{spawner}; \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_a42f58b89cfdfd21a19459d850a79876d}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Initialise\-Wave\-Data@{Initialise\-Wave\-Data}}
+\index{Initialise\-Wave\-Data@{Initialise\-Wave\-Data}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Initialise\-Wave\-Data}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Spawner\-::\-Initialise\-Wave\-Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_spawner_a42f58b89cfdfd21a19459d850a79876d}
+
+
+References wave\-Data.
+
+
+\begin{DoxyCode}
+192 \{
+193     \textcolor{comment}{//Amount of enemies:}
+194     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[0] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(0, 0, 0, 0, 0);\textcolor{comment}{//5}
+195     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[1] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(1, 5, 0, 0, 0);\textcolor{comment}{//5}
+196     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[2] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(2, 10, 0, 0, 0);\textcolor{comment}{//10}
+197     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[3] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(3, 8, 3, 0, 0);\textcolor{comment}{//11}
+198     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[4] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(4, 12, 5, 0, 0);\textcolor{comment}{//17}
+199     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[5] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(5, 15, 2, 2, 2);\textcolor{comment}{//20}
+200     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[6] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(6, 10, 0, 7, 2);\textcolor{comment}{//18}
+201     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[7] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(7, 7, 7, 4, 2); \textcolor{comment}{//20}
+202     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[8] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(8, 0, 15, 0, 5); \textcolor{comment}{//20}
+203     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[9] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(9, 0, 0, 15, 7); \textcolor{comment}{//22}
+204     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[10] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(10, 10, 10, 10, 8); \textcolor{comment}{//38}
+205     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[11] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(11, 0, 15, 15, 10); \textcolor{comment}{//40}
+206     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[12] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(12, 10, 10, 10, 10); \textcolor{comment}{//40}
+207     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[13] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(13, 15, 15, 15, 15); \textcolor{comment}{//40}
+208     \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[14] = \textcolor{keyword}{new} \hyperlink{struct_wave_data}{WaveData}(14, 20, 20, 20, 20); \textcolor{comment}{//40}
+209 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_ad7105663a68f8cb931af64463f0286c8}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Next\-Wave@{Next\-Wave}}
+\index{Next\-Wave@{Next\-Wave}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Next\-Wave}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Spawner\-::\-Next\-Wave (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_spawner_ad7105663a68f8cb931af64463f0286c8}
+
+
+References \-\_\-cam, B\-I\-G\-\_\-\-W\-A\-V\-E\-\_\-\-I\-N\-C\-O\-M\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D, Camera\-::big\-Wave\-Shaking, current\-Time, current\-Wave, enem\-Spawn\-Sound\-Manager, enemy\-Spawner\-I\-Device, max\-Wave\-Cooldown, new\-Wave, Sound\-Manager\-::\-Play\-Sound(), Camera\-::state, W\-A\-V\-E\-\_\-\-I\-N\-C\-O\-M\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D, wave\-Change\-U\-I, wave\-Cooldown, Camera\-::wave\-Shaking, and wave\-Timer\-Set.
+
+
+\begin{DoxyCode}
+147 \{
+148     \textcolor{keyword}{const} u32 now\_ = \hyperlink{_enemy_spawner_8cpp_a6fb6c47d7964fa1186985510e544e686}{enemySpawnerIDevice}->getTimer()->getTime();
+149     \textcolor{keyword}{const} f32 frameTime = (f32)(now\_ - \hyperlink{_enemy_spawner_8cpp_a9b0eac166daf4ddfb21d451eb574aca3}{currentTime}) / 1000.f; \textcolor{comment}{// Time in seconds}
+150     \hyperlink{_enemy_spawner_8cpp_a9b0eac166daf4ddfb21d451eb574aca3}{currentTime} = now\_;
+151 
+152     \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_aa4f3458458a5f172e5b160fb68473d97}{waveTimerSet} == \textcolor{keyword}{false} && \hyperlink{_enemy_spawner_8cpp_a72775aa668ffb2a0d7e469173cdd5b93}{waveCooldown} > 0)
+153     \{
+154         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_abccd7907e4faa3f04b4a786d64599f8e}{newWave}) 
+155         \{
+156             \textcolor{keywordflow}{if} ((\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave} + 1) % 5 == 0)
+157                 \hyperlink{_enemy_spawner_8cpp_a3bdc7599b0df4bac902695a10b091f2f}{enemSpawnSoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_enemy_spawner_8cpp_aea6158bfc7b897c6c2f1fcf801da1883}{BIG\_WAVE\_INCOMING\_SOUND}, \textcolor{keyword}{false});
+158             \textcolor{keywordflow}{else}
+159                 \hyperlink{_enemy_spawner_8cpp_a3bdc7599b0df4bac902695a10b091f2f}{enemSpawnSoundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_enemy_spawner_8cpp_a4a8c0d8fc8a70f796d700f01c8a9021a}{WAVE\_INCOMING\_SOUND}, \textcolor{keyword}{false});
+160 
+161             \hyperlink{_enemy_spawner_8cpp_abccd7907e4faa3f04b4a786d64599f8e}{newWave} = \textcolor{keyword}{false};
+162         \}
+163         \hyperlink{_enemy_spawner_8cpp_a30a29af809eac59191fdd00041d88039}{waveChangeUI} = \textcolor{keyword}{true};
+164         \hyperlink{_enemy_spawner_8cpp_a72775aa668ffb2a0d7e469173cdd5b93}{waveCooldown} -= frameTime;
+165         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_a72775aa668ffb2a0d7e469173cdd5b93}{waveCooldown} <= 0)
+166         \{
+167             \hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave}++;
+168             \hyperlink{class_enemy_spawner_a047cc9ff180ef6bb4a1cc437b786553b}{Spawn}();
+169             \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave} % 5 == 0)
+170             \{
+171                 \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam}->\hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam}->\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}{bigWaveShaking};
+172                 \hyperlink{_enemy_spawner_8cpp_abccd7907e4faa3f04b4a786d64599f8e}{newWave} = \textcolor{keyword}{true};
+173             \}
+174             \textcolor{keywordflow}{else}
+175             \{
+176                 \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam}->\hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{_enemy_spawner_8cpp_af02f2a517a39d70a0afb3929737a472c}{\_cam}->\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}{waveShaking};
+177                 \hyperlink{_enemy_spawner_8cpp_abccd7907e4faa3f04b4a786d64599f8e}{newWave} = \textcolor{keyword}{true};
+178             \}
+179             \textcolor{comment}{//Insert pause/UI between waves here}
+180             \hyperlink{_enemy_spawner_8cpp_aa4f3458458a5f172e5b160fb68473d97}{waveTimerSet} = \textcolor{keyword}{true};
+181             \hyperlink{_enemy_spawner_8cpp_a72775aa668ffb2a0d7e469173cdd5b93}{waveCooldown} = \hyperlink{_enemy_spawner_8cpp_aae252475624f4edf5c9353f3eb15532d}{maxWaveCooldown};
+182             \hyperlink{_enemy_spawner_8cpp_a30a29af809eac59191fdd00041d88039}{waveChangeUI} = \textcolor{keyword}{false};
+183             \hyperlink{_enemy_spawner_8cpp_aa4f3458458a5f172e5b160fb68473d97}{waveTimerSet} = \textcolor{keyword}{false};
+184         \}
+185     \}
+186 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_a047cc9ff180ef6bb4a1cc437b786553b}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Spawn@{Spawn}}
+\index{Spawn@{Spawn}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Spawn}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Spawner\-::\-Spawn (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_spawner_a047cc9ff180ef6bb4a1cc437b786553b}
+
+
+References \-\_\-player, active\-Enemies, Collision\-::\-Add\-Dynamic\-To\-List(), collision, current\-Wave, enemy, enemy\-Pool, Enemy\-::\-Get\-Enemy\-Scene\-Node(), Enemy\-Pool\-::\-Get\-Resource(), Wave\-Data\-::max\-Fast\-Enem, Wave\-Data\-::max\-Matro\-Enem, Wave\-Data\-::max\-Regular\-Enem, Wave\-Data\-::max\-Tank\-Enem, Enemy\-::\-Set\-Enemy\-Type(), Enemy\-::\-Set\-Player(), spawn\-Positions, time, and wave\-Data.
+
+
+\begin{DoxyCode}
+221 \{
+222     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave}]->\hyperlink{struct_wave_data_a70b7b4b2a611aa961b4f7c7bbbbcafcb}{maxRegularEnem}; i++)
+223     \{
+224         srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(NULL) * i);
+225         u32 randomPos = rand() % 4;
+226 
+227         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{GetResource}();
+228         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{SetPlayer}(\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player});
+229         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(Enemy::EnemyType::basic);
+230         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setPosition(
+      \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}[randomPos]);
+231         \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}());
+232         \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.push\_back(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy});
+233     \}
+234 
+235     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave}]->\hyperlink{struct_wave_data_a730aa951bab558b2a39ab8cad3e0c6b0}{maxFastEnem}; j++)
+236     \{
+237         srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(NULL) * j);
+238         u32 randomPos = rand() % 4;
+239 
+240         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{GetResource}();
+241         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{SetPlayer}(\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player});
+242         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(Enemy::EnemyType::fast);
+243         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setPosition(
+      \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}[randomPos]);
+244         \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}());
+245         \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.push\_back(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy});
+246     \}
+247 
+248     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave}]->\hyperlink{struct_wave_data_a85236ef7a2ac44e7364c65e106a341da}{maxTankEnem}; k++)
+249     \{
+250         srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(NULL) * k);
+251         u32 randomPos = rand() % 4;
+252 
+253         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{GetResource}();
+254         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{SetPlayer}(\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player});
+255         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(Enemy::EnemyType::tanky);
+256         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setPosition(
+      \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}[randomPos]);
+257         \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}());
+258         \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.push\_back(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy});
+259     \}
+260 
+261     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} k = 0; k < \hyperlink{_enemy_spawner_8cpp_a1b5d1dbce59dba7751cd9feaa3a2c40b}{waveData}[\hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave}]->\hyperlink{struct_wave_data_a147372a20a0e0cf2e92e36f9257eb280}{maxMatroEnem}; k++)
+262     \{
+263         srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(NULL) * k);
+264         u32 randomPos = rand() % 4;
+265 
+266         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{GetResource}();
+267         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{SetPlayer}(\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player});
+268         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(Enemy::EnemyType::matroshka, 2);
+269         \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setPosition(
+      \hyperlink{_enemy_spawner_8cpp_a309ce9c456c1040e752ba1a54dcd85a5}{spawnPositions}[randomPos]);
+270         \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}());
+271         \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.push\_back(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy});
+272     \}
+273 \}\end{DoxyCode}
+\hypertarget{class_enemy_spawner_ac664064f5f057837fde5c2e81daa2e6e}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Spawn\-Mathroska\-Minion@{Spawn\-Mathroska\-Minion}}
+\index{Spawn\-Mathroska\-Minion@{Spawn\-Mathroska\-Minion}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Spawn\-Mathroska\-Minion}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion (
+\begin{DoxyParamCaption}
+\item[{irr\-::core\-::vector3df}]{spawn\-Pos, }
+\item[{{\bf Enemy\-::\-Enemy\-Type}}]{enemy\-Type, }
+\item[{irr\-::s32}]{nest\-Amount = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_spawner_ac664064f5f057837fde5c2e81daa2e6e}
+
+
+References \-\_\-player, active\-Enemies, Collision\-::\-Add\-Dynamic\-To\-List(), collision, enemy, enemy\-Pool, Enemy\-::\-Get\-Enemy\-Scene\-Node(), Enemy\-Pool\-::\-Get\-Resource(), Enemy\-::\-Set\-Enemy\-Type(), and Enemy\-::\-Set\-Player().
+
+
+
+Referenced by Enemy\-::\-Take\-Damage().
+
+
+\begin{DoxyCode}
+211 \{
+212     \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{GetResource}();
+213     \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a421d67f70801a3399ca22067fcde6dff}{SetPlayer}(\hyperlink{_enemy_spawner_8cpp_a9cd078164ceb4e9bfed2981b94610dc9}{\_player});
+214     \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a567a82f1d7cb9034509459850f7784fc}{SetEnemyType}(enemyType, nestAmount);
+215     \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setPosition(spawnPos);
+216     \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy}->
+      \hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}());
+217     \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.push\_back(\hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy});
+218 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_spawner_ab7717d2d42a40b943564629a85f0fabc}{\index{Enemy\-Spawner@{Enemy\-Spawner}!Update\-Enemies@{Update\-Enemies}}
+\index{Update\-Enemies@{Update\-Enemies}!EnemySpawner@{Enemy\-Spawner}}
+\subsubsection[{Update\-Enemies}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Spawner\-::\-Update\-Enemies (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_spawner_ab7717d2d42a40b943564629a85f0fabc}
+
+
+References active\-Enemies, Heat\-Map\-Manager\-::\-Add\-Weight(), blood\-Splatter, Heat\-Map\-Manager\-::\-Check\-Zone\-From\-Position(), collision, Particle\-System\-::\-Create\-Particles(), current\-Wave, enemy\-Pool, enemy\-Spawner\-I\-Device, enemy\-Spawner\-Smgr, frame\-Delta\-Time, game\-\_\-\-Enemy\-Spawner, Game\-::\-Get\-Is\-Game\-Over(), heat\-Map\-Mngr, max\-Waves, particle\-System, power\-Up\-Position\-Adjust, Power\-Up\-Spawner\-::\-Power\-Up\-Spawn(), power\-Up\-Spawner, prev\-Frame\-Time, Collision\-::\-Remove\-Dynamic\-From\-List(), Enemy\-Pool\-::\-Return\-Resource(), Particle\-System\-::\-Update(), and wave\-Timer\-Set.
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+110 \{
+111     \textcolor{comment}{// Work out a frame delta time.}
+112     \textcolor{keyword}{const} u32 now = \hyperlink{_enemy_spawner_8cpp_a6fb6c47d7964fa1186985510e544e686}{enemySpawnerIDevice}->getTimer()->getTime();
+113     \textcolor{comment}{//enemySpawnerIDevice->getTimer()->start();}
+114     \textcolor{keyword}{const} f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} = (f32)(now - \hyperlink{_enemy_spawner_8cpp_a7f39b7d91ba9b2a31bad8f8558b8a0d9}{prevFrameTime}) / 1000.f; \textcolor{comment}{// Time in
+       seconds}
+115     \hyperlink{_enemy_spawner_8cpp_a7f39b7d91ba9b2a31bad8f8558b8a0d9}{prevFrameTime} = now;
+116     \hyperlink{_enemy_spawner_8cpp_a351bdd6d08cc3965554b639f8e11e360}{particleSystem}->\hyperlink{class_particle_system_ac60759503968e32b9cc25222995dd7d9}{Update}(frameDeltaTime);
+117     \textcolor{comment}{// Update all enemies}
+118     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.size(); i++)
+119     \{
+120         \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->Update(frameDeltaTime);
+121         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->IsDead())
+122         \{
+123             \hyperlink{_enemy_spawner_8cpp_a351bdd6d08cc3965554b639f8e11e360}{particleSystem}->\hyperlink{class_particle_system_a3f614e2d232b8ecbc7431c1302165bbf}{CreateParticles}(
+      \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->GetEnemySceneNode()->getPosition(), \hyperlink{_enemy_spawner_8cpp_a84bd053a4e24606fcf8e340d82c0003c}{bloodSplatter});\textcolor{comment}{// for
+       creating blood on enemies}
+124             \hyperlink{_enemy_spawner_8cpp_a4dcc017b886f43aae8dec561367a6d3c}{heatMapMngr}->\hyperlink{class_heat_map_manager_aaf3b56067a76a49a9685b221d63c87b9}{AddWeight}(\hyperlink{_enemy_spawner_8cpp_a4dcc017b886f43aae8dec561367a6d3c}{heatMapMngr}->
+      \hyperlink{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}{CheckZoneFromPosition}(\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->GetEnemySceneNode()->
+      getAbsolutePosition()), 5.0f);
+125             \hyperlink{_enemy_spawner_8cpp_aec329aff681c2ea4e3c05be077a87c7e}{powerUpSpawner}->\hyperlink{class_power_up_spawner_a7d10daa2eedceafdf8ceb352f6436db2}{PowerUpSpawn}(\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->
+      GetEnemySceneNode()->getPosition() - \hyperlink{_enemy_spawner_8cpp_ab942782e10adbde0b0cae87384eb718a}{powerUpPositionAdjust}); \textcolor{comment}{//to lower the powerup position}
+126             \hyperlink{_enemy_spawner_8cpp_a10a9f0b14afa27bb442d05b6a40464d6}{enemyPool}->\hyperlink{class_enemy_pool_a23a38a606c719763861a882d9f5668e6}{ReturnResource}(\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]);
+127             \hyperlink{_enemy_spawner_8cpp_abb03345f36a95239d14eaf664bf1c8cc}{collision}.\hyperlink{class_collision_af6fe5888d934195d15e51f237fc989c6}{RemoveDynamicFromList}(
+      \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->GetEnemySceneNode());
+128             \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.erase(i);
+129         \}
+130         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_a473330ef228d901a0124176f437f5855}{game\_EnemySpawner}->\hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{GetIsGameOver}())
+131         \{
+132             \hyperlink{_enemy_spawner_8cpp_acdc4e203d85a9683181751a7695ee478}{enemySpawnerSmgr}->addToDeletionQueue(\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}[i]->
+      GetEnemySceneNode());
+133             \hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.erase(i);
+134         \}
+135     \}
+136 
+137     \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_a3d9bb20c5ed03047464ed534dc3938ba}{activeEnemies}.size() <= 0 && \hyperlink{_enemy_spawner_8cpp_ae8875f134fe6fadbb9f14c149ef06d50}{currentWave} < 
+      \hyperlink{_enemy_spawner_8cpp_ae7d5c9e8b2fcf54fbdaca3e3b254fde7}{maxWaves})
+138     \{
+139         \textcolor{keywordflow}{if} (\hyperlink{_enemy_spawner_8cpp_aa4f3458458a5f172e5b160fb68473d97}{waveTimerSet} == \textcolor{keyword}{false})
+140         \{
+141             \hyperlink{class_enemy_spawner_ad7105663a68f8cb931af64463f0286c8}{NextWave}();
+142         \}
+143     \}
+144 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_enemy_spawner_8h}{Enemy\-Spawner.\-h}\item 
+\hyperlink{_enemy_spawner_8cpp}{Enemy\-Spawner.\-cpp}\end{DoxyCompactItemize}

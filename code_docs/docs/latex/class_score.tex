@@ -1,0 +1,88 @@
+\hypertarget{class_score}{\section{Score Class Reference}
+\label{class_score}\index{Score@{Score}}
+}
+
+
+{\ttfamily \#include $<$Score.\-h$>$}
+
+
+
+Collaboration diagram for Score\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{class_score__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_score_ae8d4105bea77e4bfcd77c347e0a9dd8c}{Scoring} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_score_a689888f6d45fd92988822d663a3e90ee}{Display\-Score} (irr\-::f32 points)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_score_a689888f6d45fd92988822d663a3e90ee}{\index{Score@{Score}!Display\-Score@{Display\-Score}}
+\index{Display\-Score@{Display\-Score}!Score@{Score}}
+\subsubsection[{Display\-Score}]{\setlength{\rightskip}{0pt plus 5cm}void Score\-::\-Display\-Score (
+\begin{DoxyParamCaption}
+\item[{irr\-::f32}]{points}
+\end{DoxyParamCaption}
+)}}\label{class_score_a689888f6d45fd92988822d663a3e90ee}
+
+
+References score.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+43 \{
+44     \hyperlink{_score_8cpp_a8ce81f3087b14121b3f1ebc420f1de52}{score} += points;   
+45 \}
+\end{DoxyCode}
+\hypertarget{class_score_ae8d4105bea77e4bfcd77c347e0a9dd8c}{\index{Score@{Score}!Scoring@{Scoring}}
+\index{Scoring@{Scoring}!Score@{Score}}
+\subsubsection[{Scoring}]{\setlength{\rightskip}{0pt plus 5cm}void Score\-::\-Scoring (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_score_ae8d4105bea77e4bfcd77c347e0a9dd8c}
+
+
+References font2, game\-\_\-\-Score, Game\-::\-Get\-Instance(), Game\-::\-Get\-Is\-Game\-Over(), score, score\-Gui, and timer.
+
+
+
+Referenced by Game\-::\-Draw(), and Game\-::\-Start().
+
+
+\begin{DoxyCode}
+24 \{
+25     \hyperlink{_score_8cpp_aceb549efc27a4c81f40dbe4040ad699e}{game\_Score} = \hyperlink{_score_8cpp_aceb549efc27a4c81f40dbe4040ad699e}{game\_Score}->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+26     \hyperlink{_score_8cpp_a02b8c668217ae9c0315f9c56f1ec65f8}{scoreGui} = device->getGUIEnvironment();
+27     \hyperlink{_score_8cpp_a15930d2ad7db8a52f1fe9d0cc4ca4292}{timer} = device->getTimer()->getTime();
+28     \hyperlink{_score_8cpp_a076d89d07cd761db5a4bf605823db109}{font2} = device->getGUIEnvironment()->getFont(\textcolor{stringliteral}{"../media/Fonts/fontlucida.png"});
+29     core::stringw scoreString = L\textcolor{stringliteral}{"Score: "};
+30     scoreString += \hyperlink{_score_8cpp_a8ce81f3087b14121b3f1ebc420f1de52}{score};
+31 
+32     \textcolor{keywordflow}{if} (\hyperlink{_score_8cpp_aceb549efc27a4c81f40dbe4040ad699e}{game\_Score}->\hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{GetIsGameOver}() != \textcolor{keyword}{true})
+33     \{
+34     \hyperlink{_score_8cpp_a076d89d07cd761db5a4bf605823db109}{font2}->draw(stringw(scoreString).c\_str(),
+35         core::rect<s32>(80, 40, 200, 100),
+36         video::SColor(255, 255, 255, 255));
+37     \hyperlink{class_score_a689888f6d45fd92988822d663a3e90ee}{DisplayScore}(0);
+38     \}
+39 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_score_8h}{Score.\-h}\item 
+\hyperlink{_score_8cpp}{Score.\-cpp}\end{DoxyCompactItemize}

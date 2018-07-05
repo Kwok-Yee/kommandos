@@ -1,0 +1,354 @@
+\hypertarget{class_catch_1_1_detail_1_1_approx}{\section{Catch\-:\-:Detail\-:\-:Approx Class Reference}
+\label{class_catch_1_1_detail_1_1_approx}\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:Detail\-:\-:Approx\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{class_catch_1_1_detail_1_1_approx__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_detail_1_1_approx_a1a8618ea8db08c66bd3d9fe8f74b957a}{Approx} (double value)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} \hyperlink{class_catch_1_1_detail_1_1_approx_ad8b2757f4804f9a1d3fa674efb98c20e}{operator()} (T const \&value)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\\hyperlink{class_catch_1_1_detail_1_1_approx_ab14b979fa8a37f21d037157fabed4072}{Approx} (T const \&value)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} \& \hyperlink{class_catch_1_1_detail_1_1_approx_acd26adba86a066b9f40dad467f23bc85}{epsilon} (T const \&new\-Epsilon)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} \& \hyperlink{class_catch_1_1_detail_1_1_approx_a6467dc18791e1a1f4c15c4fb63cf5051}{margin} (T const \&new\-Margin)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} \& \hyperlink{class_catch_1_1_detail_1_1_approx_a8f4d2def2920a3840d3271f6d9c5ede2}{scale} (T const \&new\-Scale)
+\item 
+std\-::string \hyperlink{class_catch_1_1_detail_1_1_approx_adeb74b73506b3f6b2ba72aea15168fbe}{to\-String} () const 
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} \hyperlink{class_catch_1_1_detail_1_1_approx_aaf86dc0ee92272ac2d9839197a07951d}{custom} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_catch_1_1_detail_1_1_approx_a1ef0f66549a40d1b096aeb4ce685bf9a}{equality\-Comparison\-Impl} (double other) const 
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_catch_1_1_detail_1_1_approx_af17c8e869ae7a55d14b99eb18e178114}{m\-\_\-epsilon}
+\item 
+double \hyperlink{class_catch_1_1_detail_1_1_approx_a4262a7e821eec507b424c335121ea0d8}{m\-\_\-margin}
+\item 
+double \hyperlink{class_catch_1_1_detail_1_1_approx_a65e9bdab9113ff3300b45f0a4e048dd7}{m\-\_\-scale}
+\item 
+double \hyperlink{class_catch_1_1_detail_1_1_approx_af7aeef703bd591f5ec85407b1dac053c}{m\-\_\-value}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}{operator==} (const T \&lhs, \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a0e5ef1957d4c38d7857005909c613743}{operator==} (\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&lhs, const T \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a29696f14ebd51887c8c88e771d12ef54}{operator!=} (T const \&lhs, \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a31d62e3c35abb86cf25e02601966ca5d}{operator!=} (\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&lhs, T const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a0369de03e81bc2ceaf6c9d830476bd49}{operator$<$=} (T const \&lhs, \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a6040b908588745570847d7ae8483b091}{operator$<$=} (\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&lhs, T const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_affd27efc62be386daeecb7a09e828d44}{operator$>$=} (T const \&lhs, \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&rhs)
+\item 
+{\footnotesize template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ }\\bool \hyperlink{class_catch_1_1_detail_1_1_approx_a5899b8a36725406701e2ebded2971ee6}{operator$>$=} (\hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} const \&lhs, T const \&rhs)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a1a8618ea8db08c66bd3d9fe8f74b957a}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!Approx@{Approx}}
+\index{Approx@{Approx}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{Approx}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-Detail\-::\-Approx\-::\-Approx (
+\begin{DoxyParamCaption}
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}}\label{class_catch_1_1_detail_1_1_approx_a1a8618ea8db08c66bd3d9fe8f74b957a}
+\hypertarget{class_catch_1_1_detail_1_1_approx_ab14b979fa8a37f21d037157fabed4072}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!Approx@{Approx}}
+\index{Approx@{Approx}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{Approx}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ Catch\-::\-Detail\-::\-Approx\-::\-Approx (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{class_catch_1_1_detail_1_1_approx_ab14b979fa8a37f21d037157fabed4072}
+
+\begin{DoxyCode}
+2090                                             : \hyperlink{class_catch_1_1_detail_1_1_approx_a1a8618ea8db08c66bd3d9fe8f74b957a}{Approx}(static\_cast<double>(value))
+2091             \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_detail_1_1_approx_aaf86dc0ee92272ac2d9839197a07951d}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!custom@{custom}}
+\index{custom@{custom}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{custom}]{\setlength{\rightskip}{0pt plus 5cm}static {\bf Approx} Catch\-::\-Detail\-::\-Approx\-::custom (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_catch_1_1_detail_1_1_approx_aaf86dc0ee92272ac2d9839197a07951d}
+\hypertarget{class_catch_1_1_detail_1_1_approx_acd26adba86a066b9f40dad467f23bc85}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!epsilon@{epsilon}}
+\index{epsilon@{epsilon}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{epsilon}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ {\bf Approx}\& Catch\-::\-Detail\-::\-Approx\-::epsilon (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{new\-Epsilon}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_detail_1_1_approx_acd26adba86a066b9f40dad467f23bc85}
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+
+Referenced by operator()().
+
+
+\begin{DoxyCode}
+2135                                                  \{
+2136                 \textcolor{keywordtype}{double} epsilonAsDouble = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(newEpsilon);
+2137                 \textcolor{keywordflow}{if} (epsilonAsDouble < 0 || epsilonAsDouble > 1.0) \{
+2138                     \textcolor{keywordflow}{throw} std::domain\_error
+2139                     (\textcolor{stringliteral}{"Invalid Approx::epsilon: "} +
+2140                         \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(epsilonAsDouble) +
+2141                         \textcolor{stringliteral}{", Approx::epsilon has to be between 0 and 1"});
+2142                 \}
+2143                 \hyperlink{class_catch_1_1_detail_1_1_approx_af17c8e869ae7a55d14b99eb18e178114}{m\_epsilon} = epsilonAsDouble;
+2144                 \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+2145             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a1ef0f66549a40d1b096aeb4ce685bf9a}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!equality\-Comparison\-Impl@{equality\-Comparison\-Impl}}
+\index{equality\-Comparison\-Impl@{equality\-Comparison\-Impl}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{equality\-Comparison\-Impl}]{\setlength{\rightskip}{0pt plus 5cm}bool Catch\-::\-Detail\-::\-Approx\-::equality\-Comparison\-Impl (
+\begin{DoxyParamCaption}
+\item[{double}]{other}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_detail_1_1_approx_a1ef0f66549a40d1b096aeb4ce685bf9a}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a6467dc18791e1a1f4c15c4fb63cf5051}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!margin@{margin}}
+\index{margin@{margin}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{margin}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ {\bf Approx}\& Catch\-::\-Detail\-::\-Approx\-::margin (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{new\-Margin}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_detail_1_1_approx_a6467dc18791e1a1f4c15c4fb63cf5051}
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+
+Referenced by operator()().
+
+
+\begin{DoxyCode}
+2148                                                \{
+2149                 \textcolor{keywordtype}{double} marginAsDouble = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(newMargin);
+2150                 \textcolor{keywordflow}{if} (marginAsDouble < 0) \{
+2151                     \textcolor{keywordflow}{throw} std::domain\_error
+2152                     (\textcolor{stringliteral}{"Invalid Approx::margin: "} +
+2153                         \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(marginAsDouble) +
+2154                         \textcolor{stringliteral}{", Approx::Margin has to be non-negative."});
+2155 
+2156                 \}
+2157                 \hyperlink{class_catch_1_1_detail_1_1_approx_a4262a7e821eec507b424c335121ea0d8}{m\_margin} = marginAsDouble;
+2158                 \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+2159             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_ad8b2757f4804f9a1d3fa674efb98c20e}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator()@{operator()}}
+\index{operator()@{operator()}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ {\bf Approx} Catch\-::\-Detail\-::\-Approx\-::operator() (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_detail_1_1_approx_ad8b2757f4804f9a1d3fa674efb98c20e}
+
+
+References epsilon(), margin(), and scale().
+
+
+\begin{DoxyCode}
+2081                                               \{
+2082                 \hyperlink{class_catch_1_1_detail_1_1_approx}{Approx} approx(static\_cast<double>(value));
+2083                 approx.epsilon(\hyperlink{class_catch_1_1_detail_1_1_approx_af17c8e869ae7a55d14b99eb18e178114}{m\_epsilon});
+2084                 approx.margin(\hyperlink{class_catch_1_1_detail_1_1_approx_a4262a7e821eec507b424c335121ea0d8}{m\_margin});
+2085                 approx.scale(\hyperlink{class_catch_1_1_detail_1_1_approx_a65e9bdab9113ff3300b45f0a4e048dd7}{m\_scale});
+2086                 \textcolor{keywordflow}{return} approx;
+2087             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a8f4d2def2920a3840d3271f6d9c5ede2}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!scale@{scale}}
+\index{scale@{scale}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{scale}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ {\bf Approx}\& Catch\-::\-Detail\-::\-Approx\-::scale (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{new\-Scale}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_detail_1_1_approx_a8f4d2def2920a3840d3271f6d9c5ede2}
+
+
+Referenced by operator()().
+
+
+\begin{DoxyCode}
+2162                                              \{
+2163                 \hyperlink{class_catch_1_1_detail_1_1_approx_a65e9bdab9113ff3300b45f0a4e048dd7}{m\_scale} = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(newScale);
+2164                 \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+2165             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_adeb74b73506b3f6b2ba72aea15168fbe}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!to\-String@{to\-String}}
+\index{to\-String@{to\-String}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{to\-String}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Catch\-::\-Detail\-::\-Approx\-::to\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_catch_1_1_detail_1_1_approx_adeb74b73506b3f6b2ba72aea15168fbe}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a29696f14ebd51887c8c88e771d12ef54}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator!=@{operator!=}}
+\index{operator!=@{operator!=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator!=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator!= (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{lhs, }
+\item[{{\bf Approx} const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a29696f14ebd51887c8c88e771d12ef54}
+
+\begin{DoxyCode}
+2105                                                                       \{
+2106                 \textcolor{keywordflow}{return} !\hyperlink{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}{operator==}(lhs, rhs);
+2107             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a31d62e3c35abb86cf25e02601966ca5d}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator!=@{operator!=}}
+\index{operator!=@{operator!=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator!=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator!= (
+\begin{DoxyParamCaption}
+\item[{{\bf Approx} const \&}]{lhs, }
+\item[{T const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a31d62e3c35abb86cf25e02601966ca5d}
+
+\begin{DoxyCode}
+2110                                                                       \{
+2111                 \textcolor{keywordflow}{return} !\hyperlink{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}{operator==}(rhs, lhs);
+2112             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a0369de03e81bc2ceaf6c9d830476bd49}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator$<$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator$<$= (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{lhs, }
+\item[{{\bf Approx} const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a0369de03e81bc2ceaf6c9d830476bd49}
+
+\begin{DoxyCode}
+2115                                                                       \{
+2116                 \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(lhs) < rhs.m\_value || lhs == rhs;
+2117             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a6040b908588745570847d7ae8483b091}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator$<$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator$<$= (
+\begin{DoxyParamCaption}
+\item[{{\bf Approx} const \&}]{lhs, }
+\item[{T const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a6040b908588745570847d7ae8483b091}
+
+\begin{DoxyCode}
+2120                                                                       \{
+2121                 \textcolor{keywordflow}{return} lhs.m\_value < \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(rhs) || lhs == rhs;
+2122             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator==@{operator==}}
+\index{operator==@{operator==}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator== (
+\begin{DoxyParamCaption}
+\item[{const T \&}]{lhs, }
+\item[{{\bf Approx} const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}
+
+\begin{DoxyCode}
+2094                                                                       \{
+2095                 \textcolor{keyword}{auto} lhs\_v = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(lhs);
+2096                 \textcolor{keywordflow}{return} rhs.equalityComparisonImpl(lhs\_v);
+2097             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a0e5ef1957d4c38d7857005909c613743}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator==@{operator==}}
+\index{operator==@{operator==}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf Approx} const \&}]{lhs, }
+\item[{const T \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a0e5ef1957d4c38d7857005909c613743}
+
+\begin{DoxyCode}
+2100                                                                       \{
+2101                 \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_detail_1_1_approx_ab38782a37d09b527ca5e126dbf433dda}{operator==}(rhs, lhs);
+2102             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_affd27efc62be386daeecb7a09e828d44}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator$>$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator$>$= (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{lhs, }
+\item[{{\bf Approx} const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_affd27efc62be386daeecb7a09e828d44}
+
+\begin{DoxyCode}
+2125                                                                       \{
+2126                 \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(lhs) > rhs.m\_value || lhs == rhs;
+2127             \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a5899b8a36725406701e2ebded2971ee6}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{operator$>$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = typename std\-::enable\-\_\-if$<$std\-::is\-\_\-constructible$<$double, T$>$\-::value$>$\-::type$>$ bool operator$>$= (
+\begin{DoxyParamCaption}
+\item[{{\bf Approx} const \&}]{lhs, }
+\item[{T const \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_detail_1_1_approx_a5899b8a36725406701e2ebded2971ee6}
+
+\begin{DoxyCode}
+2130                                                                       \{
+2131                 \textcolor{keywordflow}{return} lhs.m\_value > \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(rhs) || lhs == rhs;
+2132             \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_detail_1_1_approx_af17c8e869ae7a55d14b99eb18e178114}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!m\-\_\-epsilon@{m\-\_\-epsilon}}
+\index{m\-\_\-epsilon@{m\-\_\-epsilon}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{m\-\_\-epsilon}]{\setlength{\rightskip}{0pt plus 5cm}double Catch\-::\-Detail\-::\-Approx\-::m\-\_\-epsilon\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_detail_1_1_approx_af17c8e869ae7a55d14b99eb18e178114}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a4262a7e821eec507b424c335121ea0d8}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!m\-\_\-margin@{m\-\_\-margin}}
+\index{m\-\_\-margin@{m\-\_\-margin}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{m\-\_\-margin}]{\setlength{\rightskip}{0pt plus 5cm}double Catch\-::\-Detail\-::\-Approx\-::m\-\_\-margin\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_detail_1_1_approx_a4262a7e821eec507b424c335121ea0d8}
+\hypertarget{class_catch_1_1_detail_1_1_approx_a65e9bdab9113ff3300b45f0a4e048dd7}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!m\-\_\-scale@{m\-\_\-scale}}
+\index{m\-\_\-scale@{m\-\_\-scale}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{m\-\_\-scale}]{\setlength{\rightskip}{0pt plus 5cm}double Catch\-::\-Detail\-::\-Approx\-::m\-\_\-scale\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_detail_1_1_approx_a65e9bdab9113ff3300b45f0a4e048dd7}
+\hypertarget{class_catch_1_1_detail_1_1_approx_af7aeef703bd591f5ec85407b1dac053c}{\index{Catch\-::\-Detail\-::\-Approx@{Catch\-::\-Detail\-::\-Approx}!m\-\_\-value@{m\-\_\-value}}
+\index{m\-\_\-value@{m\-\_\-value}!Catch::Detail::Approx@{Catch\-::\-Detail\-::\-Approx}}
+\subsubsection[{m\-\_\-value}]{\setlength{\rightskip}{0pt plus 5cm}double Catch\-::\-Detail\-::\-Approx\-::m\-\_\-value\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_detail_1_1_approx_af7aeef703bd591f5ec85407b1dac053c}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

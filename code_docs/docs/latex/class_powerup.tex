@@ -1,0 +1,234 @@
+\hypertarget{class_powerup}{\section{Powerup Class Reference}
+\label{class_powerup}\index{Powerup@{Powerup}}
+}
+
+
+{\ttfamily \#include $<$Powerup.\-h$>$}
+
+
+
+Collaboration diagram for Powerup\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=251pt]{class_powerup__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468}{Powerup\-Type} \{ \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a878d907a5fd684cac1a34d0a2d068f3c}{health}, 
+\hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468afdd5d90e6d9b69acebe1061c8b9a4845}{firerate}, 
+\hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a10a2c0cad13fd5a1d5f35a7ac038c704}{splitshot}, 
+\hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a5afdc5c454fa87d55a5476924c8a832a}{base}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_powerup_a7b05c90e271c1a81f3a7c8f3bf4c34fd}{Reset} ()
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_powerup_a8215d4def5425ffd3e87b137e16a02e0}{Get\-Node} ()
+\item 
+void \hyperlink{class_powerup_a83662c82e6c9c2192713f37e93da7867}{Set\-Powerup} (irr\-::scene\-::\-I\-Scene\-Node $\ast$new\-Powerup)
+\item 
+irr\-::s32 \hyperlink{class_powerup_ada850ff17171453b95547a93700e923b}{Get\-Powerup\-Type} ()
+\item 
+\hyperlink{class_powerup_aa43da0d7fcdecf970c2206120474c84d}{Powerup} (irr\-::\-Irrlicht\-Device $\ast$device)
+\item 
+void \hyperlink{class_powerup_ad37083facb3025fa933d851ea8ecd549}{Set\-Powerup\-Type} (irr\-::s32 pow\-Type)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}
+\item 
+\hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468}{Powerup\-Type} \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_powerup_aaaae31c2cf5971eca7bd676279a5b468}{\index{Powerup@{Powerup}!Powerup\-Type@{Powerup\-Type}}
+\index{Powerup\-Type@{Powerup\-Type}!Powerup@{Powerup}}
+\subsubsection[{Powerup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Powerup\-::\-Powerup\-Type}}}\label{class_powerup_aaaae31c2cf5971eca7bd676279a5b468}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{health@{health}!Powerup@{Powerup}}\index{Powerup@{Powerup}!health@{health}}\item[{\em 
+\hypertarget{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a878d907a5fd684cac1a34d0a2d068f3c}{health}\label{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a878d907a5fd684cac1a34d0a2d068f3c}
+}]\index{firerate@{firerate}!Powerup@{Powerup}}\index{Powerup@{Powerup}!firerate@{firerate}}\item[{\em 
+\hypertarget{class_powerup_aaaae31c2cf5971eca7bd676279a5b468afdd5d90e6d9b69acebe1061c8b9a4845}{firerate}\label{class_powerup_aaaae31c2cf5971eca7bd676279a5b468afdd5d90e6d9b69acebe1061c8b9a4845}
+}]\index{splitshot@{splitshot}!Powerup@{Powerup}}\index{Powerup@{Powerup}!splitshot@{splitshot}}\item[{\em 
+\hypertarget{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a10a2c0cad13fd5a1d5f35a7ac038c704}{splitshot}\label{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a10a2c0cad13fd5a1d5f35a7ac038c704}
+}]\index{base@{base}!Powerup@{Powerup}}\index{Powerup@{Powerup}!base@{base}}\item[{\em 
+\hypertarget{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a5afdc5c454fa87d55a5476924c8a832a}{base}\label{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a5afdc5c454fa87d55a5476924c8a832a}
+}]\end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+8     \{
+9         \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a878d907a5fd684cac1a34d0a2d068f3c}{health}, \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468afdd5d90e6d9b69acebe1061c8b9a4845}{firerate}, \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a10a2c0cad13fd5a1d5f35a7ac038c704}{splitshot}, \hyperlink{class_powerup_aaaae31c2cf5971eca7bd676279a5b468a5afdc5c454fa87d55a5476924c8a832a}{base}
+10     \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_powerup_aa43da0d7fcdecf970c2206120474c84d}{\index{Powerup@{Powerup}!Powerup@{Powerup}}
+\index{Powerup@{Powerup}!Powerup@{Powerup}}
+\subsubsection[{Powerup}]{\setlength{\rightskip}{0pt plus 5cm}Powerup\-::\-Powerup (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_aa43da0d7fcdecf970c2206120474c84d}
+
+
+References powerup, powerup\-Driver, powerup\-I\-Device, and powerup\-Smgr.
+
+
+\begin{DoxyCode}
+67 \{
+68     \hyperlink{_powerup_8cpp_aacd3e75594a278156e906282ccb8a61d}{powerupIDevice} = device;
+69     \hyperlink{_powerup_8cpp_afa90c3356ecc3e19b91b2e5ca000c840}{powerupDriver} = \hyperlink{_powerup_8cpp_aacd3e75594a278156e906282ccb8a61d}{powerupIDevice}->getVideoDriver();
+70     \hyperlink{_powerup_8cpp_a990c125ec46fa7a25ffc92a12fa4227d}{powerupSmgr} = \hyperlink{_powerup_8cpp_aacd3e75594a278156e906282ccb8a61d}{powerupIDevice}->getSceneManager();
+71 
+72     \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup} = 0;
+73     \hyperlink{class_powerup_ad37083facb3025fa933d851ea8ecd549}{SetPowerupType}(PowerupType::base);
+74 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_powerup_a8215d4def5425ffd3e87b137e16a02e0}{\index{Powerup@{Powerup}!Get\-Node@{Get\-Node}}
+\index{Get\-Node@{Get\-Node}!Powerup@{Powerup}}
+\subsubsection[{Get\-Node}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Powerup\-::\-Get\-Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_a8215d4def5425ffd3e87b137e16a02e0}
+
+
+References powerup.
+
+
+\begin{DoxyCode}
+30 \{
+31     \textcolor{keywordflow}{return} \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup};
+32 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_ada850ff17171453b95547a93700e923b}{\index{Powerup@{Powerup}!Get\-Powerup\-Type@{Get\-Powerup\-Type}}
+\index{Get\-Powerup\-Type@{Get\-Powerup\-Type}!Powerup@{Powerup}}
+\subsubsection[{Get\-Powerup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}s32 Powerup\-::\-Get\-Powerup\-Type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_ada850ff17171453b95547a93700e923b}
+
+
+Referenced by Player\-::\-Move().
+
+
+\begin{DoxyCode}
+62 \{
+63     \textcolor{keywordflow}{return} \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{type};
+64 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_a7b05c90e271c1a81f3a7c8f3bf4c34fd}{\index{Powerup@{Powerup}!Reset@{Reset}}
+\index{Reset@{Reset}!Powerup@{Powerup}}
+\subsubsection[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Powerup\-::\-Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_a7b05c90e271c1a81f3a7c8f3bf4c34fd}
+
+
+References powerup.
+
+
+\begin{DoxyCode}
+24 \{
+25     \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}->setVisible(\textcolor{keyword}{false});
+26     \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}->setPosition(vector3df(0, 0, 0));
+27 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_a83662c82e6c9c2192713f37e93da7867}{\index{Powerup@{Powerup}!Set\-Powerup@{Set\-Powerup}}
+\index{Set\-Powerup@{Set\-Powerup}!Powerup@{Powerup}}
+\subsubsection[{Set\-Powerup}]{\setlength{\rightskip}{0pt plus 5cm}void Powerup\-::\-Set\-Powerup (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{new\-Powerup}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_a83662c82e6c9c2192713f37e93da7867}
+
+
+References powerup.
+
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+
+\begin{DoxyCode}
+35 \{
+36     \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup} = newPowerup;
+37 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_ad37083facb3025fa933d851ea8ecd549}{\index{Powerup@{Powerup}!Set\-Powerup\-Type@{Set\-Powerup\-Type}}
+\index{Set\-Powerup\-Type@{Set\-Powerup\-Type}!Powerup@{Powerup}}
+\subsubsection[{Set\-Powerup\-Type}]{\setlength{\rightskip}{0pt plus 5cm}void Powerup\-::\-Set\-Powerup\-Type (
+\begin{DoxyParamCaption}
+\item[{irr\-::s32}]{pow\-Type}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_ad37083facb3025fa933d851ea8ecd549}
+
+
+References health, powerup, powerup\-Driver, and type.
+
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+
+\begin{DoxyCode}
+40 \{
+41     \textcolor{keywordflow}{switch} (powType)
+42     \{
+43     \textcolor{keywordflow}{case} 0:
+44         \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{Powerup::type} = \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{Powerup::PowerupType::health};
+45         \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}->setMaterialTexture(0, \hyperlink{_powerup_8cpp_afa90c3356ecc3e19b91b2e5ca000c840}{powerupDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/Health\_Cross.png"}));
+46         \textcolor{keywordflow}{break};
+47     \textcolor{keywordflow}{case} 1:
+48         \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{Powerup::type} = Powerup::PowerupType::firerate;
+49         \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}->setMaterialTexture(0, \hyperlink{_powerup_8cpp_afa90c3356ecc3e19b91b2e5ca000c840}{powerupDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/rapidfire\_texture.png"}));
+50         \textcolor{keywordflow}{break};
+51     \textcolor{keywordflow}{case} 2:
+52         \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{Powerup::type} = Powerup::PowerupType::splitshot;
+53         \hyperlink{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{powerup}->setMaterialTexture(0, \hyperlink{_powerup_8cpp_afa90c3356ecc3e19b91b2e5ca000c840}{powerupDriver}->getTexture(\textcolor{stringliteral}{"
+      ../media/Textures/splitshot\_texture.png"}));
+54         \textcolor{keywordflow}{break};
+55     \textcolor{keywordflow}{default}:
+56         \hyperlink{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{Powerup::type} = Powerup::PowerupType::base;
+57         \textcolor{keywordflow}{break};
+58     \}
+59 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}{\index{Powerup@{Powerup}!powerup@{powerup}}
+\index{powerup@{powerup}!Powerup@{Powerup}}
+\subsubsection[{powerup}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Powerup\-::powerup\hspace{0.3cm}{\ttfamily [private]}}}\label{class_powerup_a45107cde4eb55f37b7c3b21c3bf1c156}
+\hypertarget{class_powerup_addc7f76821bf2505d35b85d3cf725a16}{\index{Powerup@{Powerup}!type@{type}}
+\index{type@{type}!Powerup@{Powerup}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Type} Powerup\-::type\hspace{0.3cm}{\ttfamily [private]}}}\label{class_powerup_addc7f76821bf2505d35b85d3cf725a16}
+
+
+Referenced by Set\-Powerup\-Type().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_powerup_8h}{Powerup.\-h}\item 
+\hyperlink{_powerup_8cpp}{Powerup.\-cpp}\end{DoxyCompactItemize}

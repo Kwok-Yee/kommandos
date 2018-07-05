@@ -1,0 +1,74 @@
+\hypertarget{struct_catch_1_1_string_maker}{\section{Catch\-:\-:String\-Maker$<$ T, typename $>$ Struct Template Reference}
+\label{struct_catch_1_1_string_maker}\index{Catch\-::\-String\-Maker$<$ T, typename $>$@{Catch\-::\-String\-Maker$<$ T, typename $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:String\-Maker$<$ T, typename $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{struct_catch_1_1_string_maker__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Fake  = T$>$ }\\static std\-::enable\-\_\-if\\*
+$<$\-::\hyperlink{class_catch_1_1_detail_1_1_is_stream_insertable}{Catch\-::\-Detail\-::\-Is\-Stream\-Insertable}\\*
+$<$ Fake $>$\-::value, std\-::string $>$\\*
+\-::type \hyperlink{struct_catch_1_1_string_maker_ab2c357e22b754802c4b1351257103eb6}{convert} (const Fake \&value)
+\item 
+{\footnotesize template$<$typename Fake  = T$>$ }\\static std\-::enable\-\_\-if\\*
+$<$!\-::\hyperlink{class_catch_1_1_detail_1_1_is_stream_insertable}{Catch\-::\-Detail\-::\-Is\-Stream\-Insertable}\\*
+$<$ Fake $>$\-::value, std\-::string $>$\\*
+\-::type \hyperlink{struct_catch_1_1_string_maker_a68bb548de0e5ad364228b1ca3dd2f561}{convert} (const Fake \&value)
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_string_maker_ab2c357e22b754802c4b1351257103eb6}{\index{Catch\-::\-String\-Maker@{Catch\-::\-String\-Maker}!convert@{convert}}
+\index{convert@{convert}!Catch::StringMaker@{Catch\-::\-String\-Maker}}
+\subsubsection[{convert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = void$>$ template$<$typename Fake  = T$>$ static std\-::enable\-\_\-if$<$\-::{\bf Catch\-::\-Detail\-::\-Is\-Stream\-Insertable}$<$Fake$>$\-::value, std\-::string$>$\-::type {\bf Catch\-::\-String\-Maker}$<$ T, typename $>$\-::convert (
+\begin{DoxyParamCaption}
+\item[{const Fake \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{struct_catch_1_1_string_maker_ab2c357e22b754802c4b1351257103eb6}
+
+
+References Catch\-::\-Reusable\-String\-Stream\-::str().
+
+
+\begin{DoxyCode}
+812                                        \{
+813             ReusableStringStream rss;
+814             rss << value;
+815             \textcolor{keywordflow}{return} rss.str();
+816         \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_string_maker_a68bb548de0e5ad364228b1ca3dd2f561}{\index{Catch\-::\-String\-Maker@{Catch\-::\-String\-Maker}!convert@{convert}}
+\index{convert@{convert}!Catch::StringMaker@{Catch\-::\-String\-Maker}}
+\subsubsection[{convert}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T , typename  = void$>$ template$<$typename Fake  = T$>$ static std\-::enable\-\_\-if$<$!\-::{\bf Catch\-::\-Detail\-::\-Is\-Stream\-Insertable}$<$Fake$>$\-::value, std\-::string$>$\-::type {\bf Catch\-::\-String\-Maker}$<$ T, typename $>$\-::convert (
+\begin{DoxyParamCaption}
+\item[{const Fake \&}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}}\label{struct_catch_1_1_string_maker_a68bb548de0e5ad364228b1ca3dd2f561}
+
+
+References Catch\-::\-Detail\-::convert\-Unstreamable().
+
+
+\begin{DoxyCode}
+821                                        \{
+822             \textcolor{keywordflow}{return} \hyperlink{namespace_catch_1_1_detail_accc3d481dbb5356a8c2c04338b511ee1}{Detail::convertUnstreamable}(value);
+823         \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

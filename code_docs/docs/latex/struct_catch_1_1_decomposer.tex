@@ -1,0 +1,58 @@
+\hypertarget{struct_catch_1_1_decomposer}{\section{Catch\-:\-:Decomposer Struct Reference}
+\label{struct_catch_1_1_decomposer}\index{Catch\-::\-Decomposer@{Catch\-::\-Decomposer}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:Decomposer\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=184pt]{struct_catch_1_1_decomposer__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\auto \hyperlink{struct_catch_1_1_decomposer_a4b1e5e844c20e5a90e3d759d216674cd}{operator$<$=} (T const \&lhs) -\/$>$ \hyperlink{class_catch_1_1_expr_lhs}{Expr\-Lhs}$<$ T const \& $>$
+\item 
+auto \hyperlink{struct_catch_1_1_decomposer_aac129b94903ae1339d5709049d83613b}{operator$<$=} (bool value) -\/$>$ \hyperlink{class_catch_1_1_expr_lhs}{Expr\-Lhs}$<$ bool $>$
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_decomposer_a4b1e5e844c20e5a90e3d759d216674cd}{\index{Catch\-::\-Decomposer@{Catch\-::\-Decomposer}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Catch::Decomposer@{Catch\-::\-Decomposer}}
+\subsubsection[{operator$<$=}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ auto Catch\-::\-Decomposer\-::operator$<$= (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{lhs}
+\end{DoxyParamCaption}
+) -\/$>$ {\bf Expr\-Lhs}$<$T const\&$>$ \hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_catch_1_1_decomposer_a4b1e5e844c20e5a90e3d759d216674cd}
+
+\begin{DoxyCode}
+1433                                                              \{
+1434             \textcolor{keywordflow}{return} ExprLhs<T const&>\{ lhs \};
+1435         \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_decomposer_aac129b94903ae1339d5709049d83613b}{\index{Catch\-::\-Decomposer@{Catch\-::\-Decomposer}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!Catch::Decomposer@{Catch\-::\-Decomposer}}
+\subsubsection[{operator$<$=}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-Decomposer\-::operator$<$= (
+\begin{DoxyParamCaption}
+\item[{bool}]{value}
+\end{DoxyParamCaption}
+) -\/$>$ {\bf Expr\-Lhs}$<$bool$>$ \hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_catch_1_1_decomposer_aac129b94903ae1339d5709049d83613b}
+
+\begin{DoxyCode}
+1437                                                       \{
+1438             \textcolor{keywordflow}{return} ExprLhs<bool>\{ value \};
+1439         \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

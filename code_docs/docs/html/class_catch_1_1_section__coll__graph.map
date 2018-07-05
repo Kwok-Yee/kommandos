@@ -1,0 +1,7 @@
+<map id="Catch::Section" name="Catch::Section">
+<area shape="rect" id="node2" href="$class_catch_1_1_non_copyable.html" title="{Catch::NonCopyable\n||# NonCopyable()\l# ~NonCopyable()\l&#45; NonCopyable()\l&#45; NonCopyable()\l&#45; operator=()\l&#45; operator=()\l}" alt="" coords="5,555,149,706"/>
+<area shape="rect" id="node3" href="$struct_catch_1_1_section_info.html" title="{Catch::SectionInfo\n||+ SectionInfo()\l}" alt="" coords="308,592,437,669"/>
+<area shape="rect" id="node4" href="$struct_catch_1_1_source_line_info.html" title="{Catch::SourceLineInfo\n||+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ SourceLineInfo()\l+ operator=()\l+ operator=()\l+ empty()\l+ operator==()\l+ operator\&lt;()\l}" alt="" coords="235,176,387,371"/>
+<area shape="rect" id="node11" href="$struct_catch_1_1_counts.html" title="{Catch::Counts\n||+ operator&#45;()\l+ operator+=()\l+ total()\l+ allPassed()\l+ allOk()\l}" alt="" coords="144,395,251,531"/>
+<area shape="rect" id="node8" href="$class_catch_1_1_timer.html" title="{Catch::Timer\n||+ start()\l+ getElapsedNanoseconds()\l+ getElapsedMicroseconds()\l+ getElapsedMilliseconds()\l+ getElapsedSeconds()\l}" alt="" coords="570,563,757,699"/>
+</map>

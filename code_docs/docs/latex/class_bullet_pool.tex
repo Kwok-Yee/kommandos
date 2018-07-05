@@ -1,0 +1,264 @@
+\hypertarget{class_bullet_pool}{\section{Bullet\-Pool Class Reference}
+\label{class_bullet_pool}\index{Bullet\-Pool@{Bullet\-Pool}}
+}
+
+
+A bullet pool.  
+
+
+
+
+{\ttfamily \#include $<$Bullet\-Pool.\-h$>$}
+
+
+
+Collaboration diagram for Bullet\-Pool\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{class_bullet_pool__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_bullet_pool_a13ca9f11d97405c0033612c389bfc06b}{Bullet\-Pool} (const \hyperlink{class_bullet_pool}{Bullet\-Pool} \&)=delete
+\begin{DoxyCompactList}\small\item\em Delete copy constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_bullet_pool}{Bullet\-Pool} \& \hyperlink{class_bullet_pool_a808fcff0d6b8e4fa0b6954a0af689b79}{operator=} (const \hyperlink{class_bullet_pool}{Bullet\-Pool} \&)=delete
+\begin{DoxyCompactList}\small\item\em Delete assignment operator. \end{DoxyCompactList}\item 
+\hyperlink{class_bullet}{Bullet} $\ast$ \hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{Get\-Resource} ()
+\begin{DoxyCompactList}\small\item\em Gets the resource. \end{DoxyCompactList}\item 
+void \hyperlink{class_bullet_pool_aa821f65e3b2a2845471ba094a683560d}{Return\-Resource} (\hyperlink{class_bullet}{Bullet} $\ast$object)
+\begin{DoxyCompactList}\small\item\em Returns a resource. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_bullet_pool}{Bullet\-Pool} $\ast$ \hyperlink{class_bullet_pool_a47b62aed3b35862ba203a5d0647b8d1a}{Get\-Instance} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_bullet_pool_ae1984d57ec3240c837589db4d25939e6}{Bullet\-Pool} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ \hyperlink{class_bullet}{Bullet} $\ast$ $>$ \hyperlink{class_bullet_pool_a1edef8514952653237ee829a197fd040}{resources}
+\begin{DoxyCompactList}\small\item\em The resources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_bullet_pool}{Bullet\-Pool} $\ast$ \hyperlink{class_bullet_pool_aac55f9e917420391431f394836222baf}{instance} = 0
+\begin{DoxyCompactList}\small\item\em The instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A bullet pool. 
+
+
+
+ 
+
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_bullet_pool_a13ca9f11d97405c0033612c389bfc06b}{\index{Bullet\-Pool@{Bullet\-Pool}!Bullet\-Pool@{Bullet\-Pool}}
+\index{Bullet\-Pool@{Bullet\-Pool}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{Bullet\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Bullet\-Pool\-::\-Bullet\-Pool (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bullet\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_bullet_pool_a13ca9f11d97405c0033612c389bfc06b}
+
+
+Delete copy constructor. 
+
+
+
+ 
+
+ \hypertarget{class_bullet_pool_ae1984d57ec3240c837589db4d25939e6}{\index{Bullet\-Pool@{Bullet\-Pool}!Bullet\-Pool@{Bullet\-Pool}}
+\index{Bullet\-Pool@{Bullet\-Pool}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{Bullet\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Bullet\-Pool\-::\-Bullet\-Pool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_pool_ae1984d57ec3240c837589db4d25939e6}
+
+
+Default constructor. 
+
+
+
+
+
+
+
+ 
+
+
+
+\subsubsection*{}
+
+\subsubsection*{Default constructor.  }
+
+Referenced by Get\-Instance().
+
+
+\begin{DoxyCode}
+16 \{
+17 
+18 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_bullet_pool_a47b62aed3b35862ba203a5d0647b8d1a}{\index{Bullet\-Pool@{Bullet\-Pool}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet\-Pool} $\ast$ Bullet\-Pool\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_bullet_pool_a47b62aed3b35862ba203a5d0647b8d1a}
+
+
+Gets the instance. 
+
+
+
+ 
+
+ 
+
+References Bullet\-Pool(), and instance.
+
+
+
+Referenced by Player\-::\-Init().
+
+
+\begin{DoxyCode}
+27 \{
+28     \textcolor{keywordflow}{if} (!\hyperlink{class_bullet_pool_aac55f9e917420391431f394836222baf}{instance})
+29     \{
+30         \hyperlink{class_bullet_pool_aac55f9e917420391431f394836222baf}{instance} = \textcolor{keyword}{new} \hyperlink{class_bullet_pool_ae1984d57ec3240c837589db4d25939e6}{BulletPool}();
+31     \}
+32     \textcolor{keywordflow}{return} \hyperlink{class_bullet_pool_aac55f9e917420391431f394836222baf}{instance};
+33 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{\index{Bullet\-Pool@{Bullet\-Pool}!Get\-Resource@{Get\-Resource}}
+\index{Get\-Resource@{Get\-Resource}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{Get\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet} $\ast$ Bullet\-Pool\-::\-Get\-Resource (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}
+
+
+Gets the resource. 
+
+
+
+ 
+
+ 
+
+References resources.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+40 \{
+41     \textcolor{keywordflow}{if} (\hyperlink{class_bullet_pool_a1edef8514952653237ee829a197fd040}{resources}.empty())
+42     \{
+43         \textcolor{keywordflow}{return} \textcolor{keyword}{new} \hyperlink{class_bullet}{Bullet}();
+44     \}
+45     \textcolor{keywordflow}{else}
+46     \{
+47         \hyperlink{class_bullet}{Bullet}* bullet = \hyperlink{class_bullet_pool_a1edef8514952653237ee829a197fd040}{resources}.front();
+48         \hyperlink{class_bullet_pool_a1edef8514952653237ee829a197fd040}{resources}.pop\_front();
+49         \textcolor{keywordflow}{return} bullet;
+50     \}
+51 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_pool_a808fcff0d6b8e4fa0b6954a0af689b79}{\index{Bullet\-Pool@{Bullet\-Pool}!operator=@{operator=}}
+\index{operator=@{operator=}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet\-Pool}\& Bullet\-Pool\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bullet\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_bullet_pool_a808fcff0d6b8e4fa0b6954a0af689b79}
+
+
+Delete assignment operator. 
+
+
+
+ 
+
+ \hypertarget{class_bullet_pool_aa821f65e3b2a2845471ba094a683560d}{\index{Bullet\-Pool@{Bullet\-Pool}!Return\-Resource@{Return\-Resource}}
+\index{Return\-Resource@{Return\-Resource}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{Return\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-Pool\-::\-Return\-Resource (
+\begin{DoxyParamCaption}
+\item[{{\bf Bullet} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_pool_aa821f65e3b2a2845471ba094a683560d}
+
+
+Returns a resource. 
+
+Resets the object and returns the resource back to the resources. 
+
+
+
+ 
+
+ 
+
+References resources.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+58 \{
+59     \textcolor{keywordtype}{object}->Reset();
+60     \hyperlink{class_bullet_pool_a1edef8514952653237ee829a197fd040}{resources}.push\_back(\textcolor{keywordtype}{object});
+61 \}\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_bullet_pool_aac55f9e917420391431f394836222baf}{\index{Bullet\-Pool@{Bullet\-Pool}!instance@{instance}}
+\index{instance@{instance}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet\-Pool} $\ast$ Bullet\-Pool\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_bullet_pool_aac55f9e917420391431f394836222baf}
+
+
+The instance. 
+
+
+
+Referenced by Get\-Instance().
+
+\hypertarget{class_bullet_pool_a1edef8514952653237ee829a197fd040}{\index{Bullet\-Pool@{Bullet\-Pool}!resources@{resources}}
+\index{resources@{resources}!BulletPool@{Bullet\-Pool}}
+\subsubsection[{resources}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Bullet}$\ast$$>$ Bullet\-Pool\-::resources\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_pool_a1edef8514952653237ee829a197fd040}
+
+
+The resources. 
+
+
+
+Referenced by Get\-Resource(), and Return\-Resource().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_bullet_pool_8h}{Bullet\-Pool.\-h}\item 
+\hyperlink{_bullet_pool_8cpp}{Bullet\-Pool.\-cpp}\end{DoxyCompactItemize}

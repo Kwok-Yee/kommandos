@@ -1,0 +1,130 @@
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher}{\section{Catch\-:\-:Matchers\-:\-:Vector\-:\-:Unordered\-Equals\-Matcher$<$ T $>$ Struct Template Reference}
+\label{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher}\index{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher$<$ T $>$@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Unordered\-Equals\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Unordered\-Equals\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a525905639b2b15b52ddb0bf14bfa19da}{Unordered\-Equals\-Matcher} (std\-::vector$<$ T $>$ const \&target)
+\item 
+bool \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a3ccdd9dd2cd8bdbb8bb121acbb9cb358}{match} (std\-::vector$<$ T $>$ const \&vec) const override
+\item 
+std\-::string \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a7202d811200317abc58c844f663823df}{describe} () const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::vector$<$ T $>$ const \& \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\-\_\-target}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a525905639b2b15b52ddb0bf14bfa19da}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}!Unordered\-Equals\-Matcher@{Unordered\-Equals\-Matcher}}
+\index{Unordered\-Equals\-Matcher@{Unordered\-Equals\-Matcher}!Catch::Matchers::Vector::UnorderedEqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}}
+\subsubsection[{Unordered\-Equals\-Matcher}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}$<$ T $>$\-::{\bf Unordered\-Equals\-Matcher} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ T $>$ const \&}]{target}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a525905639b2b15b52ddb0bf14bfa19da}
+
+\begin{DoxyCode}
+2629 : \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\_target}(target) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a7202d811200317abc58c844f663823df}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}!describe@{describe}}
+\index{describe@{describe}!Catch::Matchers::Vector::UnorderedEqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}}
+\subsubsection[{describe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}$<$ T $>$\-::describe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a7202d811200317abc58c844f663823df}
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+\begin{DoxyCode}
+2660                                                     \{
+2661                     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"UnorderedEquals: "} + \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{::Catch::Detail::stringify}(
+      \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\_target});
+2662                 \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a3ccdd9dd2cd8bdbb8bb121acbb9cb358}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}!match@{match}}
+\index{match@{match}!Catch::Matchers::Vector::UnorderedEqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}}
+\subsubsection[{match}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}$<$ T $>$\-::match (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ T $>$ const \&}]{vec}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_a3ccdd9dd2cd8bdbb8bb121acbb9cb358}
+
+
+References Catch\-::\-Matchers\-::\-Vector\-::\-Detail\-::contains(), and Catch\-::\-Matchers\-::\-Vector\-::\-Detail\-::count().
+
+
+\begin{DoxyCode}
+2630                                                                    \{
+2631                     \textcolor{comment}{// Note: This is a reimplementation of std::is\_permutation,}
+2632                     \textcolor{comment}{//       because I don't want to include <algorithm> inside the common path}
+2633                     \textcolor{keywordflow}{if} (\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\_target}.size() != vec.size()) \{
+2634                         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2635                     \}
+2636                     \textcolor{keyword}{auto} lfirst = \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\_target}.begin(), llast = \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{m\_target}.end();
+2637                     \textcolor{keyword}{auto} rfirst = vec.begin(), rlast = vec.end();
+2638                     \textcolor{comment}{// Cut common prefix to optimize checking of permuted parts}
+2639                     \textcolor{keywordflow}{while} (lfirst != llast && *lfirst != *rfirst) \{
+2640                         ++lfirst; ++rfirst;
+2641                     \}
+2642                     \textcolor{keywordflow}{if} (lfirst == llast) \{
+2643                         \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+2644                     \}
+2645 
+2646                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} mid = lfirst; mid != llast; ++mid) \{
+2647                         \textcolor{comment}{// Skip already counted items}
+2648                         \textcolor{keywordflow}{if} (\hyperlink{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_a73a425534a3113c590fac55f64338d1e}{Detail::contains}(lfirst, mid, *mid)) \{
+2649                             \textcolor{keywordflow}{continue};
+2650                         \}
+2651                         \textcolor{keywordtype}{size\_t} num\_vec = \hyperlink{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_abca18680db20c92f848b02a2c2708852}{Detail::count}(rfirst, rlast, *mid);
+2652                         \textcolor{keywordflow}{if} (num\_vec == 0 || \hyperlink{namespace_catch_1_1_matchers_1_1_vector_1_1_detail_abca18680db20c92f848b02a2c2708852}{Detail::count}(lfirst, llast, *mid) != num\_vec) \{
+2653                             \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2654                         \}
+2655                     \}
+2656 
+2657                     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+2658                 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}!m\-\_\-target@{m\-\_\-target}}
+\index{m\-\_\-target@{m\-\_\-target}!Catch::Matchers::Vector::UnorderedEqualsMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}}
+\subsubsection[{m\-\_\-target}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::vector$<$T$>$ const\& {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Unordered\-Equals\-Matcher}$<$ T $>$\-::m\-\_\-target\hspace{0.3cm}{\ttfamily [private]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_unordered_equals_matcher_aaa39871eb4034d4335214215dd693712}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

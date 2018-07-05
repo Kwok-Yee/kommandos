@@ -1,0 +1,84 @@
+\hypertarget{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base}{\section{Catch\-:\-:Matchers\-:\-:Impl\-:\-:Matcher\-Base$<$ T $>$ Struct Template Reference}
+\label{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base}\index{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base$<$ T $>$@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Matchers\-:\-:Impl\-:\-:Matcher\-Base$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Matchers\-:\-:Impl\-:\-:Matcher\-Base$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_match_all_of}{Match\-All\-Of}$<$ T $>$ \hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a275a18e3e1c4d0bddfde34e362f66b6c}{operator\&\&} (\hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base}{Matcher\-Base} const \&other) const 
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_match_any_of}{Match\-Any\-Of}$<$ T $>$ \hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a382ffd0d07d6a5cdadd2bd36ade0a742}{operator$\vert$$\vert$} (\hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base}{Matcher\-Base} const \&other) const 
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_match_not_of}{Match\-Not\-Of}$<$ T $>$ \hyperlink{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_afd5c25339eab93d9ea037fa4282fca7c}{operator!} () const 
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_afd5c25339eab93d9ea037fa4282fca7c}{\index{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}!operator!@{operator!}}
+\index{operator!@{operator!}!Catch::Matchers::Impl::MatcherBase@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}}
+\subsubsection[{operator!}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Match\-Not\-Of}$<$ T $>$ {\bf Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}$<$ T $>$\-::operator! (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_afd5c25339eab93d9ea037fa4282fca7c}
+
+\begin{DoxyCode}
+2349                                                             \{
+2350                 \textcolor{keywordflow}{return} MatchNotOf<T>(*this);
+2351             \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a275a18e3e1c4d0bddfde34e362f66b6c}{\index{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}!operator\&\&@{operator\&\&}}
+\index{operator\&\&@{operator\&\&}!Catch::Matchers::Impl::MatcherBase@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}}
+\subsubsection[{operator\&\&}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Match\-All\-Of}$<$ T $>$ {\bf Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}$<$ T $>$\-::operator\&\& (
+\begin{DoxyParamCaption}
+\item[{{\bf Matcher\-Base}$<$ T $>$ const \&}]{other}
+\end{DoxyParamCaption}
+) const}}\label{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a275a18e3e1c4d0bddfde34e362f66b6c}
+
+\begin{DoxyCode}
+2341                                                                                      \{
+2342                 \textcolor{keywordflow}{return} MatchAllOf<T>() && *\textcolor{keyword}{this} && other;
+2343             \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a382ffd0d07d6a5cdadd2bd36ade0a742}{\index{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}!operator$\vert$$\vert$@{operator$\vert$$\vert$}}
+\index{operator$\vert$$\vert$@{operator$\vert$$\vert$}!Catch::Matchers::Impl::MatcherBase@{Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}}
+\subsubsection[{operator$\vert$$\vert$}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Match\-Any\-Of}$<$ T $>$ {\bf Catch\-::\-Matchers\-::\-Impl\-::\-Matcher\-Base}$<$ T $>$\-::operator$\vert$$\vert$ (
+\begin{DoxyParamCaption}
+\item[{{\bf Matcher\-Base}$<$ T $>$ const \&}]{other}
+\end{DoxyParamCaption}
+) const}}\label{struct_catch_1_1_matchers_1_1_impl_1_1_matcher_base_a382ffd0d07d6a5cdadd2bd36ade0a742}
+
+\begin{DoxyCode}
+2345                                                                                      \{
+2346                 \textcolor{keywordflow}{return} MatchAnyOf<T>() || *\textcolor{keyword}{this} || other;
+2347             \}
+\end{DoxyCode}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,110 @@
+\hypertarget{class_catch_1_1_match_expr}{\section{Catch\-:\-:Match\-Expr$<$ Arg\-T, Matcher\-T $>$ Class Template Reference}
+\label{class_catch_1_1_match_expr}\index{Catch\-::\-Match\-Expr$<$ Arg\-T, Matcher\-T $>$@{Catch\-::\-Match\-Expr$<$ Arg\-T, Matcher\-T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Match\-Expr$<$ Arg\-T, Matcher\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{class_catch_1_1_match_expr__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Match\-Expr$<$ Arg\-T, Matcher\-T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_catch_1_1_match_expr__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_match_expr_ab5b9ecc4fb9e91f5f48756e75affe93d}{Match\-Expr} (Arg\-T const \&arg, Matcher\-T const \&matcher, \hyperlink{class_catch_1_1_string_ref}{String\-Ref} matcher\-String)
+\item 
+void \hyperlink{class_catch_1_1_match_expr_ad3e41adb597750b2219bb37e51185629}{stream\-Reconstructed\-Expression} (std\-::ostream \&os) const override
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Arg\-T const \& \hyperlink{class_catch_1_1_match_expr_afb77e2fbf49f956d27f8617a70cf7118}{m\-\_\-arg}
+\item 
+Matcher\-T \hyperlink{class_catch_1_1_match_expr_a4dea78586dd2b3268b4a186e7c0adbe2}{m\-\_\-matcher}
+\item 
+\hyperlink{class_catch_1_1_string_ref}{String\-Ref} \hyperlink{class_catch_1_1_match_expr_a33ec706994f744ff1f4a549177ec08f9}{m\-\_\-matcher\-String}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_match_expr_ab5b9ecc4fb9e91f5f48756e75affe93d}{\index{Catch\-::\-Match\-Expr@{Catch\-::\-Match\-Expr}!Match\-Expr@{Match\-Expr}}
+\index{Match\-Expr@{Match\-Expr}!Catch::MatchExpr@{Catch\-::\-Match\-Expr}}
+\subsubsection[{Match\-Expr}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Arg\-T, typename Matcher\-T$>$ {\bf Catch\-::\-Match\-Expr}$<$ Arg\-T, Matcher\-T $>$\-::{\bf Match\-Expr} (
+\begin{DoxyParamCaption}
+\item[{Arg\-T const \&}]{arg, }
+\item[{Matcher\-T const \&}]{matcher, }
+\item[{{\bf String\-Ref}}]{matcher\-String}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_match_expr_ab5b9ecc4fb9e91f5f48756e75affe93d}
+
+\begin{DoxyCode}
+2705             : \hyperlink{struct_catch_1_1_i_transient_expression_aafe69572b7ed884e63ec81f58d4afd8c}{ITransientExpression}\{ \textcolor{keyword}{true}, matcher.match(arg) \},
+2706             \hyperlink{class_catch_1_1_match_expr_afb77e2fbf49f956d27f8617a70cf7118}{m\_arg}(arg),
+2707             \hyperlink{class_catch_1_1_match_expr_a4dea78586dd2b3268b4a186e7c0adbe2}{m\_matcher}(matcher),
+2708             \hyperlink{class_catch_1_1_match_expr_a33ec706994f744ff1f4a549177ec08f9}{m\_matcherString}(matcherString)
+2709         \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_match_expr_ad3e41adb597750b2219bb37e51185629}{\index{Catch\-::\-Match\-Expr@{Catch\-::\-Match\-Expr}!stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}}
+\index{stream\-Reconstructed\-Expression@{stream\-Reconstructed\-Expression}!Catch::MatchExpr@{Catch\-::\-Match\-Expr}}
+\subsubsection[{stream\-Reconstructed\-Expression}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Arg\-T, typename Matcher\-T$>$ void {\bf Catch\-::\-Match\-Expr}$<$ Arg\-T, Matcher\-T $>$\-::stream\-Reconstructed\-Expression (
+\begin{DoxyParamCaption}
+\item[{std\-::ostream \&}]{os}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}}\label{class_catch_1_1_match_expr_ad3e41adb597750b2219bb37e51185629}
+
+
+Implements \hyperlink{struct_catch_1_1_i_transient_expression_aabe1889df9c6e639a24afb08d8a0fe9e}{Catch\-::\-I\-Transient\-Expression}.
+
+
+
+References Catch\-::\-Detail\-::stringify(), and Catch\-::\-Detail\-::unprintable\-String.
+
+
+\begin{DoxyCode}
+2711                                                                           \{
+2712             \textcolor{keyword}{auto} matcherAsString = \hyperlink{class_catch_1_1_match_expr_a4dea78586dd2b3268b4a186e7c0adbe2}{m\_matcher}.toString();
+2713             os << \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{Catch::Detail::stringify}(\hyperlink{class_catch_1_1_match_expr_afb77e2fbf49f956d27f8617a70cf7118}{m\_arg}) << \textcolor{charliteral}{' '};
+2714             \textcolor{keywordflow}{if} (matcherAsString == \hyperlink{namespace_catch_1_1_detail_a466775f4eec29ffef29ab334cd885136}{Detail::unprintableString})
+2715                 os << \hyperlink{class_catch_1_1_match_expr_a33ec706994f744ff1f4a549177ec08f9}{m\_matcherString};
+2716             \textcolor{keywordflow}{else}
+2717                 os << matcherAsString;
+2718         \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_match_expr_afb77e2fbf49f956d27f8617a70cf7118}{\index{Catch\-::\-Match\-Expr@{Catch\-::\-Match\-Expr}!m\-\_\-arg@{m\-\_\-arg}}
+\index{m\-\_\-arg@{m\-\_\-arg}!Catch::MatchExpr@{Catch\-::\-Match\-Expr}}
+\subsubsection[{m\-\_\-arg}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Arg\-T, typename Matcher\-T$>$ Arg\-T const\& {\bf Catch\-::\-Match\-Expr}$<$ Arg\-T, Matcher\-T $>$\-::m\-\_\-arg\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_match_expr_afb77e2fbf49f956d27f8617a70cf7118}
+\hypertarget{class_catch_1_1_match_expr_a4dea78586dd2b3268b4a186e7c0adbe2}{\index{Catch\-::\-Match\-Expr@{Catch\-::\-Match\-Expr}!m\-\_\-matcher@{m\-\_\-matcher}}
+\index{m\-\_\-matcher@{m\-\_\-matcher}!Catch::MatchExpr@{Catch\-::\-Match\-Expr}}
+\subsubsection[{m\-\_\-matcher}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Arg\-T, typename Matcher\-T$>$ Matcher\-T {\bf Catch\-::\-Match\-Expr}$<$ Arg\-T, Matcher\-T $>$\-::m\-\_\-matcher\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_match_expr_a4dea78586dd2b3268b4a186e7c0adbe2}
+\hypertarget{class_catch_1_1_match_expr_a33ec706994f744ff1f4a549177ec08f9}{\index{Catch\-::\-Match\-Expr@{Catch\-::\-Match\-Expr}!m\-\_\-matcher\-String@{m\-\_\-matcher\-String}}
+\index{m\-\_\-matcher\-String@{m\-\_\-matcher\-String}!Catch::MatchExpr@{Catch\-::\-Match\-Expr}}
+\subsubsection[{m\-\_\-matcher\-String}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename Arg\-T, typename Matcher\-T$>$ {\bf String\-Ref} {\bf Catch\-::\-Match\-Expr}$<$ Arg\-T, Matcher\-T $>$\-::m\-\_\-matcher\-String\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_match_expr_a33ec706994f744ff1f4a549177ec08f9}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

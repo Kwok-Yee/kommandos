@@ -1,0 +1,186 @@
+\hypertarget{class_input_receiver}{\section{Input\-Receiver Class Reference}
+\label{class_input_receiver}\index{Input\-Receiver@{Input\-Receiver}}
+}
+
+
+{\ttfamily \#include $<$Input\-Receiver.\-h$>$}
+
+
+
+Inheritance diagram for Input\-Receiver\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=246pt]{class_input_receiver__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Input\-Receiver\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_input_receiver__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_input_receiver_a8cbad01c0e0dcaa953685b1c932d8ce6}{On\-Event} (const irr\-::\-S\-Event \&event)
+\item 
+bool \hyperlink{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{Get\-Is\-Key\-Down} (irr\-::\-E\-K\-E\-Y\-\_\-\-C\-O\-D\-E key\-Code)
+\item 
+irr\-::core\-::vector3df \hyperlink{class_input_receiver_abd5fa51f4c1e72240f78a0f006c37c87}{Get\-Mouse\-Position} ()
+\item 
+bool \hyperlink{class_input_receiver_a0f5a5d9a25bc6c11e781e42cb73340fb}{Get\-Is\-Left\-Mouse\-Button\-Pressed} ()
+\item 
+\hyperlink{class_input_receiver_a70f3cf2bd8fd15a5db3037d9e21f425f}{Input\-Receiver} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}{is\-Key\-Down} \mbox{[}irr\-::\-K\-E\-Y\-\_\-\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-S\-\_\-\-C\-O\-U\-N\-T\mbox{]}
+\item 
+irr\-::core\-::vector3df \hyperlink{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}{mouse\-Position}
+\item 
+bool \hyperlink{class_input_receiver_a4c7159255233769f501c3950bcadc209}{is\-Left\-Mouse\-Button\-Pressed}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_input_receiver_a70f3cf2bd8fd15a5db3037d9e21f425f}{\index{Input\-Receiver@{Input\-Receiver}!Input\-Receiver@{Input\-Receiver}}
+\index{Input\-Receiver@{Input\-Receiver}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{Input\-Receiver}]{\setlength{\rightskip}{0pt plus 5cm}Input\-Receiver\-::\-Input\-Receiver (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_input_receiver_a70f3cf2bd8fd15a5db3037d9e21f425f}
+
+\begin{DoxyCode}
+62 \{
+63     \textcolor{comment}{// Set all states of the keys to be "not pressed"}
+64     \textcolor{keywordflow}{for} (u32 i = 0; i < KEY\_KEY\_CODES\_COUNT; ++i)
+65     \{
+66         \hyperlink{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}{isKeyDown}[i] = \textcolor{keyword}{false};
+67     \}
+68 \}\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{\index{Input\-Receiver@{Input\-Receiver}!Get\-Is\-Key\-Down@{Get\-Is\-Key\-Down}}
+\index{Get\-Is\-Key\-Down@{Get\-Is\-Key\-Down}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{Get\-Is\-Key\-Down}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\-Receiver\-::\-Get\-Is\-Key\-Down (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-E\-K\-E\-Y\-\_\-\-C\-O\-D\-E}]{key\-Code}
+\end{DoxyParamCaption}
+)}}\label{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}
+
+
+Referenced by Player\-::\-Move().
+
+
+\begin{DoxyCode}
+47 \{
+48     \textcolor{keywordflow}{return} \hyperlink{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}{isKeyDown}[keyCode];
+49 \}
+\end{DoxyCode}
+\hypertarget{class_input_receiver_a0f5a5d9a25bc6c11e781e42cb73340fb}{\index{Input\-Receiver@{Input\-Receiver}!Get\-Is\-Left\-Mouse\-Button\-Pressed@{Get\-Is\-Left\-Mouse\-Button\-Pressed}}
+\index{Get\-Is\-Left\-Mouse\-Button\-Pressed@{Get\-Is\-Left\-Mouse\-Button\-Pressed}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{Get\-Is\-Left\-Mouse\-Button\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\-Receiver\-::\-Get\-Is\-Left\-Mouse\-Button\-Pressed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_input_receiver_a0f5a5d9a25bc6c11e781e42cb73340fb}
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+57 \{
+58     \textcolor{keywordflow}{return} \hyperlink{class_input_receiver_a4c7159255233769f501c3950bcadc209}{isLeftMouseButtonPressed};
+59 \}
+\end{DoxyCode}
+\hypertarget{class_input_receiver_abd5fa51f4c1e72240f78a0f006c37c87}{\index{Input\-Receiver@{Input\-Receiver}!Get\-Mouse\-Position@{Get\-Mouse\-Position}}
+\index{Get\-Mouse\-Position@{Get\-Mouse\-Position}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{Get\-Mouse\-Position}]{\setlength{\rightskip}{0pt plus 5cm}vector3df Input\-Receiver\-::\-Get\-Mouse\-Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_input_receiver_abd5fa51f4c1e72240f78a0f006c37c87}
+
+
+References mouse\-Position.
+
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+52 \{
+53     \textcolor{keywordflow}{return} \hyperlink{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}{mousePosition};
+54 \}
+\end{DoxyCode}
+\hypertarget{class_input_receiver_a8cbad01c0e0dcaa953685b1c932d8ce6}{\index{Input\-Receiver@{Input\-Receiver}!On\-Event@{On\-Event}}
+\index{On\-Event@{On\-Event}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{On\-Event}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\-Receiver\-::\-On\-Event (
+\begin{DoxyParamCaption}
+\item[{const irr\-::\-S\-Event \&}]{event}
+\end{DoxyParamCaption}
+)}}\label{class_input_receiver_a8cbad01c0e0dcaa953685b1c932d8ce6}
+
+
+References mouse\-Position.
+
+
+\begin{DoxyCode}
+16 \{
+17     \textcolor{keywordflow}{if} (event.EventType == EET\_MOUSE\_INPUT\_EVENT)
+18     \{
+19         \textcolor{keywordflow}{switch} (event.MouseInput.Event)
+20         \{
+21         \textcolor{keywordflow}{case} EMIE\_LMOUSE\_PRESSED\_DOWN:
+22             \hyperlink{class_input_receiver_a4c7159255233769f501c3950bcadc209}{isLeftMouseButtonPressed} = \textcolor{keyword}{true};
+23             \textcolor{keywordflow}{break};
+24         \textcolor{keywordflow}{case} EMIE\_LMOUSE\_LEFT\_UP:
+25             \hyperlink{class_input_receiver_a4c7159255233769f501c3950bcadc209}{isLeftMouseButtonPressed} = \textcolor{keyword}{false};
+26             \textcolor{keywordflow}{break};
+27         \textcolor{keywordflow}{case} EMIE\_MOUSE\_MOVED:
+28             \hyperlink{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}{mousePosition}.X = \textcolor{keyword}{event}.MouseInput.X;
+29             \textcolor{comment}{// Stores the event its y mouse position to z position}
+30             \hyperlink{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}{mousePosition}.Z = \textcolor{keyword}{event}.MouseInput.Y;
+31             \textcolor{keywordflow}{break};
+32         \textcolor{keywordflow}{default}:
+33             \textcolor{keywordflow}{break};
+34         \}
+35     \}
+36 
+37     \textcolor{comment}{// Remember whether each key is down or up}
+38     \textcolor{keywordflow}{if} (event.EventType == irr::EET\_KEY\_INPUT\_EVENT)
+39     \{
+40         \hyperlink{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}{isKeyDown}[\textcolor{keyword}{event}.KeyInput.Key] = \textcolor{keyword}{event}.KeyInput.PressedDown;
+41     \}
+42     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+43 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}{\index{Input\-Receiver@{Input\-Receiver}!is\-Key\-Down@{is\-Key\-Down}}
+\index{is\-Key\-Down@{is\-Key\-Down}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{is\-Key\-Down}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\-Receiver\-::is\-Key\-Down\mbox{[}irr\-::\-K\-E\-Y\-\_\-\-K\-E\-Y\-\_\-\-C\-O\-D\-E\-S\-\_\-\-C\-O\-U\-N\-T\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{class_input_receiver_aaed36ea961cf8eb373fa57f7c1009a05}
+\hypertarget{class_input_receiver_a4c7159255233769f501c3950bcadc209}{\index{Input\-Receiver@{Input\-Receiver}!is\-Left\-Mouse\-Button\-Pressed@{is\-Left\-Mouse\-Button\-Pressed}}
+\index{is\-Left\-Mouse\-Button\-Pressed@{is\-Left\-Mouse\-Button\-Pressed}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{is\-Left\-Mouse\-Button\-Pressed}]{\setlength{\rightskip}{0pt plus 5cm}bool Input\-Receiver\-::is\-Left\-Mouse\-Button\-Pressed\hspace{0.3cm}{\ttfamily [private]}}}\label{class_input_receiver_a4c7159255233769f501c3950bcadc209}
+\hypertarget{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}{\index{Input\-Receiver@{Input\-Receiver}!mouse\-Position@{mouse\-Position}}
+\index{mouse\-Position@{mouse\-Position}!InputReceiver@{Input\-Receiver}}
+\subsubsection[{mouse\-Position}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Input\-Receiver\-::mouse\-Position\hspace{0.3cm}{\ttfamily [private]}}}\label{class_input_receiver_ae15f1ffaada0f66bbf3d727e67b0c3a5}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_input_receiver_8h}{Input\-Receiver.\-h}\item 
+\hyperlink{_input_receiver_8cpp}{Input\-Receiver.\-cpp}\end{DoxyCompactItemize}

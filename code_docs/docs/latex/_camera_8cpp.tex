@@ -1,0 +1,205 @@
+\hypertarget{_camera_8cpp}{\section{Camera.\-cpp File Reference}
+\label{_camera_8cpp}\index{Camera.\-cpp@{Camera.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Camera.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$ctime$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include \char`\"{}Player.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Game\-Over\-State.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Game.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sound\-Manager.\-h\char`\"{}}\\*
+Include dependency graph for Camera.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_camera_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_camera_8cpp_abd32b9b9e58b56300d17f56603d2258f}{E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D}~\char`\"{}../media/Sounds/equake4.\-mp3\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const vector3df \hyperlink{_camera_8cpp_a7c0be2a67c370806c3148499dbdc60c0}{camera\-Start\-Position} = vector3df(0, 150, 0)
+\begin{DoxyCompactList}\small\item\em The camera start position. \end{DoxyCompactList}\item 
+const vector3df \hyperlink{_camera_8cpp_a9b3909feb1d589415063db537ece08ad}{camera\-Start\-Target} = vector3df(0, 0, 0)
+\begin{DoxyCompactList}\small\item\em The camera start target. \end{DoxyCompactList}\item 
+\hyperlink{class_sound_manager}{Sound\-Manager} $\ast$ \hyperlink{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\-\_\-sound\-Manager}
+\item 
+Irrlicht\-Device $\ast$ \hyperlink{_camera_8cpp_a30edcb606ee143928a2503208101c492}{camera\-I\-Device}
+\begin{DoxyCompactList}\small\item\em The camera i device. \end{DoxyCompactList}\item 
+I\-Scene\-Manager $\ast$ \hyperlink{_camera_8cpp_a0cc2153984c669f761bff4f8bc18e79c}{camera\-Smgr}
+\begin{DoxyCompactList}\small\item\em The camera scenemanager. \end{DoxyCompactList}\item 
+I\-Camera\-Scene\-Node $\ast$ \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}
+\begin{DoxyCompactList}\small\item\em The camera. \end{DoxyCompactList}\item 
+\hyperlink{class_player}{Player} $\ast$ \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\-\_\-}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_player}{Player}. \end{DoxyCompactList}\item 
+\hyperlink{class_game}{Game} $\ast$ \hyperlink{_camera_8cpp_a73df19eb9d4f0b717dd7d767d601d60a}{game\-\_\-}
+\item 
+vector3df \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{new\-Camera\-Position}
+\begin{DoxyCompactList}\small\item\em The new camera position. \end{DoxyCompactList}\item 
+const int \hyperlink{_camera_8cpp_a619c0eb0387294c24a31b7db33b7794c}{max\-Time\-Normal\-Shake} = 100
+\item 
+const int \hyperlink{_camera_8cpp_a5de58f108d9c49965afcc955ca60cf3a}{shot\-Time\-Shake} = 10
+\item 
+int \hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shake\-Timer}
+\item 
+f32 \hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{reset\-Time} = 0
+\item 
+bool \hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{sound\-Playing} = false
+\item 
+bool \hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{is\-Shaking} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_camera_8cpp_abd32b9b9e58b56300d17f56603d2258f}{\index{Camera.\-cpp@{Camera.\-cpp}!E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D@{E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D}}
+\index{E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D@{E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D}]{\setlength{\rightskip}{0pt plus 5cm}\#define E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D~\char`\"{}../media/Sounds/equake4.\-mp3\char`\"{}}}\label{_camera_8cpp_abd32b9b9e58b56300d17f56603d2258f}
+
+
+Referenced by Camera\-::\-Camera\-Update().
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\index{Camera.\-cpp@{Camera.\-cpp}!\-\_\-sound\-Manager@{\-\_\-sound\-Manager}}
+\index{\-\_\-sound\-Manager@{\-\_\-sound\-Manager}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{\-\_\-sound\-Manager}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-Manager}$\ast$ \-\_\-sound\-Manager}}\label{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}
+
+
+Referenced by Camera\-::\-Camera(), and Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{\index{Camera.\-cpp@{Camera.\-cpp}!camera@{camera}}
+\index{camera@{camera}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{camera}]{\setlength{\rightskip}{0pt plus 5cm}I\-Camera\-Scene\-Node$\ast$ camera}}\label{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}
+
+
+The camera. 
+
+
+
+Referenced by Camera\-::\-Camera\-Init(), Camera\-::\-Camera\-Update(), and Camera\-::\-Screen\-Shake().
+
+\hypertarget{_camera_8cpp_a30edcb606ee143928a2503208101c492}{\index{Camera.\-cpp@{Camera.\-cpp}!camera\-I\-Device@{camera\-I\-Device}}
+\index{camera\-I\-Device@{camera\-I\-Device}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{camera\-I\-Device}]{\setlength{\rightskip}{0pt plus 5cm}Irrlicht\-Device$\ast$ camera\-I\-Device}}\label{_camera_8cpp_a30edcb606ee143928a2503208101c492}
+
+
+The camera i device. 
+
+
+
+Referenced by Camera\-::\-Camera().
+
+\hypertarget{_camera_8cpp_a0cc2153984c669f761bff4f8bc18e79c}{\index{Camera.\-cpp@{Camera.\-cpp}!camera\-Smgr@{camera\-Smgr}}
+\index{camera\-Smgr@{camera\-Smgr}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{camera\-Smgr}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Manager$\ast$ camera\-Smgr}}\label{_camera_8cpp_a0cc2153984c669f761bff4f8bc18e79c}
+
+
+The camera scenemanager. 
+
+
+
+Referenced by Camera\-::\-Camera(), and Camera\-::\-Camera\-Init().
+
+\hypertarget{_camera_8cpp_a7c0be2a67c370806c3148499dbdc60c0}{\index{Camera.\-cpp@{Camera.\-cpp}!camera\-Start\-Position@{camera\-Start\-Position}}
+\index{camera\-Start\-Position@{camera\-Start\-Position}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{camera\-Start\-Position}]{\setlength{\rightskip}{0pt plus 5cm}const vector3df camera\-Start\-Position = vector3df(0, 150, 0)}}\label{_camera_8cpp_a7c0be2a67c370806c3148499dbdc60c0}
+
+
+The camera start position. 
+
+
+
+Referenced by Camera\-::\-Camera\-Init(), and Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a9b3909feb1d589415063db537ece08ad}{\index{Camera.\-cpp@{Camera.\-cpp}!camera\-Start\-Target@{camera\-Start\-Target}}
+\index{camera\-Start\-Target@{camera\-Start\-Target}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{camera\-Start\-Target}]{\setlength{\rightskip}{0pt plus 5cm}const vector3df camera\-Start\-Target = vector3df(0, 0, 0)}}\label{_camera_8cpp_a9b3909feb1d589415063db537ece08ad}
+
+
+The camera start target. 
+
+
+
+Referenced by Camera\-::\-Camera\-Init(), and Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a73df19eb9d4f0b717dd7d767d601d60a}{\index{Camera.\-cpp@{Camera.\-cpp}!game\-\_\-@{game\-\_\-}}
+\index{game\-\_\-@{game\-\_\-}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{game\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Game}$\ast$ game\-\_\-}}\label{_camera_8cpp_a73df19eb9d4f0b717dd7d767d601d60a}
+
+
+Referenced by Camera\-::\-Camera().
+
+\hypertarget{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{\index{Camera.\-cpp@{Camera.\-cpp}!is\-Shaking@{is\-Shaking}}
+\index{is\-Shaking@{is\-Shaking}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{is\-Shaking}]{\setlength{\rightskip}{0pt plus 5cm}bool is\-Shaking = false}}\label{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}
+
+
+Referenced by Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a619c0eb0387294c24a31b7db33b7794c}{\index{Camera.\-cpp@{Camera.\-cpp}!max\-Time\-Normal\-Shake@{max\-Time\-Normal\-Shake}}
+\index{max\-Time\-Normal\-Shake@{max\-Time\-Normal\-Shake}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{max\-Time\-Normal\-Shake}]{\setlength{\rightskip}{0pt plus 5cm}const int max\-Time\-Normal\-Shake = 100}}\label{_camera_8cpp_a619c0eb0387294c24a31b7db33b7794c}
+
+
+Referenced by Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{\index{Camera.\-cpp@{Camera.\-cpp}!new\-Camera\-Position@{new\-Camera\-Position}}
+\index{new\-Camera\-Position@{new\-Camera\-Position}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{new\-Camera\-Position}]{\setlength{\rightskip}{0pt plus 5cm}vector3df new\-Camera\-Position}}\label{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}
+
+
+The new camera position. 
+
+
+
+Referenced by Camera\-::\-Camera\-Init(), Camera\-::\-Camera\-Update(), and Camera\-::\-Screen\-Shake().
+
+\hypertarget{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{\index{Camera.\-cpp@{Camera.\-cpp}!player\-\_\-@{player\-\_\-}}
+\index{player\-\_\-@{player\-\_\-}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{player\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Player}$\ast$ player\-\_\-}}\label{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}
+
+
+The \hyperlink{class_player}{Player}. 
+
+
+
+Referenced by Camera\-::\-Camera\-Update(), and Camera\-::\-Screen\-Shake().
+
+\hypertarget{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{\index{Camera.\-cpp@{Camera.\-cpp}!reset\-Time@{reset\-Time}}
+\index{reset\-Time@{reset\-Time}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{reset\-Time}]{\setlength{\rightskip}{0pt plus 5cm}f32 reset\-Time = 0}}\label{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}
+
+
+Referenced by Camera\-::\-Screen\-Shake().
+
+\hypertarget{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{\index{Camera.\-cpp@{Camera.\-cpp}!shake\-Timer@{shake\-Timer}}
+\index{shake\-Timer@{shake\-Timer}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{shake\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}int shake\-Timer}}\label{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}
+
+
+Referenced by Camera\-::\-Camera\-Update(), and Camera\-::\-Screen\-Shake().
+
+\hypertarget{_camera_8cpp_a5de58f108d9c49965afcc955ca60cf3a}{\index{Camera.\-cpp@{Camera.\-cpp}!shot\-Time\-Shake@{shot\-Time\-Shake}}
+\index{shot\-Time\-Shake@{shot\-Time\-Shake}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{shot\-Time\-Shake}]{\setlength{\rightskip}{0pt plus 5cm}const int shot\-Time\-Shake = 10}}\label{_camera_8cpp_a5de58f108d9c49965afcc955ca60cf3a}
+
+
+Referenced by Camera\-::\-Camera\-Update().
+
+\hypertarget{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{\index{Camera.\-cpp@{Camera.\-cpp}!sound\-Playing@{sound\-Playing}}
+\index{sound\-Playing@{sound\-Playing}!Camera.cpp@{Camera.\-cpp}}
+\subsubsection[{sound\-Playing}]{\setlength{\rightskip}{0pt plus 5cm}bool sound\-Playing = false}}\label{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}
+
+
+Referenced by Camera\-::\-Camera\-Update().
+

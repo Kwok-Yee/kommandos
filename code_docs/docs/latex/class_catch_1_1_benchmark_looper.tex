@@ -1,0 +1,142 @@
+\hypertarget{class_catch_1_1_benchmark_looper}{\section{Catch\-:\-:Benchmark\-Looper Class Reference}
+\label{class_catch_1_1_benchmark_looper}\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:Benchmark\-Looper\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_catch_1_1_benchmark_looper__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_benchmark_looper_ab9ba6397306a70082f39e63a8a71bde6}{Benchmark\-Looper} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} name)
+\item 
+\hyperlink{class_catch_1_1_benchmark_looper_a54da41bada9da038dc05faf41d746765}{operator bool} ()
+\item 
+void \hyperlink{class_catch_1_1_benchmark_looper_a210552aff5b19408637444d4bb35d59c}{increment} ()
+\item 
+void \hyperlink{class_catch_1_1_benchmark_looper_a0697d1b266112b110edf2025b82c4e77}{report\-Start} ()
+\item 
+auto \hyperlink{class_catch_1_1_benchmark_looper_a97bd944521f519b1593a5d1d2f9998fa}{needs\-More\-Iterations} () -\/$>$ bool
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static auto \hyperlink{class_catch_1_1_benchmark_looper_a45fd79f05ac1fb21dcfb3a81cf052705}{get\-Resolution} () -\/$>$ uint64\-\_\-t
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string \hyperlink{class_catch_1_1_benchmark_looper_afa2005187a2abbcae69a5b16c89e68c3}{m\-\_\-name}
+\item 
+std\-::size\-\_\-t \hyperlink{class_catch_1_1_benchmark_looper_aae36ced9e5b1c884e2b3ac9d04c1c373}{m\-\_\-count} = 0
+\item 
+std\-::size\-\_\-t \hyperlink{class_catch_1_1_benchmark_looper_af28bef6706fe983afca85d2ccd2b6ca8}{m\-\_\-iterations\-To\-Run} = 1
+\item 
+uint64\-\_\-t \hyperlink{class_catch_1_1_benchmark_looper_a7e7168e3d346e78d6e85c810aec6a55d}{m\-\_\-resolution}
+\item 
+\hyperlink{class_catch_1_1_timer}{Timer} \hyperlink{class_catch_1_1_benchmark_looper_af86aacecba12576f96a1d3f321a0c959}{m\-\_\-timer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_benchmark_looper_ab9ba6397306a70082f39e63a8a71bde6}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!Benchmark\-Looper@{Benchmark\-Looper}}
+\index{Benchmark\-Looper@{Benchmark\-Looper}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{Benchmark\-Looper}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-Benchmark\-Looper\-::\-Benchmark\-Looper (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref}}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_benchmark_looper_ab9ba6397306a70082f39e63a8a71bde6}
+
+\begin{DoxyCode}
+1915             : \hyperlink{class_catch_1_1_benchmark_looper_afa2005187a2abbcae69a5b16c89e68c3}{m\_name}(name),
+1916             \hyperlink{class_catch_1_1_benchmark_looper_a7e7168e3d346e78d6e85c810aec6a55d}{m\_resolution}(\hyperlink{class_catch_1_1_benchmark_looper_a45fd79f05ac1fb21dcfb3a81cf052705}{getResolution}())
+1917         \{
+1918             \hyperlink{class_catch_1_1_benchmark_looper_a0697d1b266112b110edf2025b82c4e77}{reportStart}();
+1919             \hyperlink{class_catch_1_1_benchmark_looper_af86aacecba12576f96a1d3f321a0c959}{m\_timer}.\hyperlink{class_catch_1_1_timer_a0a56e879e43f36c102bf9ea8b5fc8b72}{start}();
+1920         \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_benchmark_looper_a45fd79f05ac1fb21dcfb3a81cf052705}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!get\-Resolution@{get\-Resolution}}
+\index{get\-Resolution@{get\-Resolution}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{get\-Resolution}]{\setlength{\rightskip}{0pt plus 5cm}static auto Catch\-::\-Benchmark\-Looper\-::get\-Resolution (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) -\/$>$  uint64\-\_\-t\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_a45fd79f05ac1fb21dcfb3a81cf052705}
+\hypertarget{class_catch_1_1_benchmark_looper_a210552aff5b19408637444d4bb35d59c}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!increment@{increment}}
+\index{increment@{increment}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{increment}]{\setlength{\rightskip}{0pt plus 5cm}void Catch\-::\-Benchmark\-Looper\-::increment (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_benchmark_looper_a210552aff5b19408637444d4bb35d59c}
+
+\begin{DoxyCode}
+1928                          \{
+1929             ++\hyperlink{class_catch_1_1_benchmark_looper_aae36ced9e5b1c884e2b3ac9d04c1c373}{m\_count};
+1930         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_benchmark_looper_a97bd944521f519b1593a5d1d2f9998fa}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!needs\-More\-Iterations@{needs\-More\-Iterations}}
+\index{needs\-More\-Iterations@{needs\-More\-Iterations}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{needs\-More\-Iterations}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-Benchmark\-Looper\-::needs\-More\-Iterations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) -\/$>$  bool}}\label{class_catch_1_1_benchmark_looper_a97bd944521f519b1593a5d1d2f9998fa}
+\hypertarget{class_catch_1_1_benchmark_looper_a54da41bada9da038dc05faf41d746765}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{operator bool}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-Benchmark\-Looper\-::operator bool (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}}\label{class_catch_1_1_benchmark_looper_a54da41bada9da038dc05faf41d746765}
+
+\begin{DoxyCode}
+1922                                  \{
+1923             \textcolor{keywordflow}{if} (\hyperlink{class_catch_1_1_benchmark_looper_aae36ced9e5b1c884e2b3ac9d04c1c373}{m\_count} < \hyperlink{class_catch_1_1_benchmark_looper_af28bef6706fe983afca85d2ccd2b6ca8}{m\_iterationsToRun})
+1924                 \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+1925             \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_benchmark_looper_a97bd944521f519b1593a5d1d2f9998fa}{needsMoreIterations}();
+1926         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_benchmark_looper_a0697d1b266112b110edf2025b82c4e77}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!report\-Start@{report\-Start}}
+\index{report\-Start@{report\-Start}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{report\-Start}]{\setlength{\rightskip}{0pt plus 5cm}void Catch\-::\-Benchmark\-Looper\-::report\-Start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_catch_1_1_benchmark_looper_a0697d1b266112b110edf2025b82c4e77}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_benchmark_looper_aae36ced9e5b1c884e2b3ac9d04c1c373}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!m\-\_\-count@{m\-\_\-count}}
+\index{m\-\_\-count@{m\-\_\-count}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{m\-\_\-count}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t Catch\-::\-Benchmark\-Looper\-::m\-\_\-count = 0\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_aae36ced9e5b1c884e2b3ac9d04c1c373}
+\hypertarget{class_catch_1_1_benchmark_looper_af28bef6706fe983afca85d2ccd2b6ca8}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!m\-\_\-iterations\-To\-Run@{m\-\_\-iterations\-To\-Run}}
+\index{m\-\_\-iterations\-To\-Run@{m\-\_\-iterations\-To\-Run}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{m\-\_\-iterations\-To\-Run}]{\setlength{\rightskip}{0pt plus 5cm}std\-::size\-\_\-t Catch\-::\-Benchmark\-Looper\-::m\-\_\-iterations\-To\-Run = 1\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_af28bef6706fe983afca85d2ccd2b6ca8}
+\hypertarget{class_catch_1_1_benchmark_looper_afa2005187a2abbcae69a5b16c89e68c3}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!m\-\_\-name@{m\-\_\-name}}
+\index{m\-\_\-name@{m\-\_\-name}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{m\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string Catch\-::\-Benchmark\-Looper\-::m\-\_\-name\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_afa2005187a2abbcae69a5b16c89e68c3}
+\hypertarget{class_catch_1_1_benchmark_looper_a7e7168e3d346e78d6e85c810aec6a55d}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!m\-\_\-resolution@{m\-\_\-resolution}}
+\index{m\-\_\-resolution@{m\-\_\-resolution}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{m\-\_\-resolution}]{\setlength{\rightskip}{0pt plus 5cm}uint64\-\_\-t Catch\-::\-Benchmark\-Looper\-::m\-\_\-resolution\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_a7e7168e3d346e78d6e85c810aec6a55d}
+\hypertarget{class_catch_1_1_benchmark_looper_af86aacecba12576f96a1d3f321a0c959}{\index{Catch\-::\-Benchmark\-Looper@{Catch\-::\-Benchmark\-Looper}!m\-\_\-timer@{m\-\_\-timer}}
+\index{m\-\_\-timer@{m\-\_\-timer}!Catch::BenchmarkLooper@{Catch\-::\-Benchmark\-Looper}}
+\subsubsection[{m\-\_\-timer}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Timer} Catch\-::\-Benchmark\-Looper\-::m\-\_\-timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_benchmark_looper_af86aacecba12576f96a1d3f321a0c959}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

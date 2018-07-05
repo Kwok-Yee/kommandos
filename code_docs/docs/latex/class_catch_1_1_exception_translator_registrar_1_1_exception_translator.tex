@@ -1,0 +1,91 @@
+\hypertarget{class_catch_1_1_exception_translator_registrar_1_1_exception_translator}{\section{Catch\-:\-:Exception\-Translator\-Registrar\-:\-:Exception\-Translator$<$ T $>$ Class Template Reference}
+\label{class_catch_1_1_exception_translator_registrar_1_1_exception_translator}\index{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator$<$ T $>$@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator$<$ T $>$}}
+}
+
+
+Inheritance diagram for Catch\-:\-:Exception\-Translator\-Registrar\-:\-:Exception\-Translator$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_catch_1_1_exception_translator_registrar_1_1_exception_translator__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Exception\-Translator\-Registrar\-:\-:Exception\-Translator$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=343pt]{class_catch_1_1_exception_translator_registrar_1_1_exception_translator__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a2de4e9bcaad47996159763e69f614d7a}{Exception\-Translator} (std\-::string($\ast$translate\-Function)(T \&))
+\item 
+std\-::string \hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a29e85940ee9ce719f26e43550cb4ed48}{translate} (Exception\-Translators\-::const\-\_\-iterator it, Exception\-Translators\-::const\-\_\-iterator it\-End) const override
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::string($\ast$ \hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_aa3d9238a0f9b3122a27ac1e60cb79ef9}{m\-\_\-translate\-Function} )(T \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a2de4e9bcaad47996159763e69f614d7a}{\index{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}!Exception\-Translator@{Exception\-Translator}}
+\index{Exception\-Translator@{Exception\-Translator}!Catch::ExceptionTranslatorRegistrar::ExceptionTranslator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}}
+\subsubsection[{Exception\-Translator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}$<$ T $>$\-::{\bf Exception\-Translator} (
+\begin{DoxyParamCaption}
+\item[{std\-::string($\ast$)(T \&)}]{translate\-Function}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a2de4e9bcaad47996159763e69f614d7a}
+
+\begin{DoxyCode}
+2024                 : \hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_aa3d9238a0f9b3122a27ac1e60cb79ef9}{m\_translateFunction}(translateFunction)
+2025             \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a29e85940ee9ce719f26e43550cb4ed48}{\index{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}!translate@{translate}}
+\index{translate@{translate}!Catch::ExceptionTranslatorRegistrar::ExceptionTranslator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}}
+\subsubsection[{translate}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string {\bf Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}$<$ T $>$\-::translate (
+\begin{DoxyParamCaption}
+\item[{Exception\-Translators\-::const\-\_\-iterator}]{it, }
+\item[{Exception\-Translators\-::const\-\_\-iterator}]{it\-End}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}}\label{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_a29e85940ee9ce719f26e43550cb4ed48}
+
+
+Implements \hyperlink{struct_catch_1_1_i_exception_translator_a2a554b96ed5ed411e7c796b6b42837a5}{Catch\-::\-I\-Exception\-Translator}.
+
+
+\begin{DoxyCode}
+2027                                                                                                            
+                           \{
+2028                 \textcolor{keywordflow}{try} \{
+2029                     \textcolor{keywordflow}{if} (it == itEnd)
+2030                         std::rethrow\_exception(std::current\_exception());
+2031                     \textcolor{keywordflow}{else}
+2032                         \textcolor{keywordflow}{return} (*it)->translate(it + 1, itEnd);
+2033                 \}
+2034                 \textcolor{keywordflow}{catch} (T& ex) \{
+2035                     \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_aa3d9238a0f9b3122a27ac1e60cb79ef9}{m\_translateFunction}(ex);
+2036                 \}
+2037             \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_aa3d9238a0f9b3122a27ac1e60cb79ef9}{\index{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}!m\-\_\-translate\-Function@{m\-\_\-translate\-Function}}
+\index{m\-\_\-translate\-Function@{m\-\_\-translate\-Function}!Catch::ExceptionTranslatorRegistrar::ExceptionTranslator@{Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}}
+\subsubsection[{m\-\_\-translate\-Function}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string($\ast$ {\bf Catch\-::\-Exception\-Translator\-Registrar\-::\-Exception\-Translator}$<$ T $>$\-::m\-\_\-translate\-Function)(T \&)\hspace{0.3cm}{\ttfamily [protected]}}}\label{class_catch_1_1_exception_translator_registrar_1_1_exception_translator_aa3d9238a0f9b3122a27ac1e60cb79ef9}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

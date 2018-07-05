@@ -1,0 +1,327 @@
+\hypertarget{class_collision}{\section{Collision Class Reference}
+\label{class_collision}\index{Collision@{Collision}}
+}
+
+
+{\ttfamily \#include $<$Collision.\-h$>$}
+
+
+
+Collaboration diagram for Collision\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{class_collision__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{Add\-Wall\-To\-List} (irr\-::scene\-::\-I\-Scene\-Node $\ast$wall)
+\item 
+void \hyperlink{class_collision_a673528880f1ad75dab13a2107a3d2b7c}{Add\-Static\-To\-List} (irr\-::scene\-::\-I\-Scene\-Node $\ast$static\-Object)
+\item 
+void \hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{Add\-Dynamic\-To\-List} (irr\-::scene\-::\-I\-Scene\-Node $\ast$dynamic\-Object)
+\item 
+void \hyperlink{class_collision_af6fe5888d934195d15e51f237fc989c6}{Remove\-Dynamic\-From\-List} (irr\-::scene\-::\-I\-Scene\-Node $\ast$dynamic\-Object)
+\item 
+void \hyperlink{class_collision_affd296ad667fec8f353265488e4de292}{Add\-Powerup\-To\-List} (\hyperlink{class_powerup}{Powerup} $\ast$\hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup})
+\item 
+bool \hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{Scene\-Node\-With\-Scene\-Node} (irr\-::scene\-::\-I\-Scene\-Node $\ast$t\-Box1, irr\-::scene\-::\-I\-Scene\-Node $\ast$t\-Box2)
+\item 
+bool \hyperlink{class_collision_a334467ec1c8b7889aa46016fcedb13f9}{Collides\-With\-Static\-Objects} (irr\-::scene\-::\-I\-Scene\-Node $\ast$dynamic\-Object)
+\item 
+void \hyperlink{class_collision_a17f9c89abcc19bfb3fe0357158dae55d}{Discrete\-Collision\-Update} (irr\-::f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\item 
+\hyperlink{class_powerup}{Powerup} $\ast$ \hyperlink{class_collision_a75da9eaaa278f192d163db0065d33483}{Collides\-With\-Powerup} (irr\-::scene\-::\-I\-Scene\-Node $\ast$\hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player})
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_collision_a48551c4c00be185dc16cf27775bd177b}{\index{Collision@{Collision}!Add\-Dynamic\-To\-List@{Add\-Dynamic\-To\-List}}
+\index{Add\-Dynamic\-To\-List@{Add\-Dynamic\-To\-List}!Collision@{Collision}}
+\subsubsection[{Add\-Dynamic\-To\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Add\-Dynamic\-To\-List (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{dynamic\-Object}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a48551c4c00be185dc16cf27775bd177b}
+
+
+References dynamic\-List.
+
+
+
+Referenced by Player\-::\-Init(), Enemy\-Spawner\-::\-Spawn(), and Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion().
+
+
+\begin{DoxyCode}
+21 \{ \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.push\_back(dynamicObject); \}
+\end{DoxyCode}
+\hypertarget{class_collision_affd296ad667fec8f353265488e4de292}{\index{Collision@{Collision}!Add\-Powerup\-To\-List@{Add\-Powerup\-To\-List}}
+\index{Add\-Powerup\-To\-List@{Add\-Powerup\-To\-List}!Collision@{Collision}}
+\subsubsection[{Add\-Powerup\-To\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Add\-Powerup\-To\-List (
+\begin{DoxyParamCaption}
+\item[{{\bf Powerup} $\ast$}]{powerup}
+\end{DoxyParamCaption}
+)}}\label{class_collision_affd296ad667fec8f353265488e4de292}
+
+
+References powerup\-List.
+
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+
+\begin{DoxyCode}
+22 \{ \hyperlink{_collision_8cpp_a5f2962496e949b1eb2272e8bb1d4c247}{powerupList}.push\_back(powerup); \}
+\end{DoxyCode}
+\hypertarget{class_collision_a673528880f1ad75dab13a2107a3d2b7c}{\index{Collision@{Collision}!Add\-Static\-To\-List@{Add\-Static\-To\-List}}
+\index{Add\-Static\-To\-List@{Add\-Static\-To\-List}!Collision@{Collision}}
+\subsubsection[{Add\-Static\-To\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Add\-Static\-To\-List (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{static\-Object}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a673528880f1ad75dab13a2107a3d2b7c}
+
+
+References static\-List.
+
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Objects().
+
+
+\begin{DoxyCode}
+20 \{ \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}.push\_back(staticObject); \}
+\end{DoxyCode}
+\hypertarget{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{\index{Collision@{Collision}!Add\-Wall\-To\-List@{Add\-Wall\-To\-List}}
+\index{Add\-Wall\-To\-List@{Add\-Wall\-To\-List}!Collision@{Collision}}
+\subsubsection[{Add\-Wall\-To\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Add\-Wall\-To\-List (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{wall}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}
+
+
+References wall\-List.
+
+
+
+Referenced by Object\-Placement\-Generation\-::\-Create\-Default\-Objects().
+
+
+\begin{DoxyCode}
+19 \{ \hyperlink{_collision_8cpp_a5761ec59c213fcbc17226b9df12dce77}{wallList}.push\_back(wall); \}
+\end{DoxyCode}
+\hypertarget{class_collision_a75da9eaaa278f192d163db0065d33483}{\index{Collision@{Collision}!Collides\-With\-Powerup@{Collides\-With\-Powerup}}
+\index{Collides\-With\-Powerup@{Collides\-With\-Powerup}!Collision@{Collision}}
+\subsubsection[{Collides\-With\-Powerup}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup} $\ast$ Collision\-::\-Collides\-With\-Powerup (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{player}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a75da9eaaa278f192d163db0065d33483}
+
+
+References powerup\-List.
+
+
+
+Referenced by Player\-::\-Move().
+
+
+\begin{DoxyCode}
+47 \{
+48     \textcolor{keywordflow}{for} (u32 i = 0; i < \hyperlink{_collision_8cpp_a5f2962496e949b1eb2272e8bb1d4c247}{powerupList}.size(); i++)
+49         \textcolor{keywordflow}{if} (\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(\hyperlink{_enemy_8cpp_a96781128d3743da3d17e0fdd91afba7b}{player}, 
+      \hyperlink{_collision_8cpp_a5f2962496e949b1eb2272e8bb1d4c247}{powerupList}[i]->GetNode()))
+50         \{
+51             \hyperlink{class_powerup}{Powerup}* pow = \hyperlink{_collision_8cpp_a5f2962496e949b1eb2272e8bb1d4c247}{powerupList}[i];
+52             \hyperlink{_collision_8cpp_a5f2962496e949b1eb2272e8bb1d4c247}{powerupList}.erase(i);
+53             \textcolor{keywordflow}{return} pow;
+54         \}
+55 
+56     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+57 \}
+\end{DoxyCode}
+\hypertarget{class_collision_a334467ec1c8b7889aa46016fcedb13f9}{\index{Collision@{Collision}!Collides\-With\-Static\-Objects@{Collides\-With\-Static\-Objects}}
+\index{Collides\-With\-Static\-Objects@{Collides\-With\-Static\-Objects}!Collision@{Collision}}
+\subsubsection[{Collides\-With\-Static\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\-::\-Collides\-With\-Static\-Objects (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{dynamic\-Object}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a334467ec1c8b7889aa46016fcedb13f9}
+
+
+References static\-List.
+
+
+
+Referenced by Player\-::\-Move(), and Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+35 \{
+36     \textcolor{keywordflow}{for} (u32 i = 0; i < \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}.size(); i++)
+37     \{
+38         \textcolor{keywordflow}{if} (\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(dynamicObject, 
+      \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}[i]))
+39         \{
+40             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+41         \}
+42     \}
+43     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+44 \}
+\end{DoxyCode}
+\hypertarget{class_collision_a17f9c89abcc19bfb3fe0357158dae55d}{\index{Collision@{Collision}!Discrete\-Collision\-Update@{Discrete\-Collision\-Update}}
+\index{Discrete\-Collision\-Update@{Discrete\-Collision\-Update}!Collision@{Collision}}
+\subsubsection[{Discrete\-Collision\-Update}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Discrete\-Collision\-Update (
+\begin{DoxyParamCaption}
+\item[{irr\-::f32}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_collision_a17f9c89abcc19bfb3fe0357158dae55d}
+
+
+References dynamic\-List, frame\-Delta\-Time, static\-List, and wall\-List.
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+60 \{
+61     vector3df difference, seperation;
+62     \textcolor{comment}{//for all dynamic objects}
+63     \textcolor{keywordflow}{for} (u32 i = 0; i < \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.size(); i++)
+64     \{
+65         vector3df colliderExtent = \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->getBoundingBox().getExtent() / 2;
+66         vector3df colliderPos = \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->getPosition();
+67 
+68         \textcolor{comment}{//for all dynamic objects,...}
+69         \textcolor{keywordflow}{for} (u32 j = i + 1; j < \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.size(); j++)
+70         \{
+71             \textcolor{keywordflow}{if} (j > \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.size())
+72                 \textcolor{keywordflow}{break};
+73             \textcolor{comment}{//if one overlaps the other}
+74             \textcolor{keywordflow}{if} (\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(\hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i], 
+      \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[j]))
+75             \{
+76                 \textcolor{comment}{//solve interpenetration}
+77                 vector3df dynamicPos = \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[j]->getPosition();
+78                 vector3df dynamicExtent = \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[j]->getBoundingBox().getExtent() / 2;
+79 
+80                 vector3df center;
+81                 \textcolor{keywordflow}{if} (colliderPos == dynamicPos) \textcolor{comment}{//if they are on top of eachother}
+82                     center = colliderPos + vector3df(1, 0, 1); \textcolor{comment}{//seperate at a random vector}
+83                 \textcolor{keywordflow}{else}
+84                     center = (colliderPos + dynamicPos) / 2; \textcolor{comment}{//average of both positions}
+85 
+86                 difference = center - colliderPos;
+87                 seperation = difference.normalize() * (colliderExtent.getLength() + dynamicExtent.getLength
+      ())* \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+88                 seperation.Y = 0;
+89                 \textcolor{comment}{//dissect Y, so it does not average all object heights}
+90                 \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[j]->setPosition(dynamicPos + (seperation));
+91             \}
+92         \}
+93 
+94         \textcolor{comment}{//...AND static objects}
+95         \textcolor{keywordflow}{for} (u32 j = 0; j < \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}.size(); j++)
+96         \{
+97             \textcolor{comment}{//if one overlaps the other}
+98             \textcolor{keywordflow}{if} (\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(\hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i], 
+      \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}[j]))
+99             \{
+100                 \textcolor{comment}{//solve interpenetration}
+101                 vector3df staticExtent = \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}[j]->getBoundingBox().getExtent() / 2;
+102                 vector3df staticPos = \hyperlink{_collision_8cpp_abb9c9e616f2284236046f10dc14fa269}{staticList}[j]->getPosition();
+103                 difference = colliderPos - staticPos;
+104                 seperation = difference.normalize() * (colliderExtent.getLength() + staticExtent.getLength(
+      )) / 20;
+105                 seperation.Y = 0;
+106 
+107                 \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->setPosition(colliderPos + seperation);
+108             \}
+109         \}
+110         \textcolor{keywordflow}{for} (u32 j = 0; j < \hyperlink{_collision_8cpp_a5761ec59c213fcbc17226b9df12dce77}{wallList}.size(); j++)
+111         \{
+112 
+113             \textcolor{comment}{//if one overlaps the other}
+114             \textcolor{keywordflow}{if} (\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(\hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i], 
+      \hyperlink{_collision_8cpp_a5761ec59c213fcbc17226b9df12dce77}{wallList}[j]))
+115             \{
+116                 \textcolor{keywordflow}{switch} (j) \{
+117                 \textcolor{keywordflow}{case} 0: \textcolor{comment}{// left wall}
+118                     seperation = vector3df(0, 0, -100) * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+119                     \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->setPosition(colliderPos + seperation);
+120                     \textcolor{keywordflow}{break};
+121                 \textcolor{keywordflow}{case} 1: \textcolor{comment}{// top wall}
+122                     seperation = vector3df(-100, 0, 0) * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+123                     \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->setPosition(colliderPos + seperation);
+124                     \textcolor{keywordflow}{break};
+125                 \textcolor{keywordflow}{case} 2: \textcolor{comment}{// right wall}
+126                     seperation = vector3df(0, 0, 100) * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+127                     \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->setPosition(colliderPos + seperation);
+128                     \textcolor{keywordflow}{break};
+129                 \textcolor{keywordflow}{case} 3: \textcolor{comment}{// bottom wall}
+130                     seperation = vector3df(100, 0, 0) * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+131                     \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i]->setPosition(colliderPos + seperation);
+132                     \textcolor{keywordflow}{break};
+133                 \}
+134             \}
+135         \}
+136     \}
+137 \}
+\end{DoxyCode}
+\hypertarget{class_collision_af6fe5888d934195d15e51f237fc989c6}{\index{Collision@{Collision}!Remove\-Dynamic\-From\-List@{Remove\-Dynamic\-From\-List}}
+\index{Remove\-Dynamic\-From\-List@{Remove\-Dynamic\-From\-List}!Collision@{Collision}}
+\subsubsection[{Remove\-Dynamic\-From\-List}]{\setlength{\rightskip}{0pt plus 5cm}void Collision\-::\-Remove\-Dynamic\-From\-List (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{dynamic\-Object}
+\end{DoxyParamCaption}
+)}}\label{class_collision_af6fe5888d934195d15e51f237fc989c6}
+
+
+References dynamic\-List.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+25 \{
+26     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.size(); i++)
+27         \textcolor{keywordflow}{if} (\hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}[i] == dynamicObject)
+28         \{
+29             \hyperlink{_collision_8cpp_a879d8cc6abaabd771309fa0b6ef5c3ef}{dynamicList}.erase(i);
+30             \textcolor{keywordflow}{break};
+31         \}
+32 \}
+\end{DoxyCode}
+\hypertarget{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{\index{Collision@{Collision}!Scene\-Node\-With\-Scene\-Node@{Scene\-Node\-With\-Scene\-Node}}
+\index{Scene\-Node\-With\-Scene\-Node@{Scene\-Node\-With\-Scene\-Node}!Collision@{Collision}}
+\subsubsection[{Scene\-Node\-With\-Scene\-Node}]{\setlength{\rightskip}{0pt plus 5cm}bool Collision\-::\-Scene\-Node\-With\-Scene\-Node (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{t\-Box1, }
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{t\-Box2}
+\end{DoxyParamCaption}
+)}}\label{class_collision_aa2fa3418899ac7948b31eb909dea6f04}
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+15 \{
+16     \textcolor{keywordflow}{return}(tBox1->getTransformedBoundingBox().intersectsWithBox(tBox2->getTransformedBoundingBox()));
+17 \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_collision_8h}{Collision.\-h}\item 
+\hyperlink{_collision_8cpp}{Collision.\-cpp}\end{DoxyCompactItemize}

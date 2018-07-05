@@ -1,0 +1,96 @@
+\hypertarget{_power_up_spawner_8cpp}{\section{Power\-Up\-Spawner.\-cpp File Reference}
+\label{_power_up_spawner_8cpp}\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Power\-Up\-Spawner.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Powerup\-Pool.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Powerup.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Collision.\-h\char`\"{}}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+Include dependency graph for Power\-Up\-Spawner.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_power_up_spawner_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+Irrlicht\-Device $\ast$ \hyperlink{_power_up_spawner_8cpp_a81f9440a46c355dea79394b845bd5188}{power\-Up\-I\-Device}
+\item 
+I\-Scene\-Manager $\ast$ \hyperlink{_power_up_spawner_8cpp_a21e35e3a83aa777a110cbdbab41c2a5f}{power\-Up\-Smgr}
+\item 
+I\-Video\-Driver $\ast$ \hyperlink{_power_up_spawner_8cpp_a72e7275e57444c56f5bf7ec2255d06ce}{power\-Up\-Driver}
+\item 
+long \hyperlink{_power_up_spawner_8cpp_aff9d41f803525ecf420cd66107f0787f}{power\-Up\-Chance}
+\item 
+const path \hyperlink{_power_up_spawner_8cpp_aefb2ed2922bde3ef3bc671e43bce3e98}{Fire\-Rate} = \char`\"{}../media/Models/\hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup}\char`\"{}
+\item 
+int \hyperlink{_power_up_spawner_8cpp_a9367c236dafb1f8208c95b697a6ffaf3}{killed\-Enemies}
+\item 
+\hyperlink{class_powerup_pool}{Powerup\-Pool} $\ast$ \hyperlink{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}{pool}
+\item 
+\hyperlink{class_powerup}{Powerup} $\ast$ \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup}
+\item 
+\hyperlink{class_collision}{Collision} \hyperlink{_power_up_spawner_8cpp_a8e8ac5767573483d8e9e3dfc198a8df8}{pow\-Col}
+\end{DoxyCompactItemize}
+
+
+\subsection{Variable Documentation}
+\hypertarget{_power_up_spawner_8cpp_aefb2ed2922bde3ef3bc671e43bce3e98}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!Fire\-Rate@{Fire\-Rate}}
+\index{Fire\-Rate@{Fire\-Rate}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{Fire\-Rate}]{\setlength{\rightskip}{0pt plus 5cm}const path Fire\-Rate = \char`\"{}../media/Models/{\bf powerup}\char`\"{}}}\label{_power_up_spawner_8cpp_aefb2ed2922bde3ef3bc671e43bce3e98}
+\hypertarget{_power_up_spawner_8cpp_a9367c236dafb1f8208c95b697a6ffaf3}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!killed\-Enemies@{killed\-Enemies}}
+\index{killed\-Enemies@{killed\-Enemies}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{killed\-Enemies}]{\setlength{\rightskip}{0pt plus 5cm}int killed\-Enemies}}\label{_power_up_spawner_8cpp_a9367c236dafb1f8208c95b697a6ffaf3}
+\hypertarget{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!pool@{pool}}
+\index{pool@{pool}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{pool}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Pool}$\ast$ pool}}\label{_power_up_spawner_8cpp_ae53f1bf6f4bae393a5b32b2dbb2f0705}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Device(), and Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+\hypertarget{_power_up_spawner_8cpp_a8e8ac5767573483d8e9e3dfc198a8df8}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!pow\-Col@{pow\-Col}}
+\index{pow\-Col@{pow\-Col}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{pow\-Col}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Collision} pow\-Col}}\label{_power_up_spawner_8cpp_a8e8ac5767573483d8e9e3dfc198a8df8}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+\hypertarget{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!powerup@{powerup}}
+\index{powerup@{powerup}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{powerup}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup}$\ast$ powerup}}\label{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}
+
+
+Referenced by Powerup\-::\-Get\-Node(), Powerup\-Pool\-::\-Get\-Resource(), Powerup\-::\-Powerup(), Power\-Up\-Spawner\-::\-Power\-Up\-Spawn(), Powerup\-::\-Reset(), Powerup\-::\-Set\-Powerup(), and Powerup\-::\-Set\-Powerup\-Type().
+
+\hypertarget{_power_up_spawner_8cpp_aff9d41f803525ecf420cd66107f0787f}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!power\-Up\-Chance@{power\-Up\-Chance}}
+\index{power\-Up\-Chance@{power\-Up\-Chance}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{power\-Up\-Chance}]{\setlength{\rightskip}{0pt plus 5cm}long power\-Up\-Chance}}\label{_power_up_spawner_8cpp_aff9d41f803525ecf420cd66107f0787f}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+\hypertarget{_power_up_spawner_8cpp_a72e7275e57444c56f5bf7ec2255d06ce}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!power\-Up\-Driver@{power\-Up\-Driver}}
+\index{power\-Up\-Driver@{power\-Up\-Driver}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{power\-Up\-Driver}]{\setlength{\rightskip}{0pt plus 5cm}I\-Video\-Driver$\ast$ power\-Up\-Driver}}\label{_power_up_spawner_8cpp_a72e7275e57444c56f5bf7ec2255d06ce}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Device().
+
+\hypertarget{_power_up_spawner_8cpp_a81f9440a46c355dea79394b845bd5188}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!power\-Up\-I\-Device@{power\-Up\-I\-Device}}
+\index{power\-Up\-I\-Device@{power\-Up\-I\-Device}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{power\-Up\-I\-Device}]{\setlength{\rightskip}{0pt plus 5cm}Irrlicht\-Device$\ast$ power\-Up\-I\-Device}}\label{_power_up_spawner_8cpp_a81f9440a46c355dea79394b845bd5188}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Device().
+
+\hypertarget{_power_up_spawner_8cpp_a21e35e3a83aa777a110cbdbab41c2a5f}{\index{Power\-Up\-Spawner.\-cpp@{Power\-Up\-Spawner.\-cpp}!power\-Up\-Smgr@{power\-Up\-Smgr}}
+\index{power\-Up\-Smgr@{power\-Up\-Smgr}!PowerUpSpawner.cpp@{Power\-Up\-Spawner.\-cpp}}
+\subsubsection[{power\-Up\-Smgr}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Manager$\ast$ power\-Up\-Smgr}}\label{_power_up_spawner_8cpp_a21e35e3a83aa777a110cbdbab41c2a5f}
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Device(), and Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+

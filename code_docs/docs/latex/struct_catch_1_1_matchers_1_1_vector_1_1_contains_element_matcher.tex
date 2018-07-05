@@ -1,0 +1,105 @@
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher}{\section{Catch\-:\-:Matchers\-:\-:Vector\-:\-:Contains\-Element\-Matcher$<$ T $>$ Struct Template Reference}
+\label{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher}\index{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher$<$ T $>$@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher$<$ T $>$}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Inheritance diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Contains\-Element\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Catch\-:\-:Matchers\-:\-:Vector\-:\-:Contains\-Element\-Matcher$<$ T $>$\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=321pt]{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a05740b5d3f89fac8de84ac0cff7b93}{Contains\-Element\-Matcher} (T const \&comparator)
+\item 
+bool \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a4be6e5642e267433d370649beb0fac}{match} (std\-::vector$<$ T $>$ const \&v) const override
+\item 
+std\-::string \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_aea3b674389a0afd82af6ba4b10f86ae6}{describe} () const override
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+T const \& \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}{m\-\_\-comparator}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a05740b5d3f89fac8de84ac0cff7b93}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}!Contains\-Element\-Matcher@{Contains\-Element\-Matcher}}
+\index{Contains\-Element\-Matcher@{Contains\-Element\-Matcher}!Catch::Matchers::Vector::ContainsElementMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}}
+\subsubsection[{Contains\-Element\-Matcher}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}$<$ T $>$\-::{\bf Contains\-Element\-Matcher} (
+\begin{DoxyParamCaption}
+\item[{T const \&}]{comparator}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a05740b5d3f89fac8de84ac0cff7b93}
+
+\begin{DoxyCode}
+2556 : \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}{m\_comparator}(comparator) \{\}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_aea3b674389a0afd82af6ba4b10f86ae6}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}!describe@{describe}}
+\index{describe@{describe}!Catch::Matchers::Vector::ContainsElementMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}}
+\subsubsection[{describe}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ std\-::string {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}$<$ T $>$\-::describe (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_aea3b674389a0afd82af6ba4b10f86ae6}
+
+
+References Catch\-::\-Detail\-::stringify().
+
+
+\begin{DoxyCode}
+2567                                                     \{
+2568                     \textcolor{keywordflow}{return} \textcolor{stringliteral}{"Contains: "} + \hyperlink{namespace_catch_1_1_detail_af0ad48344ffd3f92f3568465248a9880}{::Catch::Detail::stringify}(
+      \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}{m\_comparator});
+2569                 \}
+\end{DoxyCode}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a4be6e5642e267433d370649beb0fac}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}!match@{match}}
+\index{match@{match}!Catch::Matchers::Vector::ContainsElementMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}}
+\subsubsection[{match}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ bool {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}$<$ T $>$\-::match (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ T $>$ const \&}]{v}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_a6a4be6e5642e267433d370649beb0fac}
+
+\begin{DoxyCode}
+2558                                                                  \{
+2559                     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \textcolor{keyword}{const}& el : v) \{
+2560                         \textcolor{keywordflow}{if} (el == \hyperlink{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}{m\_comparator}) \{
+2561                             \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+2562                         \}
+2563                     \}
+2564                     \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+2565                 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}{\index{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}!m\-\_\-comparator@{m\-\_\-comparator}}
+\index{m\-\_\-comparator@{m\-\_\-comparator}!Catch::Matchers::Vector::ContainsElementMatcher@{Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}}
+\subsubsection[{m\-\_\-comparator}]{\setlength{\rightskip}{0pt plus 5cm}template$<$typename T $>$ T const\& {\bf Catch\-::\-Matchers\-::\-Vector\-::\-Contains\-Element\-Matcher}$<$ T $>$\-::m\-\_\-comparator}}\label{struct_catch_1_1_matchers_1_1_vector_1_1_contains_element_matcher_ab7eada6c4bbce1d21b44773262f9cb23}
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

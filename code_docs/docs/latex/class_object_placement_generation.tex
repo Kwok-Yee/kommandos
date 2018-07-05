@@ -1,0 +1,639 @@
+\hypertarget{class_object_placement_generation}{\section{Object\-Placement\-Generation Class Reference}
+\label{class_object_placement_generation}\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}}
+}
+
+
+Object placment generation for placing obstacles and default objects.  
+
+
+
+
+{\ttfamily \#include $<$Object\-Placement\-Generation.\-h$>$}
+
+
+
+Collaboration diagram for Object\-Placement\-Generation\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_object_placement_generation__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_object_placement_generation_a94bc6a7a4ea7001bff3799cd9da12481}{Place\-Objects} (irr\-::\-Irrlicht\-Device $\ast$device)
+\begin{DoxyCompactList}\small\item\em Places all objects in the static object in the scene. \end{DoxyCompactList}\item 
+void \hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{Generate\-New\-Objects} (\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6}{Heat\-Map\-Manager\-::\-Zone} zone)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{Create\-Objects} (irr\-::\-Irrlicht\-Device $\ast$device, irr\-::scene\-::\-I\-Scene\-Node $\ast$obstacles\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Creates the box obstacles . \end{DoxyCompactList}\item 
+void \hyperlink{class_object_placement_generation_af7a0d12091e5cd027ec0ed5c932f217b}{Create\-Grid} ()
+\begin{DoxyCompactList}\small\item\em Creates the grid on which the obstacles are spawned \end{DoxyCompactList}\item 
+void \hyperlink{class_object_placement_generation_a2f996c36e413be2633c8795fcb4fd168}{Calculate\-Grid} (irr\-::scene\-::\-I\-Scene\-Node $\ast$arena)
+\begin{DoxyCompactList}\small\item\em Calculates the grid size \end{DoxyCompactList}\item 
+void \hyperlink{class_object_placement_generation_ab8cb3f9b393d7f59365410749a275317}{Create\-Default\-Objects} (irr\-::\-Irrlicht\-Device $\ast$device)
+\begin{DoxyCompactList}\small\item\em Creates the default static objects. \end{DoxyCompactList}\item 
+void \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{Check\-Obstacle\-Position} (irr\-::scene\-::\-I\-Scene\-Node $\ast$obstacles\mbox{[}$\,$\mbox{]}, irr\-::core\-::vector3df $\ast$used\-Positions, irr\-::core\-::vector3df $\ast$grid, int size)
+\begin{DoxyCompactList}\small\item\em Checks if where a box obstacle spawns. \end{DoxyCompactList}\item 
+int \hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{Random\-Position} ()
+\begin{DoxyCompactList}\small\item\em Return a random int that is used in getting an position in the grid\end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows}
+\begin{DoxyCompactList}\small\item\em rows used in the grid. \end{DoxyCompactList}\item 
+int \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}
+\begin{DoxyCompactList}\small\item\em columns used in the grid. \end{DoxyCompactList}\item 
+int \hyperlink{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}{start\-X}
+\begin{DoxyCompactList}\small\item\em start of grid positions X and Z. \end{DoxyCompactList}\item 
+int \hyperlink{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}{start\-Z}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{zone1\-Grid}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{zone2\-Grid}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{zone3\-Grid}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{zone4\-Grid}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}{zone1\-Obstacles} \mbox{[}\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}{zone2\-Obstacles} \mbox{[}\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}{zone3\-Obstacles} \mbox{[}\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}{zone4\-Obstacles} \mbox{[}\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{used\-Zone1\-Positions}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{used\-Zone2\-Positions}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{used\-Zone3\-Positions}
+\item 
+irr\-::core\-::vector3df $\ast$ \hyperlink{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{used\-Zone4\-Positions}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Object placment generation for placing obstacles and default objects. 
+
+
+
+ 
+
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_object_placement_generation_a2f996c36e413be2633c8795fcb4fd168}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Calculate\-Grid@{Calculate\-Grid}}
+\index{Calculate\-Grid@{Calculate\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Calculate\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Calculate\-Grid (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{arena}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a2f996c36e413be2633c8795fcb4fd168}
+
+
+Calculates the grid size 
+
+Method for finding the right grid size, the arena size is divided by the obstacle size. 
+
+
+
+ 
+
+ Rows and columns are scaled the so the grid is a bit smaller and the grid is made by multiplying the rows and columns 
+
+References resize.
+
+
+\begin{DoxyCode}
+194 \{
+196 
+197     \textcolor{keywordtype}{int} \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize} = 4;
+198     vector3df arenaSize = arena->getTransformedBoundingBox().getExtent(); \textcolor{comment}{// get size of the arena.}
+199     vector3df obstacleSize = vector3df(10,10,10); \textcolor{comment}{// set the obstacle size.}
+200 
+201     f32 scale = 0.9f; \textcolor{comment}{// scale for not using the entire arena as a place where the grid spawns.}
+202 
+203     \hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} = ((arenaSize.X * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize}) * scale) / obstacleSize.X; \textcolor{comment}{// calculate the amount of rows.}
+204     \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns} = ((arenaSize.Z * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize}) * scale) / obstacleSize.Z;\textcolor{comment}{// calculate the amount of
+       columns}
+205 
+206     \textcolor{comment}{// start X and Z where the grid spawns based on the arena size scaled and divided by 2 and adjusted by
+       the obstacle size}
+207     \hyperlink{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}{startX} = ((arenaSize.X * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize}) * scale) / 2;\textcolor{comment}{// -obstacleSize.X;}
+208     \hyperlink{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}{startZ} = ((arenaSize.Z * \hyperlink{_enemy_spawner_8cpp_a23cc32f539e1b8c74174c581008b5546}{resize}) * scale) / 2;\textcolor{comment}{// -obstacleSize.Z;}
+209 
+210     \textcolor{comment}{//Because we work with four zones, dived the rows and columns by 2}
+211     \hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} /= 2;
+212     \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns} /= 2;
+213     \hyperlink{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{zone1Grid} = \textcolor{keyword}{new} vector3df[\hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} * \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}]; \textcolor{comment}{// initialize grid based on rows times
+       columns.}
+214     \hyperlink{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{zone2Grid} = \textcolor{keyword}{new} vector3df[\hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} * \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}]; \textcolor{comment}{// initialize grid based on rows times
+       columns.}
+215     \hyperlink{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{zone3Grid} = \textcolor{keyword}{new} vector3df[\hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} * \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}]; \textcolor{comment}{// initialize grid based on rows times
+       columns.}
+216     \hyperlink{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{zone4Grid} = \textcolor{keyword}{new} vector3df[\hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} * \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}]; \textcolor{comment}{// initialize grid based on rows times
+       columns.}
+217 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Check\-Obstacle\-Position@{Check\-Obstacle\-Position}}
+\index{Check\-Obstacle\-Position@{Check\-Obstacle\-Position}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Check\-Obstacle\-Position}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Check\-Obstacle\-Position (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{obstacles\mbox{[}$\,$\mbox{]}, }
+\item[{irr\-::core\-::vector3df $\ast$}]{used\-Positions, }
+\item[{irr\-::core\-::vector3df $\ast$}]{grid, }
+\item[{int}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}
+
+
+Checks if where a box obstacle spawns. 
+
+Method for checking if an obstacle position is unique. 
+
+
+
+ 
+
+ First rule is that objects can't spawn on-\/top of each other. Second rule is that objects can't spawn on the default position. 
+\begin{DoxyCode}
+313 \{
+316 
+317     vector3df defaultPosition = vector3df(266, 0, 266);
+318 
+319     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < size/4 - 1; i++)
+320     \{
+321         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = i + 1; j < size/4; j++)
+322         \{
+323             \textcolor{comment}{//Check if there are any positions that are the same.}
+324             \textcolor{keywordflow}{if} (usedPositions[i] == usedPositions[j] || usedPositions[i] == defaultPosition) \{
+325                 \textcolor{comment}{// if there are positions the same unqiue equals false.}
+326                 usedPositions[i] = grid[\hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{RandomPosition}()];
+327                 obstacles[i]->setPosition(usedPositions[i]);
+328                 \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{CheckObstaclePosition}(obstacles, usedPositions, grid, size);
+329             \}
+330             \textcolor{comment}{/*else}
+331 \textcolor{comment}{            \{}
+332 \textcolor{comment}{                //set obstacle to unique position.}
+333 \textcolor{comment}{            \}*/}
+334         \}
+335     \}
+336 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_ab8cb3f9b393d7f59365410749a275317}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Create\-Default\-Objects@{Create\-Default\-Objects}}
+\index{Create\-Default\-Objects@{Create\-Default\-Objects}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Create\-Default\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Create\-Default\-Objects (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_ab8cb3f9b393d7f59365410749a275317}
+
+
+Creates the default static objects. 
+
+Method for spawning default objects like walls and the arena floor. 
+
+
+
+ 
+
+ 
+
+References Collision\-::\-Add\-Wall\-To\-List(), coll, driver, Heat\-Map\-Manager\-::\-Get\-Instance(), Heat\-Map\-Manager\-::level, and smgr.
+
+
+\begin{DoxyCode}
+222                                                                            \{
+223 
+224     ISceneManager* \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = device->getSceneManager();
+225     IVideoDriver* \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver} = device->getVideoDriver();
+226 
+227     \textcolor{keywordtype}{int} resizeWall = 4;
+228 
+229     \textcolor{keyword}{const} path floorDiffuse = \textcolor{stringliteral}{"../media/ground/ground\_diffuse.jpg"};
+230 
+231     \textcolor{comment}{//Arena mesh with texture placed in the scene.}
+232     IMesh* planeMesh = smgr->getMesh(\textcolor{stringliteral}{"../media/ArenaFloor.3ds"});
+233     IMeshSceneNode* planeNode = smgr->addMeshSceneNode(planeMesh);
+234     planeNode->setMaterialTexture(0, driver->getTexture(floorDiffuse));
+235     planeNode->setMaterialFlag(video::EMF\_LIGHTING, \textcolor{keyword}{true});
+236     planeNode->setPosition(vector3df(0, 0.1, 0));
+237     planeNode->setScale(vector3df(3.65f, 1, 4.0f));
+238 
+239     \textcolor{comment}{//Walls with texture and position.}
+240     IMesh* longWallMeshRight = smgr->getMesh(\textcolor{stringliteral}{"../media/LongWall.3ds"});
+241     IMeshSceneNode* longWallNodeRight = smgr->addMeshSceneNode(longWallMeshRight);
+242     longWallNodeRight->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+243     longWallNodeRight->setScale(vector3df(3.65f, 1, 1));
+244     longWallNodeRight->setPosition(vector3df(0, 0, -86) * resizeWall);
+245 
+246     IMesh* longWallMeshLeft = smgr->getMesh(\textcolor{stringliteral}{"../media/LongWall.3ds"});
+247     IMeshSceneNode* longWallNodeLeft = smgr->addMeshSceneNode(longWallMeshLeft);
+248     longWallNodeLeft->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+249     longWallNodeLeft->setScale(vector3df(3.65f, 1, 1));
+250     longWallNodeLeft->setPosition(vector3df(-0.1f, 0, 90) * resizeWall);
+251 
+252     IMesh* shortWallMeshUp = smgr->getMesh(\textcolor{stringliteral}{"../media/ShortWall.3ds"});
+253     IMeshSceneNode* shortWallNodeUp = smgr->addMeshSceneNode(shortWallMeshUp);
+254     shortWallNodeUp->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+255     shortWallNodeUp->setScale(vector3df(1.0f, 1, 4.27f));
+256     shortWallNodeUp->setPosition(vector3df(78.5, 0, -0.2) * resizeWall);
+257 
+258     IMesh* shortWallMeshDown = smgr->getMesh(\textcolor{stringliteral}{"../media/ShortWall.3ds"});
+259     IMeshSceneNode* shortWallNodeDown = smgr->addMeshSceneNode(shortWallMeshDown);
+260     shortWallNodeDown->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+261     shortWallNodeDown->setScale(vector3df(1.0f, 1, 4.27f));
+262     shortWallNodeDown->setPosition(vector3df(-82.27f, 0, -0.2) * resizeWall);
+263 
+264 
+265     \textcolor{comment}{// Below here the building models are defined and placed.}
+266     \textcolor{keyword}{const} path buildingDiffuse = \textcolor{stringliteral}{"../media//BuildingsHighRise.jpg"};
+267     IMesh* buildingMesh = smgr->getMesh(\textcolor{stringliteral}{"../media/Building.3ds"});
+268     f32 yPos = -5.0f;
+269 
+270     IMeshSceneNode* rightBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+271     rightBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+272     rightBuildingNode->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{false});
+273     rightBuildingNode->setScale(vector3df(12.7, 10, 10));
+274     rightBuildingNode->setPosition(vector3df(0, yPos, 424));
+275 
+276     IMeshSceneNode* leftBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+277     leftBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+278     leftBuildingNode->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{false});
+279     leftBuildingNode->setScale(vector3df(12.7, 10, 10));
+280     leftBuildingNode->setPosition(vector3df(0, yPos, -423));
+281 
+282     IMeshSceneNode* topBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+283     topBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+284     topBuildingNode->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{false});
+285     topBuildingNode->setScale(vector3df(14, 10, 10));
+286     topBuildingNode->setPosition(vector3df(393, yPos, 0));
+287     topBuildingNode->setRotation(vector3df(0, 90, 0));
+288 
+289     IMeshSceneNode* bottomBuildingNode = smgr->addMeshSceneNode(buildingMesh);
+290     bottomBuildingNode->setMaterialTexture(0, driver->getTexture(buildingDiffuse));
+291     bottomBuildingNode->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{false});
+292     bottomBuildingNode->setScale(vector3df(14, 10, 10));
+293     bottomBuildingNode->setPosition(vector3df(-393, yPos, 0));
+294     bottomBuildingNode->setRotation(vector3df(0, 90, 0));
+295 
+296     \textcolor{comment}{//Calculate the grid using the arena floor}
+297     \hyperlink{class_object_placement_generation_a2f996c36e413be2633c8795fcb4fd168}{CalculateGrid}(planeNode);
+298 
+299     \hyperlink{class_heat_map_manager}{HeatMapManager}* h = h->\hyperlink{class_heat_map_manager_acc2cf6cbce0774a997ef1c408f07fb87}{GetInstance}();
+300     h->\hyperlink{class_heat_map_manager_a63ca12aefa554bf0756608865f1e1909}{level} = planeNode;
+301 
+302     \textcolor{comment}{//Add to collision for player and enemy}
+303     \hyperlink{_object_placement_generation_8cpp_affc113b2b7f75356153d4724706809fc}{coll}.\hyperlink{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{AddWallToList}(longWallNodeLeft);
+304     \hyperlink{_object_placement_generation_8cpp_affc113b2b7f75356153d4724706809fc}{coll}.\hyperlink{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{AddWallToList}(shortWallNodeUp);
+305     \hyperlink{_object_placement_generation_8cpp_affc113b2b7f75356153d4724706809fc}{coll}.\hyperlink{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{AddWallToList}(longWallNodeRight);
+306     \hyperlink{_object_placement_generation_8cpp_affc113b2b7f75356153d4724706809fc}{coll}.\hyperlink{class_collision_a6570dc446e23b8a5b4631ca632ea8a64}{AddWallToList}(shortWallNodeDown);
+307 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_af7a0d12091e5cd027ec0ed5c932f217b}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Create\-Grid@{Create\-Grid}}
+\index{Create\-Grid@{Create\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Create\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Create\-Grid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_af7a0d12091e5cd027ec0ed5c932f217b}
+
+
+Creates the grid on which the obstacles are spawned 
+
+Create a grid on the arena which is based on step size and the amount of rows and columns. 
+
+
+
+ 
+
+ Reason for using a normal array instead of a 2d array is because of memory use. 
+\begin{DoxyCode}
+156 \{
+158 
+159     \textcolor{keywordtype}{int} xStep = 10; \textcolor{comment}{//X step for changing position}
+160     \textcolor{keywordtype}{int} zStep = 10; \textcolor{comment}{//Z step for changing position}
+161     \textcolor{keyword}{const} \textcolor{keywordtype}{int} startY = 0; \textcolor{comment}{// Y never changes.}
+162     vector3df startZone1Vector = vector3df(\hyperlink{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}{startX}, startY, \hyperlink{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}{startZ}); \textcolor{comment}{//Start Vector where the
+       grid for zone 1 begins.}
+163     vector3df startZone2Vector = vector3df(\hyperlink{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}{startX}, startY, 0); \textcolor{comment}{//Start Vector where the grid for zone
+       2 begins.}
+164     vector3df startZone3Vector = vector3df(0, startY, \hyperlink{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}{startZ}); \textcolor{comment}{//Start Vector where the grid for zone
+       3 begins.}
+165     vector3df startZone4Vector = vector3df(0, startY, 0); \textcolor{comment}{//Start Vector where the grid for zone 4 begins.}
+166 
+167     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows}; i++)
+168     \{
+169         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns}; j++)
+170         \{
+171             \textcolor{comment}{//Grid array gets its positions like a 2d array.}
+172             \hyperlink{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{zone1Grid}[i * rows + j] = startZone1Vector + vector3df(-xStep * j, startY, -(i * zStep
+      ));
+173             \hyperlink{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{zone2Grid}[i * rows + j] = startZone2Vector + vector3df(-xStep * j, startY, -(i * zStep
+      ));
+174             \hyperlink{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{zone3Grid}[i * rows + j] = startZone3Vector + vector3df(-xStep * j, startY, -(i * zStep
+      ));
+175             \hyperlink{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{zone4Grid}[i * rows + j] = startZone4Vector + vector3df(-xStep * j, startY, -(i * zStep
+      ));
+176         \}
+177     \}
+178 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Create\-Objects@{Create\-Objects}}
+\index{Create\-Objects@{Create\-Objects}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Create\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Create\-Objects (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device, }
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{obstacles\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}
+
+
+Creates the box obstacles . 
+
+
+
+ 
+
+
+
+
+
+ \subsubsection*{summary$>$ Method for creating the objects with the correct material.  }
+
+References Collision\-::\-Add\-Static\-To\-List(), A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S, coll, crate\-Diffuse, crate\-Normal, driver, and smgr.
+
+
+\begin{DoxyCode}
+72 \{
+73     \textcolor{comment}{//Scene manager and driver for creating obstacles}
+74     ISceneManager* \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = device->getSceneManager();
+75     IVideoDriver* \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver} = device->getVideoDriver();
+76 
+77     \textcolor{comment}{//The paths for getting the obstacle material.}
+78     \textcolor{keyword}{const} path \hyperlink{_game_8cpp_aa6114f38113de74446defa5ca677c013}{crateDiffuse} = \textcolor{stringliteral}{"../media/crate/crate\_diffuse.png"};
+79     \textcolor{keyword}{const} path \hyperlink{_game_8cpp_ab03e7265c137c90450ff5cb00979c588}{crateNormal} = \textcolor{stringliteral}{"../media/crate/crate\_normal.png"};
+80 
+81 
+82     \textcolor{comment}{//Create obstacles defined by size, add textures and collision.}
+83     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4; i++)
+84     \{
+85         obstacles[i] = smgr->addCubeSceneNode();
+86         obstacles[i]->setMaterialTexture(0, driver->getTexture(crateDiffuse));
+87         obstacles[i]->setMaterialTexture(1, driver->getTexture(crateNormal));
+88         obstacles[i]->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+89         \hyperlink{_object_placement_generation_8cpp_affc113b2b7f75356153d4724706809fc}{coll}.\hyperlink{class_collision_a673528880f1ad75dab13a2107a3d2b7c}{AddStaticToList}(obstacles[i]);
+90     \}
+91 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Generate\-New\-Objects@{Generate\-New\-Objects}}
+\index{Generate\-New\-Objects@{Generate\-New\-Objects}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Generate\-New\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Generate\-New\-Objects (
+\begin{DoxyParamCaption}
+\item[{{\bf Heat\-Map\-Manager\-::\-Zone}}]{zone}
+\end{DoxyParamCaption}
+)}}\label{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}
+
+
+References A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S, Game\-::device, Game\-::\-Get\-Instance(), smgr, time, Heat\-Map\-Manager\-::\-Zone1, Heat\-Map\-Manager\-::\-Zone2, Heat\-Map\-Manager\-::\-Zone3, and Heat\-Map\-Manager\-::\-Zone4.
+
+
+
+Referenced by Heat\-Map\-Manager\-::\-Update().
+
+
+\begin{DoxyCode}
+94 \{
+95     \textcolor{comment}{//Get device for deleting obstacles}
+96     ISceneManager* \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = \hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{Game::GetInstance}()->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->getSceneManager();
+97     srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(0));
+98     \textcolor{keywordflow}{switch} (zone) \{
+99     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{HeatMapManager::Zone1}:
+100         \textcolor{comment}{//generate new objects}
+101         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4; i++)
+102         \{
+103             \textcolor{comment}{//set used position to a random position on the grid and set the position of the obstacles to
+       these positions.}
+104             \hyperlink{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{usedZone1Positions}[i] = \hyperlink{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{zone1Grid}[
+      \hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{RandomPosition}()];
+105             \hyperlink{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}{zone1Obstacles}[i]->setPosition(\hyperlink{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{usedZone1Positions}[i]);
+106         \}
+107         \textcolor{comment}{//Check if obstacles behave to the rule of not spawning on-top of each other.}
+108         \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{CheckObstaclePosition}(\hyperlink{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}{zone1Obstacles}, 
+      \hyperlink{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{usedZone1Positions}, \hyperlink{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{zone1Grid}, \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES});
+109         \textcolor{keywordflow}{break};
+110 
+111     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{HeatMapManager::Zone2}:
+112         \textcolor{comment}{//generate new objects}
+113         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES} / 4; i++)
+114         \{
+115             \textcolor{comment}{//set used position to a random position on the grid and set the position of the obstacles to
+       these positions.}
+116             \hyperlink{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{usedZone2Positions}[i] = \hyperlink{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{zone2Grid}[
+      \hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{RandomPosition}()];
+117             \hyperlink{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}{zone2Obstacles}[i]->setPosition(\hyperlink{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{usedZone2Positions}[i]);
+118         \}
+119         \textcolor{comment}{//Check if obstacles behave to the rule of not spawning on-top of each other.}
+120         \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{CheckObstaclePosition}(\hyperlink{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}{zone2Obstacles}, 
+      \hyperlink{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{usedZone2Positions}, \hyperlink{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{zone2Grid}, \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES});
+121         \textcolor{keywordflow}{break};
+122 
+123     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{HeatMapManager::Zone3}:
+124         \textcolor{comment}{//generate new objects}
+125         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES} / 4; i++)
+126         \{
+127             \textcolor{comment}{//set used position to a random position on the grid and set the position of the obstacles to
+       these positions.}
+128             \hyperlink{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{usedZone3Positions}[i] = \hyperlink{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{zone3Grid}[
+      \hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{RandomPosition}()];
+129             \hyperlink{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}{zone3Obstacles}[i]->setPosition(\hyperlink{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{usedZone3Positions}[i]);
+130         \}
+131         \textcolor{comment}{//Check if obstacles behave to the rule of not spawning on-top of each other.}
+132         \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{CheckObstaclePosition}(\hyperlink{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}{zone3Obstacles}, 
+      \hyperlink{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{usedZone3Positions}, \hyperlink{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{zone3Grid}, \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES});
+133         \textcolor{keywordflow}{break};
+134 
+135     \textcolor{keywordflow}{case} \hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{HeatMapManager::Zone4}:
+136         \textcolor{comment}{//generate new objects}
+137         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4; i++)
+138         \{
+139             \textcolor{comment}{//set used position to a random position on the grid and set the position of the obstacles to
+       these positions.}
+140             \hyperlink{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{usedZone4Positions}[i] = \hyperlink{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{zone4Grid}[
+      \hyperlink{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{RandomPosition}()];
+141             \hyperlink{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}{zone4Obstacles}[i]->setPosition(\hyperlink{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{usedZone4Positions}[i]);
+142         \}
+143         \textcolor{comment}{//Check if obstacles behave to the rule of not spawning on-top of each other.}
+144         \hyperlink{class_object_placement_generation_ae5ad2c3a1d486640f7bb4f53ca51e194}{CheckObstaclePosition}(\hyperlink{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}{zone4Obstacles}, 
+      \hyperlink{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{usedZone4Positions}, \hyperlink{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{zone4Grid}, \hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES});
+145         \textcolor{keywordflow}{break};
+146 
+147     \textcolor{keywordflow}{default}:
+148         \textcolor{keywordflow}{break};
+149     \}
+150 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_a94bc6a7a4ea7001bff3799cd9da12481}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Place\-Objects@{Place\-Objects}}
+\index{Place\-Objects@{Place\-Objects}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Place\-Objects}]{\setlength{\rightskip}{0pt plus 5cm}void Object\-Placement\-Generation\-::\-Place\-Objects (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_object_placement_generation_a94bc6a7a4ea7001bff3799cd9da12481}
+
+
+Places all objects in the static object in the scene. 
+
+Method for placing objects which uses multiple arrays to create objects and put these in random positions. 
+
+
+
+ 
+
+ 
+
+References A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S, time, Heat\-Map\-Manager\-::\-Zone1, Heat\-Map\-Manager\-::\-Zone2, Heat\-Map\-Manager\-::\-Zone3, and Heat\-Map\-Manager\-::\-Zone4.
+
+
+\begin{DoxyCode}
+37 \{
+38     \hyperlink{class_object_placement_generation_ab8cb3f9b393d7f59365410749a275317}{CreateDefaultObjects}(device); \textcolor{comment}{// Creates playing field objects.}
+39     \hyperlink{class_object_placement_generation_af7a0d12091e5cd027ec0ed5c932f217b}{CreateGrid}(); \textcolor{comment}{//Creates the grid which is used for object spawning.}
+40     srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(0)); \textcolor{comment}{//get a seed for the random so every run is different.}
+41     
+42     \hyperlink{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{CreateObjects}(device, \hyperlink{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}{zone1Obstacles}); \textcolor{comment}{// Adds objects with texture to the
+       obstacles array.}
+43     \hyperlink{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{CreateObjects}(device, \hyperlink{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}{zone2Obstacles}); \textcolor{comment}{// Adds objects with texture to the
+       obstacles array.}
+44     \hyperlink{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{CreateObjects}(device, \hyperlink{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}{zone3Obstacles}); \textcolor{comment}{// Adds objects with texture to the
+       obstacles array.}
+45     \hyperlink{class_object_placement_generation_a45cc4cdf5790a5a840aa42ee61691275}{CreateObjects}(device, \hyperlink{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}{zone4Obstacles}); \textcolor{comment}{// Adds objects with texture to the
+       obstacles array.}
+46 
+47     \hyperlink{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{usedZone1Positions} = \textcolor{keyword}{new} vector3df[\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4]; \textcolor{comment}{//
+       initialize the used position array with the amount of objects.}
+48     \hyperlink{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{usedZone2Positions} = \textcolor{keyword}{new} vector3df[\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4]; \textcolor{comment}{//
+       initialize the used position array with the amount of objects.}
+49     \hyperlink{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{usedZone3Positions} = \textcolor{keyword}{new} vector3df[\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4]; \textcolor{comment}{//
+       initialize the used position array with the amount of objects.}
+50     \hyperlink{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{usedZone4Positions} = \textcolor{keyword}{new} vector3df[\hyperlink{_object_placement_generation_8h_ae3ce5573806c4a01f588d56bfec823cb}{AMOUNT\_OF\_OBSTACLES}/4]; \textcolor{comment}{//
+       initialize the used position array with the amount of objects.}
+51 
+52     \hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{GenerateNewObjects}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6ac12fb3749b1e4eb1e472927e11bfd45b}{HeatMapManager::Zone1});
+53     \hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{GenerateNewObjects}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a3e20dce2afa7429facffa3cc1b41fcc3}{HeatMapManager::Zone2});
+54     \hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{GenerateNewObjects}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a400a98ad8579431fad61d4325b5c9694}{HeatMapManager::Zone3});
+55     \hyperlink{class_object_placement_generation_aba7072b3fd4c0443ec7884b108b8847a}{GenerateNewObjects}(\hyperlink{class_heat_map_manager_a6d43bc39106e6d2e72437f8902a586b6a39c3884e0f29b1453a01317ffc283a85}{HeatMapManager::Zone4});
+56     \textcolor{comment}{/*for (int i = 0; i < AMOUNT\_OF\_OBSTACLES; i++)}
+57 \textcolor{comment}{    \{}
+58 \textcolor{comment}{        //set used position to a random position on the grid and set the position of the obstacles to these
+       positions.}
+59 \textcolor{comment}{        usedPositions[i] = grid[RandomPosition()];}
+60 \textcolor{comment}{        obstacles[i]->setPosition(usedPositions[i]);}
+61 \textcolor{comment}{    \}}
+62 \textcolor{comment}{}
+63 \textcolor{comment}{    //Check if obstacles behave to the rule of not spawning on-top of each other.}
+64 \textcolor{comment}{    CheckObstaclePosition(obstacles, usedPositions, AMOUNT\_OF\_OBSTACLES);*/}
+65 
+66 \}
+\end{DoxyCode}
+\hypertarget{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!Random\-Position@{Random\-Position}}
+\index{Random\-Position@{Random\-Position}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{Random\-Position}]{\setlength{\rightskip}{0pt plus 5cm}int Object\-Placement\-Generation\-::\-Random\-Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a3fcec4d57ec62f0a38d9a741f30ffc0f}
+
+
+Return a random int that is used in getting an position in the grid
+
+Method for getting a random position. 
+
+
+
+ 
+
+ 
+\begin{DoxyCode}
+184 \{
+185     \textcolor{comment}{// random int for choosing a position from the grid array.}
+186     \textcolor{keywordtype}{int} r = rand() % (\hyperlink{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{rows} * \hyperlink{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{columns});
+187     \textcolor{keywordflow}{return} r;
+188 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!columns@{columns}}
+\index{columns@{columns}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{columns}]{\setlength{\rightskip}{0pt plus 5cm}int Object\-Placement\-Generation\-::columns\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a872cbf261b7aac7c6f9c570b56d92acd}
+
+
+columns used in the grid. 
+
+\hypertarget{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!rows@{rows}}
+\index{rows@{rows}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{rows}]{\setlength{\rightskip}{0pt plus 5cm}int Object\-Placement\-Generation\-::rows\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a9de1ce3954d2a5aff10af4e88bb26516}
+
+
+rows used in the grid. 
+
+\hypertarget{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!start\-X@{start\-X}}
+\index{start\-X@{start\-X}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{start\-X}]{\setlength{\rightskip}{0pt plus 5cm}int Object\-Placement\-Generation\-::start\-X\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a265fa21c083b78b5c98410436ff33d72}
+
+
+start of grid positions X and Z. 
+
+\hypertarget{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!start\-Z@{start\-Z}}
+\index{start\-Z@{start\-Z}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{start\-Z}]{\setlength{\rightskip}{0pt plus 5cm}int Object\-Placement\-Generation\-::start\-Z\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_aa0632a6f68c075e03d6a8c6551f53e4c}
+\hypertarget{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!used\-Zone1\-Positions@{used\-Zone1\-Positions}}
+\index{used\-Zone1\-Positions@{used\-Zone1\-Positions}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{used\-Zone1\-Positions}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df$\ast$ Object\-Placement\-Generation\-::used\-Zone1\-Positions\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a118140096bceaa4572e47a633f368cbb}
+\hypertarget{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!used\-Zone2\-Positions@{used\-Zone2\-Positions}}
+\index{used\-Zone2\-Positions@{used\-Zone2\-Positions}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{used\-Zone2\-Positions}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::used\-Zone2\-Positions\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_af25fcc65ed1f622b7afcb661fc1e0323}
+\hypertarget{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!used\-Zone3\-Positions@{used\-Zone3\-Positions}}
+\index{used\-Zone3\-Positions@{used\-Zone3\-Positions}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{used\-Zone3\-Positions}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::used\-Zone3\-Positions\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_ac5e3492f2ca5eccaa63d0d5738f49bf6}
+\hypertarget{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!used\-Zone4\-Positions@{used\-Zone4\-Positions}}
+\index{used\-Zone4\-Positions@{used\-Zone4\-Positions}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{used\-Zone4\-Positions}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::used\-Zone4\-Positions\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a11edbd3cca212de7672a8fe8ff307266}
+\hypertarget{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone1\-Grid@{zone1\-Grid}}
+\index{zone1\-Grid@{zone1\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone1\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df$\ast$ Object\-Placement\-Generation\-::zone1\-Grid\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_aad1c9c2a56afd002bb8b551232292d65}
+\hypertarget{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone1\-Obstacles@{zone1\-Obstacles}}
+\index{zone1\-Obstacles@{zone1\-Obstacles}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone1\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Object\-Placement\-Generation\-::zone1\-Obstacles\mbox{[}{\bf A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a2718f963a994625bafdc65c84cb821ef}
+\hypertarget{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone2\-Grid@{zone2\-Grid}}
+\index{zone2\-Grid@{zone2\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone2\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::zone2\-Grid\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a2dbfd8e1e0b6dc2e25c0dd8207f473c7}
+\hypertarget{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone2\-Obstacles@{zone2\-Obstacles}}
+\index{zone2\-Obstacles@{zone2\-Obstacles}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone2\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node $\ast$ Object\-Placement\-Generation\-::zone2\-Obstacles\mbox{[}{\bf A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_aaa6c6df1104c971c4879534da1e0df7e}
+\hypertarget{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone3\-Grid@{zone3\-Grid}}
+\index{zone3\-Grid@{zone3\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone3\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::zone3\-Grid\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_ad315e69d1bbacdfc0c3dfabcc02511b0}
+\hypertarget{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone3\-Obstacles@{zone3\-Obstacles}}
+\index{zone3\-Obstacles@{zone3\-Obstacles}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone3\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node $\ast$ Object\-Placement\-Generation\-::zone3\-Obstacles\mbox{[}{\bf A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a7c3f0562182ea4b6553ff08926b7dd90}
+\hypertarget{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone4\-Grid@{zone4\-Grid}}
+\index{zone4\-Grid@{zone4\-Grid}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone4\-Grid}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df $\ast$ Object\-Placement\-Generation\-::zone4\-Grid\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a1422711f765890659a9fb0250a8e693c}
+\hypertarget{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}{\index{Object\-Placement\-Generation@{Object\-Placement\-Generation}!zone4\-Obstacles@{zone4\-Obstacles}}
+\index{zone4\-Obstacles@{zone4\-Obstacles}!ObjectPlacementGeneration@{Object\-Placement\-Generation}}
+\subsubsection[{zone4\-Obstacles}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node $\ast$ Object\-Placement\-Generation\-::zone4\-Obstacles\mbox{[}{\bf A\-M\-O\-U\-N\-T\-\_\-\-O\-F\-\_\-\-O\-B\-S\-T\-A\-C\-L\-E\-S}/4\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}}\label{class_object_placement_generation_a224b6935021f0cad3bb6d38f60ce0800}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_object_placement_generation_8h}{Object\-Placement\-Generation.\-h}\item 
+\hyperlink{_object_placement_generation_8cpp}{Object\-Placement\-Generation.\-cpp}\end{DoxyCompactItemize}

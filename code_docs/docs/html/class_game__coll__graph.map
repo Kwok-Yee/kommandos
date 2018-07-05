@@ -1,0 +1,4 @@
+<map id="Game" name="Game">
+<area shape="rect" id="node3" href="$class_object_placement_generation.html" title="Object placment generation for placing obstacles and default objects. " alt="" coords="113,293,297,473"/>
+<area shape="rect" id="node8" href="$class_player.html" title="A player. " alt="" coords="454,249,617,517"/>
+</map>

@@ -1,0 +1,191 @@
+\hypertarget{class_enemy_pool}{\section{Enemy\-Pool Class Reference}
+\label{class_enemy_pool}\index{Enemy\-Pool@{Enemy\-Pool}}
+}
+
+
+{\ttfamily \#include $<$Enemy\-Pool.\-h$>$}
+
+
+
+Collaboration diagram for Enemy\-Pool\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{class_enemy_pool__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_enemy_pool_a7f7dfd08a6cb64c12c1f5842de977300}{Enemy\-Pool} (const \hyperlink{class_enemy_pool}{Enemy\-Pool} \&)=delete
+\item 
+\hyperlink{class_enemy_pool}{Enemy\-Pool} \& \hyperlink{class_enemy_pool_a9b652b5fdf0c284a4a6e6c51af66543c}{operator=} (const \hyperlink{class_enemy_pool}{Enemy\-Pool} \&)=delete
+\item 
+\hyperlink{class_enemy}{Enemy} $\ast$ \hyperlink{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{Get\-Resource} ()
+\item 
+void \hyperlink{class_enemy_pool_a23a38a606c719763861a882d9f5668e6}{Return\-Resource} (\hyperlink{class_enemy}{Enemy} $\ast$object)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_enemy_pool}{Enemy\-Pool} $\ast$ \hyperlink{class_enemy_pool_a9a3e8badcf44d36e36e78d3bf008fd03}{Get\-Instance} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_enemy_pool_a86c64cc1f5c0faeb1c78a6b602a2f5e6}{Enemy\-Pool} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ \hyperlink{class_enemy}{Enemy} $\ast$ $>$ \hyperlink{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{resources}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_enemy_pool}{Enemy\-Pool} $\ast$ \hyperlink{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}{instance} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_enemy_pool_a7f7dfd08a6cb64c12c1f5842de977300}{\index{Enemy\-Pool@{Enemy\-Pool}!Enemy\-Pool@{Enemy\-Pool}}
+\index{Enemy\-Pool@{Enemy\-Pool}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{Enemy\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Enemy\-Pool\-::\-Enemy\-Pool (
+\begin{DoxyParamCaption}
+\item[{const {\bf Enemy\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_enemy_pool_a7f7dfd08a6cb64c12c1f5842de977300}
+
+
+Referenced by Get\-Instance().
+
+\hypertarget{class_enemy_pool_a86c64cc1f5c0faeb1c78a6b602a2f5e6}{\index{Enemy\-Pool@{Enemy\-Pool}!Enemy\-Pool@{Enemy\-Pool}}
+\index{Enemy\-Pool@{Enemy\-Pool}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{Enemy\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Enemy\-Pool\-::\-Enemy\-Pool (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_pool_a86c64cc1f5c0faeb1c78a6b602a2f5e6}
+
+
+References Enemy\-Pool\-Device.
+
+
+\begin{DoxyCode}
+7 \{
+8     \hyperlink{_enemy_pool_8cpp_ad7774a435f9870c0a71f7d3d8d06bf94}{EnemyPoolDevice} = device;
+9 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_enemy_pool_a9a3e8badcf44d36e36e78d3bf008fd03}{\index{Enemy\-Pool@{Enemy\-Pool}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Pool} $\ast$ Enemy\-Pool\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_enemy_pool_a9a3e8badcf44d36e36e78d3bf008fd03}
+
+
+References Enemy\-Pool(), and instance.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Enemy\-Spawner().
+
+
+\begin{DoxyCode}
+14 \{
+15     \textcolor{keywordflow}{if} (!\hyperlink{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}{instance})
+16     \{
+17         \hyperlink{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}{instance} = \textcolor{keyword}{new} \hyperlink{class_enemy_pool_a7f7dfd08a6cb64c12c1f5842de977300}{EnemyPool}(device);
+18     \}
+19     \textcolor{keywordflow}{return} \hyperlink{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}{instance};
+20 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}{\index{Enemy\-Pool@{Enemy\-Pool}!Get\-Resource@{Get\-Resource}}
+\index{Get\-Resource@{Get\-Resource}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{Get\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy} $\ast$ Enemy\-Pool\-::\-Get\-Resource (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_pool_ab2bf919b69de9b367aeeb231ad0b0b4e}
+
+
+References enemy, Enemy\-Pool\-Device, Enemy\-::\-Get\-Enemy\-Scene\-Node(), and resources.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Spawn(), and Enemy\-Spawner\-::\-Spawn\-Mathroska\-Minion().
+
+
+\begin{DoxyCode}
+23 \{
+24     \textcolor{keywordflow}{if} (\hyperlink{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{resources}.empty())
+25     \{
+26         \hyperlink{class_enemy}{Enemy}* \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \textcolor{keyword}{new} \hyperlink{class_enemy}{Enemy}(\hyperlink{_enemy_pool_8cpp_ad7774a435f9870c0a71f7d3d8d06bf94}{EnemyPoolDevice});
+27         \textcolor{keywordflow}{return} \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy};
+28     \}
+29     \textcolor{keywordflow}{else}
+30     \{
+31         \hyperlink{class_enemy}{Enemy}* \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy} = \hyperlink{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{resources}.front();
+32         \hyperlink{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{resources}.pop\_front();
+33         enemy->\hyperlink{class_enemy_a85b8d7d8c6a61f8824a3b7b3fea795f4}{GetEnemySceneNode}()->setVisible(\textcolor{keyword}{true});
+34         \textcolor{keywordflow}{return} \hyperlink{_enemy_spawner_8cpp_acd5d4a5e84ef92e2e153fa20b425646f}{enemy};
+35     \}
+36 \}
+\end{DoxyCode}
+\hypertarget{class_enemy_pool_a9b652b5fdf0c284a4a6e6c51af66543c}{\index{Enemy\-Pool@{Enemy\-Pool}!operator=@{operator=}}
+\index{operator=@{operator=}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Pool}\& Enemy\-Pool\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Enemy\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_enemy_pool_a9b652b5fdf0c284a4a6e6c51af66543c}
+\hypertarget{class_enemy_pool_a23a38a606c719763861a882d9f5668e6}{\index{Enemy\-Pool@{Enemy\-Pool}!Return\-Resource@{Return\-Resource}}
+\index{Return\-Resource@{Return\-Resource}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{Return\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}void Enemy\-Pool\-::\-Return\-Resource (
+\begin{DoxyParamCaption}
+\item[{{\bf Enemy} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{class_enemy_pool_a23a38a606c719763861a882d9f5668e6}
+
+
+References resources.
+
+
+
+Referenced by Enemy\-Spawner\-::\-Update\-Enemies().
+
+
+\begin{DoxyCode}
+39 \{
+40     \textcolor{keywordtype}{object}->Reset();
+41     \hyperlink{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{resources}.push\_back(\textcolor{keywordtype}{object});
+42 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}{\index{Enemy\-Pool@{Enemy\-Pool}!instance@{instance}}
+\index{instance@{instance}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Enemy\-Pool} $\ast$ Enemy\-Pool\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_enemy_pool_aff307b55d5b5a8faf8023ee78c06c5e0}
+
+
+Referenced by Get\-Instance().
+
+\hypertarget{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}{\index{Enemy\-Pool@{Enemy\-Pool}!resources@{resources}}
+\index{resources@{resources}!EnemyPool@{Enemy\-Pool}}
+\subsubsection[{resources}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Enemy}$\ast$$>$ Enemy\-Pool\-::resources\hspace{0.3cm}{\ttfamily [private]}}}\label{class_enemy_pool_a78b476ddede948197e107e8e594e25aa}
+
+
+Referenced by Get\-Resource(), and Return\-Resource().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_enemy_pool_8h}{Enemy\-Pool.\-h}\item 
+\hyperlink{_enemy_pool_8cpp}{Enemy\-Pool.\-cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,520 @@
+\hypertarget{class_bullet}{\section{Bullet Class Reference}
+\label{class_bullet}\index{Bullet@{Bullet}}
+}
+
+
+
+
+  
+
+
+
+
+{\ttfamily \#include $<$Bullet.\-h$>$}
+
+
+
+Collaboration diagram for Bullet\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_bullet__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5}{Bullet\-Mode} \{ \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5ab15c8d61fdbcf364ff659250cfff9d3d}{basic}, 
+\hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a6eae620163c016a1c99d33efa49d5b98}{rapid\-Fire}, 
+\hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a70b93c5ed87213fabada7bf06009499a}{split\-Fire}, 
+\hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5acbc3fe102aee0027cf26135962ff7fc7}{rapid\-Split\-Fire}
+ \}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_bullet}{Bullet} Modes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{Set\-Bullet\-Mode} (\hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5}{Bullet\-Mode} mode)
+\begin{DoxyCompactList}\small\item\em Set the \hyperlink{class_bullet}{Bullet} Mode. \end{DoxyCompactList}\item 
+void \hyperlink{class_bullet_a2de1bc8fb8c70cce09385efd11e9156c}{Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets this object. \end{DoxyCompactList}\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{Get\-Bullet} ()
+\begin{DoxyCompactList}\small\item\em Gets the bullet. \end{DoxyCompactList}\item 
+void \hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{Set\-Bullet} (irr\-::scene\-::\-I\-Scene\-Node $\ast$new\-Bullet)
+\begin{DoxyCompactList}\small\item\em Sets a bullet. \end{DoxyCompactList}\item 
+float \hyperlink{class_bullet_a1fed697f50973eae024e1ce9deeb0442}{Get\-Damage} ()
+\begin{DoxyCompactList}\small\item\em Gets the damage. \end{DoxyCompactList}\item 
+void \hyperlink{class_bullet_a22c11bea0caf412bcc62ddf13dc541c7}{Update\-Bullet} (irr\-::core\-::vector3df mouse\-Pos, irr\-::core\-::vector3df player\-Pos, float \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\begin{DoxyCompactList}\small\item\em Updates the bullet. \end{DoxyCompactList}\item 
+void \hyperlink{class_bullet_a7a2e293d6bc42d3b018815a0302a0074}{Set\-Speed} (float s)
+\begin{DoxyCompactList}\small\item\em Sets the bullet speed. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_bullet_a5cc762f8b276d0ad812ed3b1fc411626}{Get\-Bullet\-Timer} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_bullet_a62aadef0cc64e5ae9085cc4e0267e920}{Get\-Bullet\-Life\-Timer} ()
+\item 
+void \hyperlink{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{Set\-Bullet\-Spread} (float s)
+\item 
+\hyperlink{class_bullet_acd7befc0bc18907cc1d871d37bbdddeb}{Bullet} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet}
+\begin{DoxyCompactList}\small\item\em The bullet. \end{DoxyCompactList}\item 
+\hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5}{Bullet\-Mode} \hyperlink{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}{bullet\-Mode}
+\begin{DoxyCompactList}\small\item\em The \hyperlink{class_bullet}{Bullet} mode. \end{DoxyCompactList}\item 
+bool \hyperlink{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}{set\-Once} = true
+\begin{DoxyCompactList}\small\item\em True to set once. \end{DoxyCompactList}\item 
+irr\-::core\-::vector3df \hyperlink{class_bullet_a02649f79014e7fa879e619b0404ad22b}{position}
+\begin{DoxyCompactList}\small\item\em The velocity. \end{DoxyCompactList}\item 
+irr\-::core\-::vector3df \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}
+\begin{DoxyCompactList}\small\item\em The delta. \end{DoxyCompactList}\item 
+float \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed}
+\begin{DoxyCompactList}\small\item\em The speed. \end{DoxyCompactList}\item 
+float \hyperlink{class_bullet_a1cad8c80e63d13da57b563b8e8e3f79e}{damage}
+\begin{DoxyCompactList}\small\item\em The damage. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bullet\-Timer}
+\begin{DoxyCompactList}\small\item\em The bullet timer. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bullet\-Life\-Timer}
+\begin{DoxyCompactList}\small\item\em The bullet life timer. \end{DoxyCompactList}\item 
+float \hyperlink{class_bullet_ab941816334c79d597fe0d20225da563b}{spread}
+\begin{DoxyCompactList}\small\item\em The bullet offset. \end{DoxyCompactList}\item 
+irr\-::f32 \hyperlink{class_bullet_a069699cea42b5adef4c794164728b922}{length}
+\item 
+irr\-::core\-::vector3df \hyperlink{class_bullet_ab856dc3d3abad6d037d33de072474608}{perpendicular}
+\item 
+irr\-::core\-::vector3df \hyperlink{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}{off\-Pos}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+ 
+
+\subsubsection*{}
+
+\subsubsection*{A bullet.  }
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5}{\index{Bullet@{Bullet}!Bullet\-Mode@{Bullet\-Mode}}
+\index{Bullet\-Mode@{Bullet\-Mode}!Bullet@{Bullet}}
+\subsubsection[{Bullet\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Bullet\-::\-Bullet\-Mode}}}\label{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5}
+
+
+\hyperlink{class_bullet}{Bullet} Modes. 
+
+
+
+ 
+
+ \begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{basic@{basic}!Bullet@{Bullet}}\index{Bullet@{Bullet}!basic@{basic}}\item[{\em 
+\hypertarget{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5ab15c8d61fdbcf364ff659250cfff9d3d}{basic}\label{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5ab15c8d61fdbcf364ff659250cfff9d3d}
+}]\index{rapid\-Fire@{rapid\-Fire}!Bullet@{Bullet}}\index{Bullet@{Bullet}!rapid\-Fire@{rapid\-Fire}}\item[{\em 
+\hypertarget{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a6eae620163c016a1c99d33efa49d5b98}{rapid\-Fire}\label{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a6eae620163c016a1c99d33efa49d5b98}
+}]\index{split\-Fire@{split\-Fire}!Bullet@{Bullet}}\index{Bullet@{Bullet}!split\-Fire@{split\-Fire}}\item[{\em 
+\hypertarget{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a70b93c5ed87213fabada7bf06009499a}{split\-Fire}\label{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a70b93c5ed87213fabada7bf06009499a}
+}]\index{rapid\-Split\-Fire@{rapid\-Split\-Fire}!Bullet@{Bullet}}\index{Bullet@{Bullet}!rapid\-Split\-Fire@{rapid\-Split\-Fire}}\item[{\em 
+\hypertarget{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5acbc3fe102aee0027cf26135962ff7fc7}{rapid\-Split\-Fire}\label{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5acbc3fe102aee0027cf26135962ff7fc7}
+}]\end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+19                     \{
+20         \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5ab15c8d61fdbcf364ff659250cfff9d3d}{basic},
+21         \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a6eae620163c016a1c99d33efa49d5b98}{rapidFire},
+22         \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5a70b93c5ed87213fabada7bf06009499a}{splitFire},
+23         \hyperlink{class_bullet_a5d75af562dbb5f6f4f68584ca9193aa5acbc3fe102aee0027cf26135962ff7fc7}{rapidSplitFire}
+24     \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_bullet_acd7befc0bc18907cc1d871d37bbdddeb}{\index{Bullet@{Bullet}!Bullet@{Bullet}}
+\index{Bullet@{Bullet}!Bullet@{Bullet}}
+\subsubsection[{Bullet}]{\setlength{\rightskip}{0pt plus 5cm}Bullet\-::\-Bullet (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_acd7befc0bc18907cc1d871d37bbdddeb}
+
+
+Default constructor. 
+
+
+
+ 
+
+ 
+\begin{DoxyCode}
+153 \{
+154     \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet} = 0;
+155     \hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(BulletMode::basic);
+156 \}\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{\index{Bullet@{Bullet}!Get\-Bullet@{Get\-Bullet}}
+\index{Get\-Bullet@{Get\-Bullet}!Bullet@{Bullet}}
+\subsubsection[{Get\-Bullet}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Bullet\-::\-Get\-Bullet (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}
+
+
+Gets the bullet. 
+
+
+
+ 
+
+ 
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+71 \{
+72     \textcolor{keywordflow}{return} \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet};
+73 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a62aadef0cc64e5ae9085cc4e0267e920}{\index{Bullet@{Bullet}!Get\-Bullet\-Life\-Timer@{Get\-Bullet\-Life\-Timer}}
+\index{Get\-Bullet\-Life\-Timer@{Get\-Bullet\-Life\-Timer}!Bullet@{Bullet}}
+\subsubsection[{Get\-Bullet\-Life\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 Bullet\-::\-Get\-Bullet\-Life\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a62aadef0cc64e5ae9085cc4e0267e920}
+
+\begin{DoxyCode}
+139 \{
+140     \textcolor{keywordflow}{return} \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer};
+141 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a5cc762f8b276d0ad812ed3b1fc411626}{\index{Bullet@{Bullet}!Get\-Bullet\-Timer@{Get\-Bullet\-Timer}}
+\index{Get\-Bullet\-Timer@{Get\-Bullet\-Timer}!Bullet@{Bullet}}
+\subsubsection[{Get\-Bullet\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 Bullet\-::\-Get\-Bullet\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a5cc762f8b276d0ad812ed3b1fc411626}
+
+
+Default constructor. 
+
+
+
+ 
+
+ 
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+134 \{
+135     \textcolor{keywordflow}{return} \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bulletTimer};
+136 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a1fed697f50973eae024e1ce9deeb0442}{\index{Bullet@{Bullet}!Get\-Damage@{Get\-Damage}}
+\index{Get\-Damage@{Get\-Damage}!Bullet@{Bullet}}
+\subsubsection[{Get\-Damage}]{\setlength{\rightskip}{0pt plus 5cm}float Bullet\-::\-Get\-Damage (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a1fed697f50973eae024e1ce9deeb0442}
+
+
+Gets the damage. 
+
+
+
+ 
+
+ 
+\begin{DoxyCode}
+89 \{
+90     \textcolor{keywordflow}{return} \hyperlink{class_bullet_a1cad8c80e63d13da57b563b8e8e3f79e}{damage};
+91 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a2de1bc8fb8c70cce09385efd11e9156c}{\index{Bullet@{Bullet}!Reset@{Reset}}
+\index{Reset@{Reset}!Bullet@{Bullet}}
+\subsubsection[{Reset}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a2de1bc8fb8c70cce09385efd11e9156c}
+
+
+Resets this object. 
+
+
+
+ 
+
+ 
+\begin{DoxyCode}
+59 \{
+60     \hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(BulletMode::basic);
+61     \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet}->setVisible(\textcolor{keyword}{false});
+62     \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet}->setPosition(vector3df(0, 0, 0));
+63     \hyperlink{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}{setOnce} = \textcolor{keyword}{true};
+64 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{\index{Bullet@{Bullet}!Set\-Bullet@{Set\-Bullet}}
+\index{Set\-Bullet@{Set\-Bullet}!Bullet@{Bullet}}
+\subsubsection[{Set\-Bullet}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Set\-Bullet (
+\begin{DoxyParamCaption}
+\item[{irr\-::scene\-::\-I\-Scene\-Node $\ast$}]{new\-Bullet}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}
+
+
+Sets a bullet. 
+
+
+
+ 
+
+ 
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+80 \{
+81     \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet} = newBullet;
+82 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{\index{Bullet@{Bullet}!Set\-Bullet\-Mode@{Set\-Bullet\-Mode}}
+\index{Set\-Bullet\-Mode@{Set\-Bullet\-Mode}!Bullet@{Bullet}}
+\subsubsection[{Set\-Bullet\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Set\-Bullet\-Mode (
+\begin{DoxyParamCaption}
+\item[{{\bf Bullet\-Mode}}]{mode}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a9988e27a0327a7ebca6b407c59661a54}
+
+
+Set the \hyperlink{class_bullet}{Bullet} Mode. 
+
+
+
+ 
+
+ 
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+27 \{
+28     \hyperlink{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}{bulletMode} = mode;
+29     \textcolor{keywordflow}{switch} (mode)
+30     \{
+31     \textcolor{keywordflow}{case} BulletMode::basic:
+32         \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed} = 300.f;
+33         \hyperlink{class_bullet_a1cad8c80e63d13da57b563b8e8e3f79e}{damage} = 25.f;
+34         \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} = 150;
+35         \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bulletTimer} = 15;
+36         \textcolor{keywordflow}{return};
+37     \textcolor{keywordflow}{case} BulletMode::rapidFire:
+38         \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed} = 350.f;
+39         \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} = 150;
+40         \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bulletTimer} = 9;
+41         \textcolor{keywordflow}{return};
+42     \textcolor{keywordflow}{case} BulletMode::splitFire:
+43         \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed} = 300.f;
+44         \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} = 150;
+45         \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bulletTimer} = 13;
+46         \textcolor{keywordflow}{return};
+47     \textcolor{keywordflow}{case} BulletMode::rapidSplitFire:
+48         \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed} = 300.f;
+49         \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} = 150;
+50         \hyperlink{class_bullet_ac1b4825f9227b4411529519edce96ead}{bulletTimer} = 9;
+51     \}
+52 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{\index{Bullet@{Bullet}!Set\-Bullet\-Spread@{Set\-Bullet\-Spread}}
+\index{Set\-Bullet\-Spread@{Set\-Bullet\-Spread}!Bullet@{Bullet}}
+\subsubsection[{Set\-Bullet\-Spread}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Set\-Bullet\-Spread (
+\begin{DoxyParamCaption}
+\item[{float}]{s}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}
+
+
+Referenced by Player\-::\-Shoot().
+
+
+\begin{DoxyCode}
+144 \{
+145     \hyperlink{class_bullet_ab941816334c79d597fe0d20225da563b}{spread} = s;
+146 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a7a2e293d6bc42d3b018815a0302a0074}{\index{Bullet@{Bullet}!Set\-Speed@{Set\-Speed}}
+\index{Set\-Speed@{Set\-Speed}!Bullet@{Bullet}}
+\subsubsection[{Set\-Speed}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Set\-Speed (
+\begin{DoxyParamCaption}
+\item[{float}]{s}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a7a2e293d6bc42d3b018815a0302a0074}
+
+
+Sets the bullet speed. 
+
+
+
+ 
+
+ 
+\begin{DoxyCode}
+129 \{
+130     \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed} = s;
+131 \}
+\end{DoxyCode}
+\hypertarget{class_bullet_a22c11bea0caf412bcc62ddf13dc541c7}{\index{Bullet@{Bullet}!Update\-Bullet@{Update\-Bullet}}
+\index{Update\-Bullet@{Update\-Bullet}!Bullet@{Bullet}}
+\subsubsection[{Update\-Bullet}]{\setlength{\rightskip}{0pt plus 5cm}void Bullet\-::\-Update\-Bullet (
+\begin{DoxyParamCaption}
+\item[{irr\-::core\-::vector3df}]{mouse\-Pos, }
+\item[{irr\-::core\-::vector3df}]{player\-Pos, }
+\item[{float}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_bullet_a22c11bea0caf412bcc62ddf13dc541c7}
+
+
+Updates the bullet. 
+
+
+
+ 
+
+ 
+
+References frame\-Delta\-Time.
+
+
+\begin{DoxyCode}
+97 \{
+98     \textcolor{keywordflow}{if} (\hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} > 0)
+99     \{
+100         \hyperlink{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{bulletLifeTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+101     \}
+102     \textcolor{keywordflow}{if} (\hyperlink{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}{setOnce})
+103     \{
+104         \hyperlink{class_bullet_a02649f79014e7fa879e619b0404ad22b}{position} = playerPos;
+105         \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta} = vector3df(mousePos.X - playerPos.X, 1.f, mousePos.Z - playerPos.Z);
+106         \hyperlink{class_bullet_a069699cea42b5adef4c794164728b922}{length} = \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}.getLength();
+107         \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta} = \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}.normalize();
+108 
+109         \textcolor{keywordflow}{if} ((\hyperlink{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}{bulletMode} == BulletMode::rapidSplitFire || \hyperlink{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}{bulletMode} == 
+      BulletMode::splitFire) && (\hyperlink{class_bullet_ab941816334c79d597fe0d20225da563b}{spread} > 0 || \hyperlink{class_bullet_ab941816334c79d597fe0d20225da563b}{spread} < 0))
+110         \{
+111             \hyperlink{class_bullet_ab856dc3d3abad6d037d33de072474608}{perpendicular} = vector3df(\hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}.Z, \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}.Y, 
+      \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta}.X);
+112             \hyperlink{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}{offPos} = mousePos + (\hyperlink{class_bullet_ab856dc3d3abad6d037d33de072474608}{perpendicular} * \hyperlink{class_bullet_ab941816334c79d597fe0d20225da563b}{spread} * 
+      \hyperlink{class_bullet_a069699cea42b5adef4c794164728b922}{length});
+113             \textcolor{comment}{//recalculate delta based on offset position}
+114             \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta} = vector3df(\hyperlink{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}{offPos}.X - playerPos.X, 1.f, \hyperlink{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}{offPos}.Z - playerPos.Z);
+115             delta.normalize();
+116         \}
+117         \hyperlink{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}{setOnce} = \textcolor{keyword}{false};
+118     \}
+119 
+120     \hyperlink{class_bullet_a02649f79014e7fa879e619b0404ad22b}{position} += \hyperlink{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{delta} * \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{speed};
+121     \hyperlink{class_bullet_a02649f79014e7fa879e619b0404ad22b}{position}.Y = 1.f;
+122     \hyperlink{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{bullet}->setPosition(\hyperlink{class_bullet_a02649f79014e7fa879e619b0404ad22b}{position});
+123 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}{\index{Bullet@{Bullet}!bullet@{bullet}}
+\index{bullet@{bullet}!Bullet@{Bullet}}
+\subsubsection[{bullet}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node$\ast$ Bullet\-::bullet\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a1269c5dd9e8fde8489ecccb2b63a7675}
+
+
+The bullet. 
+
+\hypertarget{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}{\index{Bullet@{Bullet}!bullet\-Life\-Timer@{bullet\-Life\-Timer}}
+\index{bullet\-Life\-Timer@{bullet\-Life\-Timer}!Bullet@{Bullet}}
+\subsubsection[{bullet\-Life\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::s32 Bullet\-::bullet\-Life\-Timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a5d564a2ba54760b213cc65a34c2a9bd5}
+
+
+The bullet life timer. 
+
+\hypertarget{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}{\index{Bullet@{Bullet}!bullet\-Mode@{bullet\-Mode}}
+\index{bullet\-Mode@{bullet\-Mode}!Bullet@{Bullet}}
+\subsubsection[{bullet\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bullet\-Mode} Bullet\-::bullet\-Mode\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a71410182ef75dfa9bffa3103e3115a5f}
+
+
+The \hyperlink{class_bullet}{Bullet} mode. 
+
+\hypertarget{class_bullet_ac1b4825f9227b4411529519edce96ead}{\index{Bullet@{Bullet}!bullet\-Timer@{bullet\-Timer}}
+\index{bullet\-Timer@{bullet\-Timer}!Bullet@{Bullet}}
+\subsubsection[{bullet\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::s32 Bullet\-::bullet\-Timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_ac1b4825f9227b4411529519edce96ead}
+
+
+The bullet timer. 
+
+\hypertarget{class_bullet_a1cad8c80e63d13da57b563b8e8e3f79e}{\index{Bullet@{Bullet}!damage@{damage}}
+\index{damage@{damage}!Bullet@{Bullet}}
+\subsubsection[{damage}]{\setlength{\rightskip}{0pt plus 5cm}float Bullet\-::damage\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a1cad8c80e63d13da57b563b8e8e3f79e}
+
+
+The damage. 
+
+\hypertarget{class_bullet_ab9e89b541c875e153a8ae09f1527913e}{\index{Bullet@{Bullet}!delta@{delta}}
+\index{delta@{delta}!Bullet@{Bullet}}
+\subsubsection[{delta}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Bullet\-::delta\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_ab9e89b541c875e153a8ae09f1527913e}
+
+
+The delta. 
+
+\hypertarget{class_bullet_a069699cea42b5adef4c794164728b922}{\index{Bullet@{Bullet}!length@{length}}
+\index{length@{length}!Bullet@{Bullet}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::f32 Bullet\-::length\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a069699cea42b5adef4c794164728b922}
+\hypertarget{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}{\index{Bullet@{Bullet}!off\-Pos@{off\-Pos}}
+\index{off\-Pos@{off\-Pos}!Bullet@{Bullet}}
+\subsubsection[{off\-Pos}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Bullet\-::off\-Pos\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a501965fdc9f42f81c85025da2bb57b7e}
+\hypertarget{class_bullet_ab856dc3d3abad6d037d33de072474608}{\index{Bullet@{Bullet}!perpendicular@{perpendicular}}
+\index{perpendicular@{perpendicular}!Bullet@{Bullet}}
+\subsubsection[{perpendicular}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Bullet\-::perpendicular\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_ab856dc3d3abad6d037d33de072474608}
+\hypertarget{class_bullet_a02649f79014e7fa879e619b0404ad22b}{\index{Bullet@{Bullet}!position@{position}}
+\index{position@{position}!Bullet@{Bullet}}
+\subsubsection[{position}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::core\-::vector3df Bullet\-::position\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a02649f79014e7fa879e619b0404ad22b}
+
+
+The velocity. 
+
+\hypertarget{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}{\index{Bullet@{Bullet}!set\-Once@{set\-Once}}
+\index{set\-Once@{set\-Once}!Bullet@{Bullet}}
+\subsubsection[{set\-Once}]{\setlength{\rightskip}{0pt plus 5cm}bool Bullet\-::set\-Once = true\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_aeaf18e3b47ec51f973befce26e97bf48}
+
+
+True to set once. 
+
+\hypertarget{class_bullet_a5fbd5204eec00c8285686abeb4547f16}{\index{Bullet@{Bullet}!speed@{speed}}
+\index{speed@{speed}!Bullet@{Bullet}}
+\subsubsection[{speed}]{\setlength{\rightskip}{0pt plus 5cm}float Bullet\-::speed\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_a5fbd5204eec00c8285686abeb4547f16}
+
+
+The speed. 
+
+\hypertarget{class_bullet_ab941816334c79d597fe0d20225da563b}{\index{Bullet@{Bullet}!spread@{spread}}
+\index{spread@{spread}!Bullet@{Bullet}}
+\subsubsection[{spread}]{\setlength{\rightskip}{0pt plus 5cm}float Bullet\-::spread\hspace{0.3cm}{\ttfamily [private]}}}\label{class_bullet_ab941816334c79d597fe0d20225da563b}
+
+
+The bullet offset. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_bullet_8h}{Bullet.\-h}\item 
+\hyperlink{_bullet_8cpp}{Bullet.\-cpp}\end{DoxyCompactItemize}

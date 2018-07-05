@@ -1,0 +1,171 @@
+\hypertarget{class_tutorial}{\section{Tutorial Class Reference}
+\label{class_tutorial}\index{Tutorial@{Tutorial}}
+}
+
+
+\hyperlink{class_tutorial}{Tutorial} class which displays the buttons to use and the objective of the game.  
+
+
+
+
+{\ttfamily \#include $<$Tutorial.\-h$>$}
+
+
+
+Collaboration diagram for Tutorial\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_tutorial__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_tutorial_a2bcccb05a09cfb9cd14fb456a609c50b}{Show\-Tutorial} (irr\-::\-Irrlicht\-Device $\ast$device)
+\begin{DoxyCompactList}\small\item\em Shows the tutorial G\-U\-I. \end{DoxyCompactList}\item 
+void \hyperlink{class_tutorial_a0bef62d9bb8e461bfa119e80bacc1ca5}{Remove\-Tutorial} ()
+\begin{DoxyCompactList}\small\item\em Removes the tutorial G\-U\-I. \end{DoxyCompactList}\item 
+void \hyperlink{class_tutorial_a3c755730bce8d71fdd9137a048e7c732}{Update} (irr\-::f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\begin{DoxyCompactList}\small\item\em Update for tutorial G\-U\-I. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_tutorial_a050c9844b3a52de799105883893ca073}{is\-Tutorial\-Active} = true
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{class_tutorial}{Tutorial} class which displays the buttons to use and the objective of the game. 
+
+
+
+ 
+
+ 
+
+\subsection{Member Function Documentation}
+\hypertarget{class_tutorial_a0bef62d9bb8e461bfa119e80bacc1ca5}{\index{Tutorial@{Tutorial}!Remove\-Tutorial@{Remove\-Tutorial}}
+\index{Remove\-Tutorial@{Remove\-Tutorial}!Tutorial@{Tutorial}}
+\subsubsection[{Remove\-Tutorial}]{\setlength{\rightskip}{0pt plus 5cm}void Tutorial\-::\-Remove\-Tutorial (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_tutorial_a0bef62d9bb8e461bfa119e80bacc1ca5}
+
+
+Removes the tutorial G\-U\-I. 
+
+
+
+ 
+
+ 
+
+References img.
+
+
+
+Referenced by Game\-::\-Set\-Is\-Game\-Over().
+
+
+\begin{DoxyCode}
+47 \{
+48     \textcolor{keywordflow}{if}(\hyperlink{_tutorial_8cpp_ab78bbad0d868386965dd51927f9a6a34}{img}) 
+49     \{
+50         \hyperlink{_tutorial_8cpp_ab78bbad0d868386965dd51927f9a6a34}{img}->remove();
+51         \hyperlink{_tutorial_8cpp_ab78bbad0d868386965dd51927f9a6a34}{img} = NULL;
+52     \}
+53 \}
+\end{DoxyCode}
+\hypertarget{class_tutorial_a2bcccb05a09cfb9cd14fb456a609c50b}{\index{Tutorial@{Tutorial}!Show\-Tutorial@{Show\-Tutorial}}
+\index{Show\-Tutorial@{Show\-Tutorial}!Tutorial@{Tutorial}}
+\subsubsection[{Show\-Tutorial}]{\setlength{\rightskip}{0pt plus 5cm}void Tutorial\-::\-Show\-Tutorial (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_tutorial_a2bcccb05a09cfb9cd14fb456a609c50b}
+
+
+Shows the tutorial G\-U\-I. 
+
+
+
+ 
+
+ 
+
+References driver, img, smgr, and tutorial\-G\-U\-I.
+
+
+
+Referenced by Game\-::\-Start().
+
+
+\begin{DoxyCode}
+34 \{
+35     ISceneManager* \hyperlink{_game_8cpp_a80a0cf5a63a07fec786bf483e5f22c39}{smgr} = device->getSceneManager();
+36     IVideoDriver* \hyperlink{_game_8cpp_ae8ebff0dce398b6764c0e99ec847754a}{driver} = device->getVideoDriver();
+37 
+38     \hyperlink{_tutorial_8cpp_ae7c15289e594bda6e3afc9e3d22f4a7c}{tutorialGUI} = device->getGUIEnvironment();
+39     ITexture* tutorialImage = driver->getTexture(\textcolor{stringliteral}{"../media/Textures/Tutorial\_Resize.png"});
+40     \hyperlink{_tutorial_8cpp_ab78bbad0d868386965dd51927f9a6a34}{img} = \hyperlink{_tutorial_8cpp_ae7c15289e594bda6e3afc9e3d22f4a7c}{tutorialGUI}->addImage(tutorialImage, position2d<int>(250, 90));
+41 \}
+\end{DoxyCode}
+\hypertarget{class_tutorial_a3c755730bce8d71fdd9137a048e7c732}{\index{Tutorial@{Tutorial}!Update@{Update}}
+\index{Update@{Update}!Tutorial@{Tutorial}}
+\subsubsection[{Update}]{\setlength{\rightskip}{0pt plus 5cm}void Tutorial\-::\-Update (
+\begin{DoxyParamCaption}
+\item[{irr\-::f32}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_tutorial_a3c755730bce8d71fdd9137a048e7c732}
+
+
+Update for tutorial G\-U\-I. 
+
+
+
+ 
+
+ 
+
+References frame\-Delta\-Time, img, and timer.
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+60 \{
+61     \textcolor{keywordflow}{if} (\hyperlink{_tutorial_8cpp_ab78bbad0d868386965dd51927f9a6a34}{img})
+62     \{
+63         \textcolor{keywordflow}{if} (\hyperlink{_tutorial_8cpp_ae2c6087027bfdf561a2b766975b47ee8}{timer} > 0)
+64         \{
+65             \hyperlink{_tutorial_8cpp_ae2c6087027bfdf561a2b766975b47ee8}{timer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+66         \}
+67         \textcolor{keywordflow}{else}
+68         \{
+69             \hyperlink{class_tutorial_a050c9844b3a52de799105883893ca073}{isTutorialActive} = \textcolor{keyword}{false};
+70             \hyperlink{class_tutorial_a0bef62d9bb8e461bfa119e80bacc1ca5}{RemoveTutorial}();
+71         \}
+72     \}
+73 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_tutorial_a050c9844b3a52de799105883893ca073}{\index{Tutorial@{Tutorial}!is\-Tutorial\-Active@{is\-Tutorial\-Active}}
+\index{is\-Tutorial\-Active@{is\-Tutorial\-Active}!Tutorial@{Tutorial}}
+\subsubsection[{is\-Tutorial\-Active}]{\setlength{\rightskip}{0pt plus 5cm}bool Tutorial\-::is\-Tutorial\-Active = true}}\label{class_tutorial_a050c9844b3a52de799105883893ca073}
+
+
+Referenced by Game\-::\-Update().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_tutorial_8h}{Tutorial.\-h}\item 
+\hyperlink{_tutorial_8cpp}{Tutorial.\-cpp}\end{DoxyCompactItemize}

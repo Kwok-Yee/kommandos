@@ -1,0 +1,836 @@
+\hypertarget{class_player}{\section{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+}
+
+
+A player.  
+
+
+
+
+{\ttfamily \#include $<$Player.\-h$>$}
+
+
+
+Collaboration diagram for Player\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{class_player__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_player_ac207dd2957a2e3c4e734a9a074c2321d}{Player} (irr\-::\-Irrlicht\-Device $\ast$device)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_player_ae9f5a597f15e29673c47abe47c3f1d79}{Take\-Damage} (irr\-::f32 damage)
+\begin{DoxyCompactList}\small\item\em Take damage. \end{DoxyCompactList}\item 
+void \hyperlink{class_player_aa6cc636d92ca5ccba15a5af2ef7f224a}{Draw\-Health\-Bar} ()
+\begin{DoxyCompactList}\small\item\em Draw health bar. \end{DoxyCompactList}\item 
+void \hyperlink{class_player_a436296b5c3aca2e448563594fc3eb234}{Move} (\hyperlink{class_input_receiver}{Input\-Receiver} \hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{input\-Receiver})
+\begin{DoxyCompactList}\small\item\em Moves the given input receiver. \end{DoxyCompactList}\item 
+void \hyperlink{class_player_a24b813efa1554eeb30cd7e3b508bf8fd}{Shoot} (\hyperlink{class_input_receiver}{Input\-Receiver} \hyperlink{_game_8cpp_ab1a0fe3a591398ca440c6d1932a73be2}{input\-Receiver}, \hyperlink{class_enemy_spawner}{Enemy\-Spawner} $\ast$enemies)
+\begin{DoxyCompactList}\small\item\em Shoots. \end{DoxyCompactList}\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{get\-Player\-Object} ()
+\begin{DoxyCompactList}\small\item\em Gets player object. \end{DoxyCompactList}\item 
+irr\-::scene\-::\-I\-Scene\-Node $\ast$ \hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{get\-Cam\-Follow\-Object} ()
+\item 
+void \hyperlink{class_player_a1b4fa88c5aebe9ada71cae33ec3f43eb}{Raycast} (irr\-::core\-::vector3df end\-Position, irr\-::scene\-::\-I\-Camera\-Scene\-Node $\ast$\hyperlink{_game_8cpp_af95833c961e5bd20dcd54e1d46a03c0b}{camera})
+\begin{DoxyCompactList}\small\item\em Raycasts. \end{DoxyCompactList}\item 
+bool \hyperlink{class_player_ae6123d6c74c9b5110971267f3cd52b08}{On\-Line\-Intersect} (irr\-::core\-::plane3df \&plane, irr\-::core\-::line3df \&ray)
+\begin{DoxyCompactList}\small\item\em Executes the line intersect action. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_player_ae790e9e2f8a4f53c11423d25410b5fdf}{get\-Vulnerable\-Timer} ()
+\begin{DoxyCompactList}\small\item\em Gets vulnerable timer. \end{DoxyCompactList}\item 
+irr\-::core\-::vector3df \hyperlink{class_player_a1a5ffa93ed21193d12261a46fd1613a1}{Get\-Mouse\-Position} ()
+\begin{DoxyCompactList}\small\item\em Gets mouse position. \end{DoxyCompactList}\item 
+s32 \hyperlink{class_player_ad81495e13d7c65f0ea090a9144e11d61}{Get\-Rapid\-Fire\-Timer} ()
+\item 
+s32 \hyperlink{class_player_a6b5c6e5353331ab55bfd440ea9f8f9bf}{Get\-Split\-Fire\-Timer} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_player_a4523bf2e637fcb0e36a3f456ec397e7d}{Init} ()
+\begin{DoxyCompactList}\small\item\em Initializes this object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+irr\-::s32 \hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bullet\-Timer}
+\begin{DoxyCompactList}\small\item\em The bullet timer. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapid\-Fire\-Timer}
+\begin{DoxyCompactList}\small\item\em The rapid fire power up timer. \end{DoxyCompactList}\item 
+irr\-::s32 \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{split\-Fire\-Timer}
+\begin{DoxyCompactList}\small\item\em The split fire power up timer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A player. 
+
+
+
+ 
+
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_player_ac207dd2957a2e3c4e734a9a074c2321d}{\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\subsubsection[{Player}]{\setlength{\rightskip}{0pt plus 5cm}Player\-::\-Player (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_player_ac207dd2957a2e3c4e734a9a074c2321d}
+
+
+Constructor. 
+
+
+
+ 
+
+ 
+
+References game, Game\-::\-Get\-Instance(), Sound\-Manager\-::\-Get\-Instance(), player\-Driver, player\-I\-Device, player\-Smgr, sound\-Manager, and time.
+
+
+\begin{DoxyCode}
+125 \{
+126     \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager} = \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+127     \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice} = device;
+128     \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver} = \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice}->getVideoDriver();
+129     \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr} = \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice}->getSceneManager();
+130     \hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game} = \hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game}->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+131     \hyperlink{class_player_a4523bf2e637fcb0e36a3f456ec397e7d}{Init}();
+132 
+133     \textcolor{comment}{// In order to do framerate independent movement, we have to know}
+134     \textcolor{comment}{// how long it was since the last frame}
+135     \hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time} = \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice}->getTimer()->getTime();
+136 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_player_aa6cc636d92ca5ccba15a5af2ef7f224a}{\index{Player@{Player}!Draw\-Health\-Bar@{Draw\-Health\-Bar}}
+\index{Draw\-Health\-Bar@{Draw\-Health\-Bar}!Player@{Player}}
+\subsubsection[{Draw\-Health\-Bar}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Draw\-Health\-Bar (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_aa6cc636d92ca5ccba15a5af2ef7f224a}
+
+
+Draw health bar. 
+
+
+
+ 
+
+ 
+
+References game, Game\-::\-Get\-Is\-Game\-Over(), health, M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H, player\-Driver, X1\-B\-A\-R, X2\-B\-A\-R, Y1\-B\-A\-R, and Y2\-B\-A\-R.
+
+
+
+Referenced by Game\-::\-Draw().
+
+
+\begin{DoxyCode}
+485 \{
+486     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game}->\hyperlink{class_game_a472e76af50d5275142522f9a5e149ab1}{GetIsGameOver}() != \textcolor{keyword}{true})
+487     \{
+488         \textcolor{keyword}{const} s32 barSize = \hyperlink{_player_8cpp_a2cf38e1cf676620c959917828e2eac9d}{MAX\_HEALTH};
+489         \textcolor{comment}{//draws multiple bars to make i look nice}
+490         \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver}->draw2DRectangle(SColor(255, 100, 100, 100), rect<s32>(
+      \hyperlink{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{X1BAR}, \hyperlink{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{Y1BAR}, (barSize * 5) + \hyperlink{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{X2BAR}, \hyperlink{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{Y2BAR}));
+491         \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver}->draw2DRectangle(SColor(255, 125, 125, 125), rect<s32>(
+      \hyperlink{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{X1BAR} + 1, \hyperlink{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{Y1BAR} + 1, barSize * 5 + \hyperlink{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{X2BAR} - 1, \hyperlink{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{Y2BAR} - 1));
+492         \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver}->draw2DRectangle(SColor(255, 150, 150, 150), rect<s32>(
+      \hyperlink{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{X1BAR} + 3, \hyperlink{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{Y1BAR} + 3, barSize * 5 + \hyperlink{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{X2BAR} - 3, \hyperlink{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{Y2BAR} - 3));
+493         \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver}->draw2DRectangle(rect<s32>(\hyperlink{_player_8cpp_a7cb474282a6bf639f4c724367e07267f}{X1BAR} + 3, 
+      \hyperlink{_player_8cpp_a7e48abcacca9302e3cc4a136b8ebaa13}{Y1BAR} + 3, \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} * 5 + \hyperlink{_player_8cpp_a661d6c128cdad1a108abd296bc6a8aa0}{X2BAR} - 3, \hyperlink{_player_8cpp_aa47b191301cdb9c6164268899b0a0c5f}{Y2BAR} - 3),
+494             SColor(255, 255 - \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} * 2.55, \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health}*2.55, 0),
+495             SColor(255, 255 - \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} * 2.55, \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health}*2.55, 0),
+496             SColor(255, 255 - \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} * 2.55, \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health}*2.55 - 150, 0),
+497             SColor(255, 255 - \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} * 2.55, \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health}*2.55 - 150, 0));
+498     \}
+499 \}
+\end{DoxyCode}
+\hypertarget{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{\index{Player@{Player}!get\-Cam\-Follow\-Object@{get\-Cam\-Follow\-Object}}
+\index{get\-Cam\-Follow\-Object@{get\-Cam\-Follow\-Object}!Player@{Player}}
+\subsubsection[{get\-Cam\-Follow\-Object}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::scene\-::\-I\-Scene\-Node $\ast$ Player\-::get\-Cam\-Follow\-Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}
+
+
+References cam\-Follow\-Object.
+
+
+
+Referenced by Camera\-::\-Screen\-Shake().
+
+
+\begin{DoxyCode}
+511 \{
+512     \textcolor{keywordflow}{return} \hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{camFollowObject};
+513 \}
+\end{DoxyCode}
+\hypertarget{class_player_a1a5ffa93ed21193d12261a46fd1613a1}{\index{Player@{Player}!Get\-Mouse\-Position@{Get\-Mouse\-Position}}
+\index{Get\-Mouse\-Position@{Get\-Mouse\-Position}!Player@{Player}}
+\subsubsection[{Get\-Mouse\-Position}]{\setlength{\rightskip}{0pt plus 5cm}vector3df Player\-::\-Get\-Mouse\-Position (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_a1a5ffa93ed21193d12261a46fd1613a1}
+
+
+Gets mouse position. 
+
+
+
+ 
+
+ 
+
+References mouse\-Position.
+
+
+\begin{DoxyCode}
+558 \{
+559     \textcolor{keywordflow}{return} \hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition};
+560 \}
+\end{DoxyCode}
+\hypertarget{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{\index{Player@{Player}!get\-Player\-Object@{get\-Player\-Object}}
+\index{get\-Player\-Object@{get\-Player\-Object}!Player@{Player}}
+\subsubsection[{get\-Player\-Object}]{\setlength{\rightskip}{0pt plus 5cm}I\-Scene\-Node $\ast$ Player\-::get\-Player\-Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_a2914f817c2fe9b34984e6d90e8d5322f}
+
+
+Gets player object. 
+
+
+
+ 
+
+ 
+
+References player\-Object.
+
+
+
+Referenced by Camera\-::\-Camera\-Update(), Camera\-::\-Screen\-Shake(), and Enemy\-::\-Update().
+
+
+\begin{DoxyCode}
+506 \{
+507     \textcolor{keywordflow}{return} \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject};
+508 \}
+\end{DoxyCode}
+\hypertarget{class_player_ad81495e13d7c65f0ea090a9144e11d61}{\index{Player@{Player}!Get\-Rapid\-Fire\-Timer@{Get\-Rapid\-Fire\-Timer}}
+\index{Get\-Rapid\-Fire\-Timer@{Get\-Rapid\-Fire\-Timer}!Player@{Player}}
+\subsubsection[{Get\-Rapid\-Fire\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 Player\-::\-Get\-Rapid\-Fire\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_ad81495e13d7c65f0ea090a9144e11d61}
+
+
+Referenced by U\-I\-System\-::\-Wave\-U\-I().
+
+
+\begin{DoxyCode}
+563 \{
+564     \textcolor{keywordflow}{return} \hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer};
+565 \}
+\end{DoxyCode}
+\hypertarget{class_player_a6b5c6e5353331ab55bfd440ea9f8f9bf}{\index{Player@{Player}!Get\-Split\-Fire\-Timer@{Get\-Split\-Fire\-Timer}}
+\index{Get\-Split\-Fire\-Timer@{Get\-Split\-Fire\-Timer}!Player@{Player}}
+\subsubsection[{Get\-Split\-Fire\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 Player\-::\-Get\-Split\-Fire\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_a6b5c6e5353331ab55bfd440ea9f8f9bf}
+
+
+Referenced by U\-I\-System\-::\-Wave\-U\-I().
+
+
+\begin{DoxyCode}
+568 \{
+569     \textcolor{keywordflow}{return} \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer};
+570 \}
+\end{DoxyCode}
+\hypertarget{class_player_ae790e9e2f8a4f53c11423d25410b5fdf}{\index{Player@{Player}!get\-Vulnerable\-Timer@{get\-Vulnerable\-Timer}}
+\index{get\-Vulnerable\-Timer@{get\-Vulnerable\-Timer}!Player@{Player}}
+\subsubsection[{get\-Vulnerable\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}s32 Player\-::get\-Vulnerable\-Timer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_player_ae790e9e2f8a4f53c11423d25410b5fdf}
+
+
+Gets vulnerable timer. 
+
+
+
+ 
+
+ 
+
+References vulnerable\-Timer.
+
+
+
+Referenced by Enemy\-::\-Attack().
+
+
+\begin{DoxyCode}
+549 \{
+550     \textcolor{keywordflow}{return} \hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerableTimer};
+551 \}
+\end{DoxyCode}
+\hypertarget{class_player_a4523bf2e637fcb0e36a3f456ec397e7d}{\index{Player@{Player}!Init@{Init}}
+\index{Init@{Init}!Player@{Player}}
+\subsubsection[{Init}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_player_a4523bf2e637fcb0e36a3f456ec397e7d}
+
+
+Initializes this object. 
+
+
+
+ 
+
+ 
+
+References \-\_\-\-Cam, Collision\-::\-Add\-Dynamic\-To\-List(), B\-U\-L\-L\-E\-T\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R, cam\-Follow\-Object, current\-Position, Powerup\-Pool\-::\-Get\-Instance(), Camera\-::\-Get\-Instance(), Bullet\-Pool\-::\-Get\-Instance(), G\-U\-N\-\_\-\-C\-O\-L\-O\-R, G\-U\-N\-\_\-\-M\-O\-D\-E\-L, gun\-Node, health, M\-A\-X\-\_\-\-H\-E\-A\-L\-T\-H, P\-L\-A\-Y\-E\-R\-\_\-\-M\-O\-D\-E\-L, player\-Col, player\-Driver, player\-I\-Device, player\-Object, player\-Smgr, pool, and pow\-Pool.
+
+
+\begin{DoxyCode}
+143 \{
+144     \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} = \hyperlink{_player_8cpp_a2cf38e1cf676620c959917828e2eac9d}{MAX\_HEALTH};
+145     IMesh* playerMesh = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->getMesh(\hyperlink{_player_8cpp_a5a978dc5c1ca28edd5782e9edec2ca5c}{PLAYER\_MODEL});
+146     \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject} = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addMeshSceneNode(playerMesh, 0, -1, vector3df(266, 0, 
+      266), vector3df(0, 0, 0));
+147     \hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{camFollowObject} = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode();
+148     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject})
+149     \{
+150         \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+151     \}
+152     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{camFollowObject}) 
+153     \{
+154         \hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{camFollowObject}->setParent(\hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject});
+155         \hyperlink{_player_8cpp_a017569baead2c823210b5aacb68c3661}{camFollowObject}->setScale(vector3df(0,0,0));
+156     \}
+157     \hyperlink{_player_8cpp_a03b83ef76d66d83d5eb75ce553ec0ec6}{currentPosition} = \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition();
+158 
+159     \hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{playerCol}.\hyperlink{class_collision_a48551c4c00be185dc16cf27775bd177b}{AddDynamicToList}(\hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject});
+160 
+161     IMesh* gunModel = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->getMesh(\hyperlink{_player_8cpp_a42671a2a596a686410dc3aee8c093e35}{GUN\_MODEL});
+162     \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode} = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addMeshSceneNode(gunModel);
+163     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode})
+164     \{
+165         \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode}->setPosition(vector3df(2, 5, -1));
+166         \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode}->setScale(vector3df(0.125f, 0.125f, 0.125f));
+167         \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode}->setMaterialFlag(EMF\_LIGHTING, \textcolor{keyword}{true});
+168         \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode}->setMaterialTexture(0, \hyperlink{_player_8cpp_a13cc81ce093ff81a376551471a3de042}{playerDriver}->getTexture(
+      \hyperlink{_player_8cpp_a3457fa56513040eac87f46b8b53a2cdf}{GUN\_COLOR}));
+169         \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->addChild(\hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode});
+170     \}
+171 
+172     \textcolor{comment}{// Get the instance of BulletPool}
+173     \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool} = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_a47b62aed3b35862ba203a5d0647b8d1a}{GetInstance}();
+174     \hyperlink{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}{powPool} = \hyperlink{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}{powPool}->\hyperlink{class_powerup_pool_a9d7ae900750b765773de9ed95a5619f0}{GetInstance}(\hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice});
+175 
+176     \hyperlink{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\_Cam} = \hyperlink{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\_Cam}->\hyperlink{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}{GetInstance}(NULL);
+177 
+178     \textcolor{comment}{// Set the timer to the bullet base time}
+179     \hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bulletTimer} = \hyperlink{_player_8cpp_ada34ea1c34a3a182a802477140a86146}{BULLET\_BASE\_TIMER};
+180 \}
+\end{DoxyCode}
+\hypertarget{class_player_a436296b5c3aca2e448563594fc3eb234}{\index{Player@{Player}!Move@{Move}}
+\index{Move@{Move}!Player@{Player}}
+\subsubsection[{Move}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Move (
+\begin{DoxyParamCaption}
+\item[{{\bf Input\-Receiver}}]{input\-Receiver}
+\end{DoxyParamCaption}
+)}}\label{class_player_a436296b5c3aca2e448563594fc3eb234}
+
+
+Moves the given input receiver. 
+
+
+
+ 
+
+ 
+
+References Heat\-Map\-Manager\-::active\-Zone, Heat\-Map\-Manager\-::\-Add\-Weight(), Heat\-Map\-Manager\-::\-Check\-Zone\-From\-Position(), Collision\-::\-Collides\-With\-Powerup(), Collision\-::\-Collides\-With\-Static\-Objects(), current\-Position, frame\-Delta\-Time, Input\-Receiver\-::\-Get\-Is\-Key\-Down(), Powerup\-::\-Get\-Powerup\-Type(), health, H\-E\-A\-L\-T\-H\-\_\-\-S\-O\-U\-N\-D, heat\-Map\-Manager, Heat\-Map\-Manager\-::is\-Poison\-Cloud\-Active, mouse\-Position, M\-O\-V\-E\-M\-E\-N\-T\-\_\-\-S\-P\-E\-E\-D, player\-Col, player\-I\-Device, player\-Object, Sound\-Manager\-::\-Play\-Sound(), pow\-Pool, R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D, R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D, Powerup\-Pool\-::\-Return\-Resource(), sound\-Manager, S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-E\-\_\-\-S\-O\-U\-N\-D, time, Heat\-Map\-Manager\-::\-Update(), vulnerable\-Timer, and Y\-\_\-\-A\-X\-I\-S\-\_\-\-C\-O\-R\-R\-E\-C\-T\-I\-O\-N.
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+187 \{
+188     \textcolor{comment}{// Work out a frame delta time.}
+189     u32 now = \hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice}->getTimer()->getTime();
+190     \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} = (f32)(now - \hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}) / 1000.f;
+191     \hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time} = now;
+192 
+193     vector3df newPosition = \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition();
+194 
+195     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{playerCol}.\hyperlink{class_collision_a334467ec1c8b7889aa46016fcedb13f9}{CollidesWithStaticObjects}(
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}))
+196         \hyperlink{_player_8cpp_a03b83ef76d66d83d5eb75ce553ec0ec6}{currentPosition} = \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition();
+197 
+198     \textcolor{keywordflow}{if} (inputReceiver.\hyperlink{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{GetIsKeyDown}(irr::KEY\_KEY\_W))
+199     \{
+200         newPosition.X += \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{MOVEMENT\_SPEED};
+201     \}
+202 
+203     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (inputReceiver.\hyperlink{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{GetIsKeyDown}(irr::KEY\_KEY\_S))
+204     \{
+205         newPosition.X -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{MOVEMENT\_SPEED};
+206     \}
+207 
+208     \textcolor{keywordflow}{if} (inputReceiver.\hyperlink{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{GetIsKeyDown}(irr::KEY\_KEY\_A))
+209     \{
+210         newPosition.Z += \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{MOVEMENT\_SPEED};
+211     \}
+212     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (inputReceiver.\hyperlink{class_input_receiver_a2322abecb1c388e0b3ead87e56862f1d}{GetIsKeyDown}(irr::KEY\_KEY\_D))
+213     \{
+214         newPosition.Z -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime} * \hyperlink{_player_8cpp_a8abf91f285c510ce8f0e664198252f42}{MOVEMENT\_SPEED};
+215     \}
+216 
+217     \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->setPosition(newPosition);
+218 
+219     \hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->\hyperlink{class_heat_map_manager_aaf3b56067a76a49a9685b221d63c87b9}{AddWeight}(\hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->
+      \hyperlink{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}{CheckZoneFromPosition}(newPosition), \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime}*2);
+220     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->\hyperlink{class_heat_map_manager_a13bd9841f2166a91e2f3cf93671b82f9}{CheckZoneFromPosition}(newPosition) == 
+      \hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->\hyperlink{class_heat_map_manager_a96bfbcb9d6326e12f37db7a9c4fd1e10}{activeZone} && \hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->
+      \hyperlink{class_heat_map_manager_affcd194d19a8b51c54bce180d1ca2393}{isPoisonCloudActive}) \{
+221         \hyperlink{class_player_ae9f5a597f15e29673c47abe47c3f1d79}{TakeDamage}(1);
+222     \}
+223     \hyperlink{_player_8cpp_a48dcebf2763626306e8357f05e6365cd}{heatMapManager}->\hyperlink{class_heat_map_manager_ac11943d3f92891670ddf9e613d7c06dd}{Update}();
+224     \textcolor{comment}{// Calculate the angle using atan2 using the mouse position and the player object}
+225     \textcolor{keywordtype}{float} angle = atan2(\hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition}.Z - \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition().Z,
+226         \hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition}.X - \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition().X);
+227     \textcolor{comment}{// Calculate the inverted angle}
+228     angle *= -(RADTODEG);
+229     \textcolor{comment}{// Set the angle value to be between 0 and 360}
+230     \textcolor{keywordflow}{if} (angle < 0)
+231     \{
+232         angle = 360 - (-angle);
+233     \}
+234     \textcolor{comment}{// Rotate player towards mouse position using the Y Axis correction and the calculated angle}
+235     \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->setRotation(vector3df(0, \hyperlink{_player_8cpp_a4e50a279e6f32b97d14aa23900330390}{Y\_AXIS\_CORRECTION} + angle, 0));
+236 
+237     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerableTimer} > 0)
+238     \{
+239         \hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerableTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+240     \}
+241 
+242     \hyperlink{class_powerup}{Powerup}* pow = \hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{playerCol}.\hyperlink{class_collision_a75da9eaaa278f192d163db0065d33483}{CollidesWithPowerup}(
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject});
+243     \textcolor{keywordflow}{if} (pow)
+244     \{
+245         \textcolor{keywordflow}{switch} (pow->\hyperlink{class_powerup_ada850ff17171453b95547a93700e923b}{GetPowerupType}())
+246         \{
+247         \textcolor{keywordflow}{case} 0:
+248             \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} += 25;
+249             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a30788f0ae95ac2d83b41e680ebe8cf44}{HEALTH\_SOUND}, \textcolor{keyword}{false});
+250             \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} > 100)
+251                 \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} = 100;
+252             \textcolor{keywordflow}{break};
+253         \textcolor{keywordflow}{case} 1:
+254             \hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} = 1000;
+255 
+256             \textcolor{keywordflow}{if} (\hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0) 
+257                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_player_8cpp_a50f0220a66174ae7f6cade359da30208}{RAPID\_SPLIT\_FIRE\_SOUND}, \textcolor{keyword}{false});
+258             \textcolor{keywordflow}{else}
+259                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a8c27fdb53d14363de8e278f20ac7ef96}{RAPID\_FIRE\_SOUND}, \textcolor{keyword}{false});
+260 
+261             \textcolor{keywordflow}{break};
+262         \textcolor{keywordflow}{case} 2:
+263             \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} = 1000;
+264 
+265             \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0)
+266                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_player_8cpp_a50f0220a66174ae7f6cade359da30208}{RAPID\_SPLIT\_FIRE\_SOUND}, \textcolor{keyword}{false});
+267             \textcolor{keywordflow}{else}
+268                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a8e5577e46aee3ed920332c06421c9f29}{SPLIT\_FIRE\_SOUND}, \textcolor{keyword}{false});
+269             
+270             \textcolor{keywordflow}{break};
+271         \}
+272         \hyperlink{_player_8cpp_a45c2516f9f5f3d45dfea52245b59dd22}{powPool}->\hyperlink{class_powerup_pool_a18b9675b28e4079fb5049abca99e7dee}{ReturnResource}(pow);
+273         
+274     \}
+275 \}
+\end{DoxyCode}
+\hypertarget{class_player_ae6123d6c74c9b5110971267f3cd52b08}{\index{Player@{Player}!On\-Line\-Intersect@{On\-Line\-Intersect}}
+\index{On\-Line\-Intersect@{On\-Line\-Intersect}!Player@{Player}}
+\subsubsection[{On\-Line\-Intersect}]{\setlength{\rightskip}{0pt plus 5cm}bool Player\-::\-On\-Line\-Intersect (
+\begin{DoxyParamCaption}
+\item[{irr\-::core\-::plane3df \&}]{plane, }
+\item[{irr\-::core\-::line3df \&}]{ray}
+\end{DoxyParamCaption}
+)}}\label{class_player_ae6123d6c74c9b5110971267f3cd52b08}
+
+
+Executes the line intersect action. 
+
+
+
+ 
+
+ 
+
+References mouse\-Position.
+
+
+\begin{DoxyCode}
+540 \{
+541     \textcolor{keywordflow}{return} plane.getIntersectionWithLine(ray.start, ray.getVector(), 
+      \hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition});
+542 \}
+\end{DoxyCode}
+\hypertarget{class_player_a1b4fa88c5aebe9ada71cae33ec3f43eb}{\index{Player@{Player}!Raycast@{Raycast}}
+\index{Raycast@{Raycast}!Player@{Player}}
+\subsubsection[{Raycast}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Raycast (
+\begin{DoxyParamCaption}
+\item[{irr\-::core\-::vector3df}]{end\-Position, }
+\item[{irr\-::scene\-::\-I\-Camera\-Scene\-Node $\ast$}]{camera}
+\end{DoxyParamCaption}
+)}}\label{class_player_a1b4fa88c5aebe9ada71cae33ec3f43eb}
+
+
+Raycasts. 
+
+
+
+ 
+
+ 
+
+References gun\-Node, mouse\-Position, player\-Object, player\-Smgr, and to\-Mouse\-Pos.
+
+
+\begin{DoxyCode}
+520 \{
+521     vector3df planeNormal = vector3df(0, -1, 0);
+522     vector2di rayScreenCoordination = vector2di(endPosition.X, endPosition.Z);
+523     \textcolor{comment}{// Create a ray through the screen coordinates.}
+524     line3df ray = \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->getSceneCollisionManager()->getRayFromScreenCoordinates(
+      rayScreenCoordination, \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera});
+525 
+526     plane3df plane(\hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), planeNormal);
+527     \textcolor{keywordflow}{if} (\hyperlink{class_player_ae6123d6c74c9b5110971267f3cd52b08}{OnLineIntersect}(plane, ray))
+528     \{
+529         \hyperlink{_player_8cpp_a3dd0b4a1fe67019913c1d45703f2db42}{toMousePos} = vector3df(\hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition} - \hyperlink{_player_8cpp_ac7b9da6559fe5d931a19c59f6726fa5b}{gunNode}->getPosition());
+530     \}
+531 \}
+\end{DoxyCode}
+\hypertarget{class_player_a24b813efa1554eeb30cd7e3b508bf8fd}{\index{Player@{Player}!Shoot@{Shoot}}
+\index{Shoot@{Shoot}!Player@{Player}}
+\subsubsection[{Shoot}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Shoot (
+\begin{DoxyParamCaption}
+\item[{{\bf Input\-Receiver}}]{input\-Receiver, }
+\item[{{\bf Enemy\-Spawner} $\ast$}]{enemies}
+\end{DoxyParamCaption}
+)}}\label{class_player_a24b813efa1554eeb30cd7e3b508bf8fd}
+
+
+Shoots. 
+
+
+
+ 
+
+ 
+
+References \-\_\-\-Cam, active\-Bullets, bullet\-Size, Collision\-::\-Collides\-With\-Static\-Objects(), Score\-::\-Display\-Score(), frame\-Delta\-Time, Enemy\-Spawner\-::get\-Active\-Enemies(), Bullet\-::\-Get\-Bullet(), Bullet\-::\-Get\-Bullet\-Timer(), Enemy\-Spawner\-::\-Get\-Enemy(), Input\-Receiver\-::\-Get\-Is\-Left\-Mouse\-Button\-Pressed(), Input\-Receiver\-::\-Get\-Mouse\-Position(), Bullet\-Pool\-::\-Get\-Resource(), G\-U\-N\-\_\-\-S\-H\-O\-T\-\_\-\-S\-O\-U\-N\-D, has\-Shot, mouse\-Position, player\-Col, player\-Object, player\-Scores, player\-Smgr, Sound\-Manager\-::\-Play\-Sound(), pool, R\-A\-P\-I\-D\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D, R\-A\-P\-I\-D\-\_\-\-S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D, Bullet\-Pool\-::\-Return\-Resource(), Collision\-::\-Scene\-Node\-With\-Scene\-Node(), Bullet\-::\-Set\-Bullet(), Bullet\-::\-Set\-Bullet\-Mode(), Bullet\-::\-Set\-Bullet\-Spread(), Camera\-::shoot\-Shaking, sound\-Manager, S\-P\-L\-I\-T\-\_\-\-F\-I\-R\-I\-N\-G\-\_\-\-S\-O\-U\-N\-D, Camera\-::state, and Enemy\-::\-Take\-Damage().
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+282 \{
+283     \hyperlink{class_player_a1b4fa88c5aebe9ada71cae33ec3f43eb}{Raycast}(inputReceiver.\hyperlink{class_input_receiver_abd5fa51f4c1e72240f78a0f006c37c87}{GetMousePosition}(), \hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->getActiveCamera(
+      ));
+284     \textcolor{keywordflow}{if} (\hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bulletTimer} > 0)
+285     \{
+286         \hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bulletTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+287     \}
+288     \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0)
+289     \{
+290         \hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+291     \}
+292     \textcolor{keywordflow}{if} (\hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0)
+293     \{
+294         \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+295     \}
+296     \textcolor{keywordflow}{if} (inputReceiver.\hyperlink{class_input_receiver_a0f5a5d9a25bc6c11e781e42cb73340fb}{GetIsLeftMouseButtonPressed}() && 
+      \hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bulletTimer} <= 0)
+297     \{
+298         \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0 && \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0)
+299             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(
+      \hyperlink{_player_8cpp_a40156f386bcc9285db6df05a6b685ccc}{RAPID\_SPLIT\_FIRING\_SOUND}, \textcolor{keyword}{false});
+300         \textcolor{keywordflow}{else} 
+301         \{
+302             \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0)
+303                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a7cf631e3bde07ad12168add8df7894f0}{RAPID\_FIRING\_SOUND}, \textcolor{keyword}{false});
+304             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (\hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0)
+305                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a920788433235d691429c38d155643cb9}{SPLIT\_FIRING\_SOUND}, \textcolor{keyword}{false});
+306             \textcolor{keywordflow}{else}
+307                 \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_ae889c98c6317ccb8a9bf101c96599189}{GUN\_SHOT\_SOUND}, \textcolor{keyword}{false});
+308         \}
+309             
+310         
+311 
+312         \textcolor{comment}{// Bullet instance}
+313         \hyperlink{class_bullet}{Bullet}* bullet = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{GetResource}();
+314 
+315         \textcolor{comment}{// Main bullet}
+316         bullet->\hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{SetBullet}(\hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode(10.f, 0, -1, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getRotation(), 
+      \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bulletSize}));
+317         \textcolor{keywordflow}{if} (bullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}())
+318         \{
+319             bullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{false});
+320         \}
+321 
+322         \textcolor{comment}{// Rapid fire active}
+323         \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0 && \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} <= 0)
+324         \{
+325             bullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::rapidFire);
+326         \}
+327 
+328         \textcolor{comment}{// Split fire active}
+329         \textcolor{keywordflow}{if} (\hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0 && \hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} <= 0)
+330         \{
+331             \textcolor{comment}{// Bullet left/right instances}
+332             \hyperlink{class_bullet}{Bullet}* leftBullet = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{GetResource}();
+333             \hyperlink{class_bullet}{Bullet}* rightBullet = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{GetResource}();
+334 
+335             leftBullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::splitFire);
+336             rightBullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::splitFire);
+337             leftBullet->\hyperlink{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{SetBulletSpread}(-0.1f);
+338             rightBullet->\hyperlink{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{SetBulletSpread}(0.1f);
+339 
+340             \textcolor{comment}{// Left bullet for split fire}
+341             leftBullet->\hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{SetBullet}(\hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode(10.f, 0, -1, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getRotation(), 
+      \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bulletSize}));
+342             \textcolor{keywordflow}{if} (leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}())
+343             \{
+344                 leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{false});
+345             \}
+346 
+347             \textcolor{comment}{// Right bullet for split fire}
+348             rightBullet->\hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{SetBullet}(\hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode(10.f, 0, -1, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getRotation(), 
+      \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bulletSize}));
+349             \textcolor{keywordflow}{if} (rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}())
+350             \{
+351                 rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{false});
+352             \}
+353 
+354             \textcolor{comment}{// Bullet visibility}
+355             leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{true});
+356             rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{true});
+357 
+358             \textcolor{comment}{// Push bullets to active bullets list}
+359             \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.push\_back(leftBullet);
+360             \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.push\_back(rightBullet);
+361         \}
+362 
+363         \textcolor{keywordflow}{if} (\hyperlink{class_player_ae4a6fe92f607de702ec714383324525f}{rapidFireTimer} > 0 && \hyperlink{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{splitFireTimer} > 0)
+364         \{
+365             \hyperlink{class_bullet}{Bullet}* leftBullet = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{GetResource}();
+366             \hyperlink{class_bullet}{Bullet}* rightBullet = \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_ae80aa07016b9635d7637ea5796393d29}{GetResource}();
+367 
+368             bullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::rapidFire);
+369 
+370             leftBullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::rapidSplitFire);
+371             rightBullet->\hyperlink{class_bullet_a9988e27a0327a7ebca6b407c59661a54}{SetBulletMode}(Bullet::BulletMode::rapidSplitFire);
+372             leftBullet->\hyperlink{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{SetBulletSpread}(-0.1f);
+373             rightBullet->\hyperlink{class_bullet_a1fd596da19949b3dfdba7febd1b162f1}{SetBulletSpread}(0.1f);
+374             
+375             \textcolor{comment}{// Left bullet for split fire}
+376             leftBullet->\hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{SetBullet}(\hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode(10.f, 0, -1, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getRotation(), 
+      \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bulletSize}));
+377             \textcolor{keywordflow}{if} (leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}())
+378             \{
+379                 leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{false});
+380             \}
+381 
+382             \textcolor{comment}{// Right bullet for split fire}
+383             rightBullet->\hyperlink{class_bullet_a6b68bd110c7a9729c76ae4dc9906e7e7}{SetBullet}(\hyperlink{_player_8cpp_a1f903054d84bef85b61fea5eb6eca726}{playerSmgr}->addCubeSceneNode(10.f, 0, -1, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getRotation(), 
+      \hyperlink{_player_8cpp_a396c7ac870d10132b062f2d3059dd23a}{bulletSize}));
+384             \textcolor{keywordflow}{if} (rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}())
+385             \{
+386                 rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{false});
+387             \}
+388 
+389             \textcolor{comment}{// Bullet visibility}
+390             leftBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{true});
+391             rightBullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{true});
+392 
+393             \textcolor{comment}{// Push bullets to active bullets list}
+394             \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.push\_back(leftBullet);
+395             \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.push\_back(rightBullet);
+396 
+397             \hyperlink{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\_Cam}->\hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{_player_8cpp_a87c1f6cd6648c217299003fe2415a93e}{\_Cam}->\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}{shootShaking};
+398         \}
+399 
+400         \textcolor{comment}{// Push bullets to active bullets list}
+401         \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.push\_back(bullet);
+402 
+403         \hyperlink{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}{hasShot} = \textcolor{keyword}{true};
+404 
+405         \textcolor{comment}{// Bullet visibility}
+406         bullet->\hyperlink{class_bullet_ab9ae469bacf54dfaa69e94b9ead0a908}{GetBullet}()->setVisible(\textcolor{keyword}{true});
+407 
+408         \textcolor{comment}{// Timer reset}
+409         \hyperlink{class_player_a828317741fa8c7ff58ecbdb556ac092d}{bulletTimer} = bullet->\hyperlink{class_bullet_a5cc762f8b276d0ad812ed3b1fc411626}{GetBulletTimer}();
+410     \}
+411     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}{hasShot})
+412     \{
+413         \textcolor{keywordflow}{if} (!\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.empty())
+414         \{
+415             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.size(); i++)
+416             \{
+417                 \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]->UpdateBullet(\hyperlink{_player_8cpp_ac520dee6d1987f6ad92c8b0ff57fdf64}{mousePosition}, 
+      \hyperlink{_player_8cpp_a0dc161b57661226afd81ffc4ba4f21d9}{playerObject}->getPosition(), \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime});
+418                 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < enemies->\hyperlink{class_enemy_spawner_ad83b7b7bfe4904e9addcad621d62295d}{getActiveEnemies}().size(); j++)
+419                 \{
+420                     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{playerCol}.\hyperlink{class_collision_aa2fa3418899ac7948b31eb909dea6f04}{SceneNodeWithSceneNode}(enemies->
+      \hyperlink{class_enemy_spawner_ad83b7b7bfe4904e9addcad621d62295d}{getActiveEnemies}()[j]->GetEnemySceneNode(), \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]->GetBullet()))
+421                     \{
+422                         enemies->\hyperlink{class_enemy_spawner_a42d5341193911135909c3df1a6271d3f}{GetEnemy}(j)->\hyperlink{class_enemy_ab3567fe4213734615d7f3fed6c48a9c8}{TakeDamage}(
+      \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]->GetDamage());
+423                         \hyperlink{_player_8cpp_af856435115748d9c4c7fdd16f9408f85}{playerScores}.\hyperlink{class_score_a689888f6d45fd92988822d663a3e90ee}{DisplayScore}(10);
+424                         \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_aa821f65e3b2a2845471ba094a683560d}{ReturnResource}(\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]);
+425                         \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.erase(i);
+426                         \textcolor{comment}{// return to correct the index}
+427                         \textcolor{keywordflow}{return};
+428                     \}
+429                 \}
+430                 \textcolor{comment}{// Check collision with static walls or the life time of the bullet}
+431                 \textcolor{keywordflow}{if} ((\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i] && \hyperlink{_player_8cpp_a3ea8274de548d0594347dd6a211fa395}{playerCol}.
+      \hyperlink{class_collision_a334467ec1c8b7889aa46016fcedb13f9}{CollidesWithStaticObjects}(\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]->GetBullet())) ||
+432                     (\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i] && \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]->GetBulletLifeTimer() =
+      = 0))
+433                 \{
+434                     \hyperlink{_player_8cpp_a5bf1425dbe612c76c16cd7b81bdf8b6e}{pool}->\hyperlink{class_bullet_pool_aa821f65e3b2a2845471ba094a683560d}{ReturnResource}(\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}[i]);
+435                     \hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.erase(i);
+436                 \}
+437                 \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_a27bbbc62347638c3702e6da25c5c2e3b}{activeBullets}.empty())
+438                 \{
+439                     \hyperlink{_player_8cpp_a2d715509f4d90440302cf55ac1c9a588}{hasShot} = \textcolor{keyword}{false};
+440                 \}
+441             \}
+442         \}
+443     \}
+444 \}
+\end{DoxyCode}
+\hypertarget{class_player_ae9f5a597f15e29673c47abe47c3f1d79}{\index{Player@{Player}!Take\-Damage@{Take\-Damage}}
+\index{Take\-Damage@{Take\-Damage}!Player@{Player}}
+\subsubsection[{Take\-Damage}]{\setlength{\rightskip}{0pt plus 5cm}void Player\-::\-Take\-Damage (
+\begin{DoxyParamCaption}
+\item[{irr\-::f32}]{damage}
+\end{DoxyParamCaption}
+)}}\label{class_player_ae9f5a597f15e29673c47abe47c3f1d79}
+
+
+Take damage. 
+
+
+
+ 
+
+ 
+
+References game, game\-Over\-State, health, player\-I\-Device, Sound\-Manager\-::\-Play\-Sound(), Game\-::\-Set\-Is\-Game\-Over(), Game\-Over\-State\-::\-Show\-Game\-Over(), sound\-Manager, T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D1, T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D2, T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D3, T\-A\-K\-E\-\_\-\-D\-A\-M\-A\-G\-E\-\_\-\-S\-O\-U\-N\-D4, V\-U\-L\-N\-E\-R\-A\-B\-L\-E\-\_\-\-B\-A\-S\-E\-\_\-\-T\-I\-M\-E\-R, and vulnerable\-Timer.
+
+
+
+Referenced by Enemy\-::\-Attack().
+
+
+\begin{DoxyCode}
+451 \{
+452     \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} > 0 && \hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerableTimer} <= 0)
+453     \{
+454         \textcolor{keywordflow}{switch} (rand() % 4) 
+455         \{
+456         \textcolor{keywordflow}{case} 0:
+457             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_ac5d072b0acab9406d2c98c1779ea117f}{TAKE\_DAMAGE\_SOUND1}, \textcolor{keyword}{false});
+458             \textcolor{keywordflow}{break};
+459         \textcolor{keywordflow}{case} 1:
+460             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_a29b36850eddf785ec49af30087ad662a}{TAKE\_DAMAGE\_SOUND2}, \textcolor{keyword}{false});
+461             \textcolor{keywordflow}{break};
+462         \textcolor{keywordflow}{case} 2:
+463             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_ae0ff94bd607ae4bcc575ca8470301873}{TAKE\_DAMAGE\_SOUND3}, \textcolor{keyword}{false});
+464             \textcolor{keywordflow}{break};
+465         \textcolor{keywordflow}{case} 3:
+466             \hyperlink{_player_8cpp_aa536d458e5b766e20ac204a4ab09cc36}{soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_player_8cpp_ae04e78447ab78775ae4a7ae88deb8b78}{TAKE\_DAMAGE\_SOUND4}, \textcolor{keyword}{false});
+467             \textcolor{keywordflow}{break};
+468         \}
+469         \hyperlink{_player_8cpp_a73659202e903d625e27de1f6278ead6f}{vulnerableTimer} = \hyperlink{_player_8cpp_a3b89c5e6b6e4acece886a4065679465c}{VULNERABLE\_BASE\_TIMER};
+470         \hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} -= damage;
+471 
+472         \textcolor{keywordflow}{if} (\hyperlink{_player_8cpp_ae436015bd00ce552ac0bc6eefe3b8e00}{health} <= 0)
+473         \{
+474             \hyperlink{_player_8cpp_a76232c769b4e1ad0ce7399a10191a8d6}{gameOverState}.\hyperlink{class_game_over_state_a144dcad5d29cee7c76be7194407044d6}{ShowGameOver}(\hyperlink{_player_8cpp_acc0d822bdc6a1983133abc5ba4fceecb}{playerIDevice});
+475             \hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game}->\hyperlink{class_game_acd4aa68f7ef7603ecd61a879fe0286e7}{SetIsGameOver}(\textcolor{keyword}{true});
+476         \}
+477     \}
+478 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_player_a828317741fa8c7ff58ecbdb556ac092d}{\index{Player@{Player}!bullet\-Timer@{bullet\-Timer}}
+\index{bullet\-Timer@{bullet\-Timer}!Player@{Player}}
+\subsubsection[{bullet\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::s32 Player\-::bullet\-Timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_player_a828317741fa8c7ff58ecbdb556ac092d}
+
+
+The bullet timer. 
+
+\hypertarget{class_player_ae4a6fe92f607de702ec714383324525f}{\index{Player@{Player}!rapid\-Fire\-Timer@{rapid\-Fire\-Timer}}
+\index{rapid\-Fire\-Timer@{rapid\-Fire\-Timer}!Player@{Player}}
+\subsubsection[{rapid\-Fire\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::s32 Player\-::rapid\-Fire\-Timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_player_ae4a6fe92f607de702ec714383324525f}
+
+
+The rapid fire power up timer. 
+
+\hypertarget{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}{\index{Player@{Player}!split\-Fire\-Timer@{split\-Fire\-Timer}}
+\index{split\-Fire\-Timer@{split\-Fire\-Timer}!Player@{Player}}
+\subsubsection[{split\-Fire\-Timer}]{\setlength{\rightskip}{0pt plus 5cm}irr\-::s32 Player\-::split\-Fire\-Timer\hspace{0.3cm}{\ttfamily [private]}}}\label{class_player_a0d99bf8e9ae2d6e2079407a1686fc3a3}
+
+
+The split fire power up timer. 
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_player_8h}{Player.\-h}\item 
+\hyperlink{_player_8cpp}{Player.\-cpp}\end{DoxyCompactItemize}

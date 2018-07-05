@@ -1,0 +1,4 @@
+<map id="Catch::NonCopyable" name="Catch::NonCopyable">
+<area shape="rect" id="node2" href="$struct_catch_1_1_auto_reg.html" title="{Catch::AutoReg\n||+ AutoReg()\l+ ~AutoReg()\l}" alt="" coords="5,242,120,334"/>
+<area shape="rect" id="node3" href="$class_catch_1_1_section.html" title="{Catch::Section\n|&#45; m_info\l&#45; m_name\l&#45; m_assertions\l&#45; m_sectionIncluded\l&#45; m_timer\l|+ Section()\l+ ~Section()\l+ operator bool()\l}" alt="" coords="145,205,284,371"/>
+</map>

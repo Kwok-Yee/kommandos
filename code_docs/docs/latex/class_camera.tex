@@ -1,0 +1,366 @@
+\hypertarget{class_camera}{\section{Camera Class Reference}
+\label{class_camera}\index{Camera@{Camera}}
+}
+
+
+Top down camera that follows player  
+
+
+
+
+{\ttfamily \#include $<$Camera.\-h$>$}
+
+
+
+Collaboration diagram for Camera\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{class_camera__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236}{Camera\-State} \{ \\*
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal}, 
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}{wave\-Shaking}, 
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}{big\-Wave\-Shaking}, 
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}{shoot\-Shaking}, 
+\\*
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}{gameover}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_camera_a8dcadcfd314ecb49ac224a7e6d0bffde}{Camera} (irr\-::\-Irrlicht\-Device $\ast$device)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \hyperlink{class_camera_a76e6167aa081ea6755d0bf588cd8cb73}{Camera\-Update} (f32 \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frame\-Delta\-Time})
+\begin{DoxyCompactList}\small\item\em Updates the camera position and target \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}{Get\-Instance} (Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236}{Camera\-State} \hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_camera_ab31de25cd3c79eb40dcb785fa280cda6}{Camera\-Init} ()
+\begin{DoxyCompactList}\small\item\em Initialization of the \hyperlink{class_camera}{Camera} \end{DoxyCompactList}\item 
+void \hyperlink{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}{Screen\-Shake} (f32 frame\-Delta\-Tim, f32 intensity)
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_camera}{Camera} $\ast$ \hyperlink{class_camera_af95982469bc5cdc45c48f464b9ff05b9}{instance} = 0
+\begin{DoxyCompactList}\small\item\em Initializes the camera \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Top down camera that follows player 
+
+
+
+ 
+
+ 
+
+\subsection{Member Enumeration Documentation}
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236}{\index{Camera@{Camera}!Camera\-State@{Camera\-State}}
+\index{Camera\-State@{Camera\-State}!Camera@{Camera}}
+\subsubsection[{Camera\-State}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Camera\-::\-Camera\-State}}}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{normal@{normal}!Camera@{Camera}}\index{Camera@{Camera}!normal@{normal}}\item[{\em 
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}
+}]\index{wave\-Shaking@{wave\-Shaking}!Camera@{Camera}}\index{Camera@{Camera}!wave\-Shaking@{wave\-Shaking}}\item[{\em 
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}{wave\-Shaking}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}
+}]\index{big\-Wave\-Shaking@{big\-Wave\-Shaking}!Camera@{Camera}}\index{Camera@{Camera}!big\-Wave\-Shaking@{big\-Wave\-Shaking}}\item[{\em 
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}{big\-Wave\-Shaking}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}
+}]\index{shoot\-Shaking@{shoot\-Shaking}!Camera@{Camera}}\index{Camera@{Camera}!shoot\-Shaking@{shoot\-Shaking}}\item[{\em 
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}{shoot\-Shaking}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}
+}]\index{gameover@{gameover}!Camera@{Camera}}\index{Camera@{Camera}!gameover@{gameover}}\item[{\em 
+\hypertarget{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}{gameover}\label{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}
+}]\end{description}
+\end{Desc}
+
+\begin{DoxyCode}
+22     \{
+23         \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal},
+24         \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}{waveShaking},
+25         \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}{bigWaveShaking},
+26         \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}{shootShaking},
+27         \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}{gameover}
+28     \};
+\end{DoxyCode}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_camera_a8dcadcfd314ecb49ac224a7e6d0bffde}{\index{Camera@{Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!Camera@{Camera}}
+\subsubsection[{Camera}]{\setlength{\rightskip}{0pt plus 5cm}Camera\-::\-Camera (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)}}\label{class_camera_a8dcadcfd314ecb49ac224a7e6d0bffde}
+
+
+Constructor. 
+
+
+
+ 
+
+ 
+
+References \-\_\-sound\-Manager, camera\-I\-Device, camera\-Smgr, game\-\_\-, Game\-::\-Get\-Instance(), and Sound\-Manager\-::\-Get\-Instance().
+
+
+\begin{DoxyCode}
+67 \{
+68     \hyperlink{_camera_8cpp_a30edcb606ee143928a2503208101c492}{cameraIDevice} = device;
+69     \hyperlink{_camera_8cpp_a0cc2153984c669f761bff4f8bc18e79c}{cameraSmgr} = \hyperlink{_camera_8cpp_a30edcb606ee143928a2503208101c492}{cameraIDevice}->getSceneManager();
+70     \hyperlink{_camera_8cpp_a73df19eb9d4f0b717dd7d767d601d60a}{game\_} = \hyperlink{_camera_8cpp_a73df19eb9d4f0b717dd7d767d601d60a}{game\_}->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+71     \hyperlink{class_camera_ab31de25cd3c79eb40dcb785fa280cda6}{CameraInit}();
+72     \hyperlink{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\_soundManager} = \hyperlink{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\_soundManager}->\hyperlink{class_sound_manager_a887480b38c9380c9fba23a2337df63be}{GetInstance}();
+73 \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_camera_ab31de25cd3c79eb40dcb785fa280cda6}{\index{Camera@{Camera}!Camera\-Init@{Camera\-Init}}
+\index{Camera\-Init@{Camera\-Init}!Camera@{Camera}}
+\subsubsection[{Camera\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::\-Camera\-Init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_camera_ab31de25cd3c79eb40dcb785fa280cda6}
+
+
+Initialization of the \hyperlink{class_camera}{Camera} 
+
+
+
+ 
+
+ 
+
+References camera, camera\-Smgr, camera\-Start\-Position, camera\-Start\-Target, new\-Camera\-Position, and time.
+
+
+\begin{DoxyCode}
+80 \{
+81     \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera} = \hyperlink{_camera_8cpp_a0cc2153984c669f761bff4f8bc18e79c}{cameraSmgr}->addCameraSceneNode();
+82     \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera})
+83     \{
+84         \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setPosition(\hyperlink{_camera_8cpp_a7c0be2a67c370806c3148499dbdc60c0}{cameraStartPosition});
+85         \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setTarget(\hyperlink{_camera_8cpp_a9b3909feb1d589415063db537ece08ad}{cameraStartTarget});
+86         \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.Y = 80; 
+87     \}
+88     \textcolor{comment}{//shakeTimer = maxTime;}
+89     srand(\hyperlink{_player_8cpp_ab683520676b99a7bcc7a6299eb886247}{time}(0));
+90     \hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal};
+91 \}
+\end{DoxyCode}
+\hypertarget{class_camera_a76e6167aa081ea6755d0bf588cd8cb73}{\index{Camera@{Camera}!Camera\-Update@{Camera\-Update}}
+\index{Camera\-Update@{Camera\-Update}!Camera@{Camera}}
+\subsubsection[{Camera\-Update}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::\-Camera\-Update (
+\begin{DoxyParamCaption}
+\item[{f32}]{frame\-Delta\-Time}
+\end{DoxyParamCaption}
+)}}\label{class_camera_a76e6167aa081ea6755d0bf588cd8cb73}
+
+
+Updates the camera position and target 
+
+Update camera position relative to the player while game is playing and move camera to start pos when game is over 
+
+
+
+ 
+
+ 
+
+References \-\_\-sound\-Manager, camera, camera\-Start\-Position, camera\-Start\-Target, E\-A\-R\-T\-H\-Q\-U\-A\-K\-E\-\_\-\-S\-O\-U\-N\-D, Player\-::get\-Player\-Object(), is\-Shaking, max\-Time\-Normal\-Shake, new\-Camera\-Position, player\-\_\-, Sound\-Manager\-::\-Play\-Sound(), shake\-Timer, shot\-Time\-Shake, and sound\-Playing.
+
+
+
+Referenced by Game\-::\-Update().
+
+
+\begin{DoxyCode}
+140 \{
+141 
+142     \textcolor{keywordflow}{switch} (\hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state})
+143     \{
+144     \textcolor{keywordflow}{case} \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal}:
+145         \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera})
+146         \{
+147             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.X = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{getPlayerObject}()->getPosition().X;
+148             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.Z = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{getPlayerObject}()->getPosition().Z;
+149             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setPosition(\hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition});
+150             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setTarget(\hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{getPlayerObject}()->getPosition());
+151         \}
+152         \hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{soundPlaying} = \textcolor{keyword}{false};
+153         \hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking} = \textcolor{keyword}{false};
+154         \textcolor{keywordflow}{break};
+155     \textcolor{keywordflow}{case} \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a9bb1793c9685b74a790ea306a7852179}{waveShaking}:
+156         \textcolor{keywordflow}{if} (!\hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking}) 
+157         \{
+158             \hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking} = \textcolor{keyword}{true};
+159             \hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shakeTimer} = \hyperlink{_camera_8cpp_a619c0eb0387294c24a31b7db33b7794c}{maxTimeNormalShake};
+160         \}
+161         \hyperlink{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}{ScreenShake}(\hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime}, 0.4);
+162         \textcolor{keywordflow}{if} (!\hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{soundPlaying})
+163         \{
+164             \hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{soundPlaying} = \textcolor{keyword}{true};
+165             \hyperlink{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\_soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_camera_8cpp_abd32b9b9e58b56300d17f56603d2258f}{EARTHQUAKE\_SOUND}, \textcolor{keyword}{false});
+166         \}
+167         \textcolor{keywordflow}{break};
+168     \textcolor{keywordflow}{case} \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a3a50c28c61cd1a7f837b32c54a65c92d}{bigWaveShaking}:
+169         \textcolor{keywordflow}{if} (!\hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking})
+170         \{
+171             \hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking} = \textcolor{keyword}{true};
+172             \hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shakeTimer} = \hyperlink{_camera_8cpp_a619c0eb0387294c24a31b7db33b7794c}{maxTimeNormalShake};
+173         \}
+174         \hyperlink{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}{ScreenShake}(\hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime}, 0.5);
+175         \textcolor{keywordflow}{if} (!\hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{soundPlaying})
+176         \{
+177             \hyperlink{_camera_8cpp_a6b7c8d48813d1dd4aac53ba41d2b1981}{soundPlaying} = \textcolor{keyword}{true};
+178             \hyperlink{_camera_8cpp_ad1177796ac002afe9773fee42f521b2b}{\_soundManager}->\hyperlink{class_sound_manager_a81e8f88fe549f6767d3552f12c28ecbc}{PlaySound}(\hyperlink{_camera_8cpp_abd32b9b9e58b56300d17f56603d2258f}{EARTHQUAKE\_SOUND}, \textcolor{keyword}{false});
+179         \}
+180         \textcolor{keywordflow}{break};
+181     \textcolor{keywordflow}{case} \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a0face68fe0053d79d3a1b03bd2a2645b}{shootShaking}:
+182         \textcolor{keywordflow}{if} (!\hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking})
+183         \{
+184             \hyperlink{_camera_8cpp_a45e54b24c28f7f9f93771bbc7fc65fe0}{isShaking} = \textcolor{keyword}{true};
+185             \hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shakeTimer} = \hyperlink{_camera_8cpp_a5de58f108d9c49965afcc955ca60cf3a}{shotTimeShake};
+186         \}
+187         \hyperlink{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}{ScreenShake}(\hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime}, 2);
+188         \textcolor{keywordflow}{break};
+189     \textcolor{keywordflow}{case} \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236a4d150a6fd04ef129c37e767d9087fa9f}{gameover}:
+190         \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setPosition(\hyperlink{_camera_8cpp_a7c0be2a67c370806c3148499dbdc60c0}{cameraStartPosition});
+191         \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setTarget(\hyperlink{_camera_8cpp_a9b3909feb1d589415063db537ece08ad}{cameraStartTarget});
+192         \textcolor{keywordflow}{break};
+193     \}
+194 \}
+\end{DoxyCode}
+\hypertarget{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}{\index{Camera@{Camera}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!Camera@{Camera}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera} $\ast$ Camera\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+\item[{Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_camera_aae2256f0ee62dd982d92c09d9d00c8d5}
+
+
+Referenced by Enemy\-Spawner\-::\-Enemy\-Spawner(), Player\-::\-Init(), and Game\-::\-Start().
+
+
+\begin{DoxyCode}
+58 \{
+59     \textcolor{keywordflow}{if} (!\hyperlink{class_camera_af95982469bc5cdc45c48f464b9ff05b9}{instance})
+60     \{
+61         \hyperlink{class_camera_af95982469bc5cdc45c48f464b9ff05b9}{instance} = \textcolor{keyword}{new} \hyperlink{class_camera_a8dcadcfd314ecb49ac224a7e6d0bffde}{Camera}(device);
+62     \}
+63     \textcolor{keywordflow}{return} \hyperlink{class_camera_af95982469bc5cdc45c48f464b9ff05b9}{instance};
+64 \}
+\end{DoxyCode}
+\hypertarget{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}{\index{Camera@{Camera}!Screen\-Shake@{Screen\-Shake}}
+\index{Screen\-Shake@{Screen\-Shake}!Camera@{Camera}}
+\subsubsection[{Screen\-Shake}]{\setlength{\rightskip}{0pt plus 5cm}void Camera\-::\-Screen\-Shake (
+\begin{DoxyParamCaption}
+\item[{f32}]{frame\-Delta\-Tim, }
+\item[{f32}]{intensity}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_camera_a2a8b4c795eef0ecc8069f4ee9fe75fb3}
+
+
+References camera, frame\-Delta\-Time, Player\-::get\-Cam\-Follow\-Object(), Player\-::get\-Player\-Object(), new\-Camera\-Position, player\-\_\-, reset\-Time, and shake\-Timer.
+
+
+\begin{DoxyCode}
+94 \{
+95     \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shakeTimer} > 0)
+96     \{
+97         \hyperlink{_camera_8cpp_a06666e09f3081c828a90b1f36b5a6a20}{shakeTimer} -= \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+98         \hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{resetTime} += \hyperlink{_player_8cpp_adc988571147642cda93afbf89783f9c9}{frameDeltaTime};
+99         
+100 
+101         \textcolor{keyword}{const} f32 dur = 0.6;
+102         
+103         vector3df playerPos = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_a2914f817c2fe9b34984e6d90e8d5322f}{getPlayerObject}()->getPosition();
+104         vector3df randomVec = vector3df(playerPos.X + rand() % 2 * intensity, playerPos.Y, playerPos.Z + 
+      rand() % 2 * intensity);
+105         
+106         \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{resetTime} <= dur) 
+107         \{
+108             \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->setPosition(randomVec);
+109             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setTarget(\hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition());
+110             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.X = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition().X;
+111             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.Z = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition().Z;
+112             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setPosition(\hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition});
+113         \}
+114         \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{resetTime} > dur) 
+115         \{
+116             \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->setPosition(randomVec);
+117             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setTarget(\hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->\hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition());
+118             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.X = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition().X;
+119             \hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition}.Z = \hyperlink{_camera_8cpp_a9aee5bc0df47d284a38a6b4da40a28a8}{player\_}->
+      \hyperlink{class_player_ad41c9997bb4efcb41d8a82bf5b14c019}{getCamFollowObject}()->getPosition().Z;
+120             \hyperlink{_camera_8cpp_a8920f7ea5f818f312fd7462dd96a3a50}{camera}->setPosition(\hyperlink{_camera_8cpp_a251c0afd6da69664ff234daccd5db458}{newCameraPosition});
+121         \}
+122         \textcolor{keywordflow}{if} (\hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{resetTime} > dur * 2)
+123         \{
+124             \hyperlink{_camera_8cpp_a8652745f30900067bef50ae0b81d7141}{resetTime} = 0;
+125         \}
+126     \}
+127     \textcolor{keywordflow}{else} 
+128     \{
+129         \textcolor{comment}{//shakeTimer = maxTime;}
+130         \hyperlink{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{state} = \hyperlink{class_camera_a1ddf5d726e6c1d1d1c08d96d42c40236abb7299ba8c5dcce883fe6987df129b1c}{normal};
+131     \}
+132 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_camera_af95982469bc5cdc45c48f464b9ff05b9}{\index{Camera@{Camera}!instance@{instance}}
+\index{instance@{instance}!Camera@{Camera}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera} $\ast$ Camera\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_camera_af95982469bc5cdc45c48f464b9ff05b9}
+
+
+Initializes the camera 
+
+Constructor. 
+
+
+
+ 
+
+ \hypertarget{class_camera_a87960570c2d28bd4471c5a74fc021cb5}{\index{Camera@{Camera}!state@{state}}
+\index{state@{state}!Camera@{Camera}}
+\subsubsection[{state}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Camera\-State} Camera\-::state}}\label{class_camera_a87960570c2d28bd4471c5a74fc021cb5}
+
+
+Referenced by Enemy\-Spawner\-::\-Next\-Wave(), Game\-::\-Set\-Is\-Game\-Over(), and Player\-::\-Shoot().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_camera_8h}{Camera.\-h}\item 
+\hyperlink{_camera_8cpp}{Camera.\-cpp}\end{DoxyCompactItemize}

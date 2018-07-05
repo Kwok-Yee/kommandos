@@ -1,0 +1,61 @@
+\hypertarget{_main_8cpp}{\section{Main.\-cpp File Reference}
+\label{_main_8cpp}\index{Main.\-cpp@{Main.\-cpp}}
+}
+{\ttfamily \#include $<$irrlicht.\-h$>$}\\*
+{\ttfamily \#include $<$irr\-Klang.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}Game.\-h\char`\"{}}\\*
+Include dependency graph for Main.\-cpp\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{_main_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{_main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{_main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{\index{Main.\-cpp@{Main.\-cpp}!main@{main}}
+\index{main@{main}!Main.cpp@{Main.\-cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{_main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}
+
+
+References Game\-::device, Game\-::\-Draw(), game, Game\-::\-Get\-Instance(), Game\-::\-Start(), and Game\-::\-Update().
+
+
+\begin{DoxyCode}
+30 \{
+31     ISoundEngine* engine = createIrrKlangDevice();
+32 
+33     \textcolor{keywordflow}{if} (!engine)
+34     \textcolor{keywordflow}{return} 0;
+35 
+36     \textcolor{comment}{// Get the game's singleton instance}
+37     \hyperlink{class_game}{Game}* \hyperlink{_player_8cpp_a58bdb5643d0814ac4e697a1564b79b70}{game} = game->\hyperlink{class_game_aa989d3cee96d5ae093663bf62dea57e2}{GetInstance}();
+38     game->\hyperlink{class_game_adb05b20574551a26f8cf1dc664782790}{Start}();
+39 
+40     \textcolor{comment}{// No device found}
+41     \textcolor{keywordflow}{if} (!game->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}) \{
+42         \textcolor{keywordflow}{return} 1;
+43     \}
+44     \textcolor{keywordflow}{while} (game->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->run())
+45     \{
+46         game->\hyperlink{class_game_a1c5373c68261c54aff03e6abe40fee52}{Update}();
+47         game->\hyperlink{class_game_aad2c20e2c5529244095c50c238911e30}{Draw}();
+48     \}
+49     engine->drop();
+50     game->\hyperlink{class_game_a4968552e2ba3037d494596a908eccc00}{device}->drop();
+51 
+52     \textcolor{keywordflow}{return} 0;
+53 \}
+\end{DoxyCode}

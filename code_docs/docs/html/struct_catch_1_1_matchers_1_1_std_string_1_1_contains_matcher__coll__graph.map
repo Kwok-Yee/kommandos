@@ -1,0 +1,4 @@
+<map id="Catch::Matchers::StdString::ContainsMatcher" name="Catch::Matchers::StdString::ContainsMatcher">
+<area shape="rect" id="node2" href="$struct_catch_1_1_matchers_1_1_std_string_1_1_string_matcher_base.html" title="{Catch::Matchers::StdString\l::StringMatcherBase\n||+ StringMatcherBase()\l+ describe()\l}" alt="" coords="224,333,405,440"/>
+<area shape="rect" id="node4" href="$struct_catch_1_1_matchers_1_1_std_string_1_1_cased_string.html" title="{Catch::Matchers::StdString\l::CasedString\n||+ CasedString()\l+ adjustString()\l+ caseSensitivitySuffix()\l}" alt="" coords="224,147,405,269"/>
+</map>

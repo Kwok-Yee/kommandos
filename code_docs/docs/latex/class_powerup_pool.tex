@@ -1,0 +1,187 @@
+\hypertarget{class_powerup_pool}{\section{Powerup\-Pool Class Reference}
+\label{class_powerup_pool}\index{Powerup\-Pool@{Powerup\-Pool}}
+}
+
+
+{\ttfamily \#include $<$Powerup\-Pool.\-h$>$}
+
+
+
+Collaboration diagram for Powerup\-Pool\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{class_powerup_pool__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_powerup_pool_af0ac859c18848626748b795b890400a4}{Powerup\-Pool} (const \hyperlink{class_powerup_pool}{Powerup\-Pool} \&)=delete
+\item 
+\hyperlink{class_powerup_pool}{Powerup\-Pool} \& \hyperlink{class_powerup_pool_ab0abab3cf40b0163579e04e595bbd90b}{operator=} (const \hyperlink{class_powerup_pool}{Powerup\-Pool} \&)=delete
+\item 
+\hyperlink{class_powerup}{Powerup} $\ast$ \hyperlink{class_powerup_pool_a4b223578b11932dc8e82edc48d06d65f}{Get\-Resource} ()
+\item 
+void \hyperlink{class_powerup_pool_a18b9675b28e4079fb5049abca99e7dee}{Return\-Resource} (\hyperlink{class_powerup}{Powerup} $\ast$object)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_powerup_pool}{Powerup\-Pool} $\ast$ \hyperlink{class_powerup_pool_a9d7ae900750b765773de9ed95a5619f0}{Get\-Instance} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_powerup_pool_a8d192cd99eaffddfbf119ecf91147620}{Powerup\-Pool} (irr\-::\-Irrlicht\-Device $\ast$device)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\-::list$<$ \hyperlink{class_powerup}{Powerup} $\ast$ $>$ \hyperlink{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{resources}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_powerup_pool}{Powerup\-Pool} $\ast$ \hyperlink{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}{instance} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_powerup_pool_af0ac859c18848626748b795b890400a4}{\index{Powerup\-Pool@{Powerup\-Pool}!Powerup\-Pool@{Powerup\-Pool}}
+\index{Powerup\-Pool@{Powerup\-Pool}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{Powerup\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Powerup\-Pool\-::\-Powerup\-Pool (
+\begin{DoxyParamCaption}
+\item[{const {\bf Powerup\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_powerup_pool_af0ac859c18848626748b795b890400a4}
+
+
+Referenced by Get\-Instance().
+
+\hypertarget{class_powerup_pool_a8d192cd99eaffddfbf119ecf91147620}{\index{Powerup\-Pool@{Powerup\-Pool}!Powerup\-Pool@{Powerup\-Pool}}
+\index{Powerup\-Pool@{Powerup\-Pool}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{Powerup\-Pool}]{\setlength{\rightskip}{0pt plus 5cm}Powerup\-Pool\-::\-Powerup\-Pool (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_powerup_pool_a8d192cd99eaffddfbf119ecf91147620}
+
+
+References pow\-Pool\-Device.
+
+
+\begin{DoxyCode}
+7 \{ \hyperlink{_powerup_pool_8cpp_a6d68ecaec1afd363d75629863df96346}{powPoolDevice} = device; \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_powerup_pool_a9d7ae900750b765773de9ed95a5619f0}{\index{Powerup\-Pool@{Powerup\-Pool}!Get\-Instance@{Get\-Instance}}
+\index{Get\-Instance@{Get\-Instance}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{Get\-Instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Pool} $\ast$ Powerup\-Pool\-::\-Get\-Instance (
+\begin{DoxyParamCaption}
+\item[{irr\-::\-Irrlicht\-Device $\ast$}]{device}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}}\label{class_powerup_pool_a9d7ae900750b765773de9ed95a5619f0}
+
+
+References instance, and Powerup\-Pool().
+
+
+
+Referenced by Player\-::\-Init(), and Power\-Up\-Spawner\-::\-Power\-Up\-Device().
+
+
+\begin{DoxyCode}
+12 \{
+13     \textcolor{keywordflow}{if} (!\hyperlink{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}{instance})
+14     \{
+15         \hyperlink{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}{instance} = \textcolor{keyword}{new} \hyperlink{class_powerup_pool_af0ac859c18848626748b795b890400a4}{PowerupPool}(device);
+16     \}
+17     \textcolor{keywordflow}{return} \hyperlink{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}{instance};
+18 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_pool_a4b223578b11932dc8e82edc48d06d65f}{\index{Powerup\-Pool@{Powerup\-Pool}!Get\-Resource@{Get\-Resource}}
+\index{Get\-Resource@{Get\-Resource}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{Get\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup} $\ast$ Powerup\-Pool\-::\-Get\-Resource (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_pool_a4b223578b11932dc8e82edc48d06d65f}
+
+
+References powerup, pow\-Pool\-Device, and resources.
+
+
+
+Referenced by Power\-Up\-Spawner\-::\-Power\-Up\-Spawn().
+
+
+\begin{DoxyCode}
+21 \{
+22     \textcolor{keywordflow}{if} (\hyperlink{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{resources}.empty())
+23     \{
+24         \textcolor{keywordflow}{return} \textcolor{keyword}{new} \hyperlink{class_powerup}{Powerup}(\hyperlink{_powerup_pool_8cpp_a6d68ecaec1afd363d75629863df96346}{powPoolDevice});
+25     \}
+26     \textcolor{keywordflow}{else}
+27     \{
+28         \hyperlink{class_powerup}{Powerup}* \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup} = \hyperlink{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{resources}.front();
+29         \hyperlink{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{resources}.pop\_front();
+30         \textcolor{keywordflow}{return} \hyperlink{_power_up_spawner_8cpp_ae69e278d6b99e84c0db1ecaf769b3f39}{powerup};
+31     \}
+32 \}
+\end{DoxyCode}
+\hypertarget{class_powerup_pool_ab0abab3cf40b0163579e04e595bbd90b}{\index{Powerup\-Pool@{Powerup\-Pool}!operator=@{operator=}}
+\index{operator=@{operator=}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Pool}\& Powerup\-Pool\-::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Powerup\-Pool} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [delete]}}}\label{class_powerup_pool_ab0abab3cf40b0163579e04e595bbd90b}
+\hypertarget{class_powerup_pool_a18b9675b28e4079fb5049abca99e7dee}{\index{Powerup\-Pool@{Powerup\-Pool}!Return\-Resource@{Return\-Resource}}
+\index{Return\-Resource@{Return\-Resource}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{Return\-Resource}]{\setlength{\rightskip}{0pt plus 5cm}void Powerup\-Pool\-::\-Return\-Resource (
+\begin{DoxyParamCaption}
+\item[{{\bf Powerup} $\ast$}]{object}
+\end{DoxyParamCaption}
+)}}\label{class_powerup_pool_a18b9675b28e4079fb5049abca99e7dee}
+
+
+References resources.
+
+
+
+Referenced by Player\-::\-Move().
+
+
+\begin{DoxyCode}
+35 \{
+36     \textcolor{keywordtype}{object}->Reset();
+37     \hyperlink{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{resources}.push\_back(\textcolor{keywordtype}{object});
+38 \}
+\end{DoxyCode}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}{\index{Powerup\-Pool@{Powerup\-Pool}!instance@{instance}}
+\index{instance@{instance}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{instance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Powerup\-Pool} $\ast$ Powerup\-Pool\-::instance = 0\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_powerup_pool_a938f69e1e01e79d883313082e9cd83bf}
+
+
+Referenced by Get\-Instance().
+
+\hypertarget{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}{\index{Powerup\-Pool@{Powerup\-Pool}!resources@{resources}}
+\index{resources@{resources}!PowerupPool@{Powerup\-Pool}}
+\subsubsection[{resources}]{\setlength{\rightskip}{0pt plus 5cm}std\-::list$<${\bf Powerup}$\ast$$>$ Powerup\-Pool\-::resources\hspace{0.3cm}{\ttfamily [private]}}}\label{class_powerup_pool_a4d1fbbe9744bd3db681131aa65d20894}
+
+
+Referenced by Get\-Resource(), and Return\-Resource().
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_powerup_pool_8h}{Powerup\-Pool.\-h}\item 
+\hyperlink{_powerup_pool_8cpp}{Powerup\-Pool.\-cpp}\end{DoxyCompactItemize}

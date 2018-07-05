@@ -1,0 +1,384 @@
+\hypertarget{class_catch_1_1_string_ref}{\section{Catch\-:\-:String\-Ref Class Reference}
+\label{class_catch_1_1_string_ref}\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}}
+}
+
+
+{\ttfamily \#include $<$catch.\-hpp$>$}
+
+
+
+Collaboration diagram for Catch\-:\-:String\-Ref\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_catch_1_1_string_ref__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} = std\-::size\-\_\-t
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_catch_1_1_string_ref_a94319c75df6542327c93a312c6a80754}{String\-Ref} () noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_a2f287267c3a988b288bfd910667c1cfc}{String\-Ref} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} const \&other) noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_a407d5737b94e5a374add5c2794589733}{String\-Ref} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} \&\&other) noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_aea45f5089c53adac362bff6bd7c40943}{String\-Ref} (char const $\ast$raw\-Chars) noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_a320bf235274ebb90dd6af80485af2797}{String\-Ref} (char const $\ast$raw\-Chars, \hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} \hyperlink{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}{size}) noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_a7fe41469048f906e9a847798cd335f23}{String\-Ref} (std\-::string const \&std\-String) noexcept
+\item 
+\hyperlink{class_catch_1_1_string_ref_a387795c6d883d7281befe5e82920faf8}{$\sim$\-String\-Ref} () noexcept
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_ac330bd7890310e9cab73a82cdfc1b7f4}{operator=} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} const \&other) noexcept-\/$>$ \hyperlink{class_catch_1_1_string_ref}{String\-Ref} \&
+\item 
+\hyperlink{class_catch_1_1_string_ref_a7f38055e84bb8d16e23490b2664bb319}{operator std\-::string} () const 
+\item 
+void \hyperlink{class_catch_1_1_string_ref_a8a843e39ad3560d10a80524ed926ed63}{swap} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} \&other) noexcept
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a04c84d944fb51b02552e7ce8de7dbbf0}{operator==} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} const \&other) const noexcept-\/$>$ bool
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a015f7b3adee8fe49ebb8172ae2975d21}{operator!=} (\hyperlink{class_catch_1_1_string_ref}{String\-Ref} const \&other) const noexcept-\/$>$ bool
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a803e3617331820a7ad8fea3051d6b094}{operator\mbox{[}$\,$\mbox{]}} (\hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} index) const noexcept-\/$>$ char
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a326d5d5c97e0e792d66a9056143a922b}{empty} () const noexcept-\/$>$ bool
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}{size} () const noexcept-\/$>$ \hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type}
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_ac1f444eb9a9c7ba18b3f71fc85f3222f}{number\-Of\-Characters} () const noexcept-\/$>$ \hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type}
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}{c\-\_\-str} () const -\/$>$ char const $\ast$
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a7ce373cbe7068bdc118b8f0fc9a2d44d}{substr} (\hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} start, \hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} \hyperlink{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}{size}) const noexcept-\/$>$ \hyperlink{class_catch_1_1_string_ref}{String\-Ref}
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_aa8dd423c873140a92282bc7099ec67fc}{current\-Data} () const noexcept-\/$>$ char const $\ast$
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_catch_1_1_string_ref_aa2723bb1d9355202209993142534d3d6}{take\-Ownership} ()
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_ac1e766daa02134c0384c71ba50ef10ef}{is\-Owned} () const noexcept-\/$>$ bool
+\item 
+auto \hyperlink{class_catch_1_1_string_ref_a2cc3b81f7db653f525948cc23f490880}{is\-Substring} () const noexcept-\/$>$ bool
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char const $\ast$ \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\-\_\-start}
+\item 
+\hyperlink{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{size\-\_\-type} \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\-\_\-size}
+\item 
+char $\ast$ \hyperlink{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{m\-\_\-data} = nullptr
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr char const $\ast$const \hyperlink{class_catch_1_1_string_ref_a38d077e89f7f2ce666507ab28dd28653}{s\-\_\-empty} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{class_catch_1_1_string_ref_a420e64e1652de1b0d427775781b018f5}{String\-Ref\-Test\-Access}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A non-\/owning string class (similar to the forthcoming std\-::string\-\_\-view) Note that, because a \hyperlink{class_catch_1_1_string_ref}{String\-Ref} may be a substring of another string, it may not be null terminated. \hyperlink{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}{c\-\_\-str()} must return a null terminated string, however, and so the \hyperlink{class_catch_1_1_string_ref}{String\-Ref} will internally take ownership (taking a copy), if necessary. In theory this ownership is not externally visible -\/ but it does mean (substring) String\-Refs should not be shared between threads. 
+
+\subsection{Member Typedef Documentation}
+\hypertarget{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!size\-\_\-type@{size\-\_\-type}}
+\index{size\-\_\-type@{size\-\_\-type}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{size\-\_\-type}]{\setlength{\rightskip}{0pt plus 5cm}using {\bf Catch\-::\-String\-Ref\-::size\-\_\-type} =  std\-::size\-\_\-t}}\label{class_catch_1_1_string_ref_a06b4db8fc82b197004291cf370b2ba7c}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_catch_1_1_string_ref_a94319c75df6542327c93a312c6a80754}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a94319c75df6542327c93a312c6a80754}
+
+
+Referenced by Catch\-::operator\char`\"{}\char`\"{}\-\_\-sr().
+
+
+\begin{DoxyCode}
+397             : \hyperlink{class_catch_1_1_string_ref_a94319c75df6542327c93a312c6a80754}{StringRef}(\hyperlink{class_catch_1_1_string_ref_a38d077e89f7f2ce666507ab28dd28653}{s\_empty}, 0)
+398         \{\}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a2f287267c3a988b288bfd910667c1cfc}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} const \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a2f287267c3a988b288bfd910667c1cfc}
+
+\begin{DoxyCode}
+401             : \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\_start}(other.m\_start),
+402             \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size}(other.m\_size)
+403         \{\}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a407d5737b94e5a374add5c2794589733}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} \&\&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a407d5737b94e5a374add5c2794589733}
+
+\begin{DoxyCode}
+406             : \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\_start}(other.m\_start),
+407             \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size}(other.m\_size),
+408             \hyperlink{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{m\_data}(other.m\_data)
+409         \{
+410             other.m\_data = \textcolor{keyword}{nullptr};
+411         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_aea45f5089c53adac362bff6bd7c40943}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{raw\-Chars}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_aea45f5089c53adac362bff6bd7c40943}
+\hypertarget{class_catch_1_1_string_ref_a320bf235274ebb90dd6af80485af2797}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+\item[{char const $\ast$}]{raw\-Chars, }
+\item[{{\bf size\-\_\-type}}]{size}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a320bf235274ebb90dd6af80485af2797}
+
+\begin{DoxyCode}
+416             :   \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\_start}(rawChars),
+417             \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size}(\hyperlink{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}{size})
+418         \{\}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a7fe41469048f906e9a847798cd335f23}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref@{String\-Ref}}
+\index{String\-Ref@{String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::\-String\-Ref (
+\begin{DoxyParamCaption}
+\item[{std\-::string const \&}]{std\-String}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a7fe41469048f906e9a847798cd335f23}
+
+\begin{DoxyCode}
+421             : \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\_start}(stdString.c\_str()),
+422             \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size}(stdString.size())
+423         \{\}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a387795c6d883d7281befe5e82920faf8}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!$\sim$\-String\-Ref@{$\sim$\-String\-Ref}}
+\index{$\sim$\-String\-Ref@{$\sim$\-String\-Ref}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{$\sim$\-String\-Ref}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::$\sim$\-String\-Ref (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a387795c6d883d7281befe5e82920faf8}
+
+
+References m\-\_\-data.
+
+
+\begin{DoxyCode}
+425                               \{
+426             \textcolor{keyword}{delete}[] \hyperlink{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{m\_data};
+427         \}
+\end{DoxyCode}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!c\-\_\-str@{c\-\_\-str}}
+\index{c\-\_\-str@{c\-\_\-str}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{c\-\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::c\-\_\-str (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$  char const $\ast$}}\label{class_catch_1_1_string_ref_a1669cb2765e820ca258159676cbd82a5}
+\hypertarget{class_catch_1_1_string_ref_aa8dd423c873140a92282bc7099ec67fc}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!current\-Data@{current\-Data}}
+\index{current\-Data@{current\-Data}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{current\-Data}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::current\-Data (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$  char const $\ast$\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_aa8dd423c873140a92282bc7099ec67fc}
+\hypertarget{class_catch_1_1_string_ref_a326d5d5c97e0e792d66a9056143a922b}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!empty@{empty}}
+\index{empty@{empty}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{empty}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::empty (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$ bool \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a326d5d5c97e0e792d66a9056143a922b}
+
+
+References m\-\_\-size.
+
+
+\begin{DoxyCode}
+448                                             \{
+449             \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size} == 0;
+450         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_ac1e766daa02134c0384c71ba50ef10ef}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!is\-Owned@{is\-Owned}}
+\index{is\-Owned@{is\-Owned}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{is\-Owned}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::is\-Owned (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$  bool\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_ac1e766daa02134c0384c71ba50ef10ef}
+\hypertarget{class_catch_1_1_string_ref_a2cc3b81f7db653f525948cc23f490880}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!is\-Substring@{is\-Substring}}
+\index{is\-Substring@{is\-Substring}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{is\-Substring}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::is\-Substring (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$  bool\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a2cc3b81f7db653f525948cc23f490880}
+\hypertarget{class_catch_1_1_string_ref_ac1f444eb9a9c7ba18b3f71fc85f3222f}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!number\-Of\-Characters@{number\-Of\-Characters}}
+\index{number\-Of\-Characters@{number\-Of\-Characters}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{number\-Of\-Characters}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::number\-Of\-Characters (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$  {\bf size\-\_\-type}\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_ac1f444eb9a9c7ba18b3f71fc85f3222f}
+\hypertarget{class_catch_1_1_string_ref_a7f38055e84bb8d16e23490b2664bb319}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!operator std\-::string@{operator std\-::string}}
+\index{operator std\-::string@{operator std\-::string}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{operator std\-::string}]{\setlength{\rightskip}{0pt plus 5cm}Catch\-::\-String\-Ref\-::operator std\-::string (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}}\label{class_catch_1_1_string_ref_a7f38055e84bb8d16e23490b2664bb319}
+\hypertarget{class_catch_1_1_string_ref_a015f7b3adee8fe49ebb8172ae2975d21}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!operator!=@{operator!=}}
+\index{operator!=@{operator!=}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{operator!=}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::operator!= (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} const \&}]{other}
+\end{DoxyParamCaption}
+) const -\/$>$  bool\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a015f7b3adee8fe49ebb8172ae2975d21}
+\hypertarget{class_catch_1_1_string_ref_ac330bd7890310e9cab73a82cdfc1b7f4}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!operator=@{operator=}}
+\index{operator=@{operator=}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::operator= (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} const \&}]{other}
+\end{DoxyParamCaption}
+) -\/$>$ {\bf String\-Ref}\& \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_ac330bd7890310e9cab73a82cdfc1b7f4}
+
+
+References m\-\_\-data, m\-\_\-size, and m\-\_\-start.
+
+
+\begin{DoxyCode}
+429                                                                         \{
+430             \textcolor{keyword}{delete}[] \hyperlink{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{m\_data};
+431             \hyperlink{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{m\_data} = \textcolor{keyword}{nullptr};
+432             \hyperlink{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{m\_start} = other.m\_start;
+433             \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size} = other.m\_size;
+434             \textcolor{keywordflow}{return} *\textcolor{keyword}{this};
+435         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a04c84d944fb51b02552e7ce8de7dbbf0}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!operator==@{operator==}}
+\index{operator==@{operator==}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{operator==}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::operator== (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} const \&}]{other}
+\end{DoxyParamCaption}
+) const -\/$>$  bool\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a04c84d944fb51b02552e7ce8de7dbbf0}
+\hypertarget{class_catch_1_1_string_ref_a803e3617331820a7ad8fea3051d6b094}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{index}
+\end{DoxyParamCaption}
+) const -\/$>$  char\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a803e3617331820a7ad8fea3051d6b094}
+\hypertarget{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!size@{size}}
+\index{size@{size}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::size (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const -\/$>$ {\bf size\-\_\-type} \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_aa370158c82397f443a16f96ab3133950}
+
+
+References m\-\_\-size.
+
+
+
+Referenced by Catch\-::operator\char`\"{}\char`\"{}\-\_\-sr().
+
+
+\begin{DoxyCode}
+451                                                 \{
+452             \textcolor{keywordflow}{return} \hyperlink{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{m\_size};
+453         \}
+\end{DoxyCode}
+\hypertarget{class_catch_1_1_string_ref_a7ce373cbe7068bdc118b8f0fc9a2d44d}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!substr@{substr}}
+\index{substr@{substr}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{substr}]{\setlength{\rightskip}{0pt plus 5cm}auto Catch\-::\-String\-Ref\-::substr (
+\begin{DoxyParamCaption}
+\item[{{\bf size\-\_\-type}}]{start, }
+\item[{{\bf size\-\_\-type}}]{size}
+\end{DoxyParamCaption}
+) const -\/$>$  {\bf String\-Ref}\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a7ce373cbe7068bdc118b8f0fc9a2d44d}
+\hypertarget{class_catch_1_1_string_ref_a8a843e39ad3560d10a80524ed926ed63}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!swap@{swap}}
+\index{swap@{swap}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{swap}]{\setlength{\rightskip}{0pt plus 5cm}void Catch\-::\-String\-Ref\-::swap (
+\begin{DoxyParamCaption}
+\item[{{\bf String\-Ref} \&}]{other}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [noexcept]}}}\label{class_catch_1_1_string_ref_a8a843e39ad3560d10a80524ed926ed63}
+\hypertarget{class_catch_1_1_string_ref_aa2723bb1d9355202209993142534d3d6}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!take\-Ownership@{take\-Ownership}}
+\index{take\-Ownership@{take\-Ownership}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{take\-Ownership}]{\setlength{\rightskip}{0pt plus 5cm}void Catch\-::\-String\-Ref\-::take\-Ownership (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_string_ref_aa2723bb1d9355202209993142534d3d6}
+
+
+\subsection{Friends And Related Function Documentation}
+\hypertarget{class_catch_1_1_string_ref_a420e64e1652de1b0d427775781b018f5}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!String\-Ref\-Test\-Access@{String\-Ref\-Test\-Access}}
+\index{String\-Ref\-Test\-Access@{String\-Ref\-Test\-Access}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{String\-Ref\-Test\-Access}]{\setlength{\rightskip}{0pt plus 5cm}friend struct String\-Ref\-Test\-Access\hspace{0.3cm}{\ttfamily [friend]}}}\label{class_catch_1_1_string_ref_a420e64e1652de1b0d427775781b018f5}
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!m\-\_\-data@{m\-\_\-data}}
+\index{m\-\_\-data@{m\-\_\-data}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{m\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}char$\ast$ Catch\-::\-String\-Ref\-::m\-\_\-data = nullptr\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_string_ref_ae671eabbedd386aeb334d3da1a904ba5}
+
+
+Referenced by operator=(), and $\sim$\-String\-Ref().
+
+\hypertarget{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!m\-\_\-size@{m\-\_\-size}}
+\index{m\-\_\-size@{m\-\_\-size}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{m\-\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}{\bf size\-\_\-type} Catch\-::\-String\-Ref\-::m\-\_\-size\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_string_ref_a91ee253f5b7e43303352186139845753}
+
+
+Referenced by empty(), operator=(), and size().
+
+\hypertarget{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!m\-\_\-start@{m\-\_\-start}}
+\index{m\-\_\-start@{m\-\_\-start}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{m\-\_\-start}]{\setlength{\rightskip}{0pt plus 5cm}char const$\ast$ Catch\-::\-String\-Ref\-::m\-\_\-start\hspace{0.3cm}{\ttfamily [private]}}}\label{class_catch_1_1_string_ref_a0583d4e5ea88c99c121504052a4fcb6c}
+
+
+Referenced by operator=().
+
+\hypertarget{class_catch_1_1_string_ref_a38d077e89f7f2ce666507ab28dd28653}{\index{Catch\-::\-String\-Ref@{Catch\-::\-String\-Ref}!s\-\_\-empty@{s\-\_\-empty}}
+\index{s\-\_\-empty@{s\-\_\-empty}!Catch::StringRef@{Catch\-::\-String\-Ref}}
+\subsubsection[{s\-\_\-empty}]{\setlength{\rightskip}{0pt plus 5cm}constexpr char const$\ast$ const Catch\-::\-String\-Ref\-::s\-\_\-empty = \char`\"{}\char`\"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}}\label{class_catch_1_1_string_ref_a38d077e89f7f2ce666507ab28dd28653}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{catch_8hpp}{catch.\-hpp}\end{DoxyCompactItemize}

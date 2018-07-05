@@ -140,8 +140,6 @@ void HeatMapManager::Update()
 	if (countdown)
 	{
 		seconds -= 0.016; //we use vsync, so it's always 60fps, 0.016 is the framedeltatime
-		isDangerZoneActive = true;
-
 		stringw newText("There will be gas in Zone ");
 		newText += activeZone;
 		newText += " in ";
@@ -149,6 +147,7 @@ void HeatMapManager::Update()
 		newText += " seconds";
 		countdownText->setText(newText.c_str());
 
+		isDangerZoneActive = true;
 		if (seconds < 0)
 		{
 			countdown = false;
@@ -164,7 +163,13 @@ void HeatMapManager::Update()
 	}
 	if (isPoisonCloudActive)
 	{
-		isDangerZoneActive = false;
+		if (isDangerZoneActive)
+		{
+			isDangerZoneActive = false;
+			dangerZoneSpawned == false;
+			//dangerZone->remove();
+			hsmgr->addToDeletionQueue(GetDangerZone());
+		}
 		//hsmgr->addToDeletionQueue(GetDangerZone());  <--- HERE's THE ERROR 
 		seconds -= 0.016;
 		if (seconds < 0)
@@ -197,7 +202,7 @@ void HeatMapManager::CreateDangerZone(Zone zone)
 {
 	const path texturePathDangerZone = "../media/Textures/danger_texture.png";
 	vector3df dangerZonePosition;
-	dangerZonePosition.Y = -0.5;
+	dangerZonePosition.Y = -1.5;
 	f32 size = level->getTransformedBoundingBox().getExtent().X / 18;
 	switch (zone)
 	{
@@ -231,8 +236,10 @@ void HeatMapManager::CreateDangerZone(Zone zone)
 		dangerZone->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
 		dangerZone->setMaterialTexture(0, hGame->device->getVideoDriver()->getTexture(texturePathDangerZone));
 		dangerZone->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
+		printf("dangerzone is made");
 
 	}
+	cout << dangerZone;
 	//isDangerZoneActive = true;
 }
 

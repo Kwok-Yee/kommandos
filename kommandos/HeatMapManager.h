@@ -1,7 +1,7 @@
 #pragma once
 #include <irrlicht.h>
 
-#define MAX_WEIGHT 30
+#define MAX_WEIGHT 100
 #define MAX_COUNTDOWN_SECONDS 5
 #define MAX_POISONCLOUS_SECONDS 20
 #define GAS_SOUND "../media/Sounds/gas.mp3"

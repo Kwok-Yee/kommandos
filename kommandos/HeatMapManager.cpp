@@ -236,10 +236,7 @@ void HeatMapManager::CreateDangerZone(Zone zone)
 		dangerZone->setMaterialFlag(video::EMF_ZWRITE_ENABLE, false);
 		dangerZone->setMaterialTexture(0, hGame->device->getVideoDriver()->getTexture(texturePathDangerZone));
 		dangerZone->setMaterialType(video::EMT_TRANSPARENT_ADD_COLOR);
-		printf("dangerzone is made");
-
 	}
-	cout << dangerZone;
 	//isDangerZoneActive = true;
 }
 

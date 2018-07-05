@@ -23,11 +23,14 @@ public:
 	static HeatMapManager* GetInstance();
 	Zone activeZone;
 	bool isPoisonCloudActive = false;
+	bool isDangerZoneActive = false;
+	bool dangerZoneSpawned = false;
 	void AddWeight(Zone zone, float weight);
 	int GetWeight(Zone zone);
 	Zone CheckZoneFromPosition(irr::core::vector3df pos);
 	void Update();
 	irr::scene::ISceneNode* GetPoisonCloud();
+	irr::scene::ISceneNode* GetDangerZone();
 private:
 	HeatMapManager();
 	static HeatMapManager* instance;
@@ -35,7 +38,9 @@ private:
 	bool isZoneActive = false, countdown = false;
 	float seconds;
 	irr::scene::ISceneNode* poisonCloud;
+	irr::scene::ISceneNode* dangerZone;
 	irr::gui::IGUIStaticText* countdownText;
+	void CreateDangerZone(Zone zone);
 	void CreatePoisonCloud(Zone zone);
 	void CreateCountdown(Zone zone);
 
